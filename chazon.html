@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌌 Chazon OS - חזון</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+    color: #00ff88;
+    overflow: hidden;
+  }
+  #boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s;
+  }
+  #boot-screen.hidden { opacity: 0; pointer-events: none; }
+  #boot-log {
+    width: 80%;
+    max-width: 600px;
+    text-align: left;
+    line-height: 1.6;
+  }
+  .boot-line {
+    animation: fadeIn 0.3s;
+    margin: 2px 0;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  #terminal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    background: #000;
+    border: 3px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+  }
+  #terminal.active { display: flex; }
+  #output {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
+  #input-line {
+    display: flex;
+    align-items: center;
+  }
+  #prompt { color: #00ff88; margin-right: 5px; }
+  #input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #00ff88;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  .taskbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    background: #0a0a0a;
+    border-top: 2px solid #00ff88;
+    display: none;
+    align-items: center;
+    padding: 0 15px;
+    font-size: 12px;
+  }
+  .taskbar.active { display: flex; }
+  .button {
+    background: #00ff88;
+    color: #000;
+    border: none;
+    padding: 5px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  .button:hover { background: #00cc66; }
+</style>
+</head>
+<body>
+
+<!-- Boot Screen -->
+<div id="boot-screen">
+  <div id="boot-log"></div>
+</div>
+
+<!-- Terminal -->
+<div id="terminal">
+  <div id="output"></div>
+  <div id="input-line">
+    <span id="prompt">chazon@os:~$</span>
+    <input type="text" id="input" autofocus>
+  </div>
+</div>
+
+<!-- Taskbar -->
+<div class="taskbar">
+  <span>🌌 Chazon OS | חזון | φ=1.618</span>
+  <span style="flex:1"></span>
+  <button class="button" onclick="runDemo()">Demo</button>
+  <button class="button" onclick="showHelp()">Help</button>
+  <button class="button" onclick="clearTerminal()">Clear</button>
+</div>
+
+<script>
+// Bootstrap Loader
+const ChazonBootstrap = {
+  modules: [
+    'chazon/core/mdcompiler.md',
+    'chazon/core/os.md',
+    'chazon/core/cli.md',
+    'chazon/agents/ci.md',
+    'chazon/agents/test.md',
+    'chazon/agents/deploy.md',
+    'chazon/ui/desktop.md',
+    'chazon/ui/windows.md',
+    'chazon/isa/standards.md',
+    'chazon/isa/compliance.md'
+  ],
+
+  programs: [
+    'chazon/programs/hello.md',
+    'chazon/programs/calculator.md',
+    'chazon/programs/search.md',
+    'chazon/programs/cicd.md',
+    'chazon/programs/neural.md'
+  ],
+
+  async boot() {
+    this.log('🌌 Chazon OS v1.0.0');
+    this.log('חזון - Vision | φ-Balanced Computing');
+    this.log('');
+
+    this.log('Loading markdown compiler...');
+    await this.loadCompiler();
+
+    this.log('Loading core modules...');
+    await this.loadModules();
+
+    this.log('Loading programs...');
+    await this.loadPrograms();
+
+    this.log('Initializing OS...');
+    if (window.ChazonOS) ChazonOS.boot();
+
+    this.log('');
+    this.log('✅ Boot complete!');
+    this.log('Type "help" for commands');
+
+    setTimeout(() => this.showTerminal(), 2000);
+  },
+
+  async loadCompiler() {
+    // Bootstrap minimal compiler
+    window.MDCompiler = {
+      compile(markdown) {
+        const regex = /```(?:javascript|js)?\n([\s\S]*?)```/g;
+        const blocks = [];
+        let match;
+        while ((match = regex.exec(markdown))) {
+          blocks.push(match[1].trim());
+        }
+        return blocks.map(code => {
+          try {
+            return { success: true, output: eval(code) };
+          } catch (err) {
+            return { success: false, error: err.message };
+          }
+        });
+      }
+    };
+  },
+
+  async loadModules() {
+    for (const module of this.modules) {
+      try {
+        const response = await fetch(module);
+        const markdown = await response.text();
+        const compiled = MDCompiler.compile(markdown);
+        this.log(`  ✓ ${module.split('/').pop()}`);
+      } catch (err) {
+        this.log(`  ✗ ${module}: ${err.message}`);
+      }
+    }
+  },
+
+  async loadPrograms() {
+    if (!window.ChazonCLI) {
+      this.log('  ⚠️ CLI not available, skipping programs');
+      return;
+    }
+
+    for (const program of this.programs) {
+      try {
+        const response = await fetch(program);
+        const content = await response.text();
+        const name = program.split('/').pop();
+        ChazonCLI.addFile(name, content);
+        this.log(`  ✓ ${name}`);
+      } catch (err) {
+        this.log(`  ✗ ${program}: ${err.message}`);
+      }
+    }
+  },
+
+  log(message) {
+    const bootLog = document.getElementById('boot-log');
+    const line = document.createElement('div');
+    line.className = 'boot-line';
+    line.textContent = message;
+    bootLog.appendChild(line);
+  },
+
+  showTerminal() {
+    document.getElementById('boot-screen').classList.add('hidden');
+    document.getElementById('terminal').classList.add('active');
+    document.querySelector('.taskbar').classList.add('active');
+    document.getElementById('input').focus();
+  }
+};
+
+// Terminal Handler
+const Terminal = {
+  output: document.getElementById('output'),
+  input: document.getElementById('input'),
+
+  print(text) {
+    this.output.textContent += text + '\n';
+    this.output.scrollTop = this.output.scrollHeight;
+  },
+
+  exec(command) {
+    this.print(`chazon@os:~$ ${command}`);
+
+    if (!command.trim()) return;
+
+    if (command === 'help') {
+      this.print('Available commands:');
+      this.print('  help          - Show this help');
+      this.print('  ls            - List programs');
+      this.print('  run <file>    - Run a program');
+      this.print('  cat <file>    - View program source');
+      this.print('  demo          - Run demo programs');
+      this.print('  clear         - Clear terminal');
+      return;
+    }
+
+    if (command === 'clear') {
+      this.output.textContent = '';
+      return;
+    }
+
+    if (command === 'demo') {
+      runDemo();
+      return;
+    }
+
+    if (window.ChazonCLI) {
+      const result = ChazonCLI.exec(command);
+      this.print(result || '');
+    } else {
+      this.print('Error: CLI not loaded');
+    }
+  }
+};
+
+// Event Handlers
+document.getElementById('input').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    Terminal.exec(e.target.value);
+    e.target.value = '';
+  }
+});
+
+function showHelp() {
+  Terminal.exec('help');
+}
+
+function clearTerminal() {
+  Terminal.exec('clear');
+}
+
+function runDemo() {
+  Terminal.print('\n🎬 Running demo programs...\n');
+  const demos = ['hello.md', 'calculator.md', 'neural.md'];
+
+  demos.forEach((demo, i) => {
+    setTimeout(() => {
+      Terminal.print(`\n--- ${demo} ---`);
+      Terminal.exec(`run ${demo}`);
+    }, i * 1000);
+  });
+}
+
+// Boot on load
+window.addEventListener('load', () => {
+  ChazonBootstrap.boot();
+});
+</script>
+
+</body>
+</html>
