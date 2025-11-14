@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏭 AutomationGPT - Qdrant Challenge Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+            color: #0f0;
+            overflow: hidden;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .ui-overlay {
+            position: relative;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .ui-overlay > * {
+            pointer-events: auto;
+        }
+
+        .header {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background: rgba(0,0,0,0.8);
+            padding: 15px 30px;
+            border-radius: 10px;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 20px rgba(0,255,0,0.5);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            text-shadow: 0 0 10px #0f0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 5px #0f0; }
+            to { text-shadow: 0 0 20px #0f0, 0 0 30px #0f0; }
+        }
+
+        .header .subtitle {
+            color: #0af;
+            margin-top: 5px;
+        }
+
+        .control-panel {
+            position: absolute;
+            left: 20px;
+            top: 120px;
+            width: 320px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0,255,0,0.3);
+        }
+
+        .panel-section {
+            margin-bottom: 20px;
+        }
+
+        .panel-section h3 {
+            color: #0af;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px solid #0f0;
+            padding-bottom: 5px;
+        }
+
+        .query-input {
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #0f0;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .query-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #0af;
+            border-color: #0af;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .mode-btn {
+            padding: 8px;
+            background: rgba(0,255,0,0.1);
+            border: 1px solid #0f0;
+            color: #0f0;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .mode-btn:hover {
+            background: rgba(0,255,0,0.3);
+            box-shadow: 0 0 10px rgba(0,255,0,0.5);
+        }
+
+        .mode-btn.active {
+            background: rgba(0,255,0,0.5);
+            border-color: #0af;
+            box-shadow: 0 0 15px rgba(0,175,255,0.8);
+        }
+
+        .search-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #0f0, #0af);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0,255,0,0.8);
+        }
+
+        .sample-queries {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .sample-query {
+            padding: 8px;
+            margin-bottom: 5px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #0f0;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .sample-query:hover {
+            background: rgba(0,255,0,0.2);
+            border-color: #0af;
+        }
+
+        .sample-query.regulatory {
+            border-color: #f90;
+            color: #f90;
+        }
+
+        .stats-panel {
+            position: absolute;
+            right: 20px;
+            top: 120px;
+            width: 280px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0,255,0,0.3);
+        }
+
+        .stat-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0,255,0,0.05);
+            border-left: 3px solid #0f0;
+        }
+
+        .stat-label {
+            color: #0af;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            color: #0f0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .collections-viz {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .collection-item {
+            padding: 8px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid #0f0;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .collection-count {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0af;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #fff;
+        }
+
+        .results-panel {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 400px;
+            max-height: 300px;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid #0f0;
+            border-radius: 10px;
+            padding: 15px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .results-panel.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(0,255,0,0.05);
+            border-left: 3px solid #0af;
+            font-size: 12px;
+        }
+
+        .result-source {
+            color: #f90;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #0af;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #0f0;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0f0;
+            border-radius: 4px;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.95);
+            border: 2px solid #0af;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+            z-index: 1000;
+            max-width: 250px;
+        }
+
+        .tooltip.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <div class="ui-overlay">
+        <div class="header">
+            <h1>🏭 AUTOMATIONGPT</h1>
+            <div class="subtitle">Multimodal ISA + Regulatory Search | Qdrant Challenge</div>
+        </div>
+
+        <div class="control-panel">
+            <div class="panel-section">
+                <h3>🔍 Search Interface</h3>
+                <input type="text" class="query-input" id="queryInput" placeholder="Enter query...">
+
+                <div class="mode-selector">
+                    <button class="mode-btn active" data-mode="hybrid">🔄 Hybrid</button>
+                    <button class="mode-btn" data-mode="text">📝 Text</button>
+                    <button class="mode-btn" data-mode="code">💻 Code</button>
+                    <button class="mode-btn" data-mode="regulatory">📜 Regulatory</button>
+                </div>
+
+                <button class="search-btn" id="searchBtn">🚀 SEARCH</button>
+            </div>
+
+            <div class="panel-section">
+                <h3>💡 Sample Queries</h3>
+                <div class="sample-queries">
+                    <div class="sample-query regulatory" data-query="What is 21 CFR Part 11?">
+                        📜 What is 21 CFR Part 11?
+                    </div>
+                    <div class="sample-query regulatory" data-query="EU Annex 11 vs 21 CFR Part 11">
+                        📜 EU Annex 11 vs 21 CFR Part 11
+                    </div>
+                    <div class="sample-query" data-query="ISA-95 Level 3 MES">
+                        🏭 ISA-95 Level 3 MES
+                    </div>
+                    <div class="sample-query" data-query="ISA-88 batch control">
+                        🧪 ISA-88 batch control
+                    </div>
+                    <div class="sample-query" data-query="PID controller code">
+                        💻 PID controller code
+                    </div>
+                    <div class="sample-query regulatory" data-query="Audit trail implementation">
+                        📜 Audit trail implementation
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="panel-section">
+                <h3>📊 Qdrant Collections</h3>
+                <div class="collections-viz">
+                    <div class="collection-item">
+                        <div class="collection-count" id="isaCount">24</div>
+                        <div>ISA/Regulatory</div>
+                    </div>
+                    <div class="collection-item">
+                        <div class="collection-count" id="codeCount">3</div>
+                        <div>Code</div>
+                    </div>
+                    <div class="collection-item">
+                        <div class="collection-count" id="docCount">2</div>
+                        <div>Docs</div>
+                    </div>
+                    <div class="collection-item">
+                        <div class="collection-count" id="mediaCount">0</div>
+                        <div>Media</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-label">Vector Dimensions</div>
+                <div class="stat-value">1536d</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-label">Search Latency</div>
+                <div class="stat-value" id="latency">~80ms</div>
+            </div>
+
+            <div class="stat-item">
+                <div class="stat-label">Active Mode</div>
+                <div class="stat-value" id="activeMode">Hybrid</div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3 style="margin-bottom: 10px; color: #0af;">Legend</h3>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #0f0;"></div>
+                <span>ISA Standards</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f90;"></div>
+                <span>Regulatory (21 CFR/EU)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #0af;"></div>
+                <span>Code Samples</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #f0f;"></div>
+                <span>Documentation</span>
+            </div>
+        </div>
+
+        <div class="results-panel" id="resultsPanel">
+            <h3 style="color: #0af; margin-bottom: 10px;">Search Results</h3>
+            <div id="resultsContent"></div>
+        </div>
+
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <script>
+        // Mock data for demo
+        const MOCK_DATA = {
+            isa: [
+                { id: 0, pos: [5, 0, 0], std: 'ISA-95', txt: 'Level 0: Physical Process', color: 0x00ff00 },
+                { id: 1, pos: [5, 2, 0], std: 'ISA-95', txt: 'Level 1: Sensing/Control', color: 0x00ff00 },
+                { id: 2, pos: [5, 4, 0], std: 'ISA-95', txt: 'Level 2: Supervisory', color: 0x00ff00 },
+                { id: 3, pos: [5, 6, 0], std: 'ISA-95', txt: 'Level 3: MES', color: 0x00ff00 },
+                { id: 4, pos: [5, 8, 0], std: 'ISA-95', txt: 'Level 4: ERP', color: 0x00ff00 },
+                { id: 5, pos: [-5, 3, 0], std: 'ISA-88', txt: 'Batch Control', color: 0x00ff88 },
+                { id: 6, pos: [-5, 5, 0], std: 'ISA-18.2', txt: 'Alarm Management', color: 0x88ff00 },
+            ],
+            regulatory: [
+                { id: 10, pos: [0, 3, 5], std: '21 CFR Part 11', txt: 'Electronic Records', color: 0xff9900 },
+                { id: 11, pos: [0, 5, 5], std: '21 CFR 11.10(b)', txt: 'Audit Trail', color: 0xff9900 },
+                { id: 12, pos: [0, 3, -5], std: 'EU Annex 11', txt: 'Computerised Systems', color: 0xff6600 },
+                { id: 13, pos: [0, 5, -5], std: 'EU Annex 11 Sec 9', txt: 'Audit Trail', color: 0xff6600 },
+            ],
+            code: [
+                { id: 20, pos: [-5, 0, -5], lang: 'ST', fn: 'PID Control', color: 0x00aaff },
+                { id: 21, pos: [-3, 0, -5], lang: 'ST', fn: 'Interlock', color: 0x0088ff },
+                { id: 22, pos: [-5, 0, -3], lang: 'ST', fn: 'Batch Phase', color: 0x00aaff },
+            ],
+            doc: [
+                { id: 30, pos: [3, 0, 3], type: 'Tutorial', txt: 'ISA-95 Guide', color: 0xff00ff },
+                { id: 31, pos: [3, 0, 5], type: 'FAQ', txt: 'Compliance', color: 0xff00aa },
+            ]
+        };
+
+        class VectorSpace {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('canvas'),
+                    antialias: true,
+                    alpha: true
+                });
+
+                this.particles = [];
+                this.connections = [];
+                this.time = 0;
+                this.searchActive = false;
+                this.highlightedPoints = [];
+
+                this.init();
+            }
+
+            init() {
+                this.setupRenderer();
+                this.setupCamera();
+                this.setupLighting();
+                this.createVectorSpace();
+                this.setupControls();
+                this.setupUI();
+                this.animate();
+
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+
+            setupRenderer() {
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setClearColor(0x000000, 0);
+            }
+
+            setupCamera() {
+                this.camera.position.set(20, 15, 20);
+                this.camera.lookAt(0, 4, 0);
+            }
+
+            setupLighting() {
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+                this.scene.add(ambientLight);
+
+                const pointLight = new THREE.PointLight(0x00ffff, 1, 100);
+                pointLight.position.set(0, 10, 0);
+                this.scene.add(pointLight);
+
+                const lights = [
+                    { color: 0x00ff00, pos: [10, 10, 10] },
+                    { color: 0xff9900, pos: [-10, 10, 10] },
+                    { color: 0x00aaff, pos: [10, 10, -10] },
+                ];
+
+                lights.forEach(l => {
+                    const light = new THREE.PointLight(l.color, 0.5, 50);
+                    light.position.set(...l.pos);
+                    this.scene.add(light);
+                });
+            }
+
+            createVectorSpace() {
+                // Create grid
+                const gridHelper = new THREE.GridHelper(30, 15, 0x004488, 0x002244);
+                this.scene.add(gridHelper);
+
+                // Create ISA level planes
+                for (let i = 0; i <= 4; i++) {
+                    const geometry = new THREE.PlaneGeometry(3, 3);
+                    const material = new THREE.MeshBasicMaterial({
+                        color: 0x00ff00,
+                        transparent: true,
+                        opacity: 0.1,
+                        side: THREE.DoubleSide
+                    });
+                    const plane = new THREE.Mesh(geometry, material);
+                    plane.position.set(5, i * 2, 0);
+                    plane.rotation.x = Math.PI / 2;
+                    this.scene.add(plane);
+
+                    // Add level label
+                    const label = this.createLabel(`L${i}`);
+                    label.position.set(7, i * 2, 0);
+                    this.scene.add(label);
+                }
+
+                // Create vector points
+                Object.values(MOCK_DATA).forEach(collection => {
+                    collection.forEach(item => {
+                        const point = this.createVectorPoint(item);
+                        this.scene.add(point);
+                        this.particles.push({ mesh: point, data: item });
+                    });
+                });
+
+                // Create connections
+                this.createConnections();
+            }
+
+            createVectorPoint(data) {
+                const geometry = new THREE.SphereGeometry(0.3, 16, 16);
+                const material = new THREE.MeshPhongMaterial({
+                    color: data.color,
+                    emissive: data.color,
+                    emissiveIntensity: 0.5,
+                    transparent: true,
+                    opacity: 0.8
+                });
+
+                const sphere = new THREE.Mesh(geometry, material);
+                sphere.position.set(...data.pos);
+                sphere.userData = data;
+
+                // Add glow
+                const glowGeometry = new THREE.SphereGeometry(0.5, 16, 16);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: data.color,
+                    transparent: true,
+                    opacity: 0.2
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                sphere.add(glow);
+
+                return sphere;
+            }
+
+            createLabel(text) {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 128;
+                canvas.height = 64;
+
+                context.fillStyle = '#00ffff';
+                context.font = 'bold 24px Courier New';
+                context.textAlign = 'center';
+                context.fillText(text, 64, 40);
+
+                const texture = new THREE.CanvasTexture(canvas);
+                const material = new THREE.SpriteMaterial({ map: texture, transparent: true });
+                const sprite = new THREE.Sprite(material);
+                sprite.scale.set(2, 1, 1);
+
+                return sprite;
+            }
+
+            createConnections() {
+                // Connect ISA levels
+                for (let i = 0; i < 4; i++) {
+                    const start = new THREE.Vector3(5, i * 2, 0);
+                    const end = new THREE.Vector3(5, (i + 1) * 2, 0);
+                    this.addConnection(start, end, 0x00ff00);
+                }
+
+                // Connect regulatory to ISA levels
+                this.addConnection(
+                    new THREE.Vector3(0, 3, 5),
+                    new THREE.Vector3(5, 6, 0),
+                    0xff9900
+                );
+
+                // Random connections between nearby points
+                this.particles.forEach((p1, i) => {
+                    this.particles.slice(i + 1).forEach(p2 => {
+                        const dist = p1.mesh.position.distanceTo(p2.mesh.position);
+                        if (dist < 5 && Math.random() > 0.7) {
+                            this.addConnection(
+                                p1.mesh.position,
+                                p2.mesh.position,
+                                0x00ffff,
+                                0.1
+                            );
+                        }
+                    });
+                });
+            }
+
+            addConnection(start, end, color, opacity = 0.3) {
+                const points = [start.clone(), end.clone()];
+                const geometry = new THREE.BufferGeometry().setFromPoints(points);
+                const material = new THREE.LineBasicMaterial({
+                    color: color,
+                    transparent: true,
+                    opacity: opacity
+                });
+                const line = new THREE.Line(geometry, material);
+                this.scene.add(line);
+                this.connections.push(line);
+            }
+
+            setupControls() {
+                let mouseDown = false;
+                let mouseX = 0, mouseY = 0;
+                let cameraAngle = Math.PI / 4;
+                let cameraHeight = 15;
+                let cameraDistance = 25;
+
+                document.addEventListener('mousedown', (e) => {
+                    if (e.target.id === 'canvas') {
+                        mouseDown = true;
+                        mouseX = e.clientX;
+                        mouseY = e.clientY;
+                    }
+                });
+
+                document.addEventListener('mouseup', () => {
+                    mouseDown = false;
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!mouseDown) return;
+
+                    const deltaX = e.clientX - mouseX;
+                    const deltaY = e.clientY - mouseY;
+
+                    cameraAngle += deltaX * 0.01;
+                    cameraHeight += deltaY * 0.1;
+                    cameraHeight = Math.max(5, Math.min(30, cameraHeight));
+
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+                document.addEventListener('wheel', (e) => {
+                    if (e.target.id === 'canvas') {
+                        cameraDistance += e.deltaY * 0.05;
+                        cameraDistance = Math.max(10, Math.min(50, cameraDistance));
+                    }
+                });
+
+                this.updateCamera = () => {
+                    this.camera.position.x = Math.cos(cameraAngle) * cameraDistance;
+                    this.camera.position.z = Math.sin(cameraAngle) * cameraDistance;
+                    this.camera.position.y = cameraHeight;
+                    this.camera.lookAt(0, 4, 0);
+                };
+            }
+
+            setupUI() {
+                // Mode buttons
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        document.getElementById('activeMode').textContent = btn.textContent.trim();
+                    });
+                });
+
+                // Sample queries
+                document.querySelectorAll('.sample-query').forEach(sq => {
+                    sq.addEventListener('click', () => {
+                        document.getElementById('queryInput').value = sq.dataset.query;
+                        this.performSearch(sq.dataset.query);
+                    });
+                });
+
+                // Search button
+                document.getElementById('searchBtn').addEventListener('click', () => {
+                    const query = document.getElementById('queryInput').value;
+                    if (query) this.performSearch(query);
+                });
+
+                // Enter key
+                document.getElementById('queryInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const query = e.target.value;
+                        if (query) this.performSearch(query);
+                    }
+                });
+
+                // Hover on particles
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+                const tooltip = document.getElementById('tooltip');
+
+                document.addEventListener('mousemove', (e) => {
+                    if (e.target.id !== 'canvas') return;
+
+                    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+                    mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+                    raycaster.setFromCamera(mouse, this.camera);
+                    const intersects = raycaster.intersectObjects(this.particles.map(p => p.mesh));
+
+                    if (intersects.length > 0) {
+                        const data = intersects[0].object.userData;
+                        tooltip.innerHTML = `
+                            <strong>${data.std || data.lang || data.type}</strong><br>
+                            ${data.txt || data.fn || 'Vector Point'}<br>
+                            <span style="color: #666;">Pos: [${data.pos.map(n => n.toFixed(1)).join(', ')}]</span>
+                        `;
+                        tooltip.style.left = e.clientX + 10 + 'px';
+                        tooltip.style.top = e.clientY + 10 + 'px';
+                        tooltip.classList.add('show');
+                    } else {
+                        tooltip.classList.remove('show');
+                    }
+                });
+            }
+
+            performSearch(query) {
+                this.searchActive = true;
+                const resultsPanel = document.getElementById('resultsPanel');
+                const resultsContent = document.getElementById('resultsContent');
+
+                resultsPanel.classList.add('show');
+                resultsContent.innerHTML = '<div class="loading"><div class="spinner"></div> Searching...</div>';
+
+                // Clear previous highlights
+                this.highlightedPoints.forEach(p => {
+                    p.material.emissiveIntensity = 0.5;
+                    p.scale.set(1, 1, 1);
+                });
+                this.highlightedPoints = [];
+
+                // Simulate search
+                setTimeout(() => {
+                    const results = this.mockSearch(query);
+                    this.displayResults(results);
+
+                    // Update latency
+                    const latency = 60 + Math.random() * 40;
+                    document.getElementById('latency').textContent = `~${latency.toFixed(0)}ms`;
+                }, 500);
+            }
+
+            mockSearch(query) {
+                const q = query.toLowerCase();
+                let results = [];
+
+                // Search through all data
+                Object.values(MOCK_DATA).forEach(collection => {
+                    collection.forEach(item => {
+                        const searchText = (item.txt || item.fn || item.type || '').toLowerCase();
+                        const searchStd = (item.std || item.lang || '').toLowerCase();
+
+                        if (searchText.includes(q) || searchStd.includes(q) ||
+                            q.includes(searchText) || q.includes(searchStd)) {
+                            results.push({
+                                ...item,
+                                score: 0.9 - Math.random() * 0.2
+                            });
+                        }
+                    });
+                });
+
+                // If no results, return top items
+                if (results.length === 0) {
+                    results = [
+                        MOCK_DATA.isa[3],
+                        MOCK_DATA.regulatory[0],
+                        MOCK_DATA.code[0]
+                    ].map(item => ({ ...item, score: 0.7 + Math.random() * 0.2 }));
+                }
+
+                return results.sort((a, b) => b.score - a.score).slice(0, 5);
+            }
+
+            displayResults(results) {
+                const resultsContent = document.getElementById('resultsContent');
+
+                resultsContent.innerHTML = results.map(r => `
+                    <div class="result-item">
+                        <div class="result-source">
+                            ${r.std || r.lang || r.type} - Score: ${(r.score * 100).toFixed(1)}%
+                        </div>
+                        <div>${r.txt || r.fn || 'Match found'}</div>
+                    </div>
+                `).join('');
+
+                // Highlight results in 3D space
+                results.forEach(r => {
+                    const particle = this.particles.find(p => p.data.id === r.id);
+                    if (particle) {
+                        particle.mesh.material.emissiveIntensity = 1.5;
+                        particle.mesh.scale.set(1.5, 1.5, 1.5);
+                        this.highlightedPoints.push(particle.mesh);
+                    }
+                });
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                this.time += 0.016;
+
+                // Animate particles
+                this.particles.forEach((p, i) => {
+                    const offset = i * 0.5;
+                    p.mesh.position.y += Math.sin(this.time + offset) * 0.002;
+                    p.mesh.rotation.y += 0.01;
+
+                    if (p.mesh.children[0]) { // Glow
+                        p.mesh.children[0].rotation.y -= 0.02;
+                        p.mesh.children[0].scale.set(
+                            1 + Math.sin(this.time * 2 + offset) * 0.1,
+                            1 + Math.sin(this.time * 2 + offset) * 0.1,
+                            1 + Math.sin(this.time * 2 + offset) * 0.1
+                        );
+                    }
+                });
+
+                // Pulse highlighted points
+                this.highlightedPoints.forEach((p, i) => {
+                    const pulse = 1.5 + Math.sin(this.time * 4 + i) * 0.2;
+                    p.scale.set(pulse, pulse, pulse);
+                });
+
+                // Update camera
+                if (this.updateCamera) {
+                    this.updateCamera();
+                }
+
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            onWindowResize() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            new VectorSpace();
+        });
+    </script>
+</body>
+</html>
