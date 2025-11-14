@@ -132,19 +132,31 @@
 // Bootstrap Loader
 const ChazonBootstrap = {
   modules: [
+    // Core infrastructure (load first)
+    'chazon/core/packml.md',
+    'chazon/core/changelog.md',
+    'chazon/core/sqlite.md',
     'chazon/core/mdcompiler.md',
     'chazon/core/os.md',
     'chazon/core/cli.md',
     'chazon/core/state.md',
+    'chazon/core/mcp.md',
+    'chazon/core/api.md',
+    'chazon/core/wrapper.md',
+    'chazon/core/sync.md',
+    'chazon/core/integration.md',
+    // Agents
     'chazon/agents/ci.md',
     'chazon/agents/test.md',
     'chazon/agents/deploy.md',
+    // UI
     'chazon/ui/desktop.md',
     'chazon/ui/windows.md',
     'chazon/ui/icons.md',
     'chazon/ui/taskbar.md',
     'chazon/ui/theme.md',
     'chazon/ui/index.md',
+    // Standards
     'chazon/isa/standards.md',
     'chazon/isa/compliance.md'
   ],
@@ -152,9 +164,11 @@ const ChazonBootstrap = {
   programs: [
     'chazon/programs/hello.md',
     'chazon/programs/calculator.md',
+    'chazon/programs/data.md',
     'chazon/programs/search.md',
-    'chazon/programs/cicd.md',
-    'chazon/programs/neural.md'
+    'chazon/programs/events.md',
+    'chazon/programs/neural.md',
+    'chazon/programs/cicd.md'
   ],
 
   async boot() {
