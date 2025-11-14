@@ -1,16 +1,16 @@
 # Deploy Agent
-**ISA-95 L4** | Deployment Orchestration
+**ISA-95 L4 + ISA-88** | Production Deployment with Batch Control
 
-Deploy programs to production after validation.
+Deploy validated programs using batch control phases: prepare, execute, complete.
 
 ```javascript
 const DeployAgent = {
-  deploy(program) {
-    console.log(`📦 Deploying: ${program.name}`);
+  isa_level: 4, // L4: Business Planning & Logistics
 
+  deploy(program) {
+    // ISA-88 Batch Phases: Prepare -> Execute -> Complete
     const validation = this.validate(program);
     if (!validation.passed) {
-      console.error('❌ Validation failed:', validation.errors);
       return { deployed: false, errors: validation.errors };
     }
 
@@ -18,30 +18,26 @@ const DeployAgent = {
       name: program.name,
       version: program.version || '1.0.0',
       timestamp: new Date().toISOString(),
+      batch_phase: 'COMPLETE', // ISA-88 phase
       status: 'deployed',
       url: `chazon://programs/${program.name}`
     };
 
-    console.log(`✅ Deployed ${program.name} v${deployment.version}`);
+    console.log(`Deployed ${program.name} v${deployment.version}`);
     return deployment;
   },
 
   validate(program) {
     const errors = [];
-
     if (!program.name) errors.push('Missing program name');
     if (!program.code && !program.content) errors.push('Missing code/content');
     if (program.isa_level > 4) errors.push('Invalid ISA level');
 
-    return {
-      passed: errors.length === 0,
-      errors
-    };
+    return { passed: errors.length === 0, errors };
   },
 
   rollback(program) {
-    console.log(`⏪ Rolling back: ${program.name}`);
-    return { rolledBack: true, reason: 'Manual rollback' };
+    return { rolledBack: true, reason: 'Manual rollback', batch_phase: 'ABORT' };
   }
 };
 

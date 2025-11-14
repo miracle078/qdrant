@@ -1,15 +1,15 @@
 # Desktop Environment
-**Chazon UI** | Pseudo-OS Desktop with Window Manager
+**Chazon UI** | Pseudo-OS Desktop Foundation
 
-Create desktop environment with taskbar, icons, and terminal.
+Create desktop environment foundation with φ-balanced design.
 
 ```javascript
 const ChazonUI = {
+  φ: (1 + Math.sqrt(5)) / 2,
+
   init() {
     this.createDesktop();
-    this.createTaskbar();
-    this.createTerminal();
-    console.log('🖥️ Desktop initialized');
+    console.log('🖥️ Desktop initialized | φ=' + this.φ.toFixed(3));
   },
 
   createDesktop() {
@@ -24,27 +24,16 @@ const ChazonUI = {
     this.desktop = desktop;
   },
 
-  createTaskbar() {
-    const taskbar = document.createElement('div');
-    taskbar.style.cssText = `
-      position:absolute;bottom:0;width:100%;height:40px;
-      background:#0a0a0a;border-top:2px solid #00ff88;
-      display:flex;align-items:center;padding:0 10px;
-    `;
-    taskbar.innerHTML = `<span>🌌 Chazon OS | חזון | φ=${((1+Math.sqrt(5))/2).toFixed(3)}</span>`;
-    this.desktop.appendChild(taskbar);
+  addElement(element) {
+    if (this.desktop) this.desktop.appendChild(element);
   },
 
-  createTerminal() {
-    const term = document.createElement('div');
-    term.id = 'terminal';
-    term.style.cssText = `
-      position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-      width:80%;height:60%;background:#000;border:2px solid #00ff88;
-      padding:10px;overflow-y:auto;
-    `;
-    this.desktop.appendChild(term);
-    this.terminal = term;
+  clear() {
+    if (this.desktop) {
+      Array.from(this.desktop.children).forEach(child => {
+        if (!child.id.includes('taskbar')) child.remove();
+      });
+    }
   }
 };
 

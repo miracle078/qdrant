@@ -1,10 +1,13 @@
 # Markdown Compiler
-**Client-Side Execution** | ISA-95 L3: MES/Control Layer
+**φ-Balanced Execution** | ISA-95 L3: MES/Control Layer
 
-Parse markdown → Extract code blocks → Execute in sandbox.
+Parse markdown → Extract code → Execute. φ-safe sandboxing.
 
 ```javascript
 const MDCompiler = {
+  φ: 1.618,
+  timeout: 1618,
+
   compile(markdown) {
     const blocks = this.parse(markdown);
     return this.execute(blocks);
@@ -15,22 +18,23 @@ const MDCompiler = {
     const blocks = [];
     let match;
     while ((match = regex.exec(md))) {
-      blocks.push({ lang: match[1] || 'js', code: match[2].trim() });
+      blocks.push({
+        lang: match[1] || 'js',
+        code: match[2].trim()
+      });
     }
     return blocks;
   },
 
   execute(blocks) {
-    const results = [];
-    for (const block of blocks) {
+    return blocks.map(block => {
       try {
         const result = this.runSandbox(block.code, block.lang);
-        results.push({ success: true, output: result });
+        return { success: true, output: result, lang: block.lang };
       } catch (err) {
-        results.push({ success: false, error: err.message });
+        return { success: false, error: err.message, lang: block.lang };
       }
-    }
-    return results;
+    });
   },
 
   runSandbox(code, lang) {
@@ -40,7 +44,7 @@ const MDCompiler = {
     if (lang === 'python' || lang === 'py') {
       return eval(code.replace(/print\((.*)\)/g, 'console.log($1)'));
     }
-    throw new Error(`Unsupported: ${lang}`);
+    throw new Error(`Unsupported language: ${lang}`);
   }
 };
 

@@ -1,12 +1,13 @@
 # Test Agent
-**ISA Standards Compliance** | Unit & Integration Testing
+**ISA-95 L1 + ISA-18.2** | Unit Testing with Alarm Management
 
-Run tests with ISA-18.2 alarm management for errors.
+Execute unit tests with standardized alarm handling for failures.
 
 ```javascript
 const TestAgent = {
+  isa_level: 1, // L1: Unit/Cell Control
+
   run(tests) {
-    console.log(`🧪 Running ${tests.length} tests`);
     const results = tests.map(t => this.runTest(t));
     this.report(results);
     return results;
@@ -17,7 +18,6 @@ const TestAgent = {
       const start = performance.now();
       const result = eval(test.code);
       const duration = performance.now() - start;
-
       const passed = test.expect ? result === test.expect : !!result;
 
       return {
@@ -43,13 +43,13 @@ const TestAgent = {
       priority: test.critical ? 'HIGH' : 'MEDIUM',
       type: 'TEST_FAILURE',
       message: err?.message || 'Assertion failed',
-      isa_standard: 'ISA-18.2'
+      standard: 'ISA-18.2'
     };
   },
 
   report(results) {
     const passed = results.filter(r => r.passed).length;
-    console.log(`✅ ${passed}/${results.length} tests passed`);
+    console.log(`${passed}/${results.length} tests passed`);
   }
 };
 
