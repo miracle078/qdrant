@@ -9,6 +9,48 @@
 
 ---
 
+## 🌌 NEW: Chazon OS - חזון
+
+**φ-Balanced Computing | Client-Side Markdown Programs | ISA-Compliant**
+
+Chazon (חזון - "Vision") is a revolutionary pseudo-OS that runs entirely in your browser! Execute programs written in Markdown format with full ISA automation standards compliance.
+
+### ✨ Try it Now
+
+**Live Demo:** Open [`chazon.html`](chazon.html) in your browser
+
+```bash
+# Commands:
+help          - Show available commands
+run hello.md  - Run Hello World program
+demo          - Run demo programs (hello, calculator, neural network)
+ls            - List all programs
+```
+
+### 🎯 Features
+
+- **All files < 250 tokens** - Ultra-modular design
+- **Markdown programs** - Write code in .md files, execute client-side
+- **CI/CD agents** - ISA-95 L0-L4 automated testing & deployment
+- **No backend required** - Runs entirely in browser (GitHub Pages ready)
+- **ISA standards** - Full L0-L4 hierarchy implementation
+- **φ-balanced** - Golden ratio (1.618) design philosophy
+
+### 📁 Architecture
+
+```
+chazon/
+├── core/          # OS kernel, markdown compiler, CLI
+├── agents/        # CI/CD agents (ISA-95 L0-L4)
+├── ui/            # Desktop environment, window manager
+├── isa/           # Standards & compliance (95/88/18.2)
+└── programs/      # Sample programs (.md files)
+```
+
+**[→ Full Chazon Documentation](chazon/README.md)**
+
+---
+
 ## 🎯 Problem
 
 Industrial automation knowledge is **trapped**:
@@ -84,8 +126,12 @@ curl -X POST http://localhost:8000/query \
 
 ### 5. Open the Frontend
 
-Open `index.html` in your browser, or visit:
-- **Local:** `file:///path/to/qdrant/index.html`
+**Option A: Chazon OS (Recommended)**
+- Open `chazon.html` in your browser
+- **GitHub Pages:** https://teslasolar.github.io/qdrant/chazon.html
+
+**Option B: AutomationGPT Classic**
+- Open `index.html` in your browser
 - **GitHub Pages:** https://teslasolar.github.io/qdrant/
 
 ---
@@ -382,8 +428,8 @@ REACT_APP_API_URL=http://localhost:8000
 ## 🎨 Frontend
 
 ### Static HTML (GitHub Pages)
-- Open `index.html` directly
-- Genesis aesthetic (dark matrix theme)
+- **Chazon OS:** `chazon.html` - Markdown-based programs with CI/CD
+- **Classic:** `index.html` - Genesis aesthetic (dark matrix theme)
 - Pure JavaScript, no build required
 
 ### React App

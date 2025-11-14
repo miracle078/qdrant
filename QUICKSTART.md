@@ -2,6 +2,34 @@
 
 Get up and running in 5 minutes!
 
+## 🌌 Chazon OS - Super Quick Start (30 seconds!)
+
+**No API keys, no installation, no backend!**
+
+```bash
+# Just open in your browser:
+open chazon.html
+
+# Or visit:
+https://teslasolar.github.io/qdrant/chazon.html
+```
+
+**Commands:**
+```
+help          - Show available commands
+run hello.md  - Run Hello World
+demo          - Run demo programs
+ls            - List all programs
+```
+
+**That's it!** Chazon OS runs entirely client-side. See [Chazon README](chazon/README.md) for details.
+
+---
+
+## 🏭 AutomationGPT Classic - Full Setup
+
+For the full multimodal search engine with API backend:
+
 ## Prerequisites
 
 - Docker & Docker Compose
@@ -149,13 +177,20 @@ curl -X POST http://localhost:8000/search/code \
 
 ## Step 7: Open Frontend
 
-### Static HTML (Easiest)
+### Option A: Landing Page
+1. Open `index.html` - Choose between Chazon OS or AutomationGPT Classic
 
-1. Open `index.html` in your browser
+### Option B: Chazon OS (No API Required)
+1. Open `chazon.html` in your browser
+2. Type `demo` to see sample programs
+3. Pure client-side, no backend needed!
+
+### Option C: AutomationGPT Classic
+1. Open `automationgpt.html` in your browser
 2. Enter a query (e.g., "Explain ISA-95 level 3")
 3. Click Search
 
-**Note:** Update API_URL in index.html if not using localhost:8000
+**Note:** Update API_URL in automationgpt.html if not using localhost:8000
 
 ### React App (Optional)
 

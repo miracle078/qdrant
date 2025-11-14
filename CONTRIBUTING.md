@@ -1,10 +1,55 @@
-# Contributing to AutomationGPT
+# Contributing to AutomationGPT + Chazon OS
 
-Thank you for your interest in contributing to AutomationGPT! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing! This project includes two main components:
+- **AutomationGPT** - Multimodal search engine for ISA standards
+- **Chazon OS** - Client-side pseudo-OS with markdown programs
 
 ## Code of Conduct
 
 Be respectful, inclusive, and collaborative. We're building this for the automation community.
+
+## 🌌 Contributing to Chazon OS
+
+Chazon has unique constraints - **all files must be < 250 tokens**!
+
+### Adding Programs
+
+Create markdown files in `chazon/programs/`:
+
+```markdown
+# Your Program Name
+**Description** | ISA-95 Level
+
+Brief description of what this program does.
+
+\```javascript
+// Your code here
+console.log('Hello Chazon!');
+return 'Success';
+\```
+```
+
+**Requirements:**
+- File must be < 250 tokens (check with `wc -w`)
+- Include ISA level in header
+- Code blocks must be JavaScript
+- Follow φ-balanced design principles
+
+### Adding Agents
+
+Create agents in `chazon/agents/` following ISA-95 hierarchy:
+- L0: Code execution
+- L1: Unit testing
+- L2: Integration
+- L3: System testing
+- L4: Deployment
+
+### File Size Check
+
+```bash
+# Check word count (should be < 250)
+wc -w chazon/programs/yourfile.md
+```
 
 ## How to Contribute
 
