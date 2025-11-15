@@ -1,0 +1,73 @@
+{
+  "provider": "medical",
+  "description": "Medical Imaging Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "RUNNING",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Medical imaging system status"
+    },
+    "dicomReady": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "DICOM viewer ready"
+    },
+    "qdrantConnected": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Qdrant vector search connected"
+    },
+    "alfDetectReady": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "AlF-DETECT system ready"
+    },
+    "imagesProcessed": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total images processed"
+    },
+    "similaritySearches": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Vector similarity searches"
+    },
+    "embedModel": {
+      "value": "BiomedCLIP",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Embedding model"
+    },
+    "avgProcessTime": {
+      "value": 0,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Average image processing time"
+    },
+    "cacheSize": {
+      "value": 0,
+      "type": "number",
+      "unit": "MB",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Image cache size"
+    }
+  }
+}

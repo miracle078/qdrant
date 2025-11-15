@@ -1,0 +1,66 @@
+{
+  "provider": "language",
+  "description": "SNT Language Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "IDLE",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "SNT compiler status"
+    },
+    "compilerReady": {
+      "value": false,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Compiler initialized"
+    },
+    "trinaryMode": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Trinary (base-3) mode enabled"
+    },
+    "emojiCompression": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Emoji compression enabled"
+    },
+    "compiledPrograms": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total compiled programs"
+    },
+    "compileTime": {
+      "value": 0,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Last compile duration"
+    },
+    "syntaxErrors": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Syntax error count"
+    },
+    "compressionRatio": {
+      "value": 0.0,
+      "type": "number",
+      "unit": "%",
+      "quality": "UNCERTAIN",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Average compression ratio"
+    }
+  }
+}
