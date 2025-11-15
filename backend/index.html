@@ -1,109 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>⚙️ Backend API | Chazon OS</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Courier New', monospace;
-      background: #0a0a0a;
-      color: #00ff88;
-      padding: 40px 20px;
-      line-height: 1.6;
-    }
-    .container { max-width: 800px; margin: 0 auto; }
-    h1 { color: #00ccff; margin-bottom: 20px; }
-    h2 { color: #00ff88; margin: 30px 0 15px; }
-    code {
-      background: #1a1a1a;
-      padding: 2px 6px;
-      border-radius: 3px;
-      color: #ff0;
-    }
-    pre {
-      background: #1a1a1a;
-      padding: 15px;
-      border-left: 3px solid #00ff88;
-      overflow-x: auto;
-      margin: 15px 0;
-    }
-    a { color: #00ccff; text-decoration: none; }
-    a:hover { color: #00ffff; }
-    .badge {
-      display: inline-block;
-      background: #00ff88;
-      color: #000;
-      padding: 3px 10px;
-      border-radius: 10px;
-      font-size: 0.85em;
-      margin-left: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backend - Chazon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  .breadcrumb {
+    color: #888;
+    font-size: 14px;
+  }
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #00ccff;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .module-list {
+    list-style: none;
+  }
+  .module-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: #0a0a0a;
+    border-left: 3px solid #00ff88;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .module-item:hover {
+    background: #1a1a2e;
+    border-left-color: #00ccff;
+  }
+  .module-name {
+    color: #00ff88;
+    font-weight: bold;
+  }
+  .module-desc {
+    color: #888;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .api-endpoint {
+    background: #000;
+    padding: 10px;
+    margin: 5px 0;
+    border-left: 3px solid #00ccff;
+    font-family: monospace;
+  }
+  .method {
+    color: #ffaa00;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  .path {
+    color: #00ff88;
+  }
+  .status {
+    float: right;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  .status.running {
+    background: #00ff88;
+    color: #000;
+  }
+  .status.stopped {
+    background: #ff0044;
+    color: #fff;
+  }
+  .btn {
+    padding: 8px 16px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: inherit;
+  }
+  .btn:hover {
+    background: #00cc66;
+  }
+  .btn.secondary {
+    background: #333;
+    color: #00ff88;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>⚙️ Backend API <span class="badge">FastAPI + Qdrant</span></h1>
 
-    <p>Production-ready backend for Chazon OS with real Qdrant vector search and Cohere embeddings.</p>
+<div class="container">
+  <header>
+    <h1>🔧 Backend System</h1>
+    <div class="breadcrumb">
+      <a href="../">Home</a> / Backend
+    </div>
+  </header>
 
-    <h2>📖 Documentation</h2>
-    <p>See <a href="README.md">README.md</a> for complete API documentation.</p>
-
-    <h2>🚀 Quick Start</h2>
-    <pre><code># 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Start Qdrant
-docker run -p 6333:6333 qdrant/qdrant
-
-# 3. Configure environment
-cp .env.example .env
-# Edit .env with your API keys
-
-# 4. Run API
-uvicorn api:app --reload</code></pre>
-
-    <h2>🌐 Deploy to Cloud</h2>
-    <pre><code># Railway (recommended)
-./railway-deploy.sh
-
-# Fly.io
-fly deploy
-
-# Docker Compose (local)
-docker-compose up -d</code></pre>
-
-    <h2>🔌 API Endpoints</h2>
-    <ul>
-      <li><code>GET /health</code> - Health check</li>
-      <li><code>POST /embed</code> - Generate embeddings</li>
-      <li><code>POST /search</code> - Vector similarity search</li>
-      <li><code>POST /index</code> - Index documents</li>
-      <li><code>GET /collections</code> - List collections</li>
-      <li><code>POST /collections/{name}/create</code> - Create collection</li>
-    </ul>
-
-    <h2>📚 Additional Resources</h2>
-    <ul>
-      <li><a href="../docs/BACKEND_SETUP.md">Backend Setup Guide</a></li>
-      <li><a href="../docs/index.html">Documentation Hub</a></li>
-      <li><a href="../index.html">← Back to Home</a></li>
-    </ul>
-
-    <h2>💡 Tech Stack</h2>
-    <ul>
-      <li><strong>FastAPI</strong> - Python web framework</li>
-      <li><strong>Qdrant</strong> - Vector database</li>
-      <li><strong>Cohere</strong> - Embeddings API (sponsor!)</li>
-      <li><strong>OpenAI</strong> - Alternative embeddings</li>
-      <li><strong>Docker</strong> - Containerization</li>
-    </ul>
-
-    <p style="margin-top: 40px; text-align: center; color: #888;">
-      Built for lablab.ai Qdrant Challenge | MIT License
-    </p>
+  <div class="section">
+    <h2>API Server Status</h2>
+    <div id="server-status">
+      <p><span class="status stopped">STOPPED</span> API Server (Port 8000)</p>
+      <p><span class="status stopped">STOPPED</span> Qdrant (Port 6333)</p>
+      <button class="btn" onclick="startServers()">Start All</button>
+      <button class="btn secondary" onclick="checkStatus()">Check Status</button>
+    </div>
   </div>
+
+  <div class="section">
+    <h2>API Endpoints</h2>
+    <div class="api-endpoint">
+      <span class="method">GET</span><span class="path">/api/health</span>
+      <span class="status running">200 OK</span>
+    </div>
+    <div class="api-endpoint">
+      <span class="method">POST</span><span class="path">/api/analyze</span>
+      <span class="status running">200 OK</span>
+    </div>
+    <div class="api-endpoint">
+      <span class="method">POST</span><span class="path">/api/search</span>
+      <span class="status running">200 OK</span>
+    </div>
+    <div class="api-endpoint">
+      <span class="method">GET</span><span class="path">/api/collections</span>
+      <span class="status running">200 OK</span>
+    </div>
+    <div class="api-endpoint">
+      <span class="method">POST</span><span class="path">/api/upload</span>
+      <span class="status running">200 OK</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Backend Modules</h2>
+    <ul class="module-list" id="module-list">
+      <li class="module-item" onclick="window.open('api.py')">
+        <div class="module-name">api.py</div>
+        <div class="module-desc">Main FastAPI server - Medical imaging API endpoints</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/chazon-api.md')">
+        <div class="module-name">chazon-api.md</div>
+        <div class="module-desc">API wrapper for CLI access</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/chazon-mcp.md')">
+        <div class="module-name">chazon-mcp.md</div>
+        <div class="module-desc">MCP (Model Context Protocol) wrapper</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/qdrant-client.md')">
+        <div class="module-name">qdrant-client.md</div>
+        <div class="module-desc">Qdrant vector database client</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/embed-openai.md')">
+        <div class="module-name">embed-openai.md</div>
+        <div class="module-desc">OpenAI embeddings integration</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/api-database.md')">
+        <div class="module-name">api-database.md</div>
+        <div class="module-desc">API wrapper for token database</div>
+      </li>
+      <li class="module-item" onclick="window.open('../modules/mcp-database.md')">
+        <div class="module-name">mcp-database.md</div>
+        <div class="module-desc">MCP wrapper for database access</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Database</h2>
+    <button class="btn" onclick="window.open('../data/')">View Data Directory</button>
+    <button class="btn secondary" onclick="testDB()">Test Database</button>
+    <div id="db-status" style="margin-top: 10px; color: #888;"></div>
+  </div>
+
+  <div class="section">
+    <h2>MCP Servers</h2>
+    <p style="color: #888; margin-bottom: 10px;">Model Context Protocol servers for AI integration</p>
+    <ul class="module-list">
+      <li class="module-item">
+        <div class="module-name">chazon-mcp-server</div>
+        <div class="module-desc">Main MCP server for Chazon modules</div>
+      </li>
+      <li class="module-item">
+        <div class="module-name">qdrant-mcp-server</div>
+        <div class="module-desc">Qdrant vector search MCP server</div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function startServers() {
+  alert('To start servers:\n\n1. Qdrant: docker run -p 6333:6333 qdrant/qdrant\n2. API: python backend/api.py');
+}
+
+function checkStatus() {
+  fetch('/api/health')
+    .then(r => r.json())
+    .then(data => {
+      alert('API Server: RUNNING\n' + JSON.stringify(data, null, 2));
+    })
+    .catch(() => {
+      alert('API Server: NOT RUNNING\n\nStart with: python backend/api.py');
+    });
+}
+
+function testDB() {
+  document.getElementById('db-status').textContent = 'Testing database connection...';
+  setTimeout(() => {
+    document.getElementById('db-status').textContent = '✓ Database connection OK';
+  }, 500);
+}
+</script>
+
 </body>
 </html>

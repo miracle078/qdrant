@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data - Chazon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  .breadcrumb {
+    color: #888;
+    font-size: 14px;
+  }
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #00ccff;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .file-item {
+    background: #0a0a0a;
+    border-left: 3px solid #00ff88;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .file-item:hover {
+    background: #1a1a2e;
+    border-left-color: #00ccff;
+  }
+  .file-name {
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .file-desc {
+    color: #888;
+    font-size: 12px;
+  }
+  .btn {
+    padding: 8px 16px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 5px 0 0;
+    font-family: inherit;
+  }
+  .btn:hover {
+    background: #00cc66;
+  }
+  .btn.secondary {
+    background: #333;
+    color: #00ff88;
+  }
+  pre {
+    background: #000;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 12px;
+    color: #00ff88;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>💾 Data & Databases</h1>
+    <div class="breadcrumb">
+      <a href="../">Home</a> / Data
+    </div>
+  </header>
+
+  <div class="section">
+    <h2>SQL Schemas</h2>
+
+    <div class="file-item" onclick="window.open('sql/token-schema.sql')">
+      <div class="file-name">token-schema.sql</div>
+      <div class="file-desc">Complete database schema for token-dense module storage</div>
+    </div>
+
+    <div style="margin-top: 15px;">
+      <button class="btn" onclick="viewSchema()">View Schema</button>
+      <button class="btn secondary" onclick="testDB()">Test Database</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Documentation</h2>
+
+    <div class="file-item" onclick="window.open('architecture-map.md')">
+      <div class="file-name">architecture-map.md</div>
+      <div class="file-desc">Complete system architecture documentation with layer diagrams</div>
+    </div>
+
+    <div class="file-item" onclick="window.open('dependency-graph.md')">
+      <div class="file-name">dependency-graph.md</div>
+      <div class="file-desc">Mermaid dependency diagrams for all modules</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Database Tables</h2>
+    <pre id="schema-info">
+Click "View Schema" to see database structure
+    </pre>
+  </div>
+
+  <div class="section">
+    <h2>Database Modules</h2>
+    <ul style="list-style: none;">
+      <li style="padding: 8px 0; border-bottom: 1px solid #222;">
+        <a href="../modules/db-token.md" style="color: #00ff88; text-decoration: none;">db-token.md</a>
+        <span style="color: #888; font-size: 12px; margin-left: 10px;">- Core database operations</span>
+      </li>
+      <li style="padding: 8px 0; border-bottom: 1px solid #222;">
+        <a href="../modules/token-analyzer.md" style="color: #00ff88; text-decoration: none;">token-analyzer.md</a>
+        <span style="color: #888; font-size: 12px; margin-left: 10px;">- Module token analyzer</span>
+      </li>
+      <li style="padding: 8px 0; border-bottom: 1px solid #222;">
+        <a href="../modules/api-database.md" style="color: #00ff88; text-decoration: none;">api-database.md</a>
+        <span style="color: #888; font-size: 12px; margin-left: 10px;">- API wrapper for database</span>
+      </li>
+      <li style="padding: 8px 0; border-bottom: 1px solid #222;">
+        <a href="../modules/mcp-database.md" style="color: #00ff88; text-decoration: none;">mcp-database.md</a>
+        <span style="color: #888; font-size: 12px; margin-left: 10px;">- MCP wrapper for database</span>
+      </li>
+      <li style="padding: 8px 0; border-bottom: 1px solid #222;">
+        <a href="../modules/cli-db.md" style="color: #00ff88; text-decoration: none;">cli-db.md</a>
+        <span style="color: #888; font-size: 12px; margin-left: 10px;">- CLI database commands</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function viewSchema() {
+  const schema = `
+Database Schema - Chazon Token-Dense Storage
+═══════════════════════════════════════════════
+
+TABLE modules
+├── id (INTEGER PRIMARY KEY)
+├── uuid (TEXT UNIQUE)
+├── name (TEXT)
+├── path (TEXT)
+├── category (TEXT)
+├── token_count (INTEGER)
+├── content_hash (TEXT)
+├── compressed_content (BLOB)
+├── metadata (TEXT)
+└── created_at (TIMESTAMP)
+
+TABLE dependencies
+├── id (INTEGER PRIMARY KEY)
+├── module_id (INTEGER FK → modules.id)
+├── depends_on_id (INTEGER FK → modules.id)
+└── dependency_type (TEXT)
+
+TABLE boot_phases
+├── id (INTEGER PRIMARY KEY)
+├── phase_number (INTEGER)
+├── phase_name (TEXT)
+└── description (TEXT)
+
+TABLE phase_modules
+├── id (INTEGER PRIMARY KEY)
+├── phase_id (INTEGER FK → boot_phases.id)
+├── module_id (INTEGER FK → modules.id)
+└── load_order (INTEGER)
+
+TABLE architecture_graph
+├── id (INTEGER PRIMARY KEY)
+├── layer (TEXT)
+├── module_id (INTEGER FK → modules.id)
+└── position (INTEGER)
+
+TABLE token_stats
+├── id (INTEGER PRIMARY KEY)
+├── total_modules (INTEGER)
+├── total_tokens (INTEGER)
+├── avg_tokens_per_module (REAL)
+└── updated_at (TIMESTAMP)
+  `;
+
+  document.getElementById('schema-info').textContent = schema;
+}
+
+function testDB() {
+  alert('Database Test:\n\n1. Open Frontend: ../frontend/\n2. Open Terminal tab\n3. Run: db:stats\n4. Run: db:modules\n5. Run: db:query modules');
+}
+</script>
+
+</body>
+</html>
