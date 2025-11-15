@@ -1,0 +1,450 @@
+title: "Chazon Medical Imaging Factory - Process Flow Diagram"
+version: "1.0.0"
+date: "2025-11-15"
+standard: "ISA-5.1 (P&ID Symbols)"
+
+# Component definitions
+components:
+  # Level 3 - SCADA/MES
+  - id: SCADA_GATEWAY
+    type: HMI
+    tag: HMI-001
+    name: "SCADA Gateway"
+    location: "/"
+    description: "Master factory control interface"
+    coordinates: {x: 100, y: 100}
+
+  - id: SCADA_MASTER
+    type: SCADA
+    tag: SCADA-001
+    name: "SCADA Master"
+    location: "/scada.html"
+    description: "Process monitoring and data acquisition"
+    coordinates: {x: 300, y: 100}
+
+  - id: HMI_MASTER
+    type: HMI
+    tag: HMI-002
+    name: "HMI Panel"
+    location: "/hmi.html"
+    description: "Operator control panel"
+    coordinates: {x: 500, y: 100}
+
+  - id: PLC_MASTER
+    type: PLC
+    tag: PLC-000
+    name: "Master PLC Controller"
+    location: "/plc.html"
+    description: "Master control logic orchestrator"
+    coordinates: {x: 700, y: 100}
+    scan_time: "50ms"
+
+  # Level 2 - OS Gateway
+  - id: OS_GATEWAY
+    type: HMI
+    tag: HMI-010
+    name: "Chazon OS Gateway"
+    location: "/os/index.html"
+    description: "Operating system interface"
+    coordinates: {x: 400, y: 250}
+
+  # Level 1 - Area PLCs
+  - id: PLC_MODULES
+    type: PLC
+    tag: PLC-001
+    name: "Module System PLC"
+    location: "/os/modules/"
+    description: "Controls 114 markdown modules"
+    scan_time: "60ms"
+    coordinates: {x: 100, y: 400}
+
+  - id: PLC_BOOT
+    type: PLC
+    tag: PLC-002
+    name: "Boot Sequencer PLC"
+    location: "/os/boot/"
+    description: "6-phase initialization control"
+    scan_time: "50ms"
+    coordinates: {x: 250, y: 400}
+
+  - id: PLC_MODELS
+    type: PLC
+    tag: PLC-003
+    name: "AI Models PLC"
+    location: "/os/models/"
+    description: "AI inference control"
+    scan_time: "100ms"
+    coordinates: {x: 400, y: 400}
+
+  - id: PLC_MEDICAL
+    type: PLC
+    tag: PLC-004
+    name: "Medical Imaging PLC"
+    location: "/os/medical/"
+    description: "DICOM, AlF-DETECT control"
+    scan_time: "80ms"
+    coordinates: {x: 550, y: 400}
+
+  - id: PLC_DATA
+    type: PLC
+    tag: PLC-005
+    name: "Data Layer PLC"
+    location: "/os/data/"
+    description: "Database management control"
+    scan_time: "75ms"
+    coordinates: {x: 700, y: 400}
+
+  - id: PLC_LANGUAGE
+    type: PLC
+    tag: PLC-006
+    name: "Language System PLC"
+    location: "/os/language/"
+    description: "SNT compiler control"
+    scan_time: "120ms"
+    coordinates: {x: 850, y: 400}
+
+  # Level 0 - Field Devices (Processors/Databases)
+  - id: MD_COMPILER
+    type: Processor
+    tag: PROC-001
+    name: "MD Compiler"
+    location: "/os/modules/chazon-mdcompiler.md"
+    description: "Markdown to JavaScript compiler"
+    coordinates: {x: 100, y: 550}
+
+  - id: MODULE_ROUTER
+    type: Processor
+    tag: PROC-002
+    name: "Module Router"
+    location: "/os/module-router.md"
+    description: "UUID-based module discovery"
+    coordinates: {x: 250, y: 550}
+
+  - id: AI_ONNX
+    type: Processor
+    tag: PROC-003
+    name: "ONNX Runtime"
+    location: "/os/models/"
+    description: "AI inference engine"
+    coordinates: {x: 400, y: 550}
+
+  - id: AI_WEBGPU
+    type: Processor
+    tag: PROC-004
+    name: "WebGPU Accelerator"
+    location: "Browser GPU"
+    description: "GPU-accelerated inference"
+    coordinates: {x: 550, y: 550}
+
+  - id: DB_TOKEN
+    type: Database
+    tag: DB-001
+    name: "Token Database"
+    location: "/os/data/tokendb.sql"
+    description: "SQL token-dense storage"
+    coordinates: {x: 700, y: 550}
+
+  - id: DB_QDRANT
+    type: Database
+    tag: DB-002
+    name: "Qdrant Vector DB"
+    location: "External:6333"
+    description: "Medical image embeddings"
+    coordinates: {x: 850, y: 550}
+
+  - id: SNT_COMPILER
+    type: Processor
+    tag: PROC-005
+    name: "SNT Compiler"
+    location: "/os/language/"
+    description: "Trinary compiler"
+    coordinates: {x: 1000, y: 550}
+
+# Process flow connections
+connections:
+  # SCADA Level
+  - from: SCADA_GATEWAY
+    to: SCADA_MASTER
+    protocol: HTTP
+    data_type: "Navigation"
+    line_type: "signal"
+    flow_rate: "10 req/s"
+
+  - from: SCADA_GATEWAY
+    to: HMI_MASTER
+    protocol: HTTP
+    data_type: "Navigation"
+    line_type: "signal"
+
+  - from: SCADA_MASTER
+    to: OS_GATEWAY
+    protocol: WebSocket
+    data_type: "Real-time metrics"
+    line_type: "data"
+    bidirectional: true
+
+  - from: HMI_MASTER
+    to: PLC_MASTER
+    protocol: "Control signals"
+    data_type: "Commands"
+    line_type: "signal"
+    bidirectional: true
+
+  - from: PLC_MASTER
+    to: OS_GATEWAY
+    protocol: MQTT
+    data_type: "PLC status updates"
+    line_type: "signal"
+    topic: "chazon/plc/+/status"
+
+  # OS Gateway to Area PLCs
+  - from: OS_GATEWAY
+    to: PLC_MODULES
+    protocol: "Module Router"
+    data_type: "Module requests"
+    line_type: "signal"
+
+  - from: OS_GATEWAY
+    to: PLC_BOOT
+    protocol: "Module Router"
+    data_type: "Boot commands"
+    line_type: "signal"
+
+  - from: OS_GATEWAY
+    to: PLC_MODELS
+    protocol: "Module Router"
+    data_type: "Inference requests"
+    line_type: "signal"
+
+  - from: OS_GATEWAY
+    to: PLC_MEDICAL
+    protocol: "Module Router"
+    data_type: "Medical imaging commands"
+    line_type: "signal"
+
+  # Boot sequence
+  - from: PLC_BOOT
+    to: PLC_MODULES
+    protocol: "Function call"
+    data_type: "Load module requests"
+    line_type: "process"
+    description: "Phase 0-5 module loading"
+
+  - from: PLC_MODULES
+    to: MD_COMPILER
+    protocol: "Function call"
+    data_type: "Markdown source"
+    line_type: "process"
+    flow_rate: "114 modules"
+
+  - from: MD_COMPILER
+    to: PLC_MODULES
+    protocol: "Return value"
+    data_type: "Compiled JavaScript"
+    line_type: "process"
+
+  # Module management
+  - from: PLC_MODULES
+    to: MODULE_ROUTER
+    protocol: "Function call"
+    data_type: "UUID lookup"
+    line_type: "process"
+
+  - from: PLC_MODULES
+    to: DB_TOKEN
+    protocol: SQL
+    data_type: "Module metadata"
+    line_type: "data"
+    bidirectional: true
+
+  # AI inference pipeline
+  - from: PLC_MEDICAL
+    to: PLC_MODELS
+    protocol: "Module Router"
+    data_type: "Medical images"
+    line_type: "process"
+
+  - from: PLC_MODELS
+    to: AI_ONNX
+    protocol: "ONNX API"
+    data_type: "Tensor input"
+    line_type: "process"
+
+  - from: AI_ONNX
+    to: AI_WEBGPU
+    protocol: "WebGPU"
+    data_type: "GPU operations"
+    line_type: "process"
+
+  - from: AI_WEBGPU
+    to: AI_ONNX
+    protocol: "WebGPU"
+    data_type: "Computation results"
+    line_type: "process"
+
+  - from: AI_ONNX
+    to: PLC_MODELS
+    protocol: "Return value"
+    data_type: "Inference results"
+    line_type: "process"
+
+  # Vector search
+  - from: PLC_MODELS
+    to: DB_QDRANT
+    protocol: gRPC
+    data_type: "Vector embeddings"
+    line_type: "data"
+    port: 6334
+
+  - from: PLC_MEDICAL
+    to: DB_QDRANT
+    protocol: "REST API"
+    data_type: "Similarity queries"
+    line_type: "data"
+    bidirectional: true
+    port: 6333
+
+  # Language processing
+  - from: PLC_LANGUAGE
+    to: SNT_COMPILER
+    protocol: "Function call"
+    data_type: "SNT source code"
+    line_type: "process"
+
+  - from: SNT_COMPILER
+    to: PLC_LANGUAGE
+    protocol: "Return value"
+    data_type: "Compiled trinary"
+    line_type: "process"
+
+# Control loops
+control_loops:
+  - name: "Boot Sequence Control"
+    tag: LOOP-001
+    controller: PLC_BOOT
+    setpoint: "All 6 phases complete"
+    process_variable: "Current phase status"
+    manipulated_variable: "Phase execution trigger"
+    measurement_tag: AT-001
+    control_type: "Sequential Control"
+    scan_rate: "50ms"
+
+  - name: "Module Load Balancing"
+    tag: LOOP-002
+    controller: PLC_MODULES
+    setpoint: "Memory < 500 MB"
+    process_variable: "Modules loaded count"
+    manipulated_variable: "Cache eviction rate"
+    measurement_tag: AT-002
+    control_type: "PID"
+    scan_rate: "60ms"
+    tuning: {Kp: 1.5, Ki: 0.3, Kd: 0.1}
+
+  - name: "Inference Queue Management"
+    tag: LOOP-003
+    controller: PLC_MODELS
+    setpoint: "Latency < 100ms"
+    process_variable: "Queue depth"
+    manipulated_variable: "Batch size"
+    measurement_tag: FT-001
+    control_type: "Feedforward"
+    scan_rate: "100ms"
+
+  - name: "Medical Study Throughput"
+    tag: LOOP-004
+    controller: PLC_MEDICAL
+    setpoint: "10 studies/hour"
+    process_variable: "Study processing rate"
+    manipulated_variable: "Worker threads"
+    measurement_tag: FT-002
+    control_type: "Cascade"
+    scan_rate: "80ms"
+
+# Instrumentation
+instruments:
+  - tag: AT-001
+    type: "Analyzer/Transmitter"
+    location: PLC_BOOT
+    measures: "Boot phase progress"
+    range: "0-6 phases"
+    output_signal: "MQTT"
+    output_topic: "chazon/os/boot/phase/+/status"
+
+  - tag: AT-002
+    type: "Analyzer/Transmitter"
+    location: PLC_MODULES
+    measures: "Module performance metrics"
+    range: "0-1000 modules"
+    output_signal: "WebSocket"
+    output_rate: "1 Hz"
+
+  - tag: FT-001
+    type: "Flow Transmitter"
+    location: PLC_MODELS
+    measures: "Inference throughput"
+    range: "0-100 inferences/sec"
+    output_signal: "MQTT"
+    output_topic: "chazon/os/models/throughput"
+
+  - tag: FT-002
+    type: "Flow Transmitter"
+    location: PLC_MEDICAL
+    measures: "Study processing rate"
+    range: "0-100 studies/hour"
+    output_signal: "MQTT"
+    output_topic: "chazon/os/medical/throughput"
+
+  - tag: PT-001
+    type: "Pressure Transmitter"
+    location: AI_WEBGPU
+    measures: "GPU memory pressure"
+    range: "0-100%"
+    output_signal: "WebSocket"
+    alarm_high: 90
+
+  - tag: LT-001
+    type: "Level Transmitter"
+    location: DB_TOKEN
+    measures: "Database fill level"
+    range: "0-1000000 records"
+    output_signal: "SQL trigger"
+
+# Communication protocols used
+protocols:
+  HTTP:
+    port: 8080
+    encryption: false
+    use_case: "SCADA gateway navigation"
+
+  WebSocket:
+    port: 8080
+    path: "/ws"
+    use_case: "Real-time metrics streaming"
+
+  MQTT:
+    broker: "localhost:1883"
+    qos: 1
+    use_case: "Event-driven messaging"
+    topics:
+      - "chazon/os/+/status"
+      - "chazon/plc/+/scan_time"
+      - "chazon/scada/metrics/#"
+
+  gRPC:
+    port: 6334
+    service: "Qdrant"
+    use_case: "Vector database operations"
+
+  REST:
+    base_url: "http://localhost:6333"
+    use_case: "Qdrant similarity search"
+
+  SQL:
+    driver: "sqlite3"
+    connection_string: "os/data/tokendb.sql"
+    use_case: "Module metadata storage"
+
+  ModuleRouter:
+    type: "Custom protocol"
+    method: "UUID-based discovery"
+    use_case: "Location-independent module loading"
