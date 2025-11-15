@@ -275,6 +275,30 @@ const ChazonBootstrap = {
     document.getElementById('boot-screen').classList.add('hidden');
     document.getElementById('terminal').classList.add('active');
     document.querySelector('.taskbar').classList.add('active');
+
+    // Print welcome message to terminal
+    Terminal.print('═══════════════════════════════════════════════════════════', '#00ff88');
+    Terminal.print('         🌌 CHAZON OS - חזון (Vision)         ', '#00ccff');
+    Terminal.print('═══════════════════════════════════════════════════════════', '#00ff88');
+    Terminal.print('');
+    Terminal.print('φ-Balanced Computing | ISA-95 Compliant | Markdown Programs', '#888');
+    Terminal.print('');
+    Terminal.print('Available Commands:', '#00ff88');
+    Terminal.print('  help          - Show available commands', '#888');
+    Terminal.print('  ls            - List all programs', '#888');
+    Terminal.print('  run <file>    - Run a program', '#888');
+    Terminal.print('  cat <file>    - View program source', '#888');
+    Terminal.print('  demo          - Run demo programs', '#888');
+    Terminal.print('  clear         - Clear terminal', '#888');
+    Terminal.print('');
+    Terminal.print('Quick Start:', '#00ccff');
+    Terminal.print('  Try: run hello.md', '#888');
+    Terminal.print('  Try: run attractor-demo.md', '#888');
+    Terminal.print('  Try: run qdrant-real-demo.md', '#888');
+    Terminal.print('');
+    Terminal.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', '#00ff88');
+    Terminal.print('');
+
     document.getElementById('input').focus();
   }
 };
