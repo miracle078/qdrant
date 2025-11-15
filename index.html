@@ -265,6 +265,105 @@
             star.style.animationDelay = Math.random() * 3 + 's';
             starsContainer.appendChild(star);
         }
+
+        // Module Bootstrap System
+        const ModuleLoader = {
+            cache: new Map(),
+            baseURL: '/modules/',
+
+            async load(moduleName) {
+                // Check cache first
+                if (this.cache.has(moduleName)) {
+                    return this.cache.get(moduleName);
+                }
+
+                try {
+                    // Fetch markdown file
+                    const response = await fetch(`${this.baseURL}${moduleName}.md`);
+                    if (!response.ok) {
+                        throw new Error(`Module ${moduleName} not found`);
+                    }
+
+                    const markdown = await response.text();
+
+                    // Extract JavaScript code from markdown
+                    const jsCode = this.extractJS(markdown);
+
+                    // Execute code
+                    eval(jsCode);
+
+                    // Get module from window (assumes module exports to window.ModuleName)
+                    const exportName = this.getExportName(markdown, moduleName);
+                    const module = window[exportName];
+
+                    // Cache it
+                    this.cache.set(moduleName, module);
+
+                    console.log(`✓ Loaded module: ${moduleName} → ${exportName}`);
+                    return module;
+                } catch (error) {
+                    console.error(`Failed to load module ${moduleName}:`, error);
+                    throw error;
+                }
+            },
+
+            extractJS(markdown) {
+                const regex = /```(?:javascript|js)\s*\n([\s\S]*?)```/g;
+                const blocks = [];
+                let match;
+
+                while ((match = regex.exec(markdown)) !== null) {
+                    blocks.push(match[1].trim());
+                }
+
+                return blocks.join('\n\n');
+            },
+
+            getExportName(markdown, moduleName) {
+                // Try to find window.Something = in the code
+                const match = markdown.match(/window\.(\w+)\s*=/);
+                if (match) return match[1];
+
+                // Fallback: Convert module name to PascalCase
+                return moduleName
+                    .split('-')
+                    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+                    .join('');
+            },
+
+            async loadAll(moduleNames) {
+                const results = await Promise.allSettled(
+                    moduleNames.map(name => this.load(name))
+                );
+
+                const loaded = results.filter(r => r.status === 'fulfilled').length;
+                const failed = results.filter(r => r.status === 'rejected').length;
+
+                console.log(`📦 Module loading complete: ${loaded} loaded, ${failed} failed`);
+                return { loaded, failed, results };
+            }
+        };
+
+        // Export to window
+        window.ModuleLoader = ModuleLoader;
+
+        // Auto-load core modules on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const coreModules = [
+                'chazon-packml',
+                'chazon-mdcompiler',
+                'chazon-cli',
+                'chazon-state',
+                'qdrant-client'
+            ];
+
+            try {
+                await ModuleLoader.loadAll(coreModules);
+                console.log('🌌 Chazon module system initialized');
+            } catch (error) {
+                console.error('Module system initialization failed:', error);
+            }
+        });
     </script>
 </body>
 </html>

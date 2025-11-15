@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module System Test</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff88;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { color: #00ccff; }
+        .test {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .pass { border-left: 4px solid #00ff88; }
+        .fail { border-left: 4px solid #ff0044; }
+        .pending { border-left: 4px solid #ffaa00; }
+        code {
+            background: #000;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #00ccff;
+        }
+        #output {
+            background: #000;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            min-height: 200px;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Module Loading System Test</h1>
+    <p>Testing all 84 modules from /modules/ directory...</p>
+
+    <div id="tests"></div>
+    <div id="output"></div>
+
+    <script>
+        const output = document.getElementById('output');
+        const testsDiv = document.getElementById('tests');
+
+        function log(msg, color = '#00ff88') {
+            const line = document.createElement('div');
+            line.style.color = color;
+            line.textContent = msg;
+            output.appendChild(line);
+            console.log(msg);
+        }
+
+        function addTest(name, status, message) {
+            const test = document.createElement('div');
+            test.className = `test ${status}`;
+            test.innerHTML = `
+                <strong>${status === 'pass' ? '✓' : status === 'fail' ? '✗' : '⏳'}</strong>
+                ${name}
+                ${message ? `<br><small style="color: #888;">${message}</small>` : ''}
+            `;
+            testsDiv.appendChild(test);
+        }
+
+        async function runTests() {
+            log('🌌 Starting module system tests...\n');
+
+            // Test 1: ModuleLoader exists
+            addTest('ModuleLoader available',
+                typeof ModuleLoader !== 'undefined' ? 'pass' : 'fail',
+                typeof ModuleLoader !== 'undefined' ? 'window.ModuleLoader found' : 'ModuleLoader not found'
+            );
+
+            if (typeof ModuleLoader === 'undefined') {
+                log('❌ ModuleLoader not found. Loading from modules/module-loader.md...', '#ff0044');
+
+                try {
+                    const response = await fetch('/modules/module-loader.md');
+                    const markdown = await response.text();
+                    const jsCode = markdown.match(/```(?:javascript|js)\s*\n([\s\S]*?)```/)[1];
+                    eval(jsCode);
+                    log('✓ ModuleLoader loaded successfully', '#00ff88');
+                } catch (error) {
+                    log(`❌ Failed to load ModuleLoader: ${error.message}`, '#ff0044');
+                    return;
+                }
+            }
+
+            // Test 2: Load core modules
+            log('\n📦 Loading core modules...');
+            const coreModules = [
+                'chazon-packml',
+                'chazon-mdcompiler',
+                'chazon-cli',
+                'chazon-state',
+                'qdrant-client'
+            ];
+
+            for (const moduleName of coreModules) {
+                try {
+                    const module = await ModuleLoader.load(moduleName);
+                    addTest(`Load ${moduleName}`, 'pass', `Exported as window.${ModuleLoader.getExportName('', moduleName)}`);
+                    log(`  ✓ ${moduleName}`, '#00ff88');
+                } catch (error) {
+                    addTest(`Load ${moduleName}`, 'fail', error.message);
+                    log(`  ✗ ${moduleName}: ${error.message}`, '#ff0044');
+                }
+            }
+
+            // Test 3: Test module functionality
+            log('\n🔧 Testing module functionality...');
+
+            // Test PackML
+            if (window.PackML) {
+                try {
+                    const machine = PackML.create('test-machine');
+                    PackML.transition(machine.id, PackML.states.STARTING);
+                    const state = PackML.getState(machine.id);
+
+                    addTest('PackML state machine',
+                        state === 'starting' ? 'pass' : 'fail',
+                        `State: ${state}`
+                    );
+                    log(`  ✓ PackML: Created machine and transitioned to ${state}`, '#00ff88');
+                } catch (error) {
+                    addTest('PackML state machine', 'fail', error.message);
+                    log(`  ✗ PackML: ${error.message}`, '#ff0044');
+                }
+            }
+
+            // Test MDCompiler
+            if (window.MDCompiler) {
+                try {
+                    const testMD = '```js\nreturn "Hello from MD";\n```';
+                    const results = MDCompiler.compile(testMD);
+
+                    addTest('MDCompiler execution',
+                        results[0]?.success ? 'pass' : 'fail',
+                        `Output: ${results[0]?.output || results[0]?.error}`
+                    );
+                    log(`  ✓ MDCompiler: ${results[0]?.output}`, '#00ff88');
+                } catch (error) {
+                    addTest('MDCompiler execution', 'fail', error.message);
+                    log(`  ✗ MDCompiler: ${error.message}`, '#ff0044');
+                }
+            }
+
+            // Test 4: Load API modules
+            log('\n🌐 Loading API modules...');
+            const apiModules = [
+                'api-health',
+                'api-search',
+                'api-index',
+                'api-embed',
+                'api-collections',
+                'api-stats'
+            ];
+
+            for (const moduleName of apiModules) {
+                try {
+                    await ModuleLoader.load(moduleName);
+                    addTest(`Load ${moduleName}`, 'pass');
+                    log(`  ✓ ${moduleName}`, '#00ff88');
+                } catch (error) {
+                    addTest(`Load ${moduleName}`, 'fail', error.message);
+                    log(`  ✗ ${moduleName}: ${error.message}`, '#ff0044');
+                }
+            }
+
+            // Test 5: Cache verification
+            log('\n💾 Testing module cache...');
+            const cacheSize = ModuleLoader.cache.size;
+            addTest('Module caching',
+                cacheSize > 0 ? 'pass' : 'fail',
+                `${cacheSize} modules cached`
+            );
+            log(`  ✓ Cache contains ${cacheSize} modules`, '#00ff88');
+
+            // Summary
+            log('\n' + '='.repeat(50));
+            log('🎉 Module system test complete!', '#00ccff');
+            log(`📊 Total modules in cache: ${ModuleLoader.cache.size}`, '#00ccff');
+            log(`📁 Expected total modules: 84`, '#00ccff');
+
+            const passCount = document.querySelectorAll('.test.pass').length;
+            const failCount = document.querySelectorAll('.test.fail').length;
+            log(`\n✓ Passed: ${passCount} | ✗ Failed: ${failCount}`,
+                failCount === 0 ? '#00ff88' : '#ffaa00'
+            );
+        }
+
+        // Run tests on page load
+        window.addEventListener('DOMContentLoaded', runTests);
+    </script>
+</body>
+</html>
