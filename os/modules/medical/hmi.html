@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical HMI - Chazon Control Panel</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  #hmi-container {
+    display: grid;
+    grid-template-rows: 60px 1fr 50px;
+    height: 100vh;
+  }
+
+  #hmi-header {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border-bottom: 3px solid #00ff88;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+
+  #hmi-header h1 {
+    font-size: 1.5em;
+    color: #00ff88;
+  }
+
+  #hmi-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .control-btn {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 150px;
+  }
+
+  .control-btn:hover {
+    border-color: #00ccff;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .control-icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+
+  .control-label {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  .control-status {
+    color: #888;
+    font-size: 0.9em;
+  }
+
+  .indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
+  }
+
+  #hmi-footer {
+    background: #1a1a2e;
+    border-top: 2px solid #00ff88;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+  }
+
+  .btn:hover { background: #00cc66; }
+  .btn.secondary { background: #333; color: #00ff88; }
+</style>
+</head>
+<body>
+
+<div id="hmi-container">
+  <div id="hmi-header">
+    <h1>🎛️ Medical - HMI Control Panel</h1>
+    <div style="color: #00ccff; font-size: 1.2em;" id="system-time">00:00:00</div>
+  </div>
+
+  <div id="hmi-main">
+    <div class="control-btn" onclick="window.open('README.md')">
+      <div class="indicator"></div>
+      <div class="control-icon">📖</div>
+      <div class="control-label">README</div>
+      <div class="control-status">Documentation</div>
+    </div>
+
+    <div class="control-btn" onclick="window.location.href='scada.html'">
+      <div class="indicator"></div>
+      <div class="control-icon">📈</div>
+      <div class="control-label">SCADA View</div>
+      <div class="control-status">Real-time Data</div>
+    </div>
+
+    <div class="control-btn" onclick="window.location.href='plc.html'">
+      <div class="indicator"></div>
+      <div class="control-icon">⚙️</div>
+      <div class="control-label">PLC Logic</div>
+      <div class="control-status">Control Logic</div>
+    </div>
+  </div>
+
+  <div id="hmi-footer">
+    <div>
+      <button class="btn secondary" onclick="window.location.href='../../index.html'">🏠 OS Home</button>
+      <button class="btn secondary" onclick="window.history.back()">← Back</button>
+    </div>
+    <div>
+      <button class="btn" onclick="location.reload()">🔄 Refresh</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function updateTime() {
+  document.getElementById('system-time').textContent = new Date().toLocaleTimeString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>
+
+</body>
+</html>

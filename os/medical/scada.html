@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical SCADA - Chazon Monitoring</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  #scada-container {
+    display: grid;
+    grid-template-rows: 60px 1fr 40px;
+    height: 100vh;
+  }
+
+  #scada-header {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border-bottom: 3px solid #00ff88;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+  }
+
+  #scada-header h1 {
+    font-size: 1.5em;
+    color: #00ff88;
+  }
+
+  #scada-main {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    overflow: hidden;
+  }
+
+  #sidebar {
+    background: #1a1a2e;
+    border-right: 2px solid #00ff88;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  #content {
+    background: #000;
+    position: relative;
+    overflow: auto;
+    padding: 20px;
+  }
+
+  #data-panel {
+    background: #1a1a2e;
+    border-left: 2px solid #00ff88;
+    overflow-y: auto;
+    padding: 15px;
+  }
+
+  .data-section {
+    margin-bottom: 20px;
+  }
+
+  .data-section h3 {
+    color: #00ccff;
+    border-bottom: 1px solid #00ff88;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .data-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #222;
+    font-size: 12px;
+  }
+
+  .data-label { color: #888; }
+  .data-value { color: #00ff88; font-weight: bold; }
+
+  #status-bar {
+    background: #1a1a2e;
+    border-top: 2px solid #00ff88;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    background: #00ff88;
+    box-shadow: 0 0 8px #00ff88;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .btn:hover { background: #00cc66; }
+  .btn.secondary { background: #333; color: #00ff88; }
+</style>
+</head>
+<body>
+
+<div id="scada-container">
+  <div id="scada-header">
+    <h1>📈 Medical - SCADA Monitor</h1>
+    <div style="color: #00ccff; font-size: 1.2em;" id="system-time">00:00:00</div>
+  </div>
+
+  <div id="scada-main">
+    <div id="sidebar">
+      <h3 style="color: #00ccff; margin-bottom: 15px;">Navigation</h3>
+      <button class="btn" style="width: 100%; margin-bottom: 10px;" onclick="window.open('README.md')">📖 README</button>
+      <button class="btn secondary" style="width: 100%; margin-bottom: 10px;" onclick="window.location.href='hmi.html'">🎛️ HMI Panel</button>
+      <button class="btn secondary" style="width: 100%; margin-bottom: 10px;" onclick="window.location.href='plc.html'">⚙️ PLC Logic</button>
+      <button class="btn secondary" style="width: 100%; margin-top: 20px;" onclick="window.location.href='../index.html'">🏠 OS Home</button>
+    </div>
+
+    <div id="content">
+      <h2 style="color: #00ccff; margin-bottom: 20px;">Medical Overview</h2>
+      <div style="background: #1a1a2e; border: 2px solid #00ff88; border-radius: 8px; padding: 20px;">
+        <p style="color: #888; margin-bottom: 15px;">Real-time monitoring and control for Medical</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Status</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;">ONLINE</div>
+          </div>
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Scan Rate</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;">100ms</div>
+          </div>
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Uptime</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;" id="uptime">0m</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="data-panel">
+      <div class="data-section">
+        <h3>System Metrics</h3>
+        <div class="data-item">
+          <span class="data-label">CPU:</span>
+          <span class="data-value" id="cpu">0%</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Memory:</span>
+          <span class="data-value" id="memory">0 MB</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Status:</span>
+          <span class="data-value">RUNNING</span>
+        </div>
+      </div>
+
+      <div class="data-section">
+        <h3>Alarms</h3>
+        <div style="color: #888; font-size: 11px;">No active alarms</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="status-bar">
+    <div>
+      <span><span class="indicator"></span>System: ONLINE</span>
+    </div>
+    <div>
+      <span id="connection">Connection: STABLE</span>
+    </div>
+  </div>
+</div>
+
+<script>
+let startTime = Date.now();
+
+function updateTime() {
+  document.getElementById('system-time').textContent = new Date().toLocaleTimeString();
+  const uptime = Math.floor((Date.now() - startTime) / 60000);
+  document.getElementById('uptime').textContent = uptime + 'm';
+}
+
+function updateMetrics() {
+  document.getElementById('cpu').textContent = (Math.random() * 30 + 10).toFixed(1) + '%';
+  document.getElementById('memory').textContent = (Math.random() * 500 + 1000).toFixed(0) + ' MB';
+}
+
+setInterval(updateTime, 1000);
+setInterval(updateMetrics, 1000);
+updateTime();
+updateMetrics();
+</script>
+
+</body>
+</html>

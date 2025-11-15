@@ -1,0 +1,3 @@
+{"timestamp":"2025-11-15T16:05:12.345Z","level":"ERROR","source":"module-loader","message":"Failed to load module","data":{"module":"invalid-module.md","error":"File not found"},"session_id":"mod-load-001"}
+{"timestamp":"2025-11-15T16:12:34.567Z","level":"WARN","source":"api","message":"High response time detected","data":{"endpoint":"/api/search","duration":"2345ms","threshold":"1000ms"},"session_id":"api-req-123"}
+{"timestamp":"2025-11-15T16:18:45.678Z","level":"ERROR","source":"plc-models","message":"Model inference failed","data":{"model":"bert-tiny","error":"Out of memory"},"session_id":"plc-models-001"}
