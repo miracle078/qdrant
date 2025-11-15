@@ -72,7 +72,7 @@
 
         .projects {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -197,9 +197,26 @@
                 </ul>
             </a>
 
+            <!-- ISA-OS Container Simulator -->
+            <a href="isa-os.html" class="card">
+                <div class="icon">🏭</div>
+                <h2>ISA-OS</h2>
+                <p class="badge new">NEW! Container Runtime</p>
+                <p><strong>Browser-Based ISA Kernel</strong></p>
+                <p>Maps Docker containers to ISA-95 levels. Load Dockerfiles from GitHub and watch them build through L0→L4.</p>
+                <ul class="features">
+                    <li>ISA-95 L0-L4 kernel</li>
+                    <li>Docker → ISA mapping</li>
+                    <li>Live layer visualization</li>
+                    <li>Terminal interface</li>
+                    <li>Load from GitHub URLs</li>
+                    <li>100% client-side</li>
+                </ul>
+            </a>
+
             <!-- AutomationGPT Classic -->
             <a href="automationgpt.html" class="card">
-                <div class="icon">🏭</div>
+                <div class="icon">🔍</div>
                 <h2>AutomationGPT</h2>
                 <p class="badge">Classic</p>
                 <p><strong>Multimodal Search Engine</strong></p>

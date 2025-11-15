@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISA-OS::Browser[L0→L4]@Ω</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    #boot-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+      background: #000;
+    }
+
+    #boot-screen.hidden { display: none; }
+
+    .boot-logo {
+      font-size: 48px;
+      color: #0af;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .boot-text {
+      font-size: 14px;
+      color: #0f0;
+      margin: 5px 0;
+    }
+
+    #terminal {
+      width: 100vw;
+      height: calc(100vh - 120px);
+      padding: 20px;
+      overflow-y: auto;
+      background: #0a0a0a;
+    }
+
+    .line { margin: 2px 0; }
+    .prompt { color: #0af; font-weight: bold; }
+    .error { color: #f00; }
+    .success { color: #0f0; }
+    .warn { color: #ff0; }
+    .level-0 { color: #f0f; }
+    .level-1 { color: #0ff; }
+    .level-2 { color: #0f0; }
+    .level-3 { color: #ff0; }
+    .level-4 { color: #f80; }
+
+    #controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      background: rgba(0,0,0,0.9);
+      border-top: 2px solid #0f0;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    #input-container {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #dockerfile-input {
+      flex: 1;
+      background: #000;
+      border: 1px solid #0f0;
+      color: #0f0;
+      padding: 8px;
+      font-family: 'Courier New';
+      font-size: 14px;
+    }
+
+    button {
+      background: #000;
+      border: 2px solid #0f0;
+      color: #0f0;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-family: 'Courier New';
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #0f0;
+      color: #000;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #status-bar {
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+    }
+
+    .status-item {
+      display: flex;
+      gap: 5px;
+    }
+
+    .status-label { color: #0af; }
+    .status-value { color: #0f0; }
+
+    #isa-levels {
+      display: flex;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .isa-level {
+      padding: 3px 8px;
+      border: 1px solid #333;
+      border-radius: 3px;
+    }
+
+    .isa-level.active {
+      border-color: #0f0;
+      background: rgba(0,255,0,0.1);
+    }
+
+    .container-viz {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 200px;
+      background: rgba(0,0,0,0.8);
+      border: 1px solid #0f0;
+      padding: 10px;
+      font-size: 11px;
+    }
+
+    .layer {
+      padding: 5px;
+      margin: 3px 0;
+      border-left: 3px solid #0f0;
+      background: rgba(0,255,0,0.05);
+    }
+  </style>
+</head>
+<body>
+  <div id="boot-screen">
+    <div class="boot-logo">🏭 ISA-OS</div>
+    <div class="boot-text">Initializing kernel...</div>
+    <div class="boot-text">Loading ISA levels L0→L4...</div>
+    <div class="boot-text">Starting container runtime...</div>
+  </div>
+
+  <div id="terminal"></div>
+
+  <div class="container-viz" style="display:none">
+    <div style="color:#0af;margin-bottom:10px;font-weight:bold">CONTAINER LAYERS</div>
+    <div id="layers"></div>
+  </div>
+
+  <div id="controls">
+    <div id="input-container">
+      <input
+        type="text"
+        id="dockerfile-input"
+        placeholder="GitHub Dockerfile URL or paste Dockerfile content..."
+        value="https://raw.githubusercontent.com/docker-library/hello-world/master/Dockerfile">
+      <button id="load-btn" onclick="loadDockerfile()">LOAD</button>
+      <button id="build-btn" onclick="buildContainer()" disabled>BUILD</button>
+      <button id="run-btn" onclick="runContainer()" disabled>RUN</button>
+      <button onclick="clearTerminal()">CLEAR</button>
+    </div>
+    <div id="status-bar">
+      <div class="status-item">
+        <span class="status-label">KERNEL:</span>
+        <span class="status-value" id="kernel-status">READY</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">CONTAINERS:</span>
+        <span class="status-value" id="container-count">0</span>
+      </div>
+      <div class="status-item">
+        <span class="status-label">MEMORY:</span>
+        <span class="status-value" id="memory-usage">0 MB</span>
+      </div>
+      <div id="isa-levels">
+        <div class="isa-level" id="level-0">L0</div>
+        <div class="isa-level" id="level-1">L1</div>
+        <div class="isa-level" id="level-2">L2</div>
+        <div class="isa-level" id="level-3">L3</div>
+        <div class="isa-level" id="level-4">L4</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ISA-OS KERNEL (Browser Edition)
+    class ISAKernel {
+      constructor() {
+        this.levels = {
+          L0: { name: 'Field Devices', active: false, processes: [] },
+          L1: { name: 'Control', active: false, processes: [] },
+          L2: { name: 'Supervisory', active: false, processes: [] },
+          L3: { name: 'Operations', active: false, processes: [] },
+          L4: { name: 'Enterprise', active: false, processes: [] }
+        };
+        this.containers = [];
+        this.memory = 0;
+        this.ticks = 0;
+      }
+
+      async boot() {
+        print('<span class="prompt">[KERNEL]</span> ISA-OS v1.0 booting...');
+        await sleep(300);
+        print('<span class="prompt">[KERNEL]</span> Initializing ISA levels...');
+
+        for(let i = 0; i <= 4; i++) {
+          await sleep(100);
+          this.activateLevel(i);
+          print(`<span class="level-${i}">[L${i}]</span> ${this.levels['L'+i].name} initialized`);
+        }
+
+        await sleep(200);
+        print('<span class="success">[KERNEL]</span> Boot complete. Container runtime ready.');
+        updateStatus('kernel-status', 'RUNNING');
+      }
+
+      activateLevel(level) {
+        const key = 'L' + level;
+        this.levels[key].active = true;
+        document.getElementById(`level-${level}`).classList.add('active');
+      }
+
+      async syscall(level, cmd, args) {
+        const levelKey = 'L' + level;
+        print(`<span class="level-${level}">[SYSCALL:L${level}]</span> ${cmd} ${args.join(' ')}`);
+        await sleep(50);
+        return { status: 0, output: `Executed at ${levelKey}` };
+      }
+    }
+
+    // CONTAINER RUNTIME
+    class Container {
+      constructor(dockerfile) {
+        this.dockerfile = dockerfile;
+        this.layers = [];
+        this.state = 'stopped';
+        this.id = Math.random().toString(36).substr(2, 8);
+      }
+
+      async build() {
+        print(`<span class="prompt">[DOCKER]</span> Building container ${this.id}...`);
+
+        const lines = this.dockerfile.split('\n')
+          .map(l => l.trim())
+          .filter(l => l && !l.startsWith('#'));
+
+        for(let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          const [cmd, ...args] = line.split(/\s+/);
+
+          // Map Docker commands to ISA levels
+          let level = 0;
+          if(cmd === 'FROM') level = 0;      // L0: Base image
+          else if(cmd === 'RUN') level = 1;  // L1: Build commands
+          else if(cmd === 'COPY' || cmd === 'ADD') level = 2; // L2: File ops
+          else if(cmd === 'WORKDIR' || cmd === 'ENV') level = 2;
+          else if(cmd === 'CMD' || cmd === 'ENTRYPOINT') level = 3; // L3: Execution
+          else if(cmd === 'EXPOSE') level = 4; // L4: Network
+
+          const layer = {
+            index: i,
+            level: level,
+            cmd: cmd,
+            args: args,
+            instruction: line
+          };
+
+          this.layers.push(layer);
+
+          print(`<span class="level-${level}">[LAYER ${i+1}/${lines.length}]</span> ${line}`);
+          await kernel.syscall(level, cmd, args);
+          await sleep(100);
+
+          visualizeLayer(layer);
+        }
+
+        print(`<span class="success">[DOCKER]</span> Build complete. Image: ${this.id}`);
+        this.state = 'built';
+        kernel.containers.push(this);
+        updateStatus('container-count', kernel.containers.length);
+        return this;
+      }
+
+      async run() {
+        if(this.state !== 'built') {
+          print(`<span class="error">[ERROR]</span> Container not built`);
+          return;
+        }
+
+        print(`<span class="prompt">[DOCKER]</span> Running container ${this.id}...`);
+        this.state = 'running';
+
+        // Execute CMD/ENTRYPOINT at L3
+        const cmdLayer = this.layers.find(l => l.cmd === 'CMD' || l.cmd === 'ENTRYPOINT');
+        if(cmdLayer) {
+          await kernel.syscall(3, cmdLayer.cmd, cmdLayer.args);
+          print(`<span class="level-3">[L3:RUN]</span> ${cmdLayer.instruction}`);
+        }
+
+        await sleep(500);
+        print(`<span class="success">[DOCKER]</span> Container ${this.id} running at L3`);
+
+        // Simulate some output
+        await sleep(200);
+        print(`<span class="success">[OUTPUT]</span> Hello from ISA-OS container!`);
+        print(`<span class="success">[OUTPUT]</span> Running at ISA Level 3 (Manufacturing Operations)`);
+
+        return this;
+      }
+    }
+
+    // GLOBAL STATE
+    const kernel = new ISAKernel();
+    let currentDockerfile = null;
+    let currentContainer = null;
+
+    // UI FUNCTIONS
+    const terminal = document.getElementById('terminal');
+
+    function print(html) {
+      const line = document.createElement('div');
+      line.className = 'line';
+      line.innerHTML = html;
+      terminal.appendChild(line);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function clearTerminal() {
+      terminal.innerHTML = '';
+      document.querySelector('.container-viz').style.display = 'none';
+      document.getElementById('layers').innerHTML = '';
+    }
+
+    function updateStatus(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    function visualizeLayer(layer) {
+      const layersDiv = document.getElementById('layers');
+      const layerEl = document.createElement('div');
+      layerEl.className = 'layer';
+      layerEl.style.borderLeftColor = ['#f0f','#0ff','#0f0','#ff0','#f80'][layer.level];
+      layerEl.innerHTML = `<div style="color:#0af">L${layer.level}: ${layer.cmd}</div><div style="font-size:10px;color:#888">${layer.args.join(' ').substr(0,30)}</div>`;
+      layersDiv.appendChild(layerEl);
+      document.querySelector('.container-viz').style.display = 'block';
+    }
+
+    // MAIN FUNCTIONS
+    async function loadDockerfile() {
+      const input = document.getElementById('dockerfile-input').value.trim();
+
+      if(!input) {
+        print('<span class="error">[ERROR]</span> No Dockerfile URL or content provided');
+        return;
+      }
+
+      updateStatus('kernel-status', 'LOADING');
+
+      try {
+        let dockerfile;
+
+        // Check if it's a URL
+        if(input.startsWith('http://') || input.startsWith('https://')) {
+          print(`<span class="prompt">[FETCH]</span> Loading from ${input}...`);
+          const response = await fetch(input);
+
+          if(!response.ok) throw new Error(`HTTP ${response.status}`);
+
+          dockerfile = await response.text();
+          print(`<span class="success">[FETCH]</span> Loaded ${dockerfile.split('\n').length} lines`);
+        } else {
+          // Treat as raw Dockerfile content
+          dockerfile = input;
+          print(`<span class="success">[INPUT]</span> Loaded Dockerfile from input`);
+        }
+
+        currentDockerfile = dockerfile;
+
+        // Show preview
+        print('<span class="prompt">[DOCKERFILE]</span> Preview:');
+        dockerfile.split('\n').slice(0, 10).forEach(line => {
+          if(line.trim()) print(`  ${line}`);
+        });
+        if(dockerfile.split('\n').length > 10) {
+          print(`  ... (${dockerfile.split('\n').length - 10} more lines)`);
+        }
+
+        document.getElementById('build-btn').disabled = false;
+        updateStatus('kernel-status', 'READY');
+
+      } catch(error) {
+        print(`<span class="error">[ERROR]</span> Failed to load: ${error.message}`);
+        updateStatus('kernel-status', 'ERROR');
+      }
+    }
+
+    async function buildContainer() {
+      if(!currentDockerfile) {
+        print('<span class="error">[ERROR]</span> No Dockerfile loaded');
+        return;
+      }
+
+      document.getElementById('build-btn').disabled = true;
+      updateStatus('kernel-status', 'BUILDING');
+
+      currentContainer = new Container(currentDockerfile);
+      await currentContainer.build();
+
+      document.getElementById('run-btn').disabled = false;
+      updateStatus('kernel-status', 'BUILT');
+      kernel.memory += 10;
+      updateStatus('memory-usage', `${kernel.memory} MB`);
+    }
+
+    async function runContainer() {
+      if(!currentContainer || currentContainer.state !== 'built') {
+        print('<span class="error">[ERROR]</span> No built container to run');
+        return;
+      }
+
+      document.getElementById('run-btn').disabled = true;
+      updateStatus('kernel-status', 'RUNNING');
+
+      await currentContainer.run();
+
+      updateStatus('kernel-status', 'ACTIVE');
+      kernel.memory += 5;
+      updateStatus('memory-usage', `${kernel.memory} MB`);
+    }
+
+    // BOOT SEQUENCE
+    async function bootOS() {
+      await sleep(1000);
+      document.getElementById('boot-screen').classList.add('hidden');
+
+      await kernel.boot();
+
+      print('');
+      print('<span class="prompt">═══════════════════════════════════════════════════</span>');
+      print('<span class="prompt">  ISA-OS Browser Edition v1.0</span>');
+      print('<span class="prompt">  Container runtime ready</span>');
+      print('<span class="prompt">  Load a Dockerfile to get started</span>');
+      print('<span class="prompt">═══════════════════════════════════════════════════</span>');
+      print('');
+
+      // Memory monitor
+      setInterval(() => {
+        kernel.ticks++;
+        if(kernel.ticks % 10 === 0 && kernel.memory > 0) {
+          kernel.memory = Math.max(0, kernel.memory - 0.1);
+          updateStatus('memory-usage', `${kernel.memory.toFixed(1)} MB`);
+        }
+      }, 1000);
+    }
+
+    // Start boot on page load
+    window.addEventListener('DOMContentLoaded', bootOS);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if(e.ctrlKey && e.key === 'l') {
+        e.preventDefault();
+        clearTerminal();
+      }
+      if(e.ctrlKey && e.key === 'Enter') {
+        e.preventDefault();
+        if(!document.getElementById('build-btn').disabled) buildContainer();
+      }
+    });
+  </script>
+</body>
+</html>
