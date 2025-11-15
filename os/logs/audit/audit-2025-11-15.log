@@ -1,0 +1,4 @@
+{"timestamp":"2025-11-15T16:00:00.000Z","level":"AUDIT","source":"auth","message":"System started","data":{"user":"system","action":"startup"},"session_id":"audit-001"}
+{"timestamp":"2025-11-15T16:05:30.123Z","level":"AUDIT","source":"auth","message":"User login attempt","data":{"user":"admin","ip":"192.168.1.100","success":true},"session_id":"audit-002"}
+{"timestamp":"2025-11-15T16:10:45.234Z","level":"AUDIT","source":"config","message":"Configuration changed","data":{"user":"admin","file":"config.yaml","changes":["scan_rate"]},"session_id":"audit-003"}
+{"timestamp":"2025-11-15T16:15:12.345Z","level":"AUDIT","source":"plc","message":"Emergency stop activated","data":{"user":"operator","area":"frontend","reason":"manual"},"session_id":"audit-004"}

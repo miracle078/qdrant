@@ -1,0 +1,7 @@
+{"timestamp":"2025-11-15T16:00:00.000Z","level":"INFO","source":"system","message":"Chazon OS started","data":{"version":"1.0.0","environment":"production"},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:00:01.234Z","level":"INFO","source":"system","message":"Loading configuration","data":{"config_path":"os/config/config.yaml"},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:00:02.456Z","level":"INFO","source":"system","message":"Database connection established","data":{"db":"SQLite","path":"chazon.db"},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:00:03.678Z","level":"INFO","source":"system","message":"Qdrant vector DB connected","data":{"host":"localhost","port":6333},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:00:04.890Z","level":"INFO","source":"system","message":"All subsystems online","data":{"subsystems":15},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:15:23.123Z","level":"INFO","source":"system","message":"Health check passed","data":{"cpu_usage":"15.3%","memory_usage":"1245MB","uptime":"15m"},"session_id":"sys-001"}
+{"timestamp":"2025-11-15T16:30:45.678Z","level":"INFO","source":"system","message":"Health check passed","data":{"cpu_usage":"18.7%","memory_usage":"1298MB","uptime":"30m"},"session_id":"sys-001"}

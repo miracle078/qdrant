@@ -1,0 +1,5 @@
+{"timestamp":"2025-11-15T16:00:05.123Z","level":"INFO","source":"plc-backend","message":"Backend PLC controller started","data":{"scan_rate":"100ms"},"session_id":"plc-backend-001"}
+{"timestamp":"2025-11-15T16:00:05.223Z","level":"INFO","source":"plc-backend","message":"Tag scan initiated","data":{"tags":28},"session_id":"plc-backend-001"}
+{"timestamp":"2025-11-15T16:00:05.323Z","level":"INFO","source":"plc-backend","message":"Tag scan complete","data":{"duration":"100ms","tags_updated":28},"session_id":"plc-backend-001"}
+{"timestamp":"2025-11-15T16:00:10.456Z","level":"DEBUG","source":"plc-backend","message":"Processing API request","data":{"endpoint":"/api/health","method":"GET"},"session_id":"plc-backend-001"}
+{"timestamp":"2025-11-15T16:00:15.678Z","level":"INFO","source":"plc-backend","message":"Scan cycle complete","data":{"cycle_time":"98ms","tags":28},"session_id":"plc-backend-001"}

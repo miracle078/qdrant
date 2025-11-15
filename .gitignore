@@ -40,9 +40,13 @@ env/
 # Qdrant data
 qdrant_data/
 
-# Logs
+# Logs - ignore log files but keep directory structure and samples
 *.log
-logs/
+!os/logs/**/*.log
+!os/logs/**/
+!os/logs/*.html
+!os/logs/README.md
+!os/logs/**/.gitkeep
 
 # Test coverage
 .coverage
