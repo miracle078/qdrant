@@ -109,6 +109,7 @@
     color: #00ccff;
   }
 </style>
+<script src="path-resolver.js"></script>
 </head>
 <body>
 
@@ -195,84 +196,84 @@
   <h2 style="color: #00ccff; margin: 30px 0 20px;">OS Components</h2>
 
   <div class="components">
-    <div class="component-card" onclick="location.href='frontend/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/frontend/index.html\')">
       <div class="component-icon">🖥️</div>
       <div class="component-name">Frontend</div>
       <div class="component-desc">Medical imaging viewer, DICOM interface, patient UI</div>
       <div class="component-status status-running">RUNNING</div>
     </div>
 
-    <div class="component-card" onclick="location.href='backend/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/backend/index.html\')">
       <div class="component-icon">⚙️</div>
       <div class="component-name">Backend</div>
       <div class="component-desc">API server, Qdrant integration, MCP servers</div>
       <div class="component-status status-running">RUNNING</div>
     </div>
 
-    <div class="component-card" onclick="location.href='modules/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/modules/index.html\')">
       <div class="component-icon">📦</div>
       <div class="component-name">Module System</div>
       <div class="component-desc">114 markdown modules, UUID registry, lazy loading</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='boot/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/boot/index.html\')">
       <div class="component-icon">🚀</div>
       <div class="component-name">Boot Sequencer</div>
       <div class="component-desc">6-phase initialization, PackML state machine</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='models/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/models/index.html\')">
       <div class="component-icon">🤖</div>
       <div class="component-name">AI Models</div>
       <div class="component-desc">ONNX models, WebGPU inference, embeddings</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='data/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/data/index.html\')">
       <div class="component-icon">💾</div>
       <div class="component-name">Data Layer</div>
       <div class="component-desc">SQL databases, token storage, architecture maps</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='language/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/language/index.html\')">
       <div class="component-icon">🔤</div>
       <div class="component-name">SNT Language</div>
       <div class="component-desc">Trinary computing, space-time notation, compiler</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='medical/alf-detect.html'">
+    <div class="component-card" onclick="navigateTo(\'os/medical/alf-detect.html\')">
       <div class="component-icon">🏥</div>
       <div class="component-name">Medical Imaging</div>
       <div class="component-desc">DICOM, X-Ray, MRI, CT, AlF-DETECT system</div>
       <div class="component-status status-running">RUNNING</div>
     </div>
 
-    <div class="component-card" onclick="location.href='debug/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/debug/index.html\')">
       <div class="component-icon">🐛</div>
       <div class="component-name">Debug Console</div>
       <div class="component-desc">System diagnostics, logs, performance monitoring</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='module-router.md'">
+    <div class="component-card" onclick="navigateTo(\'os/module-router.md\')">
       <div class="component-icon">🔀</div>
       <div class="component-name">Module Router</div>
       <div class="component-desc">UUID-based discovery, location-independent imports</div>
       <div class="component-status status-running">RUNNING</div>
     </div>
 
-    <div class="component-card" onclick="location.href='templates/index.html'">
+    <div class="component-card" onclick="navigateTo(\'os/templates/index.html\')">
       <div class="component-icon">📄</div>
       <div class="component-name">Templates</div>
       <div class="component-desc">ISA templates, view templates, medical workflows</div>
       <div class="component-status status-ready">READY</div>
     </div>
 
-    <div class="component-card" onclick="location.href='../'">
+    <div class="component-card" onclick="navigateTo(\'os/../\')">
       <div class="component-icon">🏠</div>
       <div class="component-name">SCADA Gateway</div>
       <div class="component-desc">Return to main factory control system</div>

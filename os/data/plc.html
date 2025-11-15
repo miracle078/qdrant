@@ -97,11 +97,12 @@
     color: #000;
   }
 </style>
+<script src="../path-resolver.js"></script>
 </head>
 <body>
 
 <div class="breadcrumb">
-  <a href="../../">Home</a> / <a href="../">Chazon OS</a> / Data Layer PLC
+  <a href="#" onclick="navigateTo(''); return false;">Home</a> / <a href="#" onclick="navigateTo('os/'); return false;">Chazon OS</a> / Data Layer PLC
 </div>
 
 <div class="plc-header">
@@ -113,9 +114,9 @@
 </div>
 
 <div style="margin-bottom: 20px;">
-  <a href="hmi.html" class="nav-btn">📊 HMI Panel</a>
-  <a href="index.html" class="nav-btn">📄 Area Index</a>
-  <a href="../../plc.html" class="nav-btn">🏠 Master PLC</a>
+  <a href="#" onclick="navigateTo('os/data/hmi.html'); return false;" class="nav-btn">📊 HMI Panel</a>
+  <a href="#" onclick="navigateTo('os/data/index.html'); return false;" class="nav-btn">📄 Area Index</a>
+  <a href="#" onclick="navigateTo('plc.html'); return false;" class="nav-btn">🏠 Master PLC</a>
 </div>
 
 <div class="section">

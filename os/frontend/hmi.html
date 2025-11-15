@@ -18,9 +18,10 @@
   .breadcrumb { color: #888; margin-bottom: 20px; }
   .breadcrumb a { color: #00ccff; text-decoration: none; }
 </style>
+<script src="../path-resolver.js"></script>
 </head>
 <body>
-<div class="breadcrumb"><a href="../../">Home</a> / <a href="../">Chazon OS</a> / Frontend UI HMI</div>
+<div class="breadcrumb"><a href="#" onclick="navigateTo(''); return false;">Home</a> / <a href="#" onclick="navigateTo('os/'); return false;">Chazon OS</a> / Frontend UI HMI</div>
 
 <div class="hmi-header">
   <div class="hmi-title">🖥️ Frontend UI - HMI</div>
@@ -49,10 +50,10 @@
 <div class="section">
   <h2>Quick Links</h2>
   <div class="control-grid">
-    <div class="control-btn" onclick="location.href='plc.html'"><div style="font-size:2em">⚙️</div><div>View PLC Logic</div></div>
-    <div class="control-btn" onclick="location.href='index.html'"><div style="font-size:2em">📄</div><div>Area Index</div></div>
-    <div class="control-btn" onclick="location.href='../../scada.html'"><div style="font-size:2em">📊</div><div>SCADA Master</div></div>
-    <div class="control-btn" onclick="location.href='../'"><div style="font-size:2em">🏠</div><div>OS Gateway</div></div>
+    <div class="control-btn" onclick="navigateTo('os/frontend/plc.html')"><div style="font-size:2em">⚙️</div><div>View PLC Logic</div></div>
+    <div class="control-btn" onclick="navigateTo('os/frontend/index.html')"><div style="font-size:2em">📄</div><div>Area Index</div></div>
+    <div class="control-btn" onclick="navigateTo('scada.html')"><div style="font-size:2em">📊</div><div>SCADA Master</div></div>
+    <div class="control-btn" onclick="navigateTo('os/')"><div style="font-size:2em">🏠</div><div>OS Gateway</div></div>
   </div>
 </div>
 </body>

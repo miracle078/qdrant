@@ -114,11 +114,12 @@
     text-decoration: none;
   }
 </style>
+<script src="../path-resolver.js"></script>
 </head>
 <body>
 
 <div class="breadcrumb">
-  <a href="../../">Home</a> / <a href="../">Chazon OS</a> / Module System HMI
+  <a href="#" onclick="navigateTo(''); return false;">Home</a> / <a href="#" onclick="navigateTo('os/'); return false;">Chazon OS</a> / Module System HMI
 </div>
 
 <div class="hmi-header">
@@ -181,19 +182,19 @@
 <div class="section">
   <h2>Quick Links</h2>
   <div class="control-grid">
-    <div class="control-btn" onclick="window.location.href='plc.html'">
+    <div class="control-btn" onclick="navigateTo('os/modules/plc.html')">
       <div class="op-icon">⚙️</div>
       <div class="op-name">View PLC Logic</div>
     </div>
-    <div class="control-btn" onclick="window.location.href='index.html'">
+    <div class="control-btn" onclick="navigateTo('os/modules/index.html')">
       <div class="op-icon">📄</div>
       <div class="op-name">Area Index</div>
     </div>
-    <div class="control-btn" onclick="window.location.href='../../scada.html'">
+    <div class="control-btn" onclick="navigateTo('scada.html')">
       <div class="op-icon">📊</div>
       <div class="op-name">SCADA Master</div>
     </div>
-    <div class="control-btn" onclick="window.location.href='../'">
+    <div class="control-btn" onclick="navigateTo('os/')">
       <div class="op-icon">🏠</div>
       <div class="op-name">OS Gateway</div>
     </div>

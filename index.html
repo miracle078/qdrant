@@ -337,6 +337,7 @@
     text-decoration: underline;
   }
 </style>
+<script src="os/path-resolver.js"></script>
 </head>
 <body>
 
@@ -366,16 +367,16 @@
     <p>AI Medical Imaging Production Line with Ignition Perspective-Style Architecture</p>
     <div class="hero-buttons">
       <a href="os/index.html" class="btn btn-primary">🖥️ Chazon OS Gateway</a>
-      <a href="scada.html" class="btn btn-secondary">📊 SCADA Master</a>
-      <a href="hmi.html" class="btn btn-secondary">🎛️ HMI Panel</a>
-      <a href="plc.html" class="btn btn-secondary">⚙️ PLC Logic</a>
+      <a href="#" onclick="navigateTo(\'scada.html\'); return false;" class="btn btn-secondary">📊 SCADA Master</a>
+      <a href="#" onclick="navigateTo(\'hmi.html\'); return false;" class="btn btn-secondary">🎛️ HMI Panel</a>
+      <a href="#" onclick="navigateTo(\'plc.html\'); return false;" class="btn btn-secondary">⚙️ PLC Logic</a>
       <a href="os/medical/alf-detect.html" class="btn btn-secondary" style="border-color: #ff88ff; color: #ff88ff;">🧠 AlF-DETECT</a>
     </div>
   </div>
 
   <!-- Main SCADA Cards -->
   <div class="scada-grid">
-    <a href="scada.html" style="text-decoration: none;">
+    <a href="#" onclick="navigateTo(\'scada.html\'); return false;" style="text-decoration: none;">
       <div class="scada-card scada">
         <div class="card-icon">📈</div>
         <div class="card-title">SCADA Master</div>
@@ -388,7 +389,7 @@
       </div>
     </a>
 
-    <a href="plc.html" style="text-decoration: none;">
+    <a href="#" onclick="navigateTo(\'plc.html\'); return false;" style="text-decoration: none;">
       <div class="scada-card plc">
         <div class="card-icon">⚙️</div>
         <div class="card-title">PLC Controller</div>
@@ -401,7 +402,7 @@
       </div>
     </a>
 
-    <a href="hmi.html" style="text-decoration: none;">
+    <a href="#" onclick="navigateTo(\'hmi.html\'); return false;" style="text-decoration: none;">
       <div class="scada-card hmi">
         <div class="card-icon">🎛️</div>
         <div class="card-title">HMI Panel</div>
@@ -419,42 +420,42 @@
   <div class="section">
     <h2>🏭 Factory PLC Areas</h2>
     <div class="plc-grid">
-      <div class="plc-area running" onclick="window.location.href='os/frontend/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/frontend/\')">
         <div class="plc-name">🖥️ Frontend HMI</div>
         <div class="plc-status">Running | 50ms scan</div>
       </div>
 
-      <div class="plc-area running" onclick="window.location.href='os/backend/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/backend/\')">
         <div class="plc-name">🔧 Backend API</div>
         <div class="plc-status">Running | 100ms scan</div>
       </div>
 
-      <div class="plc-area running" onclick="window.location.href='os/modules/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/modules/\')">
         <div class="plc-name">📦 Module Library</div>
         <div class="plc-status">114 modules loaded</div>
       </div>
 
-      <div class="plc-area running" onclick="window.location.href='os/boot/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/boot/\')">
         <div class="plc-name">🚀 Boot Sequencer</div>
         <div class="plc-status">Complete | 6/6 phases</div>
       </div>
 
-      <div class="plc-area idle" onclick="window.location.href='os/models/'">
+      <div class="plc-area idle" onclick="navigateTo(\'os/models/\')">
         <div class="plc-name">🤖 AI Models</div>
         <div class="plc-status">Standby | 3 models</div>
       </div>
 
-      <div class="plc-area running" onclick="window.location.href='os/data/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/data/\')">
         <div class="plc-name">💾 Token Database</div>
         <div class="plc-status">Ready | SQL active</div>
       </div>
 
-      <div class="plc-area idle" onclick="window.location.href='os/language/'">
+      <div class="plc-area idle" onclick="navigateTo(\'os/language/\')">
         <div class="plc-name">🔮 SNT Language</div>
         <div class="plc-status">Idle | Compiler off</div>
       </div>
 
-      <div class="plc-area running" onclick="window.location.href='os/debug/'">
+      <div class="plc-area running" onclick="navigateTo(\'os/debug/\')">
         <div class="plc-name">🐛 Debug Console</div>
         <div class="plc-status">Active | Logging</div>
       </div>
@@ -567,9 +568,9 @@
     <a href="https://github.com/teslasolar/qdrant">GitHub</a> •
     <a href="https://github.com/teslasolar/qdrant/issues">Issues</a> •
     <a href="https://lablab.ai">lablab.ai</a> •
-    <a href="scada.html">SCADA</a> •
-    <a href="plc.html">PLC</a> •
-    <a href="hmi.html">HMI</a>
+    <a href="#" onclick="navigateTo(\'scada.html\'); return false;">SCADA</a> •
+    <a href="#" onclick="navigateTo(\'plc.html\'); return false;">PLC</a> •
+    <a href="#" onclick="navigateTo(\'hmi.html\'); return false;">HMI</a>
   </p>
   <p style="margin-top: 15px; color: #444;">
     Built with 💚 for the industrial automation and medical communities
