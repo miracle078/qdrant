@@ -24,10 +24,16 @@ python os/backend/api.py
 - **PLC Controller:** `/plc.html`
 - **HMI Panel:** `/hmi.html`
 - **Chazon OS:** `/os/index.html`
-- **AlF-DETECT:** `/os/medical/alf-detect.html`
 - **Frontend:** `/os/frontend/index.html`
-- **Debug Console:** `/os/debug/index.html`
-- **API Status:** `/os/backend/index.html`
+- **Backend API:** `/os/backend/index.html`
+- **Modules:** `/os/modules/index.html`
+- **Boot:** `/os/boot/index.html`
+- **Models:** `/os/models/index.html`
+- **Data:** `/os/data/index.html`
+- **Language:** `/os/language/index.html`
+- **Templates:** `/os/templates/`
+- **AlF-DETECT:** `/os/medical/alf-detect.html`
+- **Debug:** `/os/debug/index.html`
 
 ## File Structure
 
@@ -37,35 +43,28 @@ qdrant/
 ├── scada.html          # Master SCADA control
 ├── plc.html            # Master PLC logic
 ├── hmi.html            # Master HMI panel
-├── modules/            # 114 markdown modules
-│   ├── index.html      # Module browser
-│   ├── medical-*.md    # Medical imaging
-│   ├── chazon-*.md     # Core OS
-│   ├── qdrant-*.md     # Vector DB
-│   └── ui-*.md         # UI components
-├── data/               # SQL databases
-│   ├── index.html      # Schema viewer
-│   ├── tokendb.sql     # Token-dense storage
-│   └── architecture-maps.md
-├── language/           # SNT/trinary
-│   ├── index.html      # Language docs
-│   └── trinary/
 ├── standards/          # ISA standards
 │   └── isa/
 │       ├── isa-88/     # Batch control
 │       ├── isa-95/     # Enterprise-control
 │       └── isa-101/    # HMI design
-├── templates/          # ISA templates
-│   └── views/
-└── os/                 # Runtime/Execution
+├── docs/               # Documentation
+├── config/             # Docker, pytest configs
+├── scripts/            # Setup/deployment scripts
+├── collab/             # Multi-agent workspace
+└── os/                 # Operating System (all runtime components)
     ├── index.html      # OS gateway
-    ├── module-router.md
+    ├── module-router.md # UUID-based module discovery
     ├── frontend/       # Medical viewer UI
     ├── backend/        # FastAPI server
+    ├── modules/        # 114 markdown modules
     ├── boot/           # 6-phase boot system
     ├── debug/          # Debug console
     ├── models/         # AI models (ONNX)
-    └── medical/        # AlF-DETECT runtime
+    ├── medical/        # AlF-DETECT runtime
+    ├── data/           # SQL databases, architecture maps
+    ├── language/       # SNT/trinary compiler
+    └── templates/      # ISA template engine
 ```
 
 ## Architecture
@@ -104,8 +103,11 @@ python os/backend/mcp-codesign.py
 python os/backend/mcp-qdrant.py
 python os/backend/mcp-sqlite.py
 
-# Local server (already running on :8080)
+# Local server
 python3 -m http.server 8080
+
+# Download AI models
+cd os/models && python download-models.py
 
 # Deploy to GitHub Pages
 git push origin claude/automation-gpt-multimodal-search-*
@@ -140,22 +142,25 @@ QDRANT_API_KEY=...
 COHERE_API_KEY=...
 ```
 
-## Medical Imaging Modules
+## Key Components
 
-- `modules/medical-imaging.md` - Core imaging system
-- `modules/medical-xray-analyzer.md` - X-ray AI analysis
-- `modules/medical-dicom-viewer.md` - DICOM viewer
-- `modules/medical-qdrant.md` - Vector search integration
-- `modules/medical-dataset.md` - Medical datasets
-- `os/medical/alf-detect.html` - Alzheimer's/Autism detection runtime
+**Medical Imaging:**
+- `os/modules/medical-imaging.md` - Core imaging system
+- `os/modules/medical-xray-analyzer.md` - X-ray AI analysis
+- `os/modules/medical-dicom-viewer.md` - DICOM viewer
+- `os/modules/medical-qdrant.md` - Vector search integration
+- `os/medical/alf-detect.html` - AlF-DETECT Alzheimer's/Autism detection
 
-## SNT Language
+**SNT Language:**
+- Space-Time Notation with trinary computing
+- Base-3 arithmetic, emoji compression
+- See: `os/language/` directory
 
-Space-Time Notation with trinary computing:
-- Base-3 arithmetic (0, 1, 2)
-- Emoji compression
-- Quantum-inspired state management
-- See: `language/` directory
+**ISA Standards:**
+- ISA-88: Batch control, procedural model
+- ISA-95: Enterprise-control integration
+- ISA-101: HMI design guidelines
+- See: `standards/isa/` directory
 
 ## License
 

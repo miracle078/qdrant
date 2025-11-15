@@ -226,7 +226,7 @@ await ModuleRouter.publish('my-uuid', {
 
 ## See Also
 
-- `../modules/chazon-mdcompiler.md` - Compiles MD modules
+- `modules/chazon-mdcompiler.md` - Compiles MD modules
 - `boot/boot-sequencer.md` - Uses UUID-based loading
-- `../data/tokendb.sql` - Stores module metadata
+- `data/tokendb.sql` - Stores module metadata
 - `module-index.md` - Full module index (planned)
