@@ -1,0 +1,44 @@
+area:
+  id: medical
+  name: Medical Imaging
+  icon: 🏥
+  description: DICOM processing and AlF-DETECT analysis
+
+plc:
+  tag: PLC-004
+  scan_time_ms: 80
+  status: RUNNING
+  tag_count: 223
+  routine_count: 28
+
+operations:
+  - name: Load DICOM
+    action: loadDICOM
+  - name: Run AlF-DETECT
+    action: runAlfDetect
+  - name: Analyze Study
+    action: analyzeStudy
+  - name: Generate Report
+    action: generateReport
+
+metrics:
+  - label: Studies Analyzed
+    tag: MEDICAL_STUDIES_ANALYZED
+  - label: AlF Detections
+    tag: MEDICAL_ALF_DETECTIONS
+  - label: Analysis Time
+    tag: MEDICAL_ANALYSIS_TIME
+    unit: ms
+
+mqtt:
+  topics:
+    - chazon/os/medical/dicom/loaded
+    - chazon/os/medical/analysis/complete
+    - chazon/os/medical/alf-detect/result
+
+modbus:
+  holding_registers:
+    - address: 40030
+      name: AI_INFERENCE_QUEUE
+    - address: 40031
+      name: AI_AVG_LATENCY

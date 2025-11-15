@@ -1,0 +1,36 @@
+area:
+  id: templates
+  name: Template System
+  icon: 📄
+  description: ISA template engine and P&ID generator
+
+plc:
+  tag: PLC-009
+  scan_time_ms: 90
+  status: READY
+  tag_count: 67
+  routine_count: 8
+
+operations:
+  - name: Load Template
+    action: loadTemplate
+  - name: Render Template
+    action: renderTemplate
+  - name: Generate P&ID
+    action: generatePID
+  - name: Export CAD
+    action: exportCAD
+
+metrics:
+  - label: Templates Loaded
+    tag: TEMPLATE_COUNT
+  - label: Render Time
+    tag: TEMPLATE_RENDER_TIME
+    unit: ms
+  - label: P&IDs Generated
+    tag: TEMPLATE_PID_COUNT
+
+mqtt:
+  topics:
+    - chazon/os/templates/render/complete
+    - chazon/os/templates/pid/generated

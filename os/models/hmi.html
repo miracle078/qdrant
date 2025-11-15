@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HMI - AI Models</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #66ff66; padding: 20px; }
+  .hmi-header { background: #1a1a2e; border: 3px solid #66ff66; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+  .hmi-title { font-size: 2em; margin-bottom: 10px; }
+  .section { background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+  .section h2 { color: #66ff66; border-bottom: 2px solid #66ff66; padding-bottom: 10px; margin-bottom: 15px; }
+  .control-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+  .control-btn { background: #000; border: 2px solid #66ff66; border-radius: 6px; padding: 20px; cursor: pointer; transition: all 0.3s; text-align: center; }
+  .control-btn:hover { background: #66ff66; color: #000; transform: scale(1.05); }
+  .metric-card { background: #000; border-left: 4px solid #66ff66; padding: 15px; text-align: center; }
+  .metric-value { font-size: 2.5em; font-weight: bold; color: #66ff66; }
+  .breadcrumb { color: #888; margin-bottom: 20px; }
+  .breadcrumb a { color: #66ff66; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="breadcrumb"><a href="../../">Home</a> / <a href="../">Chazon OS</a> / AI Models HMI</div>
+
+<div class="hmi-header">
+  <div class="hmi-title">🤖 AI Models - HMI</div>
+  <div>ONNX inference engine</div>
+</div>
+
+<div class="section">
+  <h2>Operations</h2>
+  <div class="control-grid">
+    <div class="control-btn" onclick="alert('Operation 1')"><div style="font-size:2em">▶️</div><div>Operation 1</div></div>
+    <div class="control-btn" onclick="alert('Operation 2')"><div style="font-size:2em">⚡</div><div>Operation 2</div></div>
+    <div class="control-btn" onclick="alert('Operation 3')"><div style="font-size:2em">🔍</div><div>Operation 3</div></div>
+    <div class="control-btn" onclick="alert('Operation 4')"><div style="font-size:2em">💾</div><div>Operation 4</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Live Metrics</h2>
+  <div class="control-grid">
+    <div class="metric-card"><div style="color:#888;font-size:0.9em">Metric 1</div><div class="metric-value">0</div></div>
+    <div class="metric-card"><div style="color:#888;font-size:0.9em">Metric 2</div><div class="metric-value">0</div></div>
+    <div class="metric-card"><div style="color:#888;font-size:0.9em">Metric 3</div><div class="metric-value">0</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Quick Links</h2>
+  <div class="control-grid">
+    <div class="control-btn" onclick="location.href='plc.html'"><div style="font-size:2em">⚙️</div><div>View PLC Logic</div></div>
+    <div class="control-btn" onclick="location.href='index.html'"><div style="font-size:2em">📄</div><div>Area Index</div></div>
+    <div class="control-btn" onclick="location.href='../../scada.html'"><div style="font-size:2em">📊</div><div>SCADA Master</div></div>
+    <div class="control-btn" onclick="location.href='../'"><div style="font-size:2em">🏠</div><div>OS Gateway</div></div>
+  </div>
+</div>
+</body>
+</html>

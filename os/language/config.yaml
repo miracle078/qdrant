@@ -1,0 +1,36 @@
+area:
+  id: language
+  name: SNT Language
+  icon: 🔮
+  description: Space-Time Notation compiler and trinary runtime
+
+plc:
+  tag: PLC-006
+  scan_time_ms: 120
+  status: IDLE
+  tag_count: 76
+  routine_count: 11
+
+operations:
+  - name: Compile SNT
+    action: compileSNT
+  - name: Run Program
+    action: runProgram
+  - name: View AST
+    action: viewAST
+  - name: Debug Trinary
+    action: debugTrinary
+
+metrics:
+  - label: Programs Compiled
+    tag: LANG_PROGRAMS_COMPILED
+  - label: Compile Time
+    tag: LANG_COMPILE_TIME
+    unit: ms
+  - label: Runtime Errors
+    tag: LANG_RUNTIME_ERRORS
+
+mqtt:
+  topics:
+    - chazon/os/language/compile/complete
+    - chazon/os/language/runtime/error

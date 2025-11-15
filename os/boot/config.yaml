@@ -1,0 +1,91 @@
+area:
+  id: boot
+  name: Boot Sequencer
+  icon: 🚀
+  description: 6-phase initialization control
+
+plc:
+  tag: PLC-002
+  scan_time_ms: 50
+  status: RUNNING
+  tag_count: 156
+  routine_count: 18
+
+phases:
+  - id: 0
+    name: Core Systems
+    module: boot-phase0-core.md
+    description: Environment, router, compiler
+  - id: 1
+    name: CLI Interface
+    module: boot-phase1-cli.md
+    description: Terminal, commands, REPL
+  - id: 2
+    name: UI Layer
+    module: boot-phase2-ui.md
+    description: Frontend, components, state
+  - id: 3
+    name: Medical
+    module: boot-phase3-medical.md
+    description: DICOM, AlF-DETECT, imaging
+  - id: 4
+    name: Language
+    module: boot-phase4-language.md
+    description: SNT compiler, trinary
+  - id: 5
+    name: Programs
+    module: boot-phase5-programs.md
+    description: User programs, apps
+
+operations:
+  - name: Start Boot
+    action: startBoot
+    params: [quickBoot: boolean]
+  - name: Reset Sequencer
+    action: resetSequencer
+    params: []
+  - name: Skip Phase
+    action: skipPhase
+    params: [phaseId: number]
+
+metrics:
+  - label: Current Phase
+    tag: BOOT_CURRENT_PHASE
+    unit: ''
+    range: 0-5
+  - label: Boot Status
+    tag: BOOT_STATUS
+    unit: ''
+    values: [IDLE, RUNNING, COMPLETE]
+  - label: Total Boot Time
+    tag: BOOT_TOTAL_TIME
+    unit: ms
+    range: 0-5000
+
+mqtt:
+  topics:
+    - chazon/os/boot/phase/+/status
+    - chazon/os/boot/complete
+    - chazon/os/boot/error
+
+modbus:
+  holding_registers:
+    - address: 40020
+      name: BOOT_CURRENT_PHASE
+      type: UINT16
+    - address: 40021
+      name: BOOT_STATUS
+      type: UINT16
+  discrete_inputs:
+    - address: 10010
+      name: BOOT_PHASE_0_COMPLETE
+    - address: 10011
+      name: BOOT_PHASE_1_COMPLETE
+    - address: 10012
+      name: BOOT_PHASE_2_COMPLETE
+    - address: 10013
+      name: BOOT_PHASE_3_COMPLETE
+    - address: 10014
+      name: BOOT_PHASE_4_COMPLETE
+    - address: 10015
+      name: BOOT_PHASE_5_COMPLETE

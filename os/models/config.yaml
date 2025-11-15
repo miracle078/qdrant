@@ -1,0 +1,44 @@
+area:
+  id: models
+  name: AI Models
+  icon: 🤖
+  description: ONNX inference and GPU acceleration
+
+plc:
+  tag: PLC-003
+  scan_time_ms: 100
+  status: RUNNING
+  tag_count: 187
+  routine_count: 24
+
+operations:
+  - name: Load Model
+    action: loadModel
+  - name: Run Inference
+    action: runInference
+  - name: Benchmark Model
+    action: benchmarkModel
+  - name: GPU Status
+    action: gpuStatus
+
+metrics:
+  - label: Models Loaded
+    tag: MODELS_LOADED_COUNT
+  - label: Inference Queue
+    tag: MODELS_INFERENCE_QUEUE
+  - label: Avg Latency
+    tag: MODELS_AVG_LATENCY
+    unit: ms
+
+mqtt:
+  topics:
+    - chazon/os/models/inference/complete
+    - chazon/os/models/gpu/status
+    - chazon/os/models/throughput
+
+modbus:
+  holding_registers:
+    - address: 40030
+      name: AI_INFERENCE_QUEUE
+    - address: 40031
+      name: AI_AVG_LATENCY

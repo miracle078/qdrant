@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLC Logic - Boot Sequencer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .plc-header {
+    background: #1a1a2e;
+    border: 3px solid #ffaa00;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .plc-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #ffaa00;
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #ffaa00;
+    border-bottom: 2px solid #ffaa00;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .ladder-rung {
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 10px;
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .st-code {
+    background: #000;
+    border: 1px solid #444;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    white-space: pre;
+    overflow-x: auto;
+    color: #00ff88;
+  }
+  .st-keyword { color: #ffaa00; font-weight: bold; }
+  .st-comment { color: #666; font-style: italic; }
+  .st-tag { color: #00ccff; }
+  .st-number { color: #ff66cc; }
+  .breadcrumb {
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: #00ff88;
+    text-decoration: none;
+  }
+  .tags-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  .tags-table th {
+    background: #000;
+    color: #ffaa00;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #444;
+  }
+  .tags-table td {
+    padding: 8px;
+    border: 1px solid #444;
+    color: #00ff88;
+  }
+  .tags-table tr:nth-child(even) {
+    background: #111;
+  }
+  .nav-btn {
+    display: inline-block;
+    background: #000;
+    border: 2px solid #ffaa00;
+    color: #ffaa00;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .nav-btn:hover {
+    background: #ffaa00;
+    color: #000;
+  }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../../">Home</a> / <a href="../">Chazon OS</a> / Boot Sequencer PLC
+</div>
+
+<div class="plc-header">
+  <div class="plc-title">⚙️ PLC-002: Boot Sequencer Logic</div>
+  <div>Sequential control with 6-phase state machine</div>
+  <div style="margin-top: 10px; color: #888;">
+    <strong>Scan Time:</strong> 50ms | <strong>Tags:</strong> 156 | <strong>Routines:</strong> 18
+  </div>
+</div>
+
+<div style="margin-bottom: 20px;">
+  <a href="hmi.html" class="nav-btn">📊 HMI Panel</a>
+  <a href="index.html" class="nav-btn">📄 Area Index</a>
+  <a href="../../plc.html" class="nav-btn">🏠 Master PLC</a>
+</div>
+
+<div class="section">
+  <h2>Main Routine: Boot_Sequencer</h2>
+  <div class="st-code"><span class="st-comment">(* Boot Sequencer State Machine *)</span>
+<span class="st-comment">(* Controls 6-phase initialization sequence *)</span>
+
+<span class="st-keyword">CASE</span> <span class="st-tag">BootState</span> <span class="st-keyword">OF</span>
+
+  <span class="st-number">0</span>: <span class="st-comment">(* IDLE - Waiting for start command *)</span>
+     <span class="st-keyword">IF</span> <span class="st-tag">CMD_StartBoot</span> <span class="st-keyword">THEN</span>
+        <span class="st-tag">BootState</span> := <span class="st-number">1</span>;
+        <span class="st-tag">CurrentPhase</span> := <span class="st-number">0</span>;
+        <span class="st-tag">BootStartTime</span> := <span class="st-tag">SystemTime</span>;
+        <span class="st-tag">STATUS_BootRunning</span> := <span class="st-keyword">TRUE</span>;
+     <span class="st-keyword">END_IF</span>;
+
+  <span class="st-number">1</span>: <span class="st-comment">(* LOADING - Execute current phase *)</span>
+     <span class="st-keyword">CASE</span> <span class="st-tag">CurrentPhase</span> <span class="st-keyword">OF</span>
+        <span class="st-number">0</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase0_Core();
+        <span class="st-number">1</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase1_CLI();
+        <span class="st-number">2</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase2_UI();
+        <span class="st-number">3</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase3_Medical();
+        <span class="st-number">4</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase4_Language();
+        <span class="st-number">5</span>: <span class="st-tag">PhaseComplete</span> := LoadPhase5_Programs();
+     <span class="st-keyword">END_CASE</span>;
+
+     <span class="st-keyword">IF</span> <span class="st-tag">PhaseComplete</span> <span class="st-keyword">THEN</span>
+        <span class="st-tag">PhaseCompleteBits</span>[<span class="st-tag">CurrentPhase</span>] := <span class="st-keyword">TRUE</span>;
+        <span class="st-tag">BootState</span> := <span class="st-number">2</span>;
+     <span class="st-keyword">END_IF</span>;
+
+  <span class="st-number">2</span>: <span class="st-comment">(* TRANSITION - Move to next phase *)</span>
+     <span class="st-keyword">IF</span> <span class="st-tag">CurrentPhase</span> &lt; <span class="st-number">5</span> <span class="st-keyword">THEN</span>
+        <span class="st-tag">CurrentPhase</span> := <span class="st-tag">CurrentPhase</span> + <span class="st-number">1</span>;
+        <span class="st-tag">BootState</span> := <span class="st-number">1</span>;
+     <span class="st-keyword">ELSE</span>
+        <span class="st-tag">BootState</span> := <span class="st-number">3</span>; <span class="st-comment">(* All phases complete *)</span>
+     <span class="st-keyword">END_IF</span>;
+
+  <span class="st-number">3</span>: <span class="st-comment">(* COMPLETE - Boot finished *)</span>
+     <span class="st-tag">STATUS_BootRunning</span> := <span class="st-keyword">FALSE</span>;
+     <span class="st-tag">STATUS_BootComplete</span> := <span class="st-keyword">TRUE</span>;
+     <span class="st-tag">TotalBootTime</span> := <span class="st-tag">SystemTime</span> - <span class="st-tag">BootStartTime</span>;
+     PublishMQTT("chazon/os/boot/complete", <span class="st-tag">TotalBootTime</span>);
+
+  <span class="st-number">99</span>: <span class="st-comment">(* ERROR - Abort boot sequence *)</span>
+     <span class="st-tag">STATUS_BootRunning</span> := <span class="st-keyword">FALSE</span>;
+     <span class="st-tag">STATUS_BootError</span> := <span class="st-keyword">TRUE</span>;
+     PublishMQTT("chazon/os/boot/error", <span class="st-tag">ErrorCode</span>);
+
+<span class="st-keyword">END_CASE</span>;
+
+<span class="st-comment">(* Reset command *)</span>
+<span class="st-keyword">IF</span> <span class="st-tag">CMD_ResetSequencer</span> <span class="st-keyword">THEN</span>
+   <span class="st-tag">BootState</span> := <span class="st-number">0</span>;
+   <span class="st-tag">CurrentPhase</span> := <span class="st-number">0</span>;
+   <span class="st-tag">PhaseCompleteBits</span> := [<span class="st-keyword">FALSE</span>, <span class="st-keyword">FALSE</span>, <span class="st-keyword">FALSE</span>, <span class="st-keyword">FALSE</span>, <span class="st-keyword">FALSE</span>, <span class="st-keyword">FALSE</span>];
+   <span class="st-tag">STATUS_BootComplete</span> := <span class="st-keyword">FALSE</span>;
+   <span class="st-tag">CMD_ResetSequencer</span> := <span class="st-keyword">FALSE</span>;
+<span class="st-keyword">END_IF</span>;
+</div>
+</div>
+
+<div class="section">
+  <h2>Subroutine: LoadPhase0_Core</h2>
+  <div class="st-code"><span class="st-keyword">FUNCTION</span> LoadPhase0_Core : <span class="st-keyword">BOOL</span>
+<span class="st-comment">(* Load core system modules *)</span>
+
+<span class="st-keyword">VAR</span>
+  modules: <span class="st-keyword">ARRAY</span>[<span class="st-number">0</span>..<span class="st-number">2</span>] <span class="st-keyword">OF</span> <span class="st-keyword">STRING</span>;
+  i: <span class="st-keyword">INT</span>;
+  allLoaded: <span class="st-keyword">BOOL</span> := <span class="st-keyword">TRUE</span>;
+<span class="st-keyword">END_VAR</span>
+
+modules[<span class="st-number">0</span>] := "chazon-environment.md";
+modules[<span class="st-number">1</span>] := "chazon-mdcompiler.md";
+modules[<span class="st-number">2</span>] := "module-router.md";
+
+<span class="st-keyword">FOR</span> i := <span class="st-number">0</span> <span class="st-keyword">TO</span> <span class="st-number">2</span> <span class="st-keyword">DO</span>
+   <span class="st-keyword">IF</span> <span class="st-keyword">NOT</span> LoadModule(modules[i]) <span class="st-keyword">THEN</span>
+      allLoaded := <span class="st-keyword">FALSE</span>;
+   <span class="st-keyword">END_IF</span>;
+<span class="st-keyword">END_FOR</span>;
+
+PublishMQTT("chazon/os/boot/phase/0/status", allLoaded);
+LoadPhase0_Core := allLoaded;
+
+<span class="st-keyword">END_FUNCTION</span>
+</div>
+</div>
+
+<div class="section">
+  <h2>Tag Database</h2>
+  <table class="tags-table">
+    <thead>
+      <tr>
+        <th>Tag Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Modbus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BootState</td>
+        <td>INT</td>
+        <td>State machine state (0=IDLE, 1=LOADING, 2=TRANSITION, 3=COMPLETE)</td>
+        <td>40021</td>
+      </tr>
+      <tr>
+        <td>CurrentPhase</td>
+        <td>INT</td>
+        <td>Current boot phase (0-5)</td>
+        <td>40020</td>
+      </tr>
+      <tr>
+        <td>PhaseCompleteBits</td>
+        <td>BOOL[6]</td>
+        <td>Completion status for each phase</td>
+        <td>10010-10015</td>
+      </tr>
+      <tr>
+        <td>CMD_StartBoot</td>
+        <td>BOOL</td>
+        <td>Command to start boot sequence</td>
+        <td>00010</td>
+      </tr>
+      <tr>
+        <td>CMD_ResetSequencer</td>
+        <td>BOOL</td>
+        <td>Command to reset to phase 0</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>STATUS_BootRunning</td>
+        <td>BOOL</td>
+        <td>Boot sequence in progress</td>
+        <td>10002</td>
+      </tr>
+      <tr>
+        <td>STATUS_BootComplete</td>
+        <td>BOOL</td>
+        <td>All phases complete</td>
+        <td>10015</td>
+      </tr>
+      <tr>
+        <td>TotalBootTime</td>
+        <td>DINT</td>
+        <td>Total boot time in milliseconds</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>MQTT Topics</h2>
+  <table class="tags-table">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>QoS</th>
+        <th>Payload</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>chazon/os/boot/phase/+/status</td>
+        <td>1</td>
+        <td>BOOL</td>
+        <td>Phase completion status</td>
+      </tr>
+      <tr>
+        <td>chazon/os/boot/complete</td>
+        <td>1</td>
+        <td>INT (ms)</td>
+        <td>Boot complete with total time</td>
+      </tr>
+      <tr>
+        <td>chazon/os/boot/error</td>
+        <td>1</td>
+        <td>INT</td>
+        <td>Error code if boot fails</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

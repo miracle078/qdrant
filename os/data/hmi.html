@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HMI - Data Layer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .hmi-header {
+    background: #1a1a2e;
+    border: 3px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .hmi-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .status-bar {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 10px;
+  }
+  .status-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #00ff88;
+    animation: pulse 2s infinite;
+    margin-right: 5px;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #00ff88;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  .control-btn {
+    background: #000;
+    border: 2px solid #00ff88;
+    border-radius: 6px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  .control-btn:hover {
+    background: #00ff88;
+    color: #000;
+    transform: scale(1.05);
+  }
+  .op-icon {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .op-name {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  .metric-card {
+    background: #000;
+    border-left: 4px solid #00ff88;
+    padding: 15px;
+    text-align: center;
+  }
+  .metric-label {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  .metric-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #00ff88;
+  }
+  .metric-unit {
+    color: #666;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }
+  .db-card {
+    background: #000;
+    border: 2px solid #00ff88;
+    border-radius: 6px;
+    padding: 15px;
+  }
+  .db-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #00ff88;
+  }
+  .db-type {
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  .db-status {
+    color: #00ff88;
+    font-size: 0.9em;
+  }
+  .breadcrumb {
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: #00ff88;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="../../">Home</a> / <a href="../">Chazon OS</a> / Data Layer HMI
+</div>
+
+<div class="hmi-header">
+  <div class="hmi-title">💾 Data Layer - HMI</div>
+  <div>SQL databases, token storage, architecture maps</div>
+  <div class="status-bar">
+    <div>
+      <span class="status-indicator"></span>
+      <strong>PLC Status:</strong> RUNNING
+    </div>
+    <div><strong>Scan Time:</strong> 75ms</div>
+    <div><strong>Tags:</strong> 198</div>
+    <div><strong>Routines:</strong> 22</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Connected Databases</h2>
+  <div class="control-grid">
+    <div class="db-card">
+      <div class="db-name">🗄️ Token Database</div>
+      <div class="db-type">SQLite | token-dense storage</div>
+      <div class="db-status">✓ Connected | 47,283 records</div>
+    </div>
+    <div class="db-card">
+      <div class="db-name">🔍 Qdrant Vector DB</div>
+      <div class="db-type">Vector DB | medical embeddings</div>
+      <div class="db-status">✓ Connected | localhost:6333</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Operations</h2>
+  <div class="control-grid">
+    <div class="control-btn" onclick="executeOperation('queryDatabase')">
+      <div class="op-icon">🔎</div>
+      <div class="op-name">Query Database</div>
+    </div>
+    <div class="control-btn" onclick="executeOperation('backupDatabase')">
+      <div class="op-icon">💾</div>
+      <div class="op-name">Backup Database</div>
+    </div>
+    <div class="control-btn" onclick="executeOperation('optimizeTables')">
+      <div class="op-icon">⚡</div>
+      <div class="op-name">Optimize Tables</div>
+    </div>
+    <div class="control-btn" onclick="executeOperation('viewSchema')">
+      <div class="op-icon">📋</div>
+      <div class="op-name">View Schema</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Live Metrics</h2>
+  <div class="control-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Records</div>
+      <div class="metric-value" id="total-records">47283</div>
+      <div class="metric-unit"></div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Database Size</div>
+      <div class="metric-value" id="db-size">128.5</div>
+      <div class="metric-unit">MB</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Query Rate</div>
+      <div class="metric-value" id="query-rate">47</div>
+      <div class="metric-unit">queries/sec</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Quick Links</h2>
+  <div class="control-grid">
+    <div class="control-btn" onclick="window.location.href='plc.html'">
+      <div class="op-icon">⚙️</div>
+      <div class="op-name">View PLC Logic</div>
+    </div>
+    <div class="control-btn" onclick="window.location.href='index.html'">
+      <div class="op-icon">📄</div>
+      <div class="op-name">Area Index</div>
+    </div>
+    <div class="control-btn" onclick="window.location.href='../../scada.html'">
+      <div class="op-icon">📊</div>
+      <div class="op-name">SCADA Master</div>
+    </div>
+    <div class="control-btn" onclick="window.location.href='../'">
+      <div class="op-icon">🏠</div>
+      <div class="op-name">OS Gateway</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function executeOperation(op) {
+  console.log('Executing operation:', op);
+
+  if (op === 'queryDatabase') {
+    const query = prompt('Enter SQL query:');
+    if (query) {
+      alert('Executing query: ' + query);
+    }
+  } else if (op === 'backupDatabase') {
+    if (confirm('Start database backup?')) {
+      alert('Backup started. Check logs for progress.');
+    }
+  } else if (op === 'optimizeTables') {
+    if (confirm('Optimize all tables? This may take several minutes.')) {
+      alert('Table optimization started.');
+    }
+  } else if (op === 'viewSchema') {
+    const table = prompt('Enter table name (or leave empty for all):');
+    alert('Displaying schema for: ' + (table || 'all tables'));
+  }
+}
+
+// Simulate metric updates
+function updateMetrics() {
+  document.getElementById('total-records').textContent = Math.floor(45000 + Math.random() * 5000);
+  document.getElementById('db-size').textContent = (125 + Math.random() * 10).toFixed(1);
+  document.getElementById('query-rate').textContent = Math.floor(40 + Math.random() * 20);
+}
+
+setInterval(updateMetrics, 3000);
+</script>
+
+</body>
+</html>

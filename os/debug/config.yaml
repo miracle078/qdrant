@@ -1,0 +1,46 @@
+area:
+  id: debug
+  name: Debug Console
+  icon: 🐛
+  description: System debugging and monitoring
+
+plc:
+  tag: PLC-007
+  scan_time_ms: 100
+  status: RUNNING
+  tag_count: 89
+  routine_count: 14
+
+operations:
+  - name: View Logs
+    action: viewLogs
+    params: [level: string]
+  - name: Set Breakpoint
+    action: setBreakpoint
+    params: [location: string]
+  - name: Inspect Variable
+    action: inspectVariable
+    params: [name: string]
+  - name: Clear Console
+    action: clearConsole
+    params: []
+
+metrics:
+  - label: Error Count
+    tag: DEBUG_ERROR_COUNT
+    unit: ''
+    range: 0-1000
+  - label: Warning Count
+    tag: DEBUG_WARNING_COUNT
+    unit: ''
+    range: 0-1000
+  - label: Log Rate
+    tag: DEBUG_LOG_RATE
+    unit: logs/sec
+    range: 0-100
+
+mqtt:
+  topics:
+    - chazon/os/debug/log/+
+    - chazon/os/debug/error
+    - chazon/os/debug/warning

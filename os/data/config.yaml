@@ -1,0 +1,74 @@
+area:
+  id: data
+  name: Data Layer
+  icon: 💾
+  description: SQL databases, token storage, architecture maps
+
+plc:
+  tag: PLC-005
+  scan_time_ms: 75
+  status: RUNNING
+  tag_count: 198
+  routine_count: 22
+
+databases:
+  - name: Token Database
+    type: SQLite
+    path: os/data/sql/tokendb.sql
+    description: Token-dense storage for module metadata
+  - name: Qdrant Vector DB
+    type: Vector
+    endpoint: localhost:6333
+    description: Medical image embeddings
+
+operations:
+  - name: Query Database
+    action: queryDatabase
+    params: [query: string]
+  - name: Backup Database
+    action: backupDatabase
+    params: []
+  - name: Optimize Tables
+    action: optimizeTables
+    params: []
+  - name: View Schema
+    action: viewSchema
+    params: [table: string]
+
+metrics:
+  - label: Total Records
+    tag: DB_RECORD_COUNT
+    unit: ''
+    range: 0-1000000
+  - label: Database Size
+    tag: DB_SIZE_MB
+    unit: MB
+    range: 0-10000
+  - label: Query Rate
+    tag: DB_QUERY_RATE
+    unit: queries/sec
+    range: 0-1000
+
+mqtt:
+  topics:
+    - chazon/os/data/query/complete
+    - chazon/os/data/backup/status
+    - chazon/os/data/error
+
+modbus:
+  holding_registers:
+    - address: 40050
+      name: DB_RECORD_COUNT
+      type: UINT16
+    - address: 40051
+      name: DB_SIZE_MB
+      type: UINT16
+  input_registers:
+    - address: 30050
+      name: DB_QUERY_RATE
+      type: UINT16
+  coils:
+    - address: 00020
+      name: ENABLE_AUTO_BACKUP
+    - address: 00021
+      name: ENABLE_QUERY_CACHE

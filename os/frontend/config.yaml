@@ -1,0 +1,36 @@
+area:
+  id: frontend
+  name: Frontend UI
+  icon: 🖥️
+  description: Medical viewer and user interface
+
+plc:
+  tag: PLC-008
+  scan_time_ms: 85
+  status: RUNNING
+  tag_count: 134
+  routine_count: 19
+
+operations:
+  - name: Load Study
+    action: loadStudy
+  - name: Render Viewer
+    action: renderViewer
+  - name: Apply Filter
+    action: applyFilter
+  - name: Export Image
+    action: exportImage
+
+metrics:
+  - label: Studies Loaded
+    tag: FRONTEND_STUDIES_LOADED
+  - label: Render Time
+    tag: FRONTEND_RENDER_TIME
+    unit: ms
+  - label: Active Sessions
+    tag: FRONTEND_ACTIVE_SESSIONS
+
+mqtt:
+  topics:
+    - chazon/os/frontend/study/loaded
+    - chazon/os/frontend/render/complete
