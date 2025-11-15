@@ -241,11 +241,27 @@ const ChazonBootstrap = {
     for (const module of this.modules) {
       try {
         const response = await fetch(module);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
         const markdown = await response.text();
         const compiled = MDCompiler.compile(markdown);
-        this.log(`  ✓ ${module.split('/').pop()}`);
+
+        // Check compilation results
+        let hasError = false;
+        compiled.forEach(result => {
+          if (!result.success) {
+            this.log(`    Error in ${module.split('/').pop()}: ${result.error}`);
+            hasError = true;
+          }
+        });
+
+        if (!hasError) {
+          this.log(`  ✓ ${module.split('/').pop()}`);
+        }
       } catch (err) {
-        this.log(`  ✗ ${module}: ${err.message}`);
+        this.log(`  ✗ ${module.split('/').pop()}: ${err.message}`);
+        console.error(`Failed to load ${module}:`, err);
       }
     }
   },
@@ -259,12 +275,16 @@ const ChazonBootstrap = {
     for (const program of this.programs) {
       try {
         const response = await fetch(program);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
         const content = await response.text();
         const name = program.split('/').pop();
         ChazonCLI.addFile(name, content);
         this.log(`  ✓ ${name}`);
       } catch (err) {
-        this.log(`  ✗ ${program}: ${err.message}`);
+        this.log(`  ✗ ${program.split('/').pop()}: ${err.message}`);
+        console.error(`Failed to load program ${program}:`, err);
       }
     }
   },
