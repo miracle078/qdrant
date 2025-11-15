@@ -64,12 +64,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `/dashboard/` - Unified dashboard
   - `/demo/` - Multimodal search demo
   - `/isa-os/` - ISA container runtime
-  - `/sandbox/` - Sandbox environment
-  - `/test-modules/` - Module testing
-  - `/frontend/` - React frontend directory
-  - `/backend/` - FastAPI backend directory
-  - `/modules/` - Module browser
-  - `/templates/` - Template showcase
+  - `/os/sandbox/` - Sandbox environment
+  - `/os/test-modules/` - Module testing
+  - `/os/frontend/` - React frontend directory
+  - `/os/backend/` - FastAPI backend directory
+  - `/os/modules/` - Module browser
+  - `/os/templates/` - Template showcase
 - Multi-agent collaboration system in `collab/` directory
 - 5 SQLite databases for persistence (180 KB total):
   - `automationgpt.db` - Main database with 8 tables (86 KB)

@@ -50,10 +50,10 @@ qdrant/
 │       └── isa-101/    # HMI design
 ├── docs/               # Documentation
 ├── config/             # Docker, pytest configs
-├── scripts/            # Setup/deployment scripts
 ├── collab/             # Multi-agent workspace
 └── os/                 # Operating System (all runtime components)
     ├── index.html      # OS gateway
+    ├── path-resolver.js # GitHub Pages path resolution
     ├── module-router.md # UUID-based module discovery
     ├── frontend/       # Medical viewer UI
     ├── backend/        # FastAPI server
@@ -64,7 +64,10 @@ qdrant/
     ├── medical/        # AlF-DETECT runtime
     ├── data/           # SQL databases, architecture maps
     ├── language/       # SNT/trinary compiler
-    └── templates/      # ISA template engine
+    ├── templates/      # ISA template engine
+    ├── scripts/        # Setup/deployment scripts
+    ├── sandbox/        # Development sandbox
+    └── test-modules/   # Module testing
 ```
 
 ## Architecture
