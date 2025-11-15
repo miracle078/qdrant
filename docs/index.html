@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 Documentation Hub | Chazon OS + AutomationGPT</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+      color: #00ff88;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #00ff88;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: #00ccff;
+      margin-bottom: 50px;
+      font-size: 1.2em;
+    }
+    .section {
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid #00ff88;
+      border-radius: 10px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      color: #00ccff;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+    }
+    .doc-list {
+      list-style: none;
+    }
+    .doc-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+    }
+    .doc-list li:last-child { border-bottom: none; }
+    .doc-list a {
+      color: #00ff88;
+      text-decoration: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .doc-list a:hover {
+      color: #00ffff;
+      padding-left: 10px;
+      transition: all 0.2s;
+    }
+    .badge {
+      background: #00ff88;
+      color: #000;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+    .critical { background: #ff0044; color: #fff; }
+    .back-link {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .back-link a {
+      color: #00ccff;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Documentation Hub</h1>
+    <p class="subtitle">Chazon OS + AutomationGPT | lablab.ai Qdrant Challenge</p>
+
+    <div class="section">
+      <h2>🏆 Hackathon Submission</h2>
+      <ul class="doc-list">
+        <li>
+          <a href="PROJECT_STATUS.md">
+            <span>📊 Project Status Report</span>
+            <span class="badge">COMPLETE</span>
+          </a>
+        </li>
+        <li>
+          <a href="HACKATHON_ANALYSIS.md">
+            <span>📈 Hackathon Analysis (Score: 93/100)</span>
+            <span class="badge">93/100</span>
+          </a>
+        </li>
+        <li>
+          <a href="DEMO_VIDEO_SCRIPT.md">
+            <span>🎬 Demo Video Script (60 seconds)</span>
+            <span class="badge critical">RECORD</span>
+          </a>
+        </li>
+        <li>
+          <a href="PITCH_DECK.md">
+            <span>🎤 Pitch Deck (20 slides)</span>
+            <span class="badge">READY</span>
+          </a>
+        </li>
+        <li>
+          <a href="IMPROVEMENT_PLAN.md">
+            <span>🗺️ Improvement Plan & Roadmap</span>
+            <span class="badge">PLAN</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🚀 Deployment & Setup</h2>
+      <ul class="doc-list">
+        <li>
+          <a href="BACKEND_SETUP.md">
+            <span>🔧 Backend Setup Guide</span>
+            <span class="badge">Railway/Fly.io</span>
+          </a>
+        </li>
+        <li>
+          <a href="../README.md">
+            <span>📖 Main README</span>
+            <span class="badge">START HERE</span>
+          </a>
+        </li>
+        <li>
+          <a href="../backend/README.md">
+            <span>⚙️ Backend API Documentation</span>
+            <span class="badge">FastAPI</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🌌 Chazon OS Documentation</h2>
+      <ul class="doc-list">
+        <li>
+          <a href="../chazon/README.md">
+            <span>🌌 Chazon OS Overview</span>
+            <span class="badge">φ-Balanced</span>
+          </a>
+        </li>
+        <li>
+          <a href="../chazon/INDEX.md">
+            <span>📑 Complete Module Index</span>
+            <span class="badge">52 FILES</span>
+          </a>
+        </li>
+        <li>
+          <a href="../chazon.html">
+            <span>💻 Launch Chazon OS</span>
+            <span class="badge">LIVE DEMO</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🎮 Live Demos</h2>
+      <ul class="doc-list">
+        <li>
+          <a href="../index.html">
+            <span>🏠 Project Landing Page</span>
+            <span class="badge">HOME</span>
+          </a>
+        </li>
+        <li>
+          <a href="../chazon.html">
+            <span>🌌 Chazon OS Terminal</span>
+            <span class="badge">NEW</span>
+          </a>
+        </li>
+        <li>
+          <a href="../isa-os.html">
+            <span>🏭 ISA-OS Container Runtime</span>
+            <span class="badge">NEW</span>
+          </a>
+        </li>
+        <li>
+          <a href="../automationgpt.html">
+            <span>🔍 AutomationGPT Search</span>
+            <span class="badge">CLASSIC</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="back-link">
+      <a href="../index.html">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

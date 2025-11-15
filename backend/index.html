@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>⚙️ Backend API | Chazon OS</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: #0a0a0a;
+      color: #00ff88;
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+    .container { max-width: 800px; margin: 0 auto; }
+    h1 { color: #00ccff; margin-bottom: 20px; }
+    h2 { color: #00ff88; margin: 30px 0 15px; }
+    code {
+      background: #1a1a1a;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #ff0;
+    }
+    pre {
+      background: #1a1a1a;
+      padding: 15px;
+      border-left: 3px solid #00ff88;
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+    a { color: #00ccff; text-decoration: none; }
+    a:hover { color: #00ffff; }
+    .badge {
+      display: inline-block;
+      background: #00ff88;
+      color: #000;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 0.85em;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚙️ Backend API <span class="badge">FastAPI + Qdrant</span></h1>
+
+    <p>Production-ready backend for Chazon OS with real Qdrant vector search and Cohere embeddings.</p>
+
+    <h2>📖 Documentation</h2>
+    <p>See <a href="README.md">README.md</a> for complete API documentation.</p>
+
+    <h2>🚀 Quick Start</h2>
+    <pre><code># 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Start Qdrant
+docker run -p 6333:6333 qdrant/qdrant
+
+# 3. Configure environment
+cp .env.example .env
+# Edit .env with your API keys
+
+# 4. Run API
+uvicorn api:app --reload</code></pre>
+
+    <h2>🌐 Deploy to Cloud</h2>
+    <pre><code># Railway (recommended)
+./railway-deploy.sh
+
+# Fly.io
+fly deploy
+
+# Docker Compose (local)
+docker-compose up -d</code></pre>
+
+    <h2>🔌 API Endpoints</h2>
+    <ul>
+      <li><code>GET /health</code> - Health check</li>
+      <li><code>POST /embed</code> - Generate embeddings</li>
+      <li><code>POST /search</code> - Vector similarity search</li>
+      <li><code>POST /index</code> - Index documents</li>
+      <li><code>GET /collections</code> - List collections</li>
+      <li><code>POST /collections/{name}/create</code> - Create collection</li>
+    </ul>
+
+    <h2>📚 Additional Resources</h2>
+    <ul>
+      <li><a href="../docs/BACKEND_SETUP.md">Backend Setup Guide</a></li>
+      <li><a href="../docs/index.html">Documentation Hub</a></li>
+      <li><a href="../index.html">← Back to Home</a></li>
+    </ul>
+
+    <h2>💡 Tech Stack</h2>
+    <ul>
+      <li><strong>FastAPI</strong> - Python web framework</li>
+      <li><strong>Qdrant</strong> - Vector database</li>
+      <li><strong>Cohere</strong> - Embeddings API (sponsor!)</li>
+      <li><strong>OpenAI</strong> - Alternative embeddings</li>
+      <li><strong>Docker</strong> - Containerization</li>
+    </ul>
+
+    <p style="margin-top: 40px; text-align: center; color: #888;">
+      Built for lablab.ai Qdrant Challenge | MIT License
+    </p>
+  </div>
+</body>
+</html>
