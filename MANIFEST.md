@@ -8,14 +8,11 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 
 ```
 /
-├── index.html              # Landing page with module bootstrap
+├── index.html              # Auto-redirect to chazon/
 ├── schema.sql              # SQLite database schema
-├── REGISTRY.md             # Module registry with UUIDs
 ├── MANIFEST.md             # This file (project manifest)
-├── REFACTOR_PLAN.md        # Architecture refactoring plan
-├── COMPONENT_ARCHITECTURE.md # Component system docs
-├── test-modules.html       # Module testing interface
-├── dashboard.html          # Unified demo dashboard
+├── CHANGELOG.md            # Project changelog
+├── README.md               # Project README
 │
 ├── modules/                # 95 markdown modules
 │   ├── Core System (18)
@@ -83,9 +80,16 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 │   ├── 3d-worlds/          # 3D visualizations
 │   └── README.md           # Collaboration guide
 │
+├── docs/                   # Documentation
+│   ├── README.md           # Documentation index
+│   ├── QUICKSTART.md       # Quick start guide
+│   ├── STRUCTURE.md        # Project structure
+│   ├── SITEMAP.md          # Site navigation
+│   ├── CONTRIBUTING.md     # Contribution guidelines
+│   └── DEPLOYMENT.md       # Deployment guide
+│
 ├── backend/                # FastAPI backend (optional)
-├── frontend/               # React frontend (optional)
-└── docs/                   # Documentation
+└── frontend/               # React frontend (optional)
 ```
 
 ## 🔑 Key Files
@@ -93,8 +97,8 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 | File | UUID | Purpose |
 |------|------|---------|
 | schema.sql | 8b79fb96-ef94-4fea-b508-6eb6aa3a373a | Database schema |
-| REGISTRY.md | e118731b-4918-489d-beac-f1732834ab39 | Module registry |
 | MANIFEST.md | a9504de3-8007-4e73-b18e-74470498dfe8 | This manifest |
+| modules/REGISTRY.md | e118731b-4918-489d-beac-f1732834ab39 | Module registry |
 | modules/db-manager.md | d6f529de-e759-49f9-abcd-cd30e902626a | Database manager |
 | modules/module-registry.md | c16e00c3-0ad6-481c-9d2d-586d643994a3 | Registry runtime |
 
@@ -173,13 +177,13 @@ const MyModule = {
 window.MyModule = MyModule;
 // ```
 
-// Register in REGISTRY.md
+// Register in modules/REGISTRY.md
 // Add to dependency graph if needed
 ```
 
 ## 📦 Dependencies
 
-See `REGISTRY.md` for complete dependency graph.
+See `modules/REGISTRY.md` for complete dependency graph.
 
 ## 🧪 Testing
 
