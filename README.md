@@ -7,6 +7,8 @@ Chazon (חזון - "Vision") is an open source AI-powered medical imaging analyz
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Challenge](https://img.shields.io/badge/lablab.ai-qdrant-purple)
 
+**🌐 Live Demo:** [https://teslasolar.github.io/qdrant/frontend/](https://teslasolar.github.io/qdrant/frontend/)
+
 ---
 
 ## 🎯 What is Chazon?
@@ -21,7 +23,9 @@ Chazon (חזון - "Vision") is an open source AI-powered medical imaging analyz
 
 ### ✨ Live Demo
 
-**Try it now:** Open [`frontend/index.html`](frontend/index.html) in your browser
+**🌐 GitHub Pages:** [https://teslasolar.github.io/qdrant/frontend/](https://teslasolar.github.io/qdrant/frontend/)
+
+**Or run locally:** Open [`frontend/index.html`](frontend/index.html) in your browser
 
 No installation required! Runs entirely client-side with optional backend for advanced features.
 
@@ -306,6 +310,7 @@ MIT License - Free for medical and educational use
 
 ## 📧 Contact
 
+- **Live Demo:** https://teslasolar.github.io/qdrant/frontend/
 - **GitHub:** https://github.com/teslasolar/qdrant
 - **Issues:** https://github.com/teslasolar/qdrant/issues
 
