@@ -1,0 +1,8 @@
+area:
+  icon: "\U0001F527"
+  id: backend
+  name: Backend API
+plc:
+  scan_time_ms: 100
+  status: RUNNING
+  tag_count: 156

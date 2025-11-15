@@ -1,0 +1,8 @@
+area:
+  icon: "\U0001F4E6"
+  id: modules
+  name: Module System
+plc:
+  scan_time_ms: 60
+  status: RUNNING
+  tag_count: 247
