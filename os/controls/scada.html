@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SCADA Master - Chazon Factory Control</title>
+<title>Controls SCADA - Chazon Monitoring</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -13,15 +13,13 @@
     overflow: hidden;
     height: 100vh;
   }
-  
-  /* Main SCADA Layout */
+
   #scada-container {
     display: grid;
     grid-template-rows: 60px 1fr 40px;
     height: 100vh;
   }
-  
-  /* Header */
+
   #scada-header {
     background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
     border-bottom: 3px solid #00ff88;
@@ -30,99 +28,43 @@
     padding: 0 20px;
     justify-content: space-between;
   }
-  
+
   #scada-header h1 {
     font-size: 1.5em;
     color: #00ff88;
-    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
   }
-  
-  #system-time {
-    color: #00ccff;
-    font-size: 1.2em;
-  }
-  
-  /* Main Content */
+
   #scada-main {
     display: grid;
     grid-template-columns: 250px 1fr 300px;
     overflow: hidden;
   }
-  
-  /* Left Sidebar - PLC Areas */
-  #plc-tree {
+
+  #sidebar {
     background: #1a1a2e;
     border-right: 2px solid #00ff88;
     overflow-y: auto;
     padding: 15px;
   }
-  
-  .plc-area {
-    margin: 10px 0;
-    padding: 10px;
-    background: #0a0a0a;
-    border-left: 3px solid #333;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  
-  .plc-area:hover {
-    border-left-color: #00ff88;
-    background: #1a1a2e;
-  }
-  
-  .plc-area.active {
-    border-left-color: #00ff88;
-    background: #2a2a3e;
-  }
-  
-  .plc-area.running {
-    border-left-color: #00ff88;
-  }
-  
-  .plc-area.error {
-    border-left-color: #ff0044;
-  }
-  
-  .plc-area.idle {
-    border-left-color: #ffaa00;
-  }
-  
-  .plc-name {
-    color: #00ff88;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .plc-status {
-    font-size: 11px;
-    color: #888;
-  }
-  
-  /* Center - Process View */
-  #process-view {
+
+  #content {
     background: #000;
     position: relative;
-    overflow: hidden;
+    overflow: auto;
+    padding: 20px;
   }
-  
-  #process-canvas {
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Right Sidebar - Live Data */
+
   #data-panel {
     background: #1a1a2e;
     border-left: 2px solid #00ff88;
     overflow-y: auto;
     padding: 15px;
   }
-  
+
   .data-section {
     margin-bottom: 20px;
   }
-  
+
   .data-section h3 {
     color: #00ccff;
     border-bottom: 1px solid #00ff88;
@@ -130,7 +72,7 @@
     margin-bottom: 10px;
     font-size: 14px;
   }
-  
+
   .data-item {
     display: flex;
     justify-content: space-between;
@@ -138,27 +80,10 @@
     border-bottom: 1px solid #222;
     font-size: 12px;
   }
-  
-  .data-label {
-    color: #888;
-  }
-  
-  .data-value {
-    color: #00ff88;
-    font-weight: bold;
-  }
-  
-  .data-value.alarm {
-    color: #ff0044;
-    animation: blink 1s infinite;
-  }
-  
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.3; }
-  }
-  
-  /* Status Bar */
+
+  .data-label { color: #888; }
+  .data-value { color: #00ff88; font-weight: bold; }
+
   #status-bar {
     background: #1a1a2e;
     border-top: 2px solid #00ff88;
@@ -168,313 +93,123 @@
     justify-content: space-between;
     font-size: 12px;
   }
-  
-  .status-group {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  
+
   .indicator {
     width: 12px;
     height: 12px;
     border-radius: 50%;
     display: inline-block;
     margin-right: 5px;
+    background: #00ff88;
+    box-shadow: 0 0 8px #00ff88;
   }
-  
-  .indicator.green { background: #00ff88; box-shadow: 0 0 8px #00ff88; }
-  .indicator.red { background: #ff0044; box-shadow: 0 0 8px #ff0044; }
-  .indicator.yellow { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
-  
-  /* Alarms */
-  .alarm-banner {
-    background: #ff0044;
-    color: #fff;
-    padding: 10px;
-    text-align: center;
+
+  .btn {
+    padding: 6px 12px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
     font-weight: bold;
-    display: none;
   }
-  
-  .alarm-banner.active {
-    display: block;
-    animation: blink 1s infinite;
-  }
+
+  .btn:hover { background: #00cc66; }
+  .btn.secondary { background: #333; color: #00ff88; }
 </style>
 </head>
 <body>
 
 <div id="scada-container">
-  <!-- Header -->
   <div id="scada-header">
-    <h1>⚙️ CHAZON SCADA - Master Control Gateway</h1>
-    <div id="system-time">00:00:00</div>
+    <h1>📈 Controls - SCADA Monitor</h1>
+    <div style="color: #00ccff; font-size: 1.2em;" id="system-time">00:00:00</div>
   </div>
 
-  <!-- Alarm Banner -->
-  <div class="alarm-banner" id="alarm-banner">⚠️ ALARM: Check system status</div>
-
-  <!-- Main Content -->
   <div id="scada-main">
-    <!-- Left: PLC Tree -->
-    <div id="plc-tree">
-      <h3 style="color: #00ccff; margin-bottom: 15px;">PLC Areas</h3>
-      
-      <div class="plc-area running" data-area="frontend" onclick="selectArea('frontend')">
-        <div class="plc-name">🖥️ Frontend HMI</div>
-        <div class="plc-status">Status: RUNNING | Scan: 50ms</div>
-      </div>
+    <div id="sidebar">
+      <h3 style="color: #00ccff; margin-bottom: 15px;">Navigation</h3>
+      <button class="btn" style="width: 100%; margin-bottom: 10px;" onclick="window.location.href='index.html'">📄 Main View</button>
+      <button class="btn secondary" style="width: 100%; margin-bottom: 10px;" onclick="window.location.href='hmi.html'">🎛️ HMI Panel</button>
+      <button class="btn secondary" style="width: 100%; margin-bottom: 10px;" onclick="window.location.href='plc.html'">⚙️ PLC Logic</button>
+      <button class="btn secondary" style="width: 100%; margin-top: 20px;" onclick="window.location.href='../index.html'">🏠 OS Home</button>
+    </div>
 
-      <div class="plc-area running" data-area="backend" onclick="selectArea('backend')">
-        <div class="plc-name">🔧 Backend API</div>
-        <div class="plc-status">Status: RUNNING | Scan: 100ms</div>
-      </div>
-
-      <div class="plc-area running" data-area="modules" onclick="selectArea('modules')">
-        <div class="plc-name">📦 Module Library</div>
-        <div class="plc-status">Status: RUNNING | Modules: 114</div>
-      </div>
-
-      <div class="plc-area running" data-area="boot" onclick="selectArea('boot')">
-        <div class="plc-name">🚀 Boot Sequencer</div>
-        <div class="plc-status">Status: COMPLETE | Phases: 6/6</div>
-      </div>
-
-      <div class="plc-area running" data-area="models" onclick="selectArea('models')">
-        <div class="plc-name">🤖 AI Models</div>
-        <div class="plc-status">Status: READY | Models: 3</div>
-      </div>
-
-      <div class="plc-area running" data-area="data" onclick="selectArea('data')">
-        <div class="plc-name">💾 Token Database</div>
-        <div class="plc-status">Status: READY | Records: 0</div>
-      </div>
-
-      <div class="plc-area idle" data-area="language" onclick="selectArea('language')">
-        <div class="plc-name">🔮 SNT Language</div>
-        <div class="plc-status">Status: IDLE | Compiler: OFF</div>
-      </div>
-
-      <div class="plc-area running" data-area="medical" onclick="selectArea('medical')">
-        <div class="plc-name">🏥 Medical Imaging</div>
-        <div class="plc-status">Status: RUNNING | DICOM: READY</div>
+    <div id="content">
+      <h2 style="color: #00ccff; margin-bottom: 20px;">Controls Overview</h2>
+      <div style="background: #1a1a2e; border: 2px solid #00ff88; border-radius: 8px; padding: 20px;">
+        <p style="color: #888; margin-bottom: 15px;">Real-time monitoring and control for Controls</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Status</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;">ONLINE</div>
+          </div>
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Scan Rate</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;">100ms</div>
+          </div>
+          <div style="background: #000; padding: 15px; border-radius: 4px;">
+            <div style="color: #888; font-size: 12px;">Uptime</div>
+            <div style="color: #00ff88; font-size: 24px; font-weight: bold;" id="uptime">0m</div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- Center: Process View -->
-    <div id="process-view">
-      <canvas id="process-canvas"></canvas>
-    </div>
-
-    <!-- Right: Data Panel -->
     <div id="data-panel">
       <div class="data-section">
         <h3>System Metrics</h3>
         <div class="data-item">
-          <span class="data-label">CPU Load:</span>
-          <span class="data-value" id="cpu-load">0%</span>
+          <span class="data-label">CPU:</span>
+          <span class="data-value" id="cpu">0%</span>
         </div>
         <div class="data-item">
           <span class="data-label">Memory:</span>
           <span class="data-value" id="memory">0 MB</span>
         </div>
         <div class="data-item">
-          <span class="data-label">Active PLCs:</span>
-          <span class="data-value" id="active-plcs">0</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Total Tags:</span>
-          <span class="data-value" id="total-tags">0</span>
-        </div>
-      </div>
-
-      <div class="data-section">
-        <h3>Process Values</h3>
-        <div class="data-item">
-          <span class="data-label">Boot Status:</span>
-          <span class="data-value" id="boot-status">COMPLETE</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">Modules Loaded:</span>
-          <span class="data-value" id="modules-loaded">0/114</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">API Requests:</span>
-          <span class="data-value" id="api-requests">0</span>
-        </div>
-        <div class="data-item">
-          <span class="data-label">AI Inference:</span>
-          <span class="data-value" id="ai-inference">0 ms</span>
+          <span class="data-label">Status:</span>
+          <span class="data-value">RUNNING</span>
         </div>
       </div>
 
       <div class="data-section">
         <h3>Alarms</h3>
-        <div id="alarm-list" style="color: #888; font-size: 11px;">
-          No active alarms
-        </div>
+        <div style="color: #888; font-size: 11px;">No active alarms</div>
       </div>
     </div>
   </div>
 
-  <!-- Status Bar -->
   <div id="status-bar">
-    <div class="status-group">
-      <span><span class="indicator green"></span>Gateway: ONLINE</span>
-      <span><span class="indicator green"></span>Qdrant: CONNECTED</span>
-      <span><span class="indicator yellow"></span>Models: LOADING</span>
+    <div>
+      <span><span class="indicator"></span>System: ONLINE</span>
     </div>
-    <div class="status-group">
-      <span id="scan-rate">Scan: 100ms</span>
-      <span id="packet-loss">Loss: 0%</span>
+    <div>
       <span id="connection">Connection: STABLE</span>
     </div>
   </div>
 </div>
 
 <script>
-// SCADA State
-const SCADA = {
-  areas: {},
-  tags: {},
-  alarms: [],
-  scanRate: 100
-};
+let startTime = Date.now();
 
-// Update system time
 function updateTime() {
-  const now = new Date();
-  document.getElementById('system-time').textContent = now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
-
-// Select PLC area
-function selectArea(area) {
-  document.querySelectorAll('.plc-area').forEach(el => el.classList.remove('active'));
-  document.querySelector(`[data-area="${area}"]`).classList.add('active');
-
-  // Navigate to area's index page
-  window.open(`../${area}/index.html`, '_blank');
+  document.getElementById('system-time').textContent = new Date().toLocaleTimeString();
+  const uptime = Math.floor((Date.now() - startTime) / 60000);
+  document.getElementById('uptime').textContent = uptime + 'm';
 }
 
-// Draw process flow
-const canvas = document.getElementById('process-canvas');
-const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  drawProcessFlow();
-}
-
-function drawProcessFlow() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // Grid
-  ctx.strokeStyle = '#1a1a2e';
-  ctx.lineWidth = 1;
-  for (let x = 0; x < canvas.width; x += 50) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, canvas.height);
-    ctx.stroke();
-  }
-  for (let y = 0; y < canvas.height; y += 50) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(canvas.width, y);
-    ctx.stroke();
-  }
-  
-  // Title
-  ctx.fillStyle = '#00ccff';
-  ctx.font = 'bold 24px Courier New';
-  ctx.fillText('CHAZON FACTORY FLOW', 20, 40);
-  
-  // Process boxes
-  const boxes = [
-    { x: 50, y: 100, w: 150, h: 80, label: 'Frontend\nHMI', color: '#00ff88' },
-    { x: 250, y: 100, w: 150, h: 80, label: 'Boot\nSequencer', color: '#00ff88' },
-    { x: 450, y: 100, w: 150, h: 80, label: 'Modules\nLibrary', color: '#00ff88' },
-    { x: 150, y: 250, w: 150, h: 80, label: 'Backend\nAPI', color: '#00ff88' },
-    { x: 350, y: 250, w: 150, h: 80, label: 'AI Models\nInference', color: '#ffaa00' },
-    { x: 250, y: 400, w: 150, h: 80, label: 'Qdrant\nVectorDB', color: '#00ff88' }
-  ];
-  
-  boxes.forEach(box => {
-    // Box
-    ctx.strokeStyle = box.color;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(box.x, box.y, box.w, box.h);
-    
-    // Fill
-    ctx.fillStyle = 'rgba(0, 255, 136, 0.1)';
-    ctx.fillRect(box.x, box.y, box.w, box.h);
-    
-    // Label
-    ctx.fillStyle = box.color;
-    ctx.font = 'bold 14px Courier New';
-    const lines = box.label.split('\n');
-    lines.forEach((line, i) => {
-      ctx.fillText(line, box.x + 10, box.y + 30 + (i * 20));
-    });
-  });
-  
-  // Arrows
-  ctx.strokeStyle = '#00ccff';
-  ctx.lineWidth = 2;
-  
-  // Frontend -> Boot
-  drawArrow(200, 140, 250, 140);
-  // Boot -> Modules
-  drawArrow(400, 140, 450, 140);
-  // Frontend -> Backend
-  drawArrow(150, 180, 200, 250);
-  // Backend -> AI
-  drawArrow(300, 290, 350, 290);
-  // AI -> Qdrant
-  drawArrow(425, 330, 350, 400);
-}
-
-function drawArrow(x1, y1, x2, y2) {
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.stroke();
-  
-  // Arrowhead
-  const angle = Math.atan2(y2 - y1, x2 - x1);
-  ctx.beginPath();
-  ctx.moveTo(x2, y2);
-  ctx.lineTo(x2 - 10 * Math.cos(angle - Math.PI / 6), y2 - 10 * Math.sin(angle - Math.PI / 6));
-  ctx.lineTo(x2 - 10 * Math.cos(angle + Math.PI / 6), y2 - 10 * Math.sin(angle + Math.PI / 6));
-  ctx.closePath();
-  ctx.fillStyle = '#00ccff';
-  ctx.fill();
-}
-
-// Update metrics
 function updateMetrics() {
-  // Simulate data
-  document.getElementById('cpu-load').textContent = (Math.random() * 30 + 10).toFixed(1) + '%';
+  document.getElementById('cpu').textContent = (Math.random() * 30 + 10).toFixed(1) + '%';
   document.getElementById('memory').textContent = (Math.random() * 500 + 1000).toFixed(0) + ' MB';
-  document.getElementById('active-plcs').textContent = '8';
-  document.getElementById('total-tags').textContent = '247';
-  document.getElementById('modules-loaded').textContent = '41/114';
-  document.getElementById('api-requests').textContent = Math.floor(Math.random() * 100);
-  document.getElementById('ai-inference').textContent = (Math.random() * 50 + 10).toFixed(1) + ' ms';
 }
 
-// Initialize
-window.addEventListener('load', () => {
-  resizeCanvas();
-  updateTime();
-  updateMetrics();
-  setInterval(updateMetrics, 1000);
-});
-
-window.addEventListener('resize', resizeCanvas);
+setInterval(updateTime, 1000);
+setInterval(updateMetrics, 1000);
+updateTime();
+updateMetrics();
 </script>
 
 </body>

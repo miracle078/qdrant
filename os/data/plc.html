@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLC Logic - Data Layer</title>
+<title>Data PLC - Chazon Control Logic</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -12,324 +12,139 @@
     color: #00ff88;
     padding: 20px;
   }
-  .plc-header {
+  .container { max-width: 1400px; margin: 0 auto; }
+  header {
     background: #1a1a2e;
-    border: 3px solid #ffaa00;
+    border: 2px solid #00ff88;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
   }
-  .plc-title {
-    font-size: 2em;
-    margin-bottom: 10px;
-    color: #ffaa00;
-  }
-  .section {
-    background: #1a1a2e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .section h2 {
-    color: #ffaa00;
-    border-bottom: 2px solid #ffaa00;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-  }
-  .st-code {
-    background: #000;
-    border: 1px solid #444;
-    border-radius: 4px;
-    padding: 15px;
-    font-family: 'Courier New', monospace;
-    white-space: pre;
-    overflow-x: auto;
-    color: #00ff88;
-  }
-  .st-keyword { color: #ffaa00; font-weight: bold; }
-  .st-comment { color: #666; font-style: italic; }
-  .st-tag { color: #00ccff; }
-  .st-number { color: #ff66cc; }
-  .st-string { color: #88ff88; }
+  h1 { color: #00ff88; margin-bottom: 10px; }
   .breadcrumb {
     color: #888;
-    margin-bottom: 20px;
+    font-size: 14px;
   }
-  .breadcrumb a {
+  .breadcrumb a { color: #00ccff; text-decoration: none; }
+
+  .plc-card {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-left: 3px solid #00ff88;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .plc-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  .plc-name {
     color: #00ff88;
-    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
   }
-  .tags-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  .tags-table th {
-    background: #000;
-    color: #ffaa00;
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #444;
-  }
-  .tags-table td {
-    padding: 8px;
-    border: 1px solid #444;
-    color: #00ff88;
-  }
-  .tags-table tr:nth-child(even) {
-    background: #111;
-  }
-  .nav-btn {
-    display: inline-block;
-    background: #000;
-    border: 2px solid #ffaa00;
-    color: #ffaa00;
-    padding: 10px 20px;
-    margin: 5px;
+
+  .plc-status {
+    padding: 3px 10px;
     border-radius: 4px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  .nav-btn:hover {
-    background: #ffaa00;
+    font-size: 11px;
+    font-weight: bold;
+    background: #00ff88;
     color: #000;
   }
+
+  .code-block {
+    background: #000;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    overflow-x: auto;
+    margin-top: 10px;
+    color: #00ccff;
+  }
+
+  .btn {
+    padding: 6px 12px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+
+  .btn:hover { background: #00cc66; }
+  .btn.secondary { background: #333; color: #00ff88; }
 </style>
-<script src="../path-resolver.js"></script>
 </head>
 <body>
 
-<div class="breadcrumb">
-  <a href="#" onclick="navigateTo(''); return false;">Home</a> / <a href="#" onclick="navigateTo('os/'); return false;">Chazon OS</a> / Data Layer PLC
-</div>
+<div class="container">
+  <header>
+    <h1>⚙️ Data - PLC Control Logic</h1>
+    <div class="breadcrumb">
+      <a href="../index.html">OS Home</a> / <a href="index.html">Data</a> / PLC
+    </div>
+  </header>
 
-<div class="plc-header">
-  <div class="plc-title">⚙️ PLC-005: Data Layer Logic</div>
-  <div>Database management and query optimization control</div>
-  <div style="margin-top: 10px; color: #888;">
-    <strong>Scan Time:</strong> 75ms | <strong>Tags:</strong> 198 | <strong>Routines:</strong> 22
+  <div class="plc-card">
+    <div class="plc-header">
+      <div class="plc-name">Data Controller</div>
+      <div class="plc-status">RUNNING</div>
+    </div>
+    <div style="color: #888; font-size: 12px; margin-bottom: 10px;">
+      Scan Time: 100ms | Status: OK
+    </div>
+    <div class="code-block">
+// Data Control Logic
+if (systemReady) {
+  processData();
+  updateState();
+  logMetrics();
+}
+    </div>
+    <div style="margin-top: 10px;">
+      <button class="btn" onclick="window.location.href='index.html'">View Main</button>
+      <button class="btn secondary" onclick="window.location.href='hmi.html'">HMI Panel</button>
+      <button class="btn secondary" onclick="window.location.href='scada.html'">SCADA View</button>
+    </div>
+  </div>
+
+  <div class="plc-card">
+    <div class="plc-header">
+      <div class="plc-name">System Log</div>
+    </div>
+    <div class="code-block" style="height: 150px; overflow-y: auto;" id="log">
+      <div style="color: #00ff88;">[00:00:00] PLC initialized</div>
+      <div style="color: #00ccff;">[00:00:01] Scanning tags...</div>
+      <div style="color: #00ff88;">[00:00:02] System online</div>
+    </div>
   </div>
 </div>
 
-<div style="margin-bottom: 20px;">
-  <a href="#" onclick="navigateTo('os/data/hmi.html'); return false;" class="nav-btn">📊 HMI Panel</a>
-  <a href="#" onclick="navigateTo('os/data/index.html'); return false;" class="nav-btn">📄 Area Index</a>
-  <a href="#" onclick="navigateTo('plc.html'); return false;" class="nav-btn">🏠 Master PLC</a>
-</div>
+<script>
+function log(message, type = 'info') {
+  const time = new Date().toLocaleTimeString();
+  const entry = document.createElement('div');
+  entry.style.color = type === 'error' ? '#ff0044' : '#00ccff';
+  entry.textContent = `[${time}] ${message}`;
+  document.getElementById('log').appendChild(entry);
+  document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
+}
 
-<div class="section">
-  <h2>Main Routine: DatabaseManager</h2>
-  <div class="st-code"><span class="st-comment">(* Database Management Control Logic *)</span>
-<span class="st-comment">(* Handles connections, queries, and optimization *)</span>
-
-<span class="st-comment">(* Connection monitoring *)</span>
-<span class="st-tag">TokenDB_Connected</span> := CheckConnection(<span class="st-string">"os/data/sql/tokendb.sql"</span>);
-<span class="st-tag">QdrantDB_Connected</span> := CheckConnection(<span class="st-string">"http://localhost:6333"</span>);
-
-<span class="st-keyword">IF</span> <span class="st-keyword">NOT</span> <span class="st-tag">TokenDB_Connected</span> <span class="st-keyword">THEN</span>
-   <span class="st-tag">AlarmCode</span> := <span class="st-number">5001</span>; <span class="st-comment">(* Token DB connection lost *)</span>
-   PublishMQTT(<span class="st-string">"chazon/os/data/error"</span>, <span class="st-tag">AlarmCode</span>);
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-keyword">IF</span> <span class="st-keyword">NOT</span> <span class="st-tag">QdrantDB_Connected</span> <span class="st-keyword">THEN</span>
-   <span class="st-tag">AlarmCode</span> := <span class="st-number">5002</span>; <span class="st-comment">(* Qdrant DB connection lost *)</span>
-   PublishMQTT(<span class="st-string">"chazon/os/data/error"</span>, <span class="st-tag">AlarmCode</span>);
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-comment">(* Query processing *)</span>
-<span class="st-keyword">IF</span> <span class="st-tag">CMD_ExecuteQuery</span> <span class="st-keyword">AND</span> <span class="st-tag">TokenDB_Connected</span> <span class="st-keyword">THEN</span>
-   <span class="st-tag">QueryStartTime</span> := <span class="st-tag">SystemTime</span>;
-   <span class="st-tag">QueryResult</span> := ExecuteSQL(<span class="st-tag">QueryString</span>);
-   <span class="st-tag">QueryDuration</span> := <span class="st-tag">SystemTime</span> - <span class="st-tag">QueryStartTime</span>;
-
-   <span class="st-comment">(* Update metrics *)</span>
-   <span class="st-tag">TotalQueries</span> := <span class="st-tag">TotalQueries</span> + <span class="st-number">1</span>;
-   <span class="st-tag">AvgQueryTime</span> := (<span class="st-tag">AvgQueryTime</span> * (<span class="st-tag">TotalQueries</span> - <span class="st-number">1</span>) + <span class="st-tag">QueryDuration</span>) / <span class="st-tag">TotalQueries</span>;
-
-   PublishMQTT(<span class="st-string">"chazon/os/data/query/complete"</span>, <span class="st-tag">QueryDuration</span>);
-   <span class="st-tag">CMD_ExecuteQuery</span> := <span class="st-keyword">FALSE</span>;
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-comment">(* Auto-backup logic *)</span>
-<span class="st-keyword">IF</span> <span class="st-tag">ENABLE_AUTO_BACKUP</span> <span class="st-keyword">THEN</span>
-   <span class="st-tag">TimeSinceLastBackup</span> := <span class="st-tag">SystemTime</span> - <span class="st-tag">LastBackupTime</span>;
-
-   <span class="st-keyword">IF</span> <span class="st-tag">TimeSinceLastBackup</span> &gt; <span class="st-tag">BackupInterval</span> <span class="st-keyword">THEN</span>
-      <span class="st-tag">CMD_BackupDatabase</span> := <span class="st-keyword">TRUE</span>;
-   <span class="st-keyword">END_IF</span>;
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-keyword">IF</span> <span class="st-tag">CMD_BackupDatabase</span> <span class="st-keyword">THEN</span>
-   <span class="st-tag">BackupResult</span> := BackupDatabase(<span class="st-string">"tokendb_backup"</span>);
-
-   <span class="st-keyword">IF</span> <span class="st-tag">BackupResult</span> <span class="st-keyword">THEN</span>
-      <span class="st-tag">LastBackupTime</span> := <span class="st-tag">SystemTime</span>;
-      PublishMQTT(<span class="st-string">"chazon/os/data/backup/status"</span>, <span class="st-keyword">TRUE</span>);
-   <span class="st-keyword">ELSE</span>
-      <span class="st-tag">AlarmCode</span> := <span class="st-number">5010</span>; <span class="st-comment">(* Backup failed *)</span>
-      PublishMQTT(<span class="st-string">"chazon/os/data/error"</span>, <span class="st-tag">AlarmCode</span>);
-   <span class="st-keyword">END_IF</span>;
-
-   <span class="st-tag">CMD_BackupDatabase</span> := <span class="st-keyword">FALSE</span>;
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-comment">(* Table optimization *)</span>
-<span class="st-keyword">IF</span> <span class="st-tag">CMD_OptimizeTables</span> <span class="st-keyword">THEN</span>
-   OptimizeAllTables();
-   PublishMQTT(<span class="st-string">"chazon/os/data/optimize/complete"</span>, <span class="st-keyword">TRUE</span>);
-   <span class="st-tag">CMD_OptimizeTables</span> := <span class="st-keyword">FALSE</span>;
-<span class="st-keyword">END_IF</span>;
-
-<span class="st-comment">(* Update Modbus registers *)</span>
-ModbusHoldingReg[<span class="st-number">40050</span>] := <span class="st-tag">TotalRecords</span>;
-ModbusHoldingReg[<span class="st-number">40051</span>] := <span class="st-tag">DatabaseSizeMB</span>;
-ModbusInputReg[<span class="st-number">30050</span>] := <span class="st-tag">QueryRate</span>;
-</div>
-</div>
-
-<div class="section">
-  <h2>Subroutine: ExecuteSQL</h2>
-  <div class="st-code"><span class="st-keyword">FUNCTION</span> ExecuteSQL : <span class="st-keyword">STRING</span>
-<span class="st-comment">(* Execute SQL query with error handling *)</span>
-
-<span class="st-keyword">VAR_INPUT</span>
-  query: <span class="st-keyword">STRING</span>;
-<span class="st-keyword">END_VAR</span>
-
-<span class="st-keyword">VAR</span>
-  result: <span class="st-keyword">STRING</span>;
-  errorCode: <span class="st-keyword">INT</span>;
-<span class="st-keyword">END_VAR</span>
-
-<span class="st-keyword">TRY</span>
-   <span class="st-comment">(* Execute query using SQLite connection *)</span>
-   result := DB_Execute(<span class="st-tag">TokenDB_Handle</span>, query);
-
-   <span class="st-comment">(* Update record count if query modified data *)</span>
-   <span class="st-keyword">IF</span> ContainsKeyword(query, <span class="st-string">"INSERT"</span>) <span class="st-keyword">OR</span>
-      ContainsKeyword(query, <span class="st-string">"UPDATE"</span>) <span class="st-keyword">OR</span>
-      ContainsKeyword(query, <span class="st-string">"DELETE"</span>) <span class="st-keyword">THEN</span>
-      <span class="st-tag">TotalRecords</span> := GetRecordCount(<span class="st-tag">TokenDB_Handle</span>);
-   <span class="st-keyword">END_IF</span>;
-
-   ExecuteSQL := result;
-
-<span class="st-keyword">CATCH</span>
-   errorCode := <span class="st-number">5020</span>; <span class="st-comment">(* Query execution failed *)</span>
-   PublishMQTT(<span class="st-string">"chazon/os/data/error"</span>, errorCode);
-   ExecuteSQL := <span class="st-string">"ERROR"</span>;
-<span class="st-keyword">END_TRY</span>;
-
-<span class="st-keyword">END_FUNCTION</span>
-</div>
-</div>
-
-<div class="section">
-  <h2>Tag Database</h2>
-  <table class="tags-table">
-    <thead>
-      <tr>
-        <th>Tag Name</th>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Modbus</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>TokenDB_Connected</td>
-        <td>BOOL</td>
-        <td>Token database connection status</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>QdrantDB_Connected</td>
-        <td>BOOL</td>
-        <td>Qdrant vector DB connection status</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>TotalRecords</td>
-        <td>DINT</td>
-        <td>Total number of records in token DB</td>
-        <td>40050</td>
-      </tr>
-      <tr>
-        <td>DatabaseSizeMB</td>
-        <td>INT</td>
-        <td>Database size in megabytes</td>
-        <td>40051</td>
-      </tr>
-      <tr>
-        <td>QueryRate</td>
-        <td>INT</td>
-        <td>Queries per second</td>
-        <td>30050</td>
-      </tr>
-      <tr>
-        <td>ENABLE_AUTO_BACKUP</td>
-        <td>BOOL</td>
-        <td>Enable automatic database backups</td>
-        <td>00020</td>
-      </tr>
-      <tr>
-        <td>ENABLE_QUERY_CACHE</td>
-        <td>BOOL</td>
-        <td>Enable query result caching</td>
-        <td>00021</td>
-      </tr>
-      <tr>
-        <td>CMD_ExecuteQuery</td>
-        <td>BOOL</td>
-        <td>Command to execute SQL query</td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <td>CMD_BackupDatabase</td>
-        <td>BOOL</td>
-        <td>Command to start database backup</td>
-        <td>-</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="section">
-  <h2>Database Schema</h2>
-  <table class="tags-table">
-    <thead>
-      <tr>
-        <th>Table</th>
-        <th>Columns</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>modules</td>
-        <td>uuid, name, path, size, loaded_at</td>
-        <td>Module metadata and registration</td>
-      </tr>
-      <tr>
-        <td>tokens</td>
-        <td>id, token, embedding, context</td>
-        <td>Token-dense storage</td>
-      </tr>
-      <tr>
-        <td>cache</td>
-        <td>key, value, expires_at</td>
-        <td>Query result cache</td>
-      </tr>
-      <tr>
-        <td>metrics</td>
-        <td>timestamp, metric_name, value</td>
-        <td>Historical metrics storage</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+setInterval(() => {
+  if (Math.random() > 0.9) {
+    log('Scan cycle complete');
+  }
+}, 5000);
+</script>
 
 </body>
 </html>

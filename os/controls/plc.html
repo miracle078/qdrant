@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Master PLC - Chazon Control Logic</title>
+<title>Controls PLC - Chazon Control Logic</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -26,60 +26,47 @@
     font-size: 14px;
   }
   .breadcrumb a { color: #00ccff; text-decoration: none; }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 15px;
-  }
-  
+
   .plc-card {
     background: #1a1a2e;
     border: 1px solid #333;
     border-left: 3px solid #00ff88;
     border-radius: 8px;
     padding: 15px;
+    margin-bottom: 15px;
   }
-  
-  .plc-card.running { border-left-color: #00ff88; }
-  .plc-card.error { border-left-color: #ff0044; }
-  .plc-card.idle { border-left-color: #ffaa00; }
-  
+
   .plc-header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
   }
-  
+
   .plc-name {
     color: #00ff88;
     font-weight: bold;
     font-size: 16px;
   }
-  
+
   .plc-status {
     padding: 3px 10px;
     border-radius: 4px;
     font-size: 11px;
     font-weight: bold;
+    background: #00ff88;
+    color: #000;
   }
-  
-  .plc-status.running { background: #00ff88; color: #000; }
-  .plc-status.error { background: #ff0044; color: #fff; }
-  .plc-status.idle { background: #ffaa00; color: #000; }
-  
-  .plc-stats {
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 10px;
-  }
-  
-  .plc-controls {
-    display: flex;
-    gap: 8px;
+
+  .code-block {
+    background: #000;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    overflow-x: auto;
     margin-top: 10px;
+    color: #00ccff;
   }
-  
+
   .btn {
     padding: 6px 12px;
     background: #00ff88;
@@ -90,224 +77,71 @@
     font-family: inherit;
     font-size: 11px;
     font-weight: bold;
+    margin-right: 8px;
   }
-  
+
   .btn:hover { background: #00cc66; }
   .btn.secondary { background: #333; color: #00ff88; }
-  .btn.danger { background: #ff0044; color: #fff; }
-  
-  .code-block {
-    background: #000;
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 11px;
-    overflow-x: auto;
-    margin-top: 10px;
-  }
-  
-  .log {
-    background: #000;
-    padding: 10px;
-    border-radius: 4px;
-    height: 150px;
-    overflow-y: auto;
-    font-size: 11px;
-  }
-  
-  .log-entry {
-    margin: 2px 0;
-    padding: 2px 0;
-  }
-  
-  .log-entry.info { color: #00ccff; }
-  .log-entry.success { color: #00ff88; }
-  .log-entry.error { color: #ff0044; }
 </style>
 </head>
 <body>
 
 <div class="container">
   <header>
-    <h1>⚙️ Master PLC - Control Logic</h1>
+    <h1>⚙️ Controls - PLC Control Logic</h1>
     <div class="breadcrumb">
-      <a href="../index.html">Home</a> /
-      <a href="scada.html">SCADA</a> /
-      PLC
+      <a href="../index.html">OS Home</a> / <a href="index.html">Controls</a> / PLC
     </div>
   </header>
 
-  <div class="grid">
-    <!-- Frontend PLC -->
-    <div class="plc-card running">
-      <div class="plc-header">
-        <div class="plc-name">Frontend HMI Controller</div>
-        <div class="plc-status running">RUNNING</div>
-      </div>
-      <div class="plc-stats">
-        Scan Time: 50ms | Tags: 47 | Routines: 12
-      </div>
-      <div class="code-block">
-// Main Loop
-if (bootComplete) {
-  loadModules();
-  renderUI();
-  handleInput();
-}
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../frontend/index.html')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
+  <div class="plc-card">
+    <div class="plc-header">
+      <div class="plc-name">Controls Controller</div>
+      <div class="plc-status">RUNNING</div>
     </div>
-
-    <!-- Backend PLC -->
-    <div class="plc-card running">
-      <div class="plc-header">
-        <div class="plc-name">Backend API Controller</div>
-        <div class="plc-status running">RUNNING</div>
-      </div>
-      <div class="plc-stats">
-        Scan Time: 100ms | Tags: 28 | Endpoints: 5
-      </div>
-      <div class="code-block">
-// API Control Loop
-if (qdrantConnected) {
-  processRequests();
-  updateVectors();
+    <div style="color: #888; font-size: 12px; margin-bottom: 10px;">
+      Scan Time: 100ms | Status: OK
+    </div>
+    <div class="code-block">
+// Controls Control Logic
+if (systemReady) {
+  processData();
+  updateState();
   logMetrics();
 }
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../backend/index.html')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
     </div>
-
-    <!-- Module Library PLC -->
-    <div class="plc-card running">
-      <div class="plc-header">
-        <div class="plc-name">Module Library Controller</div>
-        <div class="plc-status running">RUNNING</div>
-      </div>
-      <div class="plc-stats">
-        Scan Time: 75ms | Modules: 114 | Loaded: 41
-      </div>
-      <div class="code-block">
-// Module Execution
-modules.forEach(m => {
-  if (m.shouldExecute) {
-    m.run();
-    updateState(m);
-  }
-});
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../modules/')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
-    </div>
-
-    <!-- Boot Sequencer PLC -->
-    <div class="plc-card running">
-      <div class="plc-header">
-        <div class="plc-name">Boot Sequencer</div>
-        <div class="plc-status running">COMPLETE</div>
-      </div>
-      <div class="plc-stats">
-        Phases: 6/6 | Duration: 2.3s | Status: OK
-      </div>
-      <div class="code-block">
-// Sequential Boot
-for (phase of bootPhases) {
-  loadPhaseModules(phase);
-  validatePhase(phase);
-  nextPhase();
-}
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../boot/index.html')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
-    </div>
-
-    <!-- AI Models PLC -->
-    <div class="plc-card idle">
-      <div class="plc-header">
-        <div class="plc-name">AI Inference Controller</div>
-        <div class="plc-status idle">STANDBY</div>
-      </div>
-      <div class="plc-stats">
-        Models: 3 | Cached: 0 | Backend: WebGPU
-      </div>
-      <div class="code-block">
-// Inference Pipeline
-if (modelLoaded) {
-  preprocessImage();
-  runInference();
-  postprocess();
-}
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../models/index.html')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
-    </div>
-
-    <!-- Database PLC -->
-    <div class="plc-card running">
-      <div class="plc-header">
-        <div class="plc-name">Token Database Controller</div>
-        <div class="plc-status running">READY</div>
-      </div>
-      <div class="plc-stats">
-        Records: 0 | Tables: 6 | Size: 0 KB
-      </div>
-      <div class="code-block">
-// DB Operations
-if (dbConnected) {
-  processQueries();
-  updateTokens();
-  maintainCache();
-}
-      </div>
-      <div class="plc-controls">
-        <button class="btn" onclick="window.open('../data/index.html')">Open Area</button>
-        <button class="btn secondary" onclick="window.open('hmi.html')">HMI</button>
-      </div>
+    <div style="margin-top: 10px;">
+      <button class="btn" onclick="window.location.href='index.html'">View Main</button>
+      <button class="btn secondary" onclick="window.location.href='hmi.html'">HMI Panel</button>
+      <button class="btn secondary" onclick="window.location.href='scada.html'">SCADA View</button>
     </div>
   </div>
 
-  <!-- System Log -->
-  <div style="margin-top: 20px; background: #1a1a2e; border: 1px solid #333; border-radius: 8px; padding: 15px;">
-    <h3 style="color: #00ccff; margin-bottom: 10px;">Master PLC Log</h3>
-    <div class="log" id="plc-log">
-      <div class="log-entry success">[00:00:00] Master PLC initialized</div>
-      <div class="log-entry info">[00:00:01] Scanning PLC areas...</div>
-      <div class="log-entry success">[00:00:02] Found 8 PLC controllers</div>
-      <div class="log-entry success">[00:00:03] All PLCs online</div>
-      <div class="log-entry info">[00:00:04] Entering RUN mode</div>
+  <div class="plc-card">
+    <div class="plc-header">
+      <div class="plc-name">System Log</div>
+    </div>
+    <div class="code-block" style="height: 150px; overflow-y: auto;" id="log">
+      <div style="color: #00ff88;">[00:00:00] PLC initialized</div>
+      <div style="color: #00ccff;">[00:00:01] Scanning tags...</div>
+      <div style="color: #00ff88;">[00:00:02] System online</div>
     </div>
   </div>
 </div>
 
 <script>
-// Add timestamped log entry
 function log(message, type = 'info') {
   const time = new Date().toLocaleTimeString();
   const entry = document.createElement('div');
-  entry.className = `log-entry ${type}`;
+  entry.style.color = type === 'error' ? '#ff0044' : '#00ccff';
   entry.textContent = `[${time}] ${message}`;
-  document.getElementById('plc-log').appendChild(entry);
-  
-  // Auto-scroll
-  const logEl = document.getElementById('plc-log');
-  logEl.scrollTop = logEl.scrollHeight;
+  document.getElementById('log').appendChild(entry);
+  document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
 }
 
-// Simulate periodic scan
 setInterval(() => {
-  if (Math.random() > 0.95) {
-    log('Executing scan cycle', 'info');
+  if (Math.random() > 0.9) {
+    log('Scan cycle complete');
   }
 }, 5000);
 </script>
