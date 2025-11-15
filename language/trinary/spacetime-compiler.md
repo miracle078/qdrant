@@ -189,19 +189,15 @@ window.SpaceTimeCompiler = SpaceTimeCompiler;
 
 ## Timeline Management
 
-```
-Past    [-1] ← Previously computed values
-Present [ 0] ← Current execution state
-Future  [ 1] → Predicted/scheduled operations
-```
+- **Past [-1]** - Previously computed values
+- **Present [0]** - Current execution state
+- **Future [1]** - Predicted/scheduled operations
 
 ## Spatial Distribution
 
-```
-Local   [-1] This core/thread
-Shared  [ 0] Shared cache/memory
-Remote  [ 1] Network/distributed
-```
+- **Local [-1]** - This core/thread
+- **Shared [0]** - Shared cache/memory
+- **Remote [1]** - Network/distributed
 
 ## Usage
 

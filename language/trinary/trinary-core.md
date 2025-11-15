@@ -140,12 +140,9 @@ window.TrinaryCore = TrinaryCore;
 
 ## Efficiency
 
-```
-Binary bit:   2^8 = 256 states
-Trinary trit: 3^8 = 6,561 states
-
-1 emoji = 9 trits = 19,683 states
-```
+- **Binary bit:** 2^8 = 256 states
+- **Trinary trit:** 3^8 = 6,561 states
+- **1 emoji:** 9 trits = 19,683 states
 
 ## Usage
 

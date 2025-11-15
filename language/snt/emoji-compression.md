@@ -112,14 +112,13 @@ window.EmojiCompression = EmojiCompression;
 
 ## Cube Structure
 
-```
-Layer 0 (z=0)
+**Layer 0 (z=0)**
 🔮🌌💫⭐✨🌟💥🔥⚡💧
 🌊🌀🌈☀️🌙⭕🔴🟠🟡🟢
 🔵🟣⚫⚪🟤🔺🔻🔶🔷🔸
-... (10x10 grid)
+... (10×10 grid)
 
-1 cube = 1,000 emojis
-1 emoji = 9 trits = 19,683 states
-1 cube = 19.68M states
-```
+**Storage Density:**
+- 1 cube = 1,000 emojis
+- 1 emoji = 9 trits = 19,683 states
+- 1 cube = 19.68M states

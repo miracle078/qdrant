@@ -94,21 +94,15 @@ window.SNTSyntax = SNTSyntax;
 ## Language Reference
 
 ### Timeline Declarations
-```
-@past load(x)      // Execute in past timeline
-@present work(x)   // Execute in present
-@future save(x)    // Execute in future
-```
+- `@past load(x)` - Execute in past timeline
+- `@present work(x)` - Execute in present
+- `@future save(x)` - Execute in future
 
 ### Quantum Operations
-```
-|0⟩  // Ground state (1)
-|1⟩  // Excited state (-1)
-|+⟩  // Superposition (0)
-```
+- `|0⟩` - Ground state (1)
+- `|1⟩` - Excited state (-1)
+- `|+⟩` - Superposition (0)
 
 ### Emoji Encoding
-```
-🔮.encode(42)         // Encode to trits
-🔮.decode([1,-1,0])   // Decode from trits
-```
+- `🔮.encode(42)` - Encode to trits
+- `🔮.decode([1,-1,0])` - Decode from trits

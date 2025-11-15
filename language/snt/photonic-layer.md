@@ -102,9 +102,8 @@ window.PhotonicLayer = PhotonicLayer;
 
 ## Photonic Mapping
 
-```
-Trit   Amplitude  Polarization  Wavelength  Color
-  1      1.0          0°          450nm      Blue
-  0      0.5         45°          550nm      Green
- -1      0.0         90°          650nm      Red
-```
+| Trit | Amplitude | Polarization | Wavelength | Color |
+|------|-----------|--------------|------------|-------|
+| 1    | 1.0       | 0°           | 450nm      | Blue  |
+| 0    | 0.5       | 45°          | 550nm      | Green |
+| -1   | 0.0       | 90°          | 650nm      | Red   |
