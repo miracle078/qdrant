@@ -82,3 +82,11 @@ models/**/*.bin
 models/**/*.safetensors
 !models/**/*.md
 !models/README.md
+
+# Allow os/models/ docs, but ignore actual model files
+os/models/**/*.onnx
+os/models/**/*.pt
+os/models/**/*.bin
+os/models/**/*.safetensors
+!os/models/**/*.md
+!os/models/README.md

@@ -13,8 +13,8 @@ open index.html
 
 # Full stack
 docker run -p 6333:6333 qdrant/qdrant
-pip install -r requirements.txt
-python backend/api.py
+pip install -r os/backend/requirements.txt
+python os/backend/api.py
 ```
 
 ## Key URLs
@@ -23,10 +23,11 @@ python backend/api.py
 - **SCADA Master:** `/scada.html`
 - **PLC Controller:** `/plc.html`
 - **HMI Panel:** `/hmi.html`
-- **AlF-DETECT:** `/medical/alf-detect.html`
-- **Frontend:** `/frontend/index.html`
-- **Debug Console:** `/debug/index.html`
-- **API Status:** `/backend/index.html`
+- **Chazon OS:** `/os/index.html`
+- **AlF-DETECT:** `/os/medical/alf-detect.html`
+- **Frontend:** `/os/frontend/index.html`
+- **Debug Console:** `/os/debug/index.html`
+- **API Status:** `/os/backend/index.html`
 
 ## File Structure
 
@@ -36,33 +37,12 @@ qdrant/
 ├── scada.html          # Master SCADA control
 ├── plc.html            # Master PLC logic
 ├── hmi.html            # Master HMI panel
-├── boot/               # 6-phase boot system
-│   ├── index.html      # Boot dashboard
-│   ├── boot-phase0-core.md
-│   ├── boot-phase1-ai.md
-│   ├── boot-phase2-agents.md
-│   ├── boot-phase3-medical.md
-│   ├── boot-phase4-ui.md
-│   └── boot-phase5-templates.md
 ├── modules/            # 114 markdown modules
 │   ├── index.html      # Module browser
 │   ├── medical-*.md    # Medical imaging
 │   ├── chazon-*.md     # Core OS
 │   ├── qdrant-*.md     # Vector DB
 │   └── ui-*.md         # UI components
-├── models/             # AI models
-│   ├── index.html      # Model manager
-│   ├── bert-tiny/
-│   ├── mobilenet-v3/
-│   └── distilbert/
-├── medical/            # Medical systems
-│   └── alf-detect.html # AlF-DETECT Alzheimer's/Autism
-├── frontend/           # Main medical viewer
-│   └── index.html      # DICOM viewer
-├── backend/            # FastAPI server
-│   ├── index.html      # API status
-│   ├── api.py
-│   └── mcp-*.py        # MCP servers
 ├── data/               # SQL databases
 │   ├── index.html      # Schema viewer
 │   ├── tokendb.sql     # Token-dense storage
@@ -70,10 +50,22 @@ qdrant/
 ├── language/           # SNT/trinary
 │   ├── index.html      # Language docs
 │   └── trinary/
-├── debug/              # Debug tools
-│   └── index.html      # Debug console
-└── templates/          # ISA templates
-    └── views/
+├── standards/          # ISA standards
+│   └── isa/
+│       ├── isa-88/     # Batch control
+│       ├── isa-95/     # Enterprise-control
+│       └── isa-101/    # HMI design
+├── templates/          # ISA templates
+│   └── views/
+└── os/                 # Runtime/Execution
+    ├── index.html      # OS gateway
+    ├── module-router.md
+    ├── frontend/       # Medical viewer UI
+    ├── backend/        # FastAPI server
+    ├── boot/           # 6-phase boot system
+    ├── debug/          # Debug console
+    ├── models/         # AI models (ONNX)
+    └── medical/        # AlF-DETECT runtime
 ```
 
 ## Architecture
@@ -102,15 +94,15 @@ qdrant/
 
 ```bash
 # Backend API
-cd backend && python api.py
+cd os/backend && python api.py
 
 # Qdrant Docker
 docker run -p 6333:6333 qdrant/qdrant
 
 # MCP Servers
-python backend/mcp-codesign.py
-python backend/mcp-qdrant.py
-python backend/mcp-sqlite.py
+python os/backend/mcp-codesign.py
+python os/backend/mcp-qdrant.py
+python os/backend/mcp-sqlite.py
 
 # Local server (already running on :8080)
 python3 -m http.server 8080
@@ -150,12 +142,12 @@ COHERE_API_KEY=...
 
 ## Medical Imaging Modules
 
-- `medical-imaging.md` - Core imaging system
-- `medical-xray-analyzer.md` - X-ray AI analysis
-- `medical-dicom-viewer.md` - DICOM viewer
-- `medical-qdrant.md` - Vector search integration
-- `medical-dataset.md` - Medical datasets
-- `alf-detect.html` - Alzheimer's/Autism detection
+- `modules/medical-imaging.md` - Core imaging system
+- `modules/medical-xray-analyzer.md` - X-ray AI analysis
+- `modules/medical-dicom-viewer.md` - DICOM viewer
+- `modules/medical-qdrant.md` - Vector search integration
+- `modules/medical-dataset.md` - Medical datasets
+- `os/medical/alf-detect.html` - Alzheimer's/Autism detection runtime
 
 ## SNT Language
 
