@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag Browser - Chazon SCADA</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .header {
+    background: #1a1a2e;
+    border: 3px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  .providers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+  }
+  .provider-card {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 15px;
+  }
+  .provider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #00ff88;
+  }
+  .provider-name {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #00ff88;
+  }
+  .provider-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    background: #00ff88;
+    color: #000;
+  }
+  .tag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tag-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: #000;
+    border-left: 3px solid #00ff88;
+    transition: all 0.3s;
+  }
+  .tag-row:hover {
+    background: #1a1a1a;
+    transform: translateX(5px);
+  }
+  .tag-row.updated {
+    animation: flash 0.5s;
+  }
+  @keyframes flash {
+    0%, 100% { background: #000; }
+    50% { background: #004422; }
+  }
+  .tag-name {
+    font-size: 0.9em;
+    color: #888;
+  }
+  .tag-value {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #00ff88;
+  }
+  .tag-unit {
+    color: #666;
+    font-size: 0.8em;
+    margin-left: 4px;
+  }
+  .quality {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  .quality.GOOD { background: #00ff88; }
+  .quality.BAD { background: #ff3366; }
+  .quality.UNCERTAIN { background: #ffaa00; }
+  .controls {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .btn {
+    background: #00ff88;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+  .btn:hover {
+    background: #00cc6a;
+    transform: scale(1.05);
+  }
+  .breadcrumb {
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: #00ff88;
+    text-decoration: none;
+  }
+</style>
+<script src="../path-resolver.js"></script>
+<script src="TagProvider.js"></script>
+</head>
+<body>
+
+<div class="breadcrumb">
+  <a href="#" onclick="navigateTo(''); return false;">Home</a> /
+  <a href="#" onclick="navigateTo('os/'); return false;">Chazon OS</a> /
+  <a href="#" onclick="navigateTo('os/controls/'); return false;">Controls</a> /
+  Tag Browser
+</div>
+
+<div class="header">
+  <h1>📊 Tag Browser</h1>
+  <div>Real-time SCADA tag monitoring across all PLC areas</div>
+</div>
+
+<div class="controls">
+  <button class="btn" onclick="loadAllProviders()">🔄 Refresh All</button>
+  <button class="btn" onclick="toggleUpdates()">⏸️ Pause Updates</button>
+  <span id="update-status" style="margin-left: 10px; color: #888;">Live updating...</span>
+</div>
+
+<div class="providers" id="providers-container">
+  <!-- Tag providers will be loaded here -->
+</div>
+
+<script>
+let updateInterval = null;
+let isUpdating = true;
+
+async function loadAllProviders() {
+  console.log('[TagBrowser] Loading all tag providers...');
+
+  const providers = [
+    'boot', 'data', 'debug', 'frontend', 'language',
+    'medical', 'models', 'modules', 'backend', 'templates'
+  ];
+
+  for (const provider of providers) {
+    await window.TagProvider.loadProvider(provider);
+    renderProvider(provider);
+  }
+
+  console.log('[TagBrowser] All providers loaded');
+}
+
+function renderProvider(providerName) {
+  const container = document.getElementById('providers-container');
+  const tags = window.TagProvider.getAll(providerName);
+
+  const card = document.createElement('div');
+  card.className = 'provider-card';
+  card.id = `provider-${providerName}`;
+
+  let html = `
+    <div class="provider-header">
+      <div class="provider-name">${getIcon(providerName)} ${capitalize(providerName)}</div>
+      <div class="provider-status">LOADED</div>
+    </div>
+    <div class="tag-list">
+  `;
+
+  Object.entries(tags).forEach(([tagName, tag]) => {
+    const value = formatValue(tag.value, tag.unit);
+    html += `
+      <div class="tag-row" id="tag-${providerName}-${tagName}">
+        <div class="tag-name">
+          <span class="quality ${tag.quality}"></span>
+          ${tagName}
+        </div>
+        <div class="tag-value" id="value-${providerName}-${tagName}">
+          ${value}
+        </div>
+      </div>
+    `;
+  });
+
+  html += '</div>';
+  card.innerHTML = html;
+  container.appendChild(card);
+
+  // Subscribe to tag updates
+  Object.keys(tags).forEach(tagName => {
+    window.TagProvider.subscribe(providerName, tagName, (newValue) => {
+      updateTagDisplay(providerName, tagName, newValue, tags[tagName].unit);
+    });
+  });
+}
+
+function updateTagDisplay(provider, tagName, newValue, unit) {
+  const el = document.getElementById(`value-${provider}-${tagName}`);
+  if (el) {
+    el.textContent = formatValue(newValue, unit);
+
+    // Flash animation
+    const row = document.getElementById(`tag-${provider}-${tagName}`);
+    row.classList.add('updated');
+    setTimeout(() => row.classList.remove('updated'), 500);
+  }
+}
+
+function formatValue(value, unit) {
+  let formatted;
+  if (typeof value === 'boolean') {
+    formatted = value ? 'ON' : 'OFF';
+  } else if (typeof value === 'number') {
+    formatted = value.toLocaleString();
+  } else {
+    formatted = value;
+  }
+
+  if (unit) {
+    return `${formatted} <span class="tag-unit">${unit}</span>`;
+  }
+  return formatted;
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function getIcon(provider) {
+  const icons = {
+    boot: '🚀',
+    data: '💾',
+    debug: '🐛',
+    frontend: '🖥️',
+    language: '🔮',
+    medical: '🏥',
+    models: '🤖',
+    modules: '📦',
+    backend: '⚙️',
+    templates: '📄'
+  };
+  return icons[provider] || '📊';
+}
+
+function toggleUpdates() {
+  isUpdating = !isUpdating;
+  const btn = event.target;
+  const status = document.getElementById('update-status');
+
+  if (isUpdating) {
+    btn.textContent = '⏸️ Pause Updates';
+    status.textContent = 'Live updating...';
+    status.style.color = '#00ff88';
+  } else {
+    btn.textContent = '▶️ Resume Updates';
+    status.textContent = 'Paused';
+    status.style.color = '#ffaa00';
+  }
+}
+
+// Simulate tag updates every 2 seconds
+function simulateUpdates() {
+  if (!isUpdating) return;
+
+  const providers = window.TagProvider.listProviders();
+  providers.forEach(provider => {
+    const tags = window.TagProvider.listTags(provider);
+
+    // Update a random tag
+    if (tags.length > 0 && Math.random() > 0.5) {
+      const randomTag = tags[Math.floor(Math.random() * tags.length)];
+      const tag = window.TagProvider.readFull(provider, randomTag);
+
+      if (tag && tag.type === 'number') {
+        const variance = tag.value * 0.1;
+        let newValue = tag.value + (Math.random() * variance * 2 - variance);
+        newValue = Math.max(0, Math.round(newValue * 100) / 100);
+        window.TagProvider.write(provider, randomTag, newValue);
+      }
+    }
+  });
+}
+
+// Initialize on load
+window.addEventListener('load', async () => {
+  await loadAllProviders();
+
+  // Start simulated updates
+  updateInterval = setInterval(simulateUpdates, 2000);
+});
+
+// Cleanup on unload
+window.addEventListener('beforeunload', () => {
+  if (updateInterval) {
+    clearInterval(updateInterval);
+  }
+});
+</script>
+
+</body>
+</html>

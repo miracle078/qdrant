@@ -47,12 +47,13 @@ qdrant/
 │   └── standards/      # ISA standards and protocols
 │       ├── isa/        # ISA-88, ISA-95, ISA-101
 │       └── protocols/  # MQTT, OPC UA, Modbus
-├── config/             # Docker, pytest configs
 ├── collab/             # Multi-agent workspace
 └── os/                 # Operating System (all runtime components)
     ├── index.html      # OS gateway
     ├── path-resolver.js # GitHub Pages path resolution
     ├── module-router.md # UUID-based module discovery
+    ├── config/         # Docker, pytest configs
+    ├── controls/       # Tag providers, SCADA controls
     ├── frontend/       # Medical viewer UI
     ├── backend/        # FastAPI server
     ├── modules/        # 114 markdown modules

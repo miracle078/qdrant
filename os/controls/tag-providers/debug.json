@@ -1,0 +1,59 @@
+{
+  "provider": "debug",
+  "description": "Debug Console Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "RUNNING",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Debug console status"
+    },
+    "errorCount": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Total error count"
+    },
+    "warningCount": {
+      "value": 3,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Total warning count"
+    },
+    "logRate": {
+      "value": 12,
+      "type": "number",
+      "unit": "logs/sec",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Current logging rate"
+    },
+    "breakpointCount": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Active breakpoints"
+    },
+    "logLevel": {
+      "value": "INFO",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Current log level"
+    },
+    "consoleBufferSize": {
+      "value": 1000,
+      "type": "number",
+      "unit": "lines",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Console buffer size"
+    }
+  }
+}

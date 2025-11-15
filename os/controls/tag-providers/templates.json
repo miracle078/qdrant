@@ -1,0 +1,59 @@
+{
+  "provider": "templates",
+  "description": "Template Engine Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "READY",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Template engine status"
+    },
+    "templatesLoaded": {
+      "value": 12,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Number of loaded templates"
+    },
+    "renderTime": {
+      "value": 45,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Average render time"
+    },
+    "pidGenerated": {
+      "value": 3,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "P&ID diagrams generated"
+    },
+    "cacheHitRate": {
+      "value": 87.5,
+      "type": "number",
+      "unit": "%",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Template cache hit rate"
+    },
+    "componentsRegistered": {
+      "value": 24,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Registered template components"
+    },
+    "renderQueue": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T06:20:00Z",
+      "description": "Templates in render queue"
+    }
+  }
+}
