@@ -1,21 +1,18 @@
-# Configuration
+# Development Sandbox
 
-Docker, pytest, and system configuration files
+Experimental development and testing environment
 
 ## Contents
 
-- Dockerfile
-- docker-compose.yml
-- pytest.ini
-- requirements.txt
+- Experimental code
+- Prototypes
+- Test environment
 
 ## CLI Commands
 
 ```bash
-# cd os/config/
-# docker-compose up
-# pytest
-# pip install -r requirements.txt
+# cd os/sandbox/
+# open index.html
 ```
 
 ## Navigation

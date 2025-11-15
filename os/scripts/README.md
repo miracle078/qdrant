@@ -1,21 +1,19 @@
-# Configuration
+# Scripts
 
-Docker, pytest, and system configuration files
+Setup, deployment, and build automation scripts
 
 ## Contents
 
-- Dockerfile
-- docker-compose.yml
-- pytest.ini
-- requirements.txt
+- Setup scripts
+- Deployment scripts
+- Build automation
 
 ## CLI Commands
 
 ```bash
-# cd os/config/
-# docker-compose up
-# pytest
-# pip install -r requirements.txt
+# cd os/scripts/
+# bash setup.sh
+# bash ingest.sh
 ```
 
 ## Navigation

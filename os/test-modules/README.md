@@ -1,21 +1,19 @@
-# Configuration
+# Module Testing
 
-Docker, pytest, and system configuration files
+Module testing and validation environment
 
 ## Contents
 
-- Dockerfile
-- docker-compose.yml
-- pytest.ini
-- requirements.txt
+- Module tests
+- Validation scripts
+- Test fixtures
 
 ## CLI Commands
 
 ```bash
-# cd os/config/
-# docker-compose up
+# cd os/test-modules/
 # pytest
-# pip install -r requirements.txt
+# open index.html
 ```
 
 ## Navigation

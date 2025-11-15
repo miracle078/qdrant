@@ -1,21 +1,18 @@
-# Configuration
+# SCADA Controls
 
-Docker, pytest, and system configuration files
+Tag providers and control system infrastructure
 
 ## Contents
 
-- Dockerfile
-- docker-compose.yml
-- pytest.ini
-- requirements.txt
+- Tag provider system
+- Tag browser
+- HMI integration
 
 ## CLI Commands
 
 ```bash
-# cd os/config/
-# docker-compose up
-# pytest
-# pip install -r requirements.txt
+# cd os/controls/tag-providers/
+# open tag-browser.html
 ```
 
 ## Navigation
