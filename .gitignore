@@ -63,4 +63,14 @@ frontend/.env.local
 *.mp3
 *.wav
 *.mp4
-data/
+
+# Allow data/ schemas and docs, but ignore actual database files
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/sql/*.db
+data/sql/*.sqlite
+data/sql/*.sqlite3
+!data/sql/*.sql
+!data/*.md
+!data/README.md
