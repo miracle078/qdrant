@@ -140,6 +140,12 @@ const ChazonBootstrap = {
     '../modules/chazon-sqlite.md',
     '../modules/chazon-mdcompiler.md',
     '../modules/chazon-os.md',
+    // CLI modules (load before chazon-cli)
+    '../modules/cli-core.md',
+    '../modules/cli-edit.md',
+    '../modules/cli-test.md',
+    '../modules/cli-logs.md',
+    '../modules/cli-git.md',
     '../modules/chazon-cli.md',
     '../modules/chazon-state.md',
     '../modules/chazon-mcp.md',
@@ -276,6 +282,12 @@ const ChazonBootstrap = {
     document.getElementById('terminal').classList.add('active');
     document.querySelector('.taskbar').classList.add('active');
 
+    // Initialize CLI with output element
+    if (window.ChazonCLI) {
+      const output = document.getElementById('output');
+      ChazonCLI.init(output);
+    }
+
     // Print welcome message to terminal
     Terminal.print('═══════════════════════════════════════════════════════════', '#00ff88');
     Terminal.print('         🌌 CHAZON OS - חזון (Vision)         ', '#00ccff');
@@ -283,18 +295,21 @@ const ChazonBootstrap = {
     Terminal.print('');
     Terminal.print('φ-Balanced Computing | ISA-95 Compliant | Markdown Programs', '#888');
     Terminal.print('');
-    Terminal.print('Available Commands:', '#00ff88');
-    Terminal.print('  help          - Show available commands', '#888');
-    Terminal.print('  ls            - List all programs', '#888');
-    Terminal.print('  run <file>    - Run a program', '#888');
-    Terminal.print('  cat <file>    - View program source', '#888');
-    Terminal.print('  demo          - Run demo programs', '#888');
-    Terminal.print('  clear         - Clear terminal', '#888');
+    Terminal.print('CLI Command Modules Loaded:', '#00ff88');
+    if (window.ChazonCLI && ChazonCLI.commandModules) {
+      ChazonCLI.commandModules.forEach(mod => {
+        Terminal.print(`  ✓ ${mod}`, '#888');
+      });
+    }
+    Terminal.print('');
+    Terminal.print('Type "help" for all commands', '#00ccff');
     Terminal.print('');
     Terminal.print('Quick Start:', '#00ccff');
-    Terminal.print('  Try: run hello.md', '#888');
-    Terminal.print('  Try: run attractor-demo.md', '#888');
-    Terminal.print('  Try: run qdrant-real-demo.md', '#888');
+    Terminal.print('  help          - Show all commands', '#888');
+    Terminal.print('  ls            - List programs', '#888');
+    Terminal.print('  run hello.md  - Run hello program', '#888');
+    Terminal.print('  test          - Run tests', '#888');
+    Terminal.print('  logs          - View system logs', '#888');
     Terminal.print('');
     Terminal.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', '#00ff88');
     Terminal.print('');
@@ -338,33 +353,18 @@ const Terminal = {
 
     if (!command.trim()) return;
 
-    if (command === 'help') {
-      this.print('Available commands:');
-      this.print('  help          - Show this help');
-      this.print('  ls            - List programs');
-      this.print('  run <file>    - Run a program');
-      this.print('  cat <file>    - View program source');
-      this.print('  demo          - Run demo programs');
-      this.print('  clear         - Clear terminal');
-      return;
-    }
-
-    if (command === 'clear') {
-      this.output.innerHTML = '';
-      return;
-    }
-
+    // Special demo command
     if (command === 'demo') {
       runDemo();
       return;
     }
 
+    // Execute via ChazonCLI
     if (window.ChazonCLI) {
       const spinner = command.startsWith('run') ? this.spinner() : null;
       try {
-        const result = await ChazonCLI.exec(command);
+        await ChazonCLI.exec(command);
         if (spinner) this.stopSpinner(spinner);
-        this.print(result || '');
       } catch (err) {
         if (spinner) this.stopSpinner(spinner);
         this.print(`Error: ${err.message}`, '#ff0044');

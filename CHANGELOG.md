@@ -8,6 +8,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Modular CLI System** - Extensible command-line interface with 5 command modules
+  - `modules/chazon-cli.md` - Core CLI engine (UUID: 8f3e9a5c-2d7b-4e1f-9a6c-7d5f8e2b4a3c)
+  - `modules/cli-core.md` - Basic commands: ls, cat, help, run, pwd, clear, whoami, version
+  - `modules/cli-edit.md` - File operations: edit, save, rm, touch, mkdir, cp, mv, nano
+  - `modules/cli-test.md` - Testing: test, coverage, lint, benchmark, validate
+  - `modules/cli-logs.md` - Logging: logs, tail, grep, watch, history
+  - `modules/cli-git.md` - Version control: status, commit, push, pull, log, diff, branch, checkout
+  - `modules/CLI-README.md` - Complete CLI documentation with examples
+  - 40+ total commands across all modules
+  - Command history tracking
+  - File persistence via LocalStorage
+  - Colored terminal output
+  - Error handling and validation
 - **Template System** - Perspective-style template engine inspired by Ignition Perspective
   - `modules/template-engine.md` - Template rendering engine (UUID: 3c8e9f7a-4b2d-4e1f-9c6a-8d3f5e7a9b1c)
   - `templates/views/` - View definitions (dashboard.md, chazon.md, demo.md)
@@ -15,6 +28,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `templates/layouts/` - Page layouts (default.md)
   - `templates/build.py` - Build script to compile templates to HTML
   - `templates/README.md` - Complete template system guide
+- **GitHub Pages Directory Structure** - Clean URLs with index.html per directory
+  - `/chazon/` - Chazon OS boot screen
+  - `/dashboard/` - Unified dashboard
+  - `/demo/` - Multimodal search demo
+  - `/isa-os/` - ISA container runtime
+  - `/sandbox/` - Sandbox environment
+  - `/test-modules/` - Module testing
+  - `/frontend/` - React frontend directory
+  - `/backend/` - FastAPI backend directory
+  - `/modules/` - Module browser
+  - `/templates/` - Template showcase
 - Multi-agent collaboration system in `collab/` directory
 - 5 SQLite databases for persistence (180 KB total):
   - `automationgpt.db` - Main database with 8 tables (86 KB)
@@ -42,8 +66,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated README.md with Chazon branding and φ-Balanced Computing tagline
 - Updated index.html to "Chazon | φ-Balanced Modular AI Platform"
 - Updated schema.sql header to "Chazon Database Schema"
-- Consolidated all modules into unified `modules/` directory (94 modules)
+- Consolidated all modules into unified `modules/` directory (100 modules total)
 - Module architecture now fully markdown-first with sub-250 token constraint
+- **URL structure** - Clean GitHub Pages URLs (e.g., `/dashboard/` instead of `/dashboard.html`)
+- Updated `chazon/index.html` to load all CLI command modules
+- Updated navigation links throughout project to use directory URLs
 
 ### Removed
 - `automationgpt/` directory (21 Python files, 2,332 lines)
