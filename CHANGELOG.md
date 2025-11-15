@@ -1,11 +1,42 @@
 # Changelog
-**Chazon Project** | All Notable Changes
+**Chazon** | AI Medical Imaging Analyzer
 
 All notable changes to the Chazon project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+
+### Added
+- **SNT Language System** - Space-Time Notation trinary quantum computing language
+  - `language/trinary/trinary-core.md` - Balanced ternary arithmetic (-1, 0, 1)
+  - `language/trinary/spacetime-compiler.md` - Temporal compilation (past/present/future)
+  - `language/snt/snt-parser.md` - High-level SNT parser
+  - `language/snt/snt-syntax.md` - Language syntax and validation
+  - `language/snt/photonic-layer.md` - Light-based implementation
+  - `language/snt/emoji-compression.md` - Ultra-dense emoji cube encoding (19.68M states)
+  - Example programs: hello-snt, paradox resolution, quantum superposition
+  - Performance: 25.6× more efficient than binary
+- **Medical Imaging Templates** - Multi-modality DICOM-compliant viewers
+  - `modules/medical-imaging.md` - Core medical imaging engine
+  - `templates/views/xray-template.md` - X-Ray viewer
+  - `templates/views/ct-template.md` - CT scan viewer with MPR
+  - `templates/views/mri-template.md` - MRI viewer with T1/T2/FLAIR/DWI sequences
+  - Window/level presets: bone, lung, brain, liver, soft tissue
+  - Full DICOM support, HIPAA compliant architecture
+- **Project Focus: Medical Imaging AI**
+  - Rebranded for lablab.ai Qdrant Challenge
+  - Focus on X-ray, MRI, CT scan analysis
+  - AI-powered abnormality detection
+  - Semantic search for similar medical cases
+
+### Changed
+- **README.md** - Completely rewritten to focus on medical imaging AI analyzer
+- **frontend/index.html** - Updated branding to "AI Medical Imaging Analyzer | lablab.ai"
+- Removed ISA-95 marketing from user-facing documentation
+- Updated project description to highlight medical imaging use case
+
+## [2024-01] - Modular Architecture
 
 ### Added
 - **Modular CLI System** - Extensible command-line interface with 5 command modules
