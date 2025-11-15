@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- **Template System** - Perspective-style template engine inspired by Ignition Perspective
+  - `modules/template-engine.md` - Template rendering engine (UUID: 3c8e9f7a-4b2d-4e1f-9c6a-8d3f5e7a9b1c)
+  - `templates/views/` - View definitions (dashboard.md, chazon.md, demo.md)
+  - `templates/components/` - Component library (container.md, searchbar.md, buttongroup.md, bootscreen.md)
+  - `templates/layouts/` - Page layouts (default.md)
+  - `templates/build.py` - Build script to compile templates to HTML
+  - `templates/README.md` - Complete template system guide
 - Multi-agent collaboration system in `collab/` directory
 - 5 SQLite databases for persistence (180 KB total):
   - `automationgpt.db` - Main database with 8 tables (86 KB)
@@ -43,7 +50,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - All functionality migrated to markdown modules
 - `chazon/` directory (70 markdown files, 4,491 lines)
   - All files already present in `modules/` directory
-- **Total cleanup: 91 files, 6,823 lines removed**
+- `automationgpt.html` - Old branding (replaced by chazon.html)
+- `REFACTOR_PLAN.md` - Outdated (refactoring complete)
+- **Total cleanup: 93 files, 7,687 lines removed**
 
 ## [2024-01] - Modular Architecture
 

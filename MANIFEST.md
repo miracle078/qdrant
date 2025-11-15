@@ -17,18 +17,20 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 ├── test-modules.html       # Module testing interface
 ├── dashboard.html          # Unified demo dashboard
 │
-├── modules/                # 92 markdown modules
-│   ├── Core System (17)
+├── modules/                # 95 markdown modules
+│   ├── Core System (18)
 │   │   ├── chazon-packml.md          # ISA-88 state machine
 │   │   ├── chazon-mdcompiler.md      # Markdown compiler
 │   │   ├── chazon-cli.md             # Command-line interface
 │   │   ├── db-manager.md             # SQLite manager (UUID: d6f529de...)
-│   │   └── module-registry.md        # Registry runtime (UUID: c16e00c3...)
+│   │   ├── module-registry.md        # Registry runtime (UUID: c16e00c3...)
+│   │   └── template-engine.md        # Template rendering (UUID: 3c8e9f7a...)
 │   │
-│   ├── Embeddings (6)
+│   ├── Embeddings (7)
 │   │   ├── embed-openai.md           # OpenAI 1536-dim (UUID: 760e861d...)
 │   │   ├── embed-codebert.md         # CodeBERT 768-dim (UUID: f66182df...)
 │   │   ├── embed-clip.md             # CLIP 512-dim (UUID: c6a53bf8...)
+│   │   ├── embed-audio.md            # LAION CLAP 512-dim (UUID: 72434101...)
 │   │   ├── embed-text.md             # Text embeddings
 │   │   ├── embed-code.md             # Code embeddings
 │   │   └── ingest-*.md               # Ingestion modules
@@ -67,11 +69,23 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 │   ├── Pages/Templates (5)
 │   └── Other (11)
 │
-├── automationgpt/          # Legacy Python (to be deprecated)
-├── backend/                # FastAPI backend
-├── chazon/                 # Component files (source for modules/)
-├── docs/                   # Documentation
-└── frontend/               # React frontend
+├── templates/              # Perspective-style templates
+│   ├── views/              # View definitions (dashboard.md, chazon.md, demo.md)
+│   ├── components/         # Component library (searchbar.md, container.md, etc.)
+│   ├── layouts/            # Page layouts (default.md)
+│   ├── build.py            # Template builder script
+│   └── README.md           # Template system guide
+│
+├── collab/                 # Multi-agent collaboration workspace
+│   ├── agents/             # Autonomous agents (database, module)
+│   ├── databases/          # SQLite databases (5 databases, 180 KB)
+│   ├── queries/            # Executable query scripts
+│   ├── 3d-worlds/          # 3D visualizations
+│   └── README.md           # Collaboration guide
+│
+├── backend/                # FastAPI backend (optional)
+├── frontend/               # React frontend (optional)
+└── docs/                   # Documentation
 ```
 
 ## 🔑 Key Files
@@ -86,9 +100,12 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 
 ## 📊 Statistics
 
-- **Total Files**: 400+
-- **Markdown Modules**: 92
-- **With UUIDs**: 10+
+- **Total Files**: 300+
+- **Markdown Modules**: 95
+- **Templates**: 3 views, 4 components, 1 layout
+- **Databases**: 5 SQLite (180 KB)
+- **Agents**: 2 autonomous
+- **With UUIDs**: 15+
 - **Lines of Code**: ~5000+ in modules/
 - **Average Module Size**: <250 tokens
 - **ISA Compliance**: ISA-95 L0-L4, ISA-88, ISA-18.2
@@ -100,6 +117,9 @@ Complete manifest of the Chazon (חזון) project with modular markdown archite
 - Sub-250 token constraint for extreme modularity
 - Dynamic module loader with caching
 - Exports to `window.ModuleName` for global access
+- **Template System**: Perspective-style views stored as markdown
+- **Component Library**: Reusable UI components in markdown
+- **Build Script**: Compile templates to HTML or render dynamically
 
 ### ISA-95 Hierarchy
 - **L4**: Business planning (agents, registry, manifest)
