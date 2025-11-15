@@ -43,12 +43,10 @@ qdrant/
 ├── scada.html          # Master SCADA control
 ├── plc.html            # Master PLC logic
 ├── hmi.html            # Master HMI panel
-├── standards/          # ISA standards
-│   └── isa/
-│       ├── isa-88/     # Batch control
-│       ├── isa-95/     # Enterprise-control
-│       └── isa-101/    # HMI design
 ├── docs/               # Documentation
+│   └── standards/      # ISA standards and protocols
+│       ├── isa/        # ISA-88, ISA-95, ISA-101
+│       └── protocols/  # MQTT, OPC UA, Modbus
 ├── config/             # Docker, pytest configs
 ├── collab/             # Multi-agent workspace
 └── os/                 # Operating System (all runtime components)
@@ -163,7 +161,7 @@ COHERE_API_KEY=...
 - ISA-88: Batch control, procedural model
 - ISA-95: Enterprise-control integration
 - ISA-101: HMI design guidelines
-- See: `standards/isa/` directory
+- See: `docs/standards/isa/` directory
 
 ## License
 

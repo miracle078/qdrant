@@ -61,8 +61,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `templates/README.md` - Complete template system guide
 - **GitHub Pages Directory Structure** - Clean URLs with index.html per directory
   - `/chazon/` - Chazon OS boot screen
-  - `/dashboard/` - Unified dashboard
-  - `/demo/` - Multimodal search demo
   - `/isa-os/` - ISA container runtime
   - `/os/sandbox/` - Sandbox environment
   - `/os/test-modules/` - Module testing
@@ -99,7 +97,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated schema.sql header to "Chazon Database Schema"
 - Consolidated all modules into unified `modules/` directory (100 modules total)
 - Module architecture now fully markdown-first with sub-250 token constraint
-- **URL structure** - Clean GitHub Pages URLs (e.g., `/dashboard/` instead of `/dashboard.html`)
+- **URL structure** - Clean GitHub Pages URLs (e.g., `/os/modules/` instead of `/os/modules.html`)
 - Updated `chazon/index.html` to load all CLI command modules
 - Updated navigation links throughout project to use directory URLs
 

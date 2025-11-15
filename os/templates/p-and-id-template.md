@@ -365,5 +365,5 @@ function exportSVG(config) {
 ## See Also
 
 - `../modules/template-engine.md` - Template compilation
-- `../../standards/isa/isa-5.1/` - P&ID symbols standard (planned)
+- `../../docs/standards/isa/isa-5.1/` - P&ID symbols standard (planned)
 - `architecture-p-and-id.yaml` - Chazon system P&ID
