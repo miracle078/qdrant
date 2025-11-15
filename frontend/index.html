@@ -129,232 +129,41 @@
 </div>
 
 <script>
-// Bootstrap Loader
-const ChazonBootstrap = {
-  modules: [
-    // Core infrastructure (load first)
-    '../modules/chazon-attractors.md',
-    '../modules/chazon-equilibrium.md',
-    '../modules/chazon-packml.md',
-    '../modules/chazon-changelog.md',
-    '../modules/chazon-sqlite.md',
-    '../modules/chazon-mdcompiler.md',
-    '../modules/chazon-os.md',
-    // CLI modules (load before chazon-cli)
-    '../modules/cli-core.md',
-    '../modules/cli-edit.md',
-    '../modules/cli-test.md',
-    '../modules/cli-logs.md',
-    '../modules/cli-git.md',
-    '../modules/chazon-cli.md',
-    '../modules/chazon-state.md',
-    '../modules/chazon-mcp.md',
-    '../modules/chazon-api.md',
-    '../modules/chazon-wrapper.md',
-    '../modules/chazon-sync.md',
-    '../modules/chazon-integration.md',
-    // Agents
-    '../modules/agent-ci.md',
-    '../modules/agent-test.md',
-    '../modules/agent-deploy.md',
-    // UI
-    '../modules/ui-desktop.md',
-    '../modules/ui-windows.md',
-    '../modules/ui-icons.md',
-    '../modules/ui-taskbar.md',
-    '../modules/ui-theme.md',
-    '../modules/ui-index.md',
-    // Standards
-    '../modules/isa-standards.md',
-    '../modules/isa-compliance.md',
-    // Medical/Qdrant
-    '../modules/medical-qdrant.md',
-    '../modules/qdrant-client.md',
-    '../modules/embed-openai.md',
-    '../modules/medical-xray-analyzer.md',
-    '../modules/medical-dataset.md',
-    '../modules/medical-dicom-viewer.md',
-    // Language: Trinary
-    '../language/trinary/trinary-core.md',
-    '../language/trinary/spacetime-compiler.md',
-    // Language: SNT
-    '../language/snt/snt-parser.md',
-    '../language/snt/snt-syntax.md',
-    '../language/snt/photonic-layer.md',
-    '../language/snt/emoji-compression.md'
-  ],
-
-  programs: [
-    '../modules/program-hello.md',
-    '../modules/program-calculator.md',
-    '../modules/program-data.md',
-    '../modules/program-search.md',
-    '../modules/program-events.md',
-    '../modules/program-neural.md',
-    '../modules/program-cicd.md',
-    '../modules/program-test-sync.md',
-    '../modules/program-attractor-demo.md',
-    '../modules/program-qdrant-real-demo.md',
-    '../modules/program-isa-os-demo.md',
-    '../modules/program-medical-demo.md',
-    '../modules/program-xray-3d.md',
-    // SNT Examples
-    '../language/snt/examples/hello-snt.md',
-    '../language/snt/examples/paradox-resolution.md',
-    '../language/snt/examples/quantum-superposition.md'
-  ],
-
-  async boot() {
-    this.log('🌌 Chazon v1.0.0');
-    this.log('חזון - AI Medical Imaging Analyzer');
-    this.log('');
-
-    this.log('Loading markdown compiler...');
-    await this.loadCompiler();
-
-    this.log('Loading core modules...');
-    await this.loadModules();
-
-    this.log('Loading programs...');
-    await this.loadPrograms();
-
-    this.log('Initializing OS...');
-    if (window.ChazonOS) ChazonOS.boot();
-
-    this.log('');
-    this.log('✅ Boot complete!');
-    this.log('Type "help" for commands');
-
-    setTimeout(() => this.showTerminal(), 2000);
-  },
-
-  async loadCompiler() {
-    // Bootstrap minimal compiler
-    window.MDCompiler = {
-      compile(markdown) {
-        const regex = /```(?:javascript|js)?\n([\s\S]*?)```/g;
-        const blocks = [];
-        let match;
-        while ((match = regex.exec(markdown))) {
-          blocks.push(match[1].trim());
-        }
-        return blocks.map(code => {
-          try {
-            return { success: true, output: eval(code) };
-          } catch (err) {
-            return { success: false, error: err.message };
-          }
-        });
-      }
-    };
-  },
-
-  async loadModules() {
-    for (const module of this.modules) {
+// Minimal MDCompiler Bootstrap
+window.MDCompiler = {
+  compile(markdown) {
+    const regex = /```(?:javascript|js)?\n([\s\S]*?)```/g;
+    const blocks = [];
+    let match;
+    while ((match = regex.exec(markdown))) {
+      blocks.push(match[1].trim());
+    }
+    return blocks.map(code => {
       try {
-        const response = await fetch(module);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        const markdown = await response.text();
-        const compiled = MDCompiler.compile(markdown);
-
-        // Check compilation results
-        let hasError = false;
-        compiled.forEach(result => {
-          if (!result.success) {
-            this.log(`    Error in ${module.split('/').pop()}: ${result.error}`);
-            hasError = true;
-          }
-        });
-
-        if (!hasError) {
-          this.log(`  ✓ ${module.split('/').pop()}`);
-        }
+        return { success: true, output: eval(code) };
       } catch (err) {
-        this.log(`  ✗ ${module.split('/').pop()}: ${err.message}`);
-        console.error(`Failed to load ${module}:`, err);
+        return { success: false, error: err.message };
       }
-    }
-  },
-
-  async loadPrograms() {
-    if (!window.ChazonCLI) {
-      this.log('  ⚠️ CLI not available, skipping programs');
-      return;
-    }
-
-    for (const program of this.programs) {
-      try {
-        const response = await fetch(program);
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        const content = await response.text();
-        const name = program.split('/').pop();
-        ChazonCLI.addFile(name, content);
-        this.log(`  ✓ ${name}`);
-      } catch (err) {
-        this.log(`  ✗ ${program.split('/').pop()}: ${err.message}`);
-        console.error(`Failed to load program ${program}:`, err);
-      }
-    }
-  },
-
-  log(message) {
-    const bootLog = document.getElementById('boot-log');
-    const line = document.createElement('div');
-    line.className = 'boot-line';
-    line.textContent = message;
-    bootLog.appendChild(line);
-  },
-
-  showTerminal() {
-    document.getElementById('boot-screen').classList.add('hidden');
-    document.getElementById('terminal').classList.add('active');
-    document.querySelector('.taskbar').classList.add('active');
-
-    // Initialize CLI with output element
-    if (window.ChazonCLI) {
-      const output = document.getElementById('output');
-      ChazonCLI.init(output);
-    }
-
-    // Print welcome message to terminal
-    Terminal.print('═══════════════════════════════════════════════════════════', '#00ff88');
-    Terminal.print('      🌌 CHAZON - חזון (Vision)      ', '#00ccff');
-    Terminal.print('═══════════════════════════════════════════════════════════', '#00ff88');
-    Terminal.print('');
-    Terminal.print('🏥 AI Medical Imaging Analyzer | lablab.ai Qdrant Challenge', '#888');
-    Terminal.print('');
-    Terminal.print('CLI Command Modules Loaded:', '#00ff88');
-    if (window.ChazonCLI && ChazonCLI.commandModules) {
-      ChazonCLI.commandModules.forEach(mod => {
-        Terminal.print(`  ✓ ${mod}`, '#888');
-      });
-    }
-    Terminal.print('');
-    Terminal.print('Type "help" for all commands', '#00ccff');
-    Terminal.print('');
-    Terminal.print('Quick Start:', '#00ccff');
-    Terminal.print('  help          - Show all commands', '#888');
-    Terminal.print('  ls            - List programs', '#888');
-    Terminal.print('  run hello.md  - Run hello program', '#888');
-    Terminal.print('  test          - Run tests', '#888');
-    Terminal.print('  logs          - View system logs', '#888');
-    Terminal.print('');
-    Terminal.print('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', '#00ff88');
-    Terminal.print('');
-
-    document.getElementById('input').focus();
+    });
   }
 };
+
+// Load and initialize boot sequencer
+async function initBoot() {
+  const response = await fetch('../boot/boot-sequencer.md');
+  const markdown = await response.text();
+  const compiled = MDCompiler.compile(markdown);
+
+  // Start boot sequence
+  if (window.BootSequencer) {
+    await BootSequencer.boot();
+  }
+}
 
 // Terminal Handler
 const Terminal = {
   output: document.getElementById('output'),
   input: document.getElementById('input'),
-  loading: false,
 
   print(text, color = '#00ff88') {
     const line = document.createElement('div');
@@ -364,41 +173,19 @@ const Terminal = {
     this.output.scrollTop = this.output.scrollHeight;
   },
 
-  spinner() {
-    const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
-    let i = 0;
-    const line = document.createElement('div');
-    line.style.color = '#00ff88';
-    this.output.appendChild(line);
-    return setInterval(() => {
-      line.textContent = `${frames[i++ % frames.length]} Loading...`;
-    }, 80);
-  },
-
-  stopSpinner(id) {
-    clearInterval(id);
-    this.output.removeChild(this.output.lastChild);
-  },
-
   async exec(command) {
     this.print(`chazon@os:~$ ${command}`, '#00ff88');
-
     if (!command.trim()) return;
 
-    // Special demo command
     if (command === 'demo') {
       runDemo();
       return;
     }
 
-    // Execute via ChazonCLI
     if (window.ChazonCLI) {
-      const spinner = command.startsWith('run') ? this.spinner() : null;
       try {
         await ChazonCLI.exec(command);
-        if (spinner) this.stopSpinner(spinner);
       } catch (err) {
-        if (spinner) this.stopSpinner(spinner);
         this.print(`Error: ${err.message}`, '#ff0044');
       }
     } else {
@@ -431,7 +218,6 @@ function clearTerminal() {
 function runDemo() {
   Terminal.print('\n🎬 Running demo programs...\n');
   const demos = ['hello.md', 'calculator.md', 'neural.md'];
-
   demos.forEach((demo, i) => {
     setTimeout(() => {
       Terminal.print(`\n--- ${demo} ---`);
@@ -442,7 +228,7 @@ function runDemo() {
 
 // Boot on load
 window.addEventListener('load', () => {
-  ChazonBootstrap.boot();
+  initBoot();
 });
 </script>
 
