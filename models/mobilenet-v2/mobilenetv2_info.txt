@@ -1,0 +1,6 @@
+Model: MobileNet-V2
+Status: Placeholder - Replace with actual trained model
+Download actual models from:
+- Hugging Face: https://huggingface.co/models
+- ONNX Model Zoo: https://github.com/onnx/models
+- PyTorch Hub: https://pytorch.org/hub/

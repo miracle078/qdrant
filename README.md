@@ -1,321 +1,174 @@
-# 🌌 Chazon - חזון
-**Open Source AI Medical Imaging Analyzer**
+# Chazon Medical Imaging SCADA System
 
-Chazon (חזון - "Vision") is an open source AI-powered medical imaging analyzer for X-ray, MRI, and CT scans. Built for the [lablab.ai Qdrant Challenge](https://lablab.ai).
+**Status:** Production | **License:** MIT | **Live:** https://teslasolar.github.io/qdrant/
 
-![Status](https://img.shields.io/badge/status-production-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
-![Challenge](https://img.shields.io/badge/lablab.ai-qdrant-purple)
-
-**🌐 Live Demo:** [https://teslasolar.github.io/qdrant/frontend/](https://teslasolar.github.io/qdrant/frontend/)
-
----
-
-## 🎯 What is Chazon?
-
-**Chazon** is a complete medical imaging analysis platform that helps radiologists and medical professionals:
-
-- 📊 **Analyze X-rays** - Detect abnormalities in chest X-rays, bone fractures, etc.
-- 🧠 **Process MRI scans** - Multi-sequence viewing (T1, T2, FLAIR, DWI)
-- 🔬 **Review CT scans** - Multi-planar reconstruction with Hounsfield unit measurements
-- 🔍 **Semantic Search** - Find similar cases using Qdrant vector database
-- 🤖 **AI Analysis** - Automated findings detection and diagnosis assistance
-
-### ✨ Live Demo
-
-**🌐 GitHub Pages:** [https://teslasolar.github.io/qdrant/frontend/](https://teslasolar.github.io/qdrant/frontend/)
-
-**Or run locally:** Open [`frontend/index.html`](frontend/index.html) in your browser
-
-No installation required! Runs entirely client-side with optional backend for advanced features.
-
----
-
-## 🏥 Features
-
-### Multi-Modality Support
-- **X-Ray (XR)** - 2D radiography with bone/soft tissue enhancement
-- **CT Scan** - 3D computed tomography with MPR (multi-planar reconstruction)
-- **MRI** - Magnetic resonance with T1, T2, FLAIR, DWI sequences
-- **Ultrasound (US)** - Real-time sonography
-- **PET Scan** - Metabolic imaging
-- **Mammography** - Breast cancer screening
-
-### DICOM Compliant
-- Full DICOM standard support
-- Window/level presets (bone, lung, brain, liver, soft tissue)
-- Multi-planar reconstruction
-- Volumetric measurements
-- HIPAA compliant architecture
-
-### AI-Powered Analysis
-- **Semantic Search** - Find similar medical cases using Qdrant
-- **Abnormality Detection** - AI-powered findings identification
-- **Diagnosis Assistance** - Confidence scores and recommendations
-- **Report Generation** - Automated radiology reports
-
-### Modular Architecture
-- **100+ markdown modules** - Every component < 250 tokens
-- **No backend required** - Client-side execution option
-- **Template System** - Easy customization for different modalities
-- **SNT Language** - Space-Time Notation for advanced computation
-
----
-
-## 🚀 Quick Start
-
-### Option 1: Client-Side Only (No Installation)
+## Quick Start
 
 ```bash
-# Clone the repo
-git clone https://github.com/teslasolar/qdrant
-cd qdrant
+# Clone
+git clone https://github.com/teslasolar/qdrant && cd qdrant
 
-# Open in browser
-open frontend/index.html
-# Or just double-click frontend/index.html
-```
+# Run client-side (no install)
+open index.html
 
-### Option 2: Full Stack with Qdrant
-
-```bash
-# 1. Start Qdrant vector database
+# Full stack
 docker run -p 6333:6333 qdrant/qdrant
-
-# 2. Install Python dependencies
 pip install -r requirements.txt
-
-# 3. Setup environment
-cp .env.example .env
-# Edit .env and add your API keys
-
-# 4. Start backend API
-cd backend
-python api.py
-
-# 5. Open frontend
-open frontend/index.html
+python backend/api.py
 ```
 
-### Option 3: Docker Compose (Recommended)
+## Key URLs
 
-```bash
-docker-compose up -d
-```
+- **SCADA Gateway:** `/index.html`
+- **SCADA Master:** `/scada.html`
+- **PLC Controller:** `/plc.html`
+- **HMI Panel:** `/hmi.html`
+- **AlF-DETECT:** `/medical/alf-detect.html`
+- **Frontend:** `/frontend/index.html`
+- **Debug Console:** `/debug/index.html`
+- **API Status:** `/backend/index.html`
 
-Chazon will be available at `http://localhost:8000`
-
----
-
-## 📊 Architecture
-
-```
-┌─────────────────────────────────────────────┐
-│         Chazon Medical Viewer UI            │
-│     DICOM Viewer | Multi-Modality Support   │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│         AI Analysis Engine                  │
-│   X-Ray Analyzer | Finding Detection        │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│       Qdrant Vector Database                │
-│  Medical Image Embeddings | Case Search     │
-└──────────────────┬──────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│         Embedding Layer                     │
-│  OpenAI | CLIP | Custom Medical Models      │
-└─────────────────────────────────────────────┘
-```
-
----
-
-## 🔬 Medical Imaging Templates
-
-### Create a CT Study
-```javascript
-const ctStudy = MedicalImaging.createStudy({
-  modality: 'ct',
-  patientId: 'P12345',
-  bodyPart: 'HEAD',
-  window: { level: 40, width: 80 }
-});
-```
-
-### Apply Window/Level Presets
-```javascript
-// Bone window
-const boneView = MedicalImaging.applyFilter(imageData, 'bone');
-
-// Lung window
-const lungView = MedicalImaging.applyFilter(imageData, 'lung');
-
-// Brain window
-const brainView = MedicalImaging.applyFilter(imageData, 'brain');
-```
-
-### AI Analysis
-```javascript
-const analysis = await XRayAnalyzer.analyze(imageData);
-
-console.log(analysis);
-// {
-//   findings: ["Possible pneumonia in right lower lobe"],
-//   confidence: 0.87,
-//   abnormalities: [{region: "RLL", severity: "moderate"}]
-// }
-```
-
-### Semantic Search
-```javascript
-// Find similar cases in Qdrant
-const similar = await QdrantClient.search({
-  collection: 'medical_images',
-  vector: imageEmbedding,
-  limit: 5
-});
-```
-
----
-
-## 🎨 Window/Level Presets
-
-### CT Presets
-```
-Bone:        Level: 400,  Width: 1800
-Lung:        Level: -600, Width: 1500
-Soft Tissue: Level: 40,   Width: 400
-Brain:       Level: 40,   Width: 80
-Liver:       Level: 60,   Width: 150
-```
-
-### X-Ray Presets
-```
-Default:     Level: 40,   Width: 400
-Bone:        Level: 50,   Width: 500
-Soft:        Level: 30,   Width: 300
-```
-
----
-
-## 📁 Project Structure
+## File Structure
 
 ```
 qdrant/
-├── frontend/           # Medical imaging viewer UI
-├── backend/            # FastAPI + Qdrant integration
-├── modules/            # 100+ markdown modules
-│   ├── medical-imaging.md
-│   ├── xray-analyzer.md
-│   ├── dicom-viewer.md
-│   └── qdrant-medical.md
-├── templates/          # Medical imaging templates
-│   └── views/
-│       ├── xray-template.md
-│       ├── ct-template.md
-│       └── mri-template.md
-├── language/           # SNT language system
-│   ├── trinary/        # Trinary computing
-│   └── snt/            # Space-Time Notation
-└── docs/               # Documentation
+├── index.html          # SCADA Gateway landing
+├── scada.html          # Master SCADA control
+├── plc.html            # Master PLC logic
+├── hmi.html            # Master HMI panel
+├── boot/               # 6-phase boot system
+│   ├── index.html      # Boot dashboard
+│   ├── boot-phase0-core.md
+│   ├── boot-phase1-ai.md
+│   ├── boot-phase2-agents.md
+│   ├── boot-phase3-medical.md
+│   ├── boot-phase4-ui.md
+│   └── boot-phase5-templates.md
+├── modules/            # 114 markdown modules
+│   ├── index.html      # Module browser
+│   ├── medical-*.md    # Medical imaging
+│   ├── chazon-*.md     # Core OS
+│   ├── qdrant-*.md     # Vector DB
+│   └── ui-*.md         # UI components
+├── models/             # AI models
+│   ├── index.html      # Model manager
+│   ├── bert-tiny/
+│   ├── mobilenet-v3/
+│   └── distilbert/
+├── medical/            # Medical systems
+│   └── alf-detect.html # AlF-DETECT Alzheimer's/Autism
+├── frontend/           # Main medical viewer
+│   └── index.html      # DICOM viewer
+├── backend/            # FastAPI server
+│   ├── index.html      # API status
+│   ├── api.py
+│   └── mcp-*.py        # MCP servers
+├── data/               # SQL databases
+│   ├── index.html      # Schema viewer
+│   ├── tokendb.sql     # Token-dense storage
+│   └── architecture-maps.md
+├── language/           # SNT/trinary
+│   ├── index.html      # Language docs
+│   └── trinary/
+├── debug/              # Debug tools
+│   └── index.html      # Debug console
+└── templates/          # ISA templates
+    └── views/
 ```
 
----
+## Architecture
 
-## 🧬 Technology Stack
+**Factory Automation Model (ISA-95):**
+- 8 PLC areas (Frontend, Backend, Modules, Boot, Models, Data, Language, Medical)
+- Master SCADA gateway with real-time monitoring
+- HMI operator panels for each area
+- PackML state machines for module control
 
-- **Frontend:** Vanilla JS (no frameworks needed!)
-- **Medical Imaging:** Custom DICOM viewer, window/level engine
-- **Vector Search:** Qdrant for semantic similarity
-- **AI Analysis:** OpenAI embeddings + custom models
-- **Language:** SNT (Space-Time Notation) - trinary quantum computing
-- **Architecture:** Markdown-first modular design
+**Medical Imaging:**
+- DICOM-compliant viewer (X-Ray, CT, MRI)
+- AlF-DETECT: Alzheimer's/Autism early detection
+- Qdrant vector search for case similarity
+- WebGPU client-side inference
 
----
+**Boot System:**
+- Phase 0: Core (OS, Compiler, PackML)
+- Phase 1: AI (ONNX, WebGPU, Models)
+- Phase 2: Multi-Agent (Swarm, Conway, GPT)
+- Phase 3: Medical (DICOM, Qdrant, Imaging)
+- Phase 4: UI (Components, Icons, Screens)
+- Phase 5: Templates (ISA, Views, Medical)
 
-## 🔑 Configuration
-
-Create a `.env` file:
+## CLI Commands
 
 ```bash
-# Required for AI features
+# Backend API
+cd backend && python api.py
+
+# Qdrant Docker
+docker run -p 6333:6333 qdrant/qdrant
+
+# MCP Servers
+python backend/mcp-codesign.py
+python backend/mcp-qdrant.py
+python backend/mcp-sqlite.py
+
+# Local server (already running on :8080)
+python3 -m http.server 8080
+
+# Deploy to GitHub Pages
+git push origin claude/automation-gpt-multimodal-search-*
+```
+
+## Key Technologies
+
+- **Vector DB:** Qdrant for medical case search
+- **AI:** ONNX Runtime, WebGPU inference
+- **Language:** SNT (Space-Time Notation), trinary computing
+- **Medical:** DICOM, dual-energy X-ray, Vision Transformers
+- **Architecture:** Markdown-first (114 modules), token-dense storage
+- **SCADA:** Ignition Perspective-style factory automation
+
+## API Endpoints
+
+```
+POST /analyze       # Analyze medical image
+POST /search        # Qdrant similarity search
+POST /study         # Create DICOM study
+POST /report        # Generate radiology report
+GET  /health        # Health check
+```
+
+## Environment
+
+```bash
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
-
-# Optional: Qdrant Cloud
 QDRANT_URL=https://xyz.qdrant.io
 QDRANT_API_KEY=...
-
-# Optional: Cohere (sponsor embeddings)
 COHERE_API_KEY=...
 ```
 
----
+## Medical Imaging Modules
 
-## 📡 API Endpoints
+- `medical-imaging.md` - Core imaging system
+- `medical-xray-analyzer.md` - X-ray AI analysis
+- `medical-dicom-viewer.md` - DICOM viewer
+- `medical-qdrant.md` - Vector search integration
+- `medical-dataset.md` - Medical datasets
+- `alf-detect.html` - Alzheimer's/Autism detection
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/analyze` | POST | Analyze medical image |
-| `/search` | POST | Semantic search for similar cases |
-| `/study` | POST | Create DICOM study |
-| `/report` | POST | Generate radiology report |
-| `/health` | GET | Health check |
+## SNT Language
 
----
+Space-Time Notation with trinary computing:
+- Base-3 arithmetic (0, 1, 2)
+- Emoji compression
+- Quantum-inspired state management
+- See: `language/` directory
 
-## 🏆 Built for lablab.ai
+## License
 
-This project was created for the **lablab.ai Qdrant Challenge** to demonstrate:
+MIT - Open source for medical/educational use
 
-- ✅ **Vector search** for medical imaging
-- ✅ **Semantic similarity** for diagnosis assistance
-- ✅ **Multi-modal embeddings** (images + metadata)
-- ✅ **Production-ready** architecture
-- ✅ **Open source** and accessible
+## More Info
 
----
-
-## 🌟 Why Chazon?
-
-**Chazon** (חזון - "Vision" in Hebrew) represents our vision for:
-
-- 🌍 **Accessible Healthcare** - Open source medical imaging tools
-- 🤖 **AI Assistance** - Help radiologists work faster and more accurately
-- 🔬 **Research** - Enable medical research with vector search
-- 📚 **Education** - Learn radiology with AI-powered analysis
-
----
-
-## 📄 License
-
-MIT License - Free for medical and educational use
-
----
-
-## 🙏 Acknowledgments
-
-- **Qdrant** - Vector database for semantic search
-- **lablab.ai** - Hackathon platform and community
-- **OpenAI** - Embedding models
-- **Medical Community** - DICOM standards and expertise
-
----
-
-## 📧 Contact
-
-- **Live Demo:** https://teslasolar.github.io/qdrant/frontend/
-- **GitHub:** https://github.com/teslasolar/qdrant
-- **Issues:** https://github.com/teslasolar/qdrant/issues
-
----
-
-**Built with ❤️ for the medical community**
-
-🏥 Medical Imaging | 🤖 AI-Powered | 🔍 Vector Search | 🌍 Open Source
+See `ABOUT.md` for vision, features, acknowledgments.
