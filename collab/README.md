@@ -2,7 +2,7 @@
 **UUID:** 62f4f814-7ec6-4c52-973a-c6b350c36046
 **Multi-Agent System** | ISA-95 L3-L4
 
-Autonomous agent collaboration workspace with SQLite databases and executable queries.
+Autonomous agent collaboration workspace for Chazon with SQLite databases and executable queries.
 
 ## 📁 Structure
 

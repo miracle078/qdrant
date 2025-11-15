@@ -1,4 +1,4 @@
--- AutomationGPT Database Schema
+-- Chazon Database Schema
 -- UUID: 8b79fb96-ef94-4fea-b508-6eb6aa3a373a
 -- ISA-95 L3: MES/Data Layer
 

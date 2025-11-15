@@ -1,19 +1,19 @@
-# 🏭 AutomationGPT - Multimodal ISA Standards Search
+# 🌌 Chazon - חזון
 
-**Democratizing industrial automation knowledge through AI-powered multimodal search**
+**φ-Balanced Computing | Modular Architecture | ISA-Compliant AI Platform**
 
-![Status](https://img.shields.io/badge/status-hackathon-success)
+Chazon (חזון - "Vision") is a revolutionary modular platform combining AI-powered automation knowledge with browser-based execution. All components are markdown modules under 250 tokens, following ISA-95 L0-L4 hierarchy.
+
+![Status](https://img.shields.io/badge/status-production-success)
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Python](https://img.shields.io/badge/python-3.9+-blue)
-![Qdrant](https://img.shields.io/badge/qdrant-1.7+-green)
+![Modules](https://img.shields.io/badge/modules-94-green)
+![Architecture](https://img.shields.io/badge/architecture-markdown--first-blue)
 
 ---
 
-## 🌌 NEW: Chazon OS - חזון
+## 🎯 Overview
 
-**φ-Balanced Computing | Client-Side Markdown Programs | ISA-Compliant**
-
-Chazon (חזון - "Vision") is a revolutionary pseudo-OS that runs entirely in your browser! Execute programs written in Markdown format with full ISA automation standards compliance.
+**Chazon** unifies industrial automation knowledge, multimodal search, and autonomous agents in a fully modular markdown-first architecture. Every component is an executable markdown file, enabling browser-based execution with no backend dependencies.
 
 ### ✨ Try it Now
 

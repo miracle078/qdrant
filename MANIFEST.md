@@ -1,8 +1,8 @@
-# AutomationGPT Project Manifest
+# Chazon Project Manifest
 **UUID:** a9504de3-8007-4e73-b18e-74470498dfe8
 **Project Root** | ISA-95 L4: Business Planning
 
-Complete manifest of the AutomationGPT project with modular markdown architecture.
+Complete manifest of the Chazon (חזון) project with modular markdown architecture.
 
 ## 📁 Root Structure
 
