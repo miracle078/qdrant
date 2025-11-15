@@ -11,7 +11,11 @@ templates/
 ├── views/              # View definitions (pages)
 │   ├── dashboard.md
 │   ├── chazon.md
-│   └── demo.md
+│   ├── demo.md
+│   ├── medical-viewer.md      # Universal medical viewer
+│   ├── xray-template.md       # X-Ray viewer
+│   ├── ct-template.md         # CT scan viewer
+│   └── mri-template.md        # MRI viewer
 │
 ├── components/         # Component library
 │   ├── container.md
@@ -23,7 +27,8 @@ templates/
 │   └── default.md
 │
 ├── build.py            # Build script
-└── README.md           # This file
+├── README.md           # This file
+└── MEDICAL-IMAGING.md  # Medical imaging guide
 ```
 
 ## 🎯 Concept
@@ -246,6 +251,12 @@ See `views/` for complete examples:
 - **dashboard.md** - System dashboard
 - **chazon.md** - Boot screen
 - **demo.md** - Search demo
+- **medical-viewer.md** - Universal medical imaging viewer
+- **xray-template.md** - X-Ray viewer with parameters
+- **ct-template.md** - CT scan viewer with MPR
+- **mri-template.md** - MRI viewer with sequences
+
+See **[MEDICAL-IMAGING.md](MEDICAL-IMAGING.md)** for complete medical imaging documentation.
 
 ## 🔗 Integration
 
