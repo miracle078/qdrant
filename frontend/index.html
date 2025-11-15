@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontend | Chazon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+      color: #00ff88;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #00ff88;
+    }
+    .breadcrumb {
+      margin-bottom: 30px;
+      opacity: 0.7;
+    }
+    .breadcrumb a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    p {
+      margin: 20px 0;
+      color: #ccc;
+    }
+    .card {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid #00ff88;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / Frontend
+    </div>
+
+    <h1>Frontend Directory</h1>
+
+    <div class="card">
+      <h2>React Frontend (Optional)</h2>
+      <p>This directory contains the React frontend components for Chazon.</p>
+      <p>The project primarily uses markdown-first architecture with browser-based modules.</p>
+      <p>React components are optional and can be used for more complex UI needs.</p>
+    </div>
+
+    <div class="card">
+      <h3>Status</h3>
+      <p>🚧 Under Development</p>
+      <p>Most UI is handled through templates/ and modules/</p>
+    </div>
+  </div>
+</body>
+</html>

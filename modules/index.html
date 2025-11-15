@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules | Chazon</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+      color: #00ff88;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px #00ff88;
+    }
+    .breadcrumb {
+      margin-bottom: 30px;
+      opacity: 0.7;
+    }
+    .breadcrumb a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    p {
+      margin: 20px 0;
+      color: #ccc;
+    }
+    .card {
+      background: rgba(0,0,0,0.5);
+      border: 2px solid #00ff88;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+    .stat {
+      text-align: center;
+      background: rgba(0,255,136,0.1);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #00ff88;
+    }
+    .stat .number {
+      font-size: 3em;
+      color: #00ff88;
+      font-weight: bold;
+    }
+    .stat .label {
+      color: #ccc;
+      margin-top: 10px;
+    }
+    #moduleList {
+      margin-top: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .module-item {
+      padding: 10px;
+      margin: 5px 0;
+      background: rgba(0,0,0,0.3);
+      border-left: 3px solid #00ff88;
+      cursor: pointer;
+    }
+    .module-item:hover {
+      background: rgba(0,255,136,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / Modules
+    </div>
+
+    <h1>📦 Modules Directory</h1>
+
+    <div class="card">
+      <h2>Markdown-First Modules</h2>
+      <p>All 95 modules stored as .md files with embedded JavaScript.</p>
+      <p>Each module exports to <code>window.ModuleName</code> for global access.</p>
+      <p>All modules follow sub-250 token constraint for extreme modularity.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="number" id="moduleCount">95</div>
+        <div class="label">Total Modules</div>
+      </div>
+      <div class="stat">
+        <div class="number">&lt;250</div>
+        <div class="label">Token Limit</div>
+      </div>
+      <div class="stat">
+        <div class="number">15+</div>
+        <div class="label">With UUIDs</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Module Categories</h3>
+      <div id="moduleList">
+        <div class="module-item">Loading modules...</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Usage</h3>
+      <p><strong>Load a module:</strong></p>
+      <p><code>await ModuleLoader.load('module-name');</code></p>
+      <p><strong>Access module:</strong></p>
+      <p><code>const result = ModuleName.method();</code></p>
+    </div>
+  </div>
+
+  <script>
+    // Load module list
+    async function loadModules() {
+      try {
+        const response = await fetch('/REGISTRY.md');
+        const text = await response.text();
+
+        // Parse module names from REGISTRY
+        const modulePattern = /\|\s+(.+?\.md)\s+\|/g;
+        const modules = [];
+        let match;
+        while ((match = modulePattern.exec(text)) !== null) {
+          modules.push(match[1]);
+        }
+
+        const moduleList = document.getElementById('moduleList');
+        moduleList.innerHTML = modules.map(mod => `
+          <div class="module-item">📄 ${mod}</div>
+        `).join('');
+
+        document.getElementById('moduleCount').textContent = modules.length;
+      } catch (err) {
+        console.error('Failed to load modules:', err);
+      }
+    }
+
+    loadModules();
+  </script>
+</body>
+</html>
