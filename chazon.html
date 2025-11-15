@@ -282,14 +282,34 @@ const ChazonBootstrap = {
 const Terminal = {
   output: document.getElementById('output'),
   input: document.getElementById('input'),
+  loading: false,
 
-  print(text) {
-    this.output.textContent += text + '\n';
+  print(text, color = '#00ff88') {
+    const line = document.createElement('div');
+    line.style.color = color;
+    line.textContent = text;
+    this.output.appendChild(line);
     this.output.scrollTop = this.output.scrollHeight;
   },
 
-  exec(command) {
-    this.print(`chazon@os:~$ ${command}`);
+  spinner() {
+    const frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+    let i = 0;
+    const line = document.createElement('div');
+    line.style.color = '#00ff88';
+    this.output.appendChild(line);
+    return setInterval(() => {
+      line.textContent = `${frames[i++ % frames.length]} Loading...`;
+    }, 80);
+  },
+
+  stopSpinner(id) {
+    clearInterval(id);
+    this.output.removeChild(this.output.lastChild);
+  },
+
+  async exec(command) {
+    this.print(`chazon@os:~$ ${command}`, '#00ff88');
 
     if (!command.trim()) return;
 
@@ -305,7 +325,7 @@ const Terminal = {
     }
 
     if (command === 'clear') {
-      this.output.textContent = '';
+      this.output.innerHTML = '';
       return;
     }
 
@@ -315,19 +335,31 @@ const Terminal = {
     }
 
     if (window.ChazonCLI) {
-      const result = ChazonCLI.exec(command);
-      this.print(result || '');
+      const spinner = command.startsWith('run') ? this.spinner() : null;
+      try {
+        const result = await ChazonCLI.exec(command);
+        if (spinner) this.stopSpinner(spinner);
+        this.print(result || '');
+      } catch (err) {
+        if (spinner) this.stopSpinner(spinner);
+        this.print(`Error: ${err.message}`, '#ff0044');
+      }
     } else {
-      this.print('Error: CLI not loaded');
+      this.print('Error: CLI not loaded', '#ff0044');
     }
   }
 };
 
 // Event Handlers
-document.getElementById('input').addEventListener('keypress', (e) => {
+document.getElementById('input').addEventListener('keypress', async (e) => {
   if (e.key === 'Enter') {
-    Terminal.exec(e.target.value);
-    e.target.value = '';
+    const input = e.target;
+    const command = input.value;
+    input.value = '';
+    input.disabled = true;
+    await Terminal.exec(command);
+    input.disabled = false;
+    input.focus();
   }
 });
 
