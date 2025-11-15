@@ -44,10 +44,30 @@ chazon/
 ├── agents/        # CI/CD agents (ISA-95 L0-L4)
 ├── ui/            # Desktop environment, window manager
 ├── isa/           # Standards & compliance (95/88/18.2)
+├── medical/       # Qdrant medical imaging specialization
 └── programs/      # Sample programs (.md files)
 ```
 
 **[→ Full Chazon Documentation](chazon/README.md)**
+
+### 🔌 Backend Integration (NEW)
+
+Chazon OS now includes a **production-ready backend** for real Qdrant vector search with medical imaging:
+
+- **FastAPI service** with Qdrant client integration
+- **Cohere embeddings** (hackathon sponsor!)
+- **Medical x-ray search** - Similarity search for diagnosis assistance
+- **Deploy in minutes** - Railway/Fly.io/Vercel (free tiers)
+
+**Quick Start:**
+```bash
+cd backend
+pip install -r requirements.txt
+docker run -p 6333:6333 qdrant/qdrant  # Start Qdrant
+python api.py  # Start backend at http://localhost:8000
+```
+
+**[→ Complete Backend Setup Guide](docs/BACKEND_SETUP.md)**
 
 ---
 
