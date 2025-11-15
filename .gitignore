@@ -74,3 +74,11 @@ data/sql/*.sqlite3
 !data/sql/*.sql
 !data/*.md
 !data/README.md
+
+# Allow models/ docs, but ignore actual model files
+models/**/*.onnx
+models/**/*.pt
+models/**/*.bin
+models/**/*.safetensors
+!models/**/*.md
+!models/README.md
