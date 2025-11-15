@@ -1,0 +1,79 @@
+{
+  "provider": "boot",
+  "description": "Boot Sequencer Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "COMPLETE",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Boot sequence status"
+    },
+    "currentPhase": {
+      "value": 6,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Current boot phase"
+    },
+    "totalPhases": {
+      "value": 6,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total boot phases"
+    },
+    "bootTime": {
+      "value": 2.3,
+      "type": "number",
+      "unit": "s",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total boot duration"
+    },
+    "phase0Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 0 Core complete"
+    },
+    "phase1Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 1 AI complete"
+    },
+    "phase2Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 2 Multi-Agent complete"
+    },
+    "phase3Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 3 Medical complete"
+    },
+    "phase4Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 4 UI complete"
+    },
+    "phase5Complete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Phase 5 Templates complete"
+    }
+  }
+}

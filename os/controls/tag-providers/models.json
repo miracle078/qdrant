@@ -1,0 +1,80 @@
+{
+  "provider": "models",
+  "description": "AI Models Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "STANDBY",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "AI inference engine status"
+    },
+    "totalModels": {
+      "value": 3,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total ONNX models available"
+    },
+    "modelsLoaded": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Currently loaded models"
+    },
+    "backend": {
+      "value": "WebGPU",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Inference backend"
+    },
+    "inferenceTime": {
+      "value": 0,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Last inference duration"
+    },
+    "gpuAvailable": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "GPU acceleration available"
+    },
+    "cacheSize": {
+      "value": 0,
+      "type": "number",
+      "unit": "MB",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Model cache size"
+    },
+    "bertTinyReady": {
+      "value": false,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "BERT-tiny model ready"
+    },
+    "mobilenetReady": {
+      "value": false,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "MobileNet-v2 model ready"
+    },
+    "resnet18Ready": {
+      "value": false,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "ResNet18 model ready"
+    }
+  }
+}

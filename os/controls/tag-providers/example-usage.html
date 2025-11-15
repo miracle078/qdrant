@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tag Provider Usage Example</title>
+<script src="TagProvider.js"></script>
+<style>
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .tag-display {
+    background: #1a1a2e;
+    border: 1px solid #00ff88;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  .quality-GOOD { color: #00ff88; }
+  .quality-BAD { color: #ff0044; }
+  .quality-UNCERTAIN { color: #ffaa00; }
+</style>
+</head>
+<body>
+
+<h1>Tag Provider Usage Examples</h1>
+
+<h2>1. Basic Read</h2>
+<div class="tag-display">
+  <strong>Frontend Status:</strong> <span id="frontend-status">Loading...</span>
+</div>
+
+<h2>2. Formatted Read</h2>
+<div class="tag-display">
+  <strong>Scan Time:</strong> <span id="scan-time">Loading...</span>
+</div>
+
+<h2>3. Auto-Binding (Live Updates)</h2>
+<div class="tag-display">
+  <strong>CPU Load:</strong> <span id="cpu-load">Loading...</span>
+</div>
+
+<h2>4. Quality Indicators</h2>
+<div class="tag-display">
+  <strong>Registry Status:</strong> <span id="registry-status">Loading...</span>
+</div>
+
+<h2>5. Batch Read</h2>
+<div class="tag-display">
+  <pre id="batch-read">Loading...</pre>
+</div>
+
+<h2>6. Manual Write & Subscribe</h2>
+<div class="tag-display">
+  <button onclick="simulateAlarm()">Trigger Alarm</button>
+  <span id="alarm-status">No Alarm</span>
+</div>
+
+<script>
+// Example 1: Basic Tag Reading
+async function basicRead() {
+  await TagProvider.loadProvider('frontend');
+  const status = TagProvider.read('frontend', 'status');
+  document.getElementById('frontend-status').textContent = status;
+}
+
+// Example 2: Formatted Tag Display
+async function formattedRead() {
+  await TagProvider.loadProvider('frontend');
+  const scanTime = TagProvider.read('frontend', 'scanTime');
+  document.getElementById('scan-time').textContent = `${scanTime}ms`;
+}
+
+// Example 3: Auto-Binding with Subscription
+async function autoBinding() {
+  await TagProvider.loadProvider('frontend');
+
+  // Bind with formatter
+  TagProvider.bind('frontend', 'cpuLoad', 'cpu-load', (value) => {
+    return `${value.toFixed(1)}%`;
+  });
+
+  // Simulate CPU changes
+  setInterval(() => {
+    const newValue = Math.random() * 30 + 10;
+    TagProvider.write('frontend', 'cpuLoad', newValue);
+  }, 2000);
+}
+
+// Example 4: Quality Indicators
+async function qualityIndicators() {
+  await TagProvider.loadProvider('modules');
+
+  const tag = TagProvider.readFull('modules', 'registryComplete');
+  const element = document.getElementById('registry-status');
+
+  element.textContent = `${tag.value} (Quality: ${tag.quality})`;
+  element.className = `quality-${tag.quality}`;
+}
+
+// Example 5: Batch Read Multiple Tags
+async function batchRead() {
+  await TagProvider.loadAll();
+
+  const values = TagProvider.readBatch([
+    { provider: 'frontend', tagName: 'status' },
+    { provider: 'backend', tagName: 'qdrantConnected' },
+    { provider: 'boot', tagName: 'currentPhase' },
+    { provider: 'medical', tagName: 'dicomReady' }
+  ]);
+
+  document.getElementById('batch-read').textContent =
+    JSON.stringify(values, null, 2);
+}
+
+// Example 6: Write Tags & Subscribe
+async function setupAlarm() {
+  await TagProvider.loadProvider('frontend');
+
+  // Subscribe to alarm changes
+  TagProvider.subscribe('frontend', 'alarmActive', (newValue) => {
+    const element = document.getElementById('alarm-status');
+    if (newValue) {
+      element.textContent = '🚨 ALARM ACTIVE!';
+      element.style.color = '#ff0044';
+    } else {
+      element.textContent = '✓ No Alarm';
+      element.style.color = '#00ff88';
+    }
+  });
+}
+
+function simulateAlarm() {
+  TagProvider.write('frontend', 'alarmActive', true);
+
+  // Auto-clear after 3 seconds
+  setTimeout(() => {
+    TagProvider.write('frontend', 'alarmActive', false);
+  }, 3000);
+}
+
+// Initialize all examples
+async function init() {
+  try {
+    await basicRead();
+    await formattedRead();
+    await autoBinding();
+    await qualityIndicators();
+    await batchRead();
+    await setupAlarm();
+
+    console.log('[Example] All tag providers loaded');
+    console.log('[Example] Available providers:', TagProvider.listProviders());
+  } catch (error) {
+    console.error('[Example] Error:', error);
+  }
+}
+
+// Run on page load
+init();
+</script>
+
+</body>
+</html>

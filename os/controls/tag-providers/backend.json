@@ -1,0 +1,66 @@
+{
+  "provider": "backend",
+  "description": "Backend API Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "RUNNING",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "API server status"
+    },
+    "scanTime": {
+      "value": 100,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "API response time"
+    },
+    "qdrantConnected": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Qdrant database connection"
+    },
+    "apiEndpoints": {
+      "value": 8,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Number of active endpoints"
+    },
+    "requestCount": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Total API requests"
+    },
+    "errorRate": {
+      "value": 0.0,
+      "type": "number",
+      "unit": "%",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "API error rate"
+    },
+    "port": {
+      "value": 8000,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "API server port"
+    },
+    "qdrantPort": {
+      "value": 6333,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Qdrant database port"
+    }
+  }
+}

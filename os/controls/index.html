@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controls Center - Chazon OS</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    max-width: 900px;
+    padding: 40px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  h1 {
+    font-size: 3em;
+    color: #00ff88;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    color: #888;
+    font-size: 1.2em;
+  }
+
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .control-card {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .control-card:hover {
+    border-color: #00ccff;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+  }
+
+  .control-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent, rgba(0, 255, 136, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .control-card:hover::before {
+    opacity: 1;
+  }
+
+  .icon {
+    font-size: 4em;
+    margin-bottom: 15px;
+  }
+
+  .control-title {
+    font-size: 1.5em;
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .control-desc {
+    color: #888;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  .breadcrumb {
+    text-align: center;
+    color: #888;
+    margin-bottom: 30px;
+  }
+
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+
+  .info-box {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-left: 3px solid #00ccff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 40px;
+  }
+
+  .info-box h3 {
+    color: #00ccff;
+    margin-bottom: 10px;
+  }
+
+  .info-box p {
+    color: #888;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="breadcrumb">
+    <a href="../index.html">OS Home</a> / Controls Center
+  </div>
+
+  <header>
+    <h1>⚙️ Controls Center</h1>
+    <div class="subtitle">Centralized SCADA, HMI, and PLC Control Interfaces</div>
+  </header>
+
+  <div class="controls-grid">
+    <!-- SCADA -->
+    <div class="control-card" onclick="window.location.href='scada.html'">
+      <div class="icon">📈</div>
+      <div class="control-title">SCADA</div>
+      <div class="control-desc">
+        Supervisory Control & Data Acquisition<br>
+        Master gateway for all 8 PLC areas
+      </div>
+    </div>
+
+    <!-- HMI -->
+    <div class="control-card" onclick="window.location.href='hmi.html'">
+      <div class="icon">🎛️</div>
+      <div class="control-title">HMI</div>
+      <div class="control-desc">
+        Human-Machine Interface<br>
+        Control panels for each system area
+      </div>
+    </div>
+
+    <!-- PLC -->
+    <div class="control-card" onclick="window.location.href='plc.html'">
+      <div class="icon">⚙️</div>
+      <div class="control-title">PLC</div>
+      <div class="control-desc">
+        Programmable Logic Controllers<br>
+        View logic for all control systems
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>About Controls Center</h3>
+    <p>
+      This centralized controls directory contains the master SCADA gateway, HMI panels,
+      and PLC logic interfaces for the entire Chazon OS system. From here, you can monitor
+      and control all 8 PLC areas: Frontend, Backend, Modules, Boot, Models, Data, Language,
+      and Medical.
+    </p>
+    <p style="margin-top: 10px;">
+      <strong>ISA-95 Compliance:</strong> This implementation follows ISA-95 enterprise-control
+      integration standards with a 5-level hierarchy (L0-L4) and ISA-88 PackML state machines
+      for batch control operations.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

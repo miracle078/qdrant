@@ -1,0 +1,67 @@
+{
+  "provider": "frontend",
+  "description": "Frontend HMI Control Tags",
+  "type": "PLC Area",
+  "isa_level": "L2",
+  "tags": {
+    "status": {
+      "value": "RUNNING",
+      "type": "string",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "PLC operational status"
+    },
+    "scanTime": {
+      "value": 50,
+      "type": "number",
+      "unit": "ms",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "PLC scan cycle time"
+    },
+    "modulesLoaded": {
+      "value": 41,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Number of loaded modules"
+    },
+    "bootComplete": {
+      "value": true,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Boot sequence completed"
+    },
+    "cpuLoad": {
+      "value": 15.3,
+      "type": "number",
+      "unit": "%",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "CPU utilization"
+    },
+    "memoryUsage": {
+      "value": 1024,
+      "type": "number",
+      "unit": "MB",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Memory usage"
+    },
+    "errorCount": {
+      "value": 0,
+      "type": "number",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Error counter"
+    },
+    "alarmActive": {
+      "value": false,
+      "type": "boolean",
+      "quality": "GOOD",
+      "timestamp": "2025-11-15T05:50:00Z",
+      "description": "Alarm condition active"
+    }
+  }
+}
