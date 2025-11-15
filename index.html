@@ -1,82 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌌 Chazon - חזון</title>
-    <meta http-equiv="refresh" content="0; url=frontend/">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
-            color: #00ff88;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .loading {
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px #00ff88;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
-            to { text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88, 0 0 60px #00ff88; }
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(0,255,136,0.3);
-            border-radius: 50%;
-            border-top-color: #00ff88;
-            animation: spin 1s linear infinite;
-            margin-top: 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        p {
-            margin-top: 20px;
-            opacity: 0.7;
-        }
-
-        a {
-            color: #00ccff;
-            text-decoration: none;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌌 Chazon - AI Medical Imaging Analyzer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a, #1a1a2e);
+    color: #e0e0e0;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(20, 20, 30, 0.95);
+    border: 2px solid #00ff88;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+  }
+  h1 {
+    color: #00ff88;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  .subtitle {
+    color: #888;
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+  }
+  .badges {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .badges img {
+    margin: 0 5px;
+  }
+  .nav-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 30px 0;
+  }
+  .nav-button {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+    text-decoration: none;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+    display: block;
+  }
+  .nav-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
+  }
+  .nav-button.primary {
+    background: linear-gradient(135deg, #00ccff, #0099cc);
+    grid-column: 1 / -1;
+    font-size: 1.3em;
+    padding: 25px;
+  }
+  .section {
+    margin: 30px 0;
+  }
+  .section h2 {
+    color: #00ccff;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .section li {
+    padding: 8px 0;
+    padding-left: 25px;
+    position: relative;
+  }
+  .section li:before {
+    content: "▸";
+    color: #00ff88;
+    position: absolute;
+    left: 0;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .feature-card {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .feature-card h3 {
+    color: #00ff88;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+  }
+  code {
+    background: #000;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #00ff88;
+  }
+  a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    color: #888;
+  }
+</style>
 </head>
 <body>
-    <div class="loading">
-        <h1>🌌 Chazon OS</h1>
-        <div class="spinner"></div>
-        <p>Booting φ-Balanced Computing Platform...</p>
-        <p style="font-size: 0.9em; margin-top: 40px;">
-            If not redirected, <a href="frontend/">click here</a>
-        </p>
-    </div>
 
-    <script>
-        // Immediate redirect (meta refresh is backup)
-        window.location.href = 'frontend/';
-    </script>
+<div class="container">
+  <h1>🌌 Chazon - חזון</h1>
+  <div class="subtitle">Open Source AI Medical Imaging Analyzer</div>
+
+  <div class="badges">
+    <img src="https://img.shields.io/badge/status-production-success" alt="Status">
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
+    <img src="https://img.shields.io/badge/lablab.ai-qdrant-purple" alt="Challenge">
+  </div>
+
+  <div class="nav-buttons">
+    <a href="frontend/" class="nav-button primary">
+      🚀 Launch Chazon (Live Demo)
+    </a>
+    <a href="#features" class="nav-button">🏥 Features</a>
+    <a href="https://github.com/teslasolar/qdrant" class="nav-button">📦 GitHub Repo</a>
+    <a href="#quickstart" class="nav-button">⚡ Quick Start</a>
+  </div>
+
+  <div class="section" id="about">
+    <h2>🎯 What is Chazon?</h2>
+    <p><strong>Chazon</strong> (חזון - "Vision") is an open source AI-powered medical imaging analyzer for X-ray, MRI, and CT scans. Built for the <a href="https://lablab.ai">lablab.ai Qdrant Challenge</a>.</p>
+    <br>
+    <p>Helps radiologists and medical professionals:</p>
+    <ul>
+      <li>Analyze X-rays - Detect abnormalities in chest X-rays, bone fractures, etc.</li>
+      <li>Process MRI scans - Multi-sequence viewing (T1, T2, FLAIR, DWI)</li>
+      <li>Review CT scans - Multi-planar reconstruction with Hounsfield unit measurements</li>
+      <li>Semantic Search - Find similar cases using Qdrant vector database</li>
+      <li>AI Analysis - Automated findings detection and diagnosis assistance</li>
+    </ul>
+  </div>
+
+  <div class="section" id="features">
+    <h2>🏥 Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Multi-Modality</h3>
+        <p>X-Ray, CT, MRI, Ultrasound, PET, Mammography support</p>
+      </div>
+      <div class="feature-card">
+        <h3>DICOM Compliant</h3>
+        <p>Full DICOM standard with window/level presets</p>
+      </div>
+      <div class="feature-card">
+        <h3>AI-Powered</h3>
+        <p>Semantic search and abnormality detection</p>
+      </div>
+      <div class="feature-card">
+        <h3>Modular</h3>
+        <p>100+ markdown modules, &lt;250 tokens each</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="quickstart">
+    <h2>⚡ Quick Start</h2>
+    <p><strong>Option 1: Try Online</strong></p>
+    <ul>
+      <li>Visit <a href="frontend/">https://teslasolar.github.io/qdrant/frontend/</a></li>
+      <li>No installation required!</li>
+    </ul>
+    <br>
+    <p><strong>Option 2: Run Locally</strong></p>
+    <ul>
+      <li>Clone: <code>git clone https://github.com/teslasolar/qdrant</code></li>
+      <li>Open: <code>frontend/index.html</code> in your browser</li>
+    </ul>
+    <br>
+    <p><strong>Option 3: Full Stack with Qdrant</strong></p>
+    <ul>
+      <li>Start Qdrant: <code>docker run -p 6333:6333 qdrant/qdrant</code></li>
+      <li>Install deps: <code>pip install -r requirements.txt</code></li>
+      <li>Run backend: <code>python backend/api.py</code></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>📁 Project Navigation</h2>
+    <div class="nav-buttons">
+      <a href="frontend/" class="nav-button">Frontend / CLI</a>
+      <a href="modules/" class="nav-button">Modules (100+)</a>
+      <a href="templates/" class="nav-button">Templates</a>
+      <a href="language/" class="nav-button">SNT Language</a>
+      <a href="boot/" class="nav-button">Boot System</a>
+      <a href="docs/" class="nav-button">Documentation</a>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🧬 Technology Stack</h2>
+    <ul>
+      <li><strong>Frontend:</strong> Vanilla JS (no frameworks!)</li>
+      <li><strong>Medical Imaging:</strong> Custom DICOM viewer, window/level engine</li>
+      <li><strong>Vector Search:</strong> Qdrant for semantic similarity</li>
+      <li><strong>AI Analysis:</strong> OpenAI embeddings + custom models</li>
+      <li><strong>Language:</strong> SNT (Space-Time Notation) - trinary quantum computing</li>
+      <li><strong>Architecture:</strong> Markdown-first modular design</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>🏆 Built for lablab.ai</h2>
+    <p>This project demonstrates:</p>
+    <ul>
+      <li>✅ Vector search for medical imaging</li>
+      <li>✅ Semantic similarity for diagnosis assistance</li>
+      <li>✅ Multi-modal embeddings (images + metadata)</li>
+      <li>✅ Production-ready architecture</li>
+      <li>✅ Open source and accessible</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <p>🏥 Medical Imaging | 🤖 AI-Powered | 🔍 Vector Search | 🌍 Open Source</p>
+    <p style="margin-top: 10px;">
+      <a href="https://github.com/teslasolar/qdrant">GitHub</a> |
+      <a href="https://github.com/teslasolar/qdrant/issues">Issues</a> |
+      <a href="https://lablab.ai">lablab.ai</a>
+    </p>
+    <p style="margin-top: 10px;">Built with ❤️ for the medical community</p>
+  </div>
+</div>
+
 </body>
 </html>
