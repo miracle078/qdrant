@@ -3,359 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Logs Viewer - Chazon SCADA</title>
+<title>Loading...</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: 'Courier New', monospace;
-    background: #0a0a0a;
-    color: #00ff88;
-    height: 100vh;
-    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
   }
 
-  #logs-container {
-    display: grid;
-    grid-template-rows: 60px 50px 1fr 40px;
-    height: 100vh;
-  }
-
-  /* Header */
-  #logs-header {
-    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-    border-bottom: 3px solid #00ff88;
+  .loader {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 20px;
   }
 
-  #logs-header h1 {
-    font-size: 1.5em;
-    color: #00ff88;
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top-color: #00ff88;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
   }
 
-  /* Filters */
-  #filters {
-    background: #1a1a2e;
-    border-bottom: 2px solid #333;
-    padding: 10px 20px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
-  select, input {
-    padding: 5px 10px;
-    background: #0a0a0a;
-    color: #00ff88;
-    border: 1px solid #00ff88;
-    border-radius: 4px;
-    font-family: inherit;
-    font-size: 12px;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
   }
 
-  .filter-label {
+  header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+  }
+
+  .description {
     color: #888;
-    font-size: 12px;
+    font-size: 1.3em;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2a2a3e;
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 10px 5px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #333;
+    border-left: 5px solid #00ff88;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s;
+  }
+
+  .card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .card h2 {
+    color: #00ff88;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  .card a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .section {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    color: #00ff88;
+    font-size: 2em;
+    margin-bottom: 25px;
   }
 
   .btn {
-    padding: 5px 12px;
-    background: #00ff88;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
-    font-weight: bold;
-  }
-
-  .btn:hover { background: #00cc66; }
-  .btn.secondary { background: #333; color: #00ff88; }
-
-  /* Logs Content */
-  #logs-content {
-    background: #000;
-    overflow-y: auto;
-    padding: 10px;
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-  }
-
-  .log-entry {
-    padding: 8px;
-    margin-bottom: 2px;
-    border-left: 3px solid #333;
-    background: #0a0a0a;
-    display: grid;
-    grid-template-columns: 180px 80px 120px 1fr;
-    gap: 10px;
-  }
-
-  .log-entry:hover {
-    background: #1a1a2e;
-  }
-
-  .log-timestamp {
-    color: #888;
-  }
-
-  .log-level {
-    font-weight: bold;
-    padding: 2px 6px;
-    border-radius: 3px;
-    text-align: center;
-  }
-
-  .log-level.INFO { color: #00ccff; border-left-color: #00ccff; }
-  .log-level.WARN { color: #ffaa00; border-left-color: #ffaa00; }
-  .log-level.ERROR { color: #ff0044; border-left-color: #ff0044; }
-  .log-level.DEBUG { color: #888; border-left-color: #888; }
-  .log-level.AUDIT { color: #ff88ff; border-left-color: #ff88ff; }
-  .log-level.CRITICAL {
-    color: #fff;
-    background: #ff0044;
-    border-left-color: #ff0044;
-    animation: blink 1s infinite;
-  }
-
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0.5; }
-  }
-
-  .log-source {
-    color: #00ff88;
-  }
-
-  .log-message {
-    color: #ccc;
-  }
-
-  /* Status Bar */
-  #status-bar {
-    background: #1a1a2e;
-    border-top: 2px solid #00ff88;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
-    font-size: 12px;
-  }
-
-  .indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
     display: inline-block;
-    margin-right: 5px;
-    background: #00ff88;
-    box-shadow: 0 0 8px #00ff88;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px;
   }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+  }
+
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ccff;
+    border: 2px solid #00ccff;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    border-top: 2px solid #333;
+    margin-top: 60px;
+  }
+
+  .color-green h1, .color-green .card { border-left-color: #00ff88; }
+  .color-blue h1, .color-blue .card { border-left-color: #00ccff; }
+  .color-purple h1, .color-purple .card { border-left-color: #ff88ff; }
+  .color-orange h1, .color-orange .card { border-left-color: #ffaa00; }
+  .color-red h1, .color-red .card { border-left-color: #ff6666; }
+  .color-cyan h1, .color-cyan .card { border-left-color: #00ffff; }
 </style>
 </head>
 <body>
 
-<div id="logs-container">
-  <!-- Header -->
-  <div id="logs-header">
-    <h1>📋 Logs Viewer - Chazon SCADA</h1>
-    <div style="color: #00ccff; font-size: 1.2em;" id="system-time">00:00:00</div>
-  </div>
-
-  <!-- Filters -->
-  <div id="filters">
-    <div>
-      <span class="filter-label">Source:</span>
-      <select id="source-filter" onchange="filterLogs()">
-        <option value="all">All</option>
-        <option value="system">System</option>
-        <option value="plc">PLC</option>
-        <option value="scada">SCADA</option>
-        <option value="api">API</option>
-        <option value="modules">Modules</option>
-        <option value="errors">Errors</option>
-        <option value="audit">Audit</option>
-      </select>
-    </div>
-
-    <div>
-      <span class="filter-label">Level:</span>
-      <select id="level-filter" onchange="filterLogs()">
-        <option value="all">All</option>
-        <option value="DEBUG">Debug</option>
-        <option value="INFO">Info</option>
-        <option value="WARN">Warn</option>
-        <option value="ERROR">Error</option>
-        <option value="CRITICAL">Critical</option>
-      </select>
-    </div>
-
-    <div>
-      <span class="filter-label">Search:</span>
-      <input type="text" id="search-input" placeholder="Search logs..." style="width: 200px;" onkeyup="filterLogs()">
-    </div>
-
-    <button class="btn" onclick="loadLogs()">🔄 Refresh</button>
-    <button class="btn secondary" onclick="clearLogs()">🗑️ Clear</button>
-    <button class="btn secondary" onclick="exportLogs()">💾 Export</button>
-    <button class="btn secondary" onclick="window.location.href='hmi.html'">🎛️ HMI</button>
-  </div>
-
-  <!-- Logs Content -->
-  <div id="logs-content">
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:00:00</div>
-      <div class="log-level INFO">INFO</div>
-      <div class="log-source">system</div>
-      <div class="log-message">Chazon OS started (v1.0.0)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:00:03</div>
-      <div class="log-level INFO">INFO</div>
-      <div class="log-source">system</div>
-      <div class="log-message">Qdrant vector DB connected (localhost:6333)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:00:05</div>
-      <div class="log-level INFO">INFO</div>
-      <div class="log-source">plc-backend</div>
-      <div class="log-message">Backend PLC controller started (scan_rate: 100ms)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:05:12</div>
-      <div class="log-level ERROR">ERROR</div>
-      <div class="log-source">module-loader</div>
-      <div class="log-message">Failed to load module: invalid-module.md (File not found)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:05:30</div>
-      <div class="log-level AUDIT">AUDIT</div>
-      <div class="log-source">auth</div>
-      <div class="log-message">User login attempt: admin from 192.168.1.100 (success)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:12:34</div>
-      <div class="log-level WARN">WARN</div>
-      <div class="log-source">api</div>
-      <div class="log-message">High response time detected: /api/search (2345ms)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:15:12</div>
-      <div class="log-level AUDIT">AUDIT</div>
-      <div class="log-source">plc</div>
-      <div class="log-message">Emergency stop activated by operator (area: frontend)</div>
-    </div>
-    <div class="log-entry">
-      <div class="log-timestamp">2025-11-15 16:18:45</div>
-      <div class="log-level ERROR">ERROR</div>
-      <div class="log-source">plc-models</div>
-      <div class="log-message">Model inference failed: bert-tiny (Out of memory)</div>
-    </div>
-  </div>
-
-  <!-- Status Bar -->
-  <div id="status-bar">
-    <div>
-      <span><span class="indicator"></span>Logs: ACTIVE</span>
-      <span style="margin-left: 20px;">Total: <span id="total-logs">8</span> entries</span>
-      <span style="margin-left: 20px;">Filtered: <span id="filtered-logs">8</span> entries</span>
-    </div>
-    <div>
-      <span>Auto-refresh: <span id="auto-refresh">ON</span></span>
-    </div>
-  </div>
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Loading index data...</p>
 </div>
 
+<div class="container" id="content" style="display: none;"></div>
+
 <script>
-let allLogs = [];
+// Generic Index Loader
+// Loads structured index data and renders the page
 
-// Update time
-function updateTime() {
-  document.getElementById('system-time').textContent = new Date().toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
+async function loadIndex() {
+  try {
+    // Load index tag data
+    const response = await fetch('index/tag.json');
+    if (!response.ok) {
+      throw new Error('Index data not found');
+    }
 
-// Load logs from files
-async function loadLogs() {
-  // In production, this would fetch from API or log files
-  // For now, we'll use the sample logs displayed
-  const logEntries = document.querySelectorAll('.log-entry');
-  allLogs = Array.from(logEntries).map(entry => ({
-    timestamp: entry.querySelector('.log-timestamp').textContent,
-    level: entry.querySelector('.log-level').textContent,
-    source: entry.querySelector('.log-source').textContent,
-    message: entry.querySelector('.log-message').textContent
-  }));
+    const tag = await response.json();
 
-  document.getElementById('total-logs').textContent = allLogs.length;
-  document.getElementById('filtered-logs').textContent = allLogs.length;
-}
+    // Apply color scheme
+    document.body.className = `color-${tag.Color_Scheme}`;
+    document.title = tag.Title;
 
-// Filter logs
-function filterLogs() {
-  const sourceFilter = document.getElementById('source-filter').value;
-  const levelFilter = document.getElementById('level-filter').value;
-  const searchTerm = document.getElementById('search-input').value.toLowerCase();
+    // Build page content
+    const content = document.getElementById('content');
+    content.innerHTML = `
+      <header>
+        <div class="icon">${tag.Icon}</div>
+        <h1>${tag.Title}</h1>
+        <p class="description">${tag.Description}</p>
+        <div>
+          <span class="badge">${tag.ISA_Level.replace('_', '-')}</span>
+          <span class="badge">UUID: ${tag.UUID.substring(0, 8)}</span>
+        </div>
+      </header>
 
-  const logEntries = document.querySelectorAll('.log-entry');
-  let visibleCount = 0;
+      ${tag.Parent_Path ? `
+      <div style="text-align: center; margin-bottom: 40px;">
+        <a href="${tag.Parent_Path}" class="btn btn-secondary">← Parent Directory</a>
+      </div>
+      ` : ''}
 
-  logEntries.forEach(entry => {
-    const level = entry.querySelector('.log-level').textContent;
-    const source = entry.querySelector('.log-source').textContent;
-    const message = entry.querySelector('.log-message').textContent.toLowerCase();
+      ${tag.Features && tag.Features.length > 0 ? `
+      <div class="section">
+        <h2>Features</h2>
+        <div class="grid">
+          ${tag.Features.map(f => `
+            <div class="card">
+              <div class="card-icon">${f.icon}</div>
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-    let show = true;
+      ${tag.Child_Directories && tag.Child_Directories.length > 0 ? `
+      <div class="section">
+        <h2>Subdirectories</h2>
+        <div class="grid">
+          ${tag.Child_Directories.map(d => `
+            <div class="card">
+              <div class="card-icon">${d.icon}</div>
+              <h2><a href="${d.path}">${d.title}</a></h2>
+              <p>${d.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-    if (sourceFilter !== 'all' && !source.includes(sourceFilter)) show = false;
-    if (levelFilter !== 'all' && level !== levelFilter) show = false;
-    if (searchTerm && !message.includes(searchTerm) && !source.toLowerCase().includes(searchTerm)) show = false;
+      ${(tag.Has_PLC || tag.Has_HMI || tag.Has_SCADA) ? `
+      <div class="section">
+        <h2>Control Interfaces</h2>
+        <div style="text-align: center;">
+          ${tag.Has_SCADA ? `<a href="${tag.SCADA_Path}" class="btn btn-primary">📊 SCADA</a>` : ''}
+          ${tag.Has_HMI ? `<a href="${tag.HMI_Path}" class="btn btn-primary">🎛️ HMI</a>` : ''}
+          ${tag.Has_PLC ? `<a href="${tag.PLC_Path}" class="btn btn-primary">⚙️ PLC</a>` : ''}
+        </div>
+      </div>
+      ` : ''}
 
-    entry.style.display = show ? 'grid' : 'none';
-    if (show) visibleCount++;
-  });
+      ${tag.Related_Files && tag.Related_Files.length > 0 ? `
+      <div class="section">
+        <h2>Documentation</h2>
+        <div class="grid">
+          ${tag.Related_Files.map(f => `
+            <div class="card">
+              <h2><a href="${f.path}">${f.name}</a></h2>
+              <p>Type: ${f.type}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  document.getElementById('filtered-logs').textContent = visibleCount;
-}
+      ${tag.Quick_Actions && tag.Quick_Actions.length > 0 ? `
+      <div class="section">
+        <h2>Quick Actions</h2>
+        <div style="text-align: center;">
+          ${tag.Quick_Actions.map(a => `
+            <a href="${a.path}" class="btn btn-${a.type}">${a.label}</a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-// Clear logs display
-function clearLogs() {
-  if (confirm('Clear all logs from display?')) {
-    document.getElementById('logs-content').innerHTML = '<div style="color: #888; padding: 20px; text-align: center;">No logs to display</div>';
-    document.getElementById('total-logs').textContent = '0';
-    document.getElementById('filtered-logs').textContent = '0';
+      <footer>
+        <p>
+          <strong>ISA-95 ${tag.ISA_Level.replace('_', '-')}</strong><br>
+          ${tag.Directory_Path}
+        </p>
+      </footer>
+    `;
+
+    // Hide loader, show content
+    document.getElementById('loader').style.display = 'none';
+    content.style.display = 'block';
+
+  } catch (error) {
+    console.error('Error loading index:', error);
+    document.getElementById('loader').innerHTML = `
+      <div class="card" style="max-width: 500px;">
+        <h2 style="color: #ff6666;">⚠️ Error Loading Index</h2>
+        <p>${error.message}</p>
+        <p style="margin-top: 20px;">
+          <a href="../" class="btn btn-secondary">← Go Back</a>
+        </p>
+      </div>
+    `;
   }
 }
 
-// Export logs
-function exportLogs() {
-  const visibleLogs = Array.from(document.querySelectorAll('.log-entry')).filter(e => e.style.display !== 'none');
-  const logText = visibleLogs.map(entry =>
-    `${entry.querySelector('.log-timestamp').textContent} [${entry.querySelector('.log-level').textContent}] ${entry.querySelector('.log-source').textContent}: ${entry.querySelector('.log-message').textContent}`
-  ).join('\n');
-
-  const blob = new Blob([logText], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `chazon-logs-${new Date().toISOString().split('T')[0]}.txt`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-// Initialize
-updateTime();
-loadLogs();
-
-// Auto-refresh logs every 5 seconds
-setInterval(() => {
-  if (document.getElementById('auto-refresh').textContent === 'ON') {
-    loadLogs();
-  }
-}, 5000);
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadIndex);
 </script>
 
 </body>

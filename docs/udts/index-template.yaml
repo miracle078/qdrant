@@ -1,0 +1,184 @@
+# Index Template UDT (User Defined Type)
+# ISA-95 Compliant Data Structure for Directory Indexes
+
+name: IndexTemplate
+version: 1.0.0
+isa_level: All Levels
+description: Universal index structure for directory navigation and documentation
+
+# Tag Structure
+tags:
+  # Identity Tags
+  - name: UUID
+    type: STRING
+    description: Unique identifier for this index
+
+  - name: ISA_Level
+    type: STRING
+    description: ISA-95 functional hierarchy level
+    enum: [L0_Physical, L1_Control, L2_Supervisory, L3_MES, L4_Business]
+
+  - name: Directory_Path
+    type: STRING
+    description: Relative path from root
+
+  - name: Directory_Name
+    type: STRING
+    description: Human-readable directory name
+
+  # Metadata Tags
+  - name: Title
+    type: STRING
+    description: Display title for index page
+
+  - name: Description
+    type: STRING
+    description: Brief description of directory purpose
+
+  - name: Icon
+    type: STRING
+    description: Emoji or icon for visual identification
+
+  - name: Color_Scheme
+    type: STRING
+    description: Primary color for theming
+    enum: [green, blue, purple, orange, red, cyan]
+
+  # Navigation Tags
+  - name: Parent_Path
+    type: STRING
+    description: Path to parent directory
+
+  - name: Child_Directories
+    type: ARRAY[DirectoryLink]
+    description: List of subdirectories
+
+  - name: Sibling_Directories
+    type: ARRAY[DirectoryLink]
+    description: Related directories at same level
+
+  # Documentation Tags
+  - name: README_Path
+    type: STRING
+    description: Path to README.md file
+
+  - name: Controls_Path
+    type: STRING
+    description: Path to controls.md file
+
+  - name: Status_Path
+    type: STRING
+    description: Path to status.md file
+
+  # Interface Tags
+  - name: Has_PLC
+    type: BOOLEAN
+    description: Has PLC interface
+
+  - name: Has_HMI
+    type: BOOLEAN
+    description: Has HMI interface
+
+  - name: Has_SCADA
+    type: BOOLEAN
+    description: Has SCADA interface
+
+  - name: PLC_Path
+    type: STRING
+    description: Path to plc.html
+
+  - name: HMI_Path
+    type: STRING
+    description: Path to hmi.html
+
+  - name: SCADA_Path
+    type: STRING
+    description: Path to scada.html
+
+  # Content Tags
+  - name: Features
+    type: ARRAY[Feature]
+    description: List of key features
+
+  - name: Quick_Actions
+    type: ARRAY[Action]
+    description: Quick action buttons
+
+  - name: Related_Files
+    type: ARRAY[FileLink]
+    description: Important files in directory
+
+# Nested UDTs
+nested_types:
+  DirectoryLink:
+    - name: path
+      type: STRING
+    - name: title
+      type: STRING
+    - name: description
+      type: STRING
+    - name: icon
+      type: STRING
+
+  Feature:
+    - name: title
+      type: STRING
+    - name: description
+      type: STRING
+    - name: icon
+      type: STRING
+
+  Action:
+    - name: label
+      type: STRING
+    - name: path
+      type: STRING
+    - name: type
+      type: STRING
+      enum: [primary, secondary, danger]
+
+  FileLink:
+    - name: path
+      type: STRING
+    - name: name
+      type: STRING
+    - name: type
+      type: STRING
+      enum: [markdown, html, python, javascript, yaml, json]
+
+# Template Sections
+sections:
+  - header
+  - navigation
+  - features
+  - interfaces
+  - documentation
+  - quick_actions
+  - footer
+
+# Styling
+theme:
+  L4_Business:
+    primary: "#00ff88"
+    secondary: "#00ccff"
+    background: "#1a1a2e"
+
+  L3_MES:
+    primary: "#00ccff"
+    secondary: "#00ff88"
+    background: "#1a1a2e"
+
+  L2_Supervisory:
+    primary: "#ff88ff"
+    secondary: "#00ccff"
+    background: "#1a1a2e"
+
+  L1_Control:
+    primary: "#ffaa00"
+    secondary: "#ff88ff"
+    background: "#1a1a2e"
+
+  L0_Physical:
+    primary: "#ff6666"
+    secondary: "#ffaa00"
+    background: "#1a1a2e"

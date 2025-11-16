@@ -1,0 +1,106 @@
+{
+  "UUID": "fa5e7686-eebb-48d2-9cb3-b3a966435f3b",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/language/",
+  "Directory_Name": "Language",
+  "Title": "Language",
+  "Description": "ISA-95 L3_MES - language subsystem",
+  "Icon": "\ud83c\udf10",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/language/snt/",
+      "title": "Snt",
+      "description": "snt subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/language/trinary/",
+      "title": "Trinary",
+      "description": "trinary subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/language/plc.html",
+  "hmi_path": "/os/language/hmi.html",
+  "scada_path": "/os/language/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

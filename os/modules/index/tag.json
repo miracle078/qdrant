@@ -1,0 +1,118 @@
+{
+  "UUID": "0d2f21cb-2f99-437d-a40d-e0c4285eebe1",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/modules/",
+  "Directory_Name": "Modules",
+  "Title": "Modules",
+  "Description": "ISA-95 L3_MES - modules subsystem",
+  "Icon": "\ud83d\udce6",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/modules/ai/",
+      "title": "Ai",
+      "description": "ai subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/modules/cli/",
+      "title": "Cli",
+      "description": "cli subsystem",
+      "icon": "\u2328\ufe0f"
+    },
+    {
+      "path": "/os/modules/medical/",
+      "title": "Medical",
+      "description": "medical subsystem",
+      "icon": "\ud83c\udfe5"
+    },
+    {
+      "path": "/os/modules/packml/",
+      "title": "Packml",
+      "description": "packml subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/modules/plc.html",
+  "hmi_path": "/os/modules/hmi.html",
+  "scada_path": "/os/modules/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Collaboration Workspace</title>
+<title>Loading...</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -12,15 +12,36 @@
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
     color: #e0e0e0;
     min-height: 100vh;
-    padding: 40px 20px;
+  }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top-color: #00ff88;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 60px 40px;
   }
 
-  /* Header */
   header {
     text-align: center;
     margin-bottom: 60px;
@@ -32,46 +53,28 @@
   }
 
   h1 {
-    color: #ff88ff;
     font-size: 3em;
     margin-bottom: 15px;
-    text-shadow: 0 0 30px rgba(255, 136, 255, 0.4);
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
   }
 
-  .tagline {
+  .description {
     color: #888;
     font-size: 1.3em;
   }
 
-  /* Navigation */
-  .nav-bar {
-    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-    border: 2px solid #333;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 40px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .nav-link {
-    padding: 10px 20px;
+  .badge {
+    display: inline-block;
+    padding: 8px 16px;
     background: #2a2a3e;
-    color: #ff88ff;
-    border: 2px solid #ff88ff;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.3s;
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 10px 5px;
   }
 
-  .nav-link:hover {
-    background: #ff88ff;
-    color: #000;
-  }
-
-  /* Grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -79,19 +82,18 @@
     margin-bottom: 40px;
   }
 
-  /* Card */
   .card {
     background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
     border: 2px solid #333;
-    border-left: 5px solid #ff88ff;
+    border-left: 5px solid #00ff88;
     border-radius: 12px;
     padding: 30px;
     transition: all 0.3s;
   }
 
   .card:hover {
-    border-color: #ff88ff;
-    box-shadow: 0 10px 40px rgba(255, 136, 255, 0.2);
+    border-color: #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
     transform: translateY(-3px);
   }
 
@@ -101,7 +103,7 @@
   }
 
   .card h2 {
-    color: #ff88ff;
+    color: #00ff88;
     font-size: 1.6em;
     margin-bottom: 15px;
   }
@@ -109,30 +111,17 @@
   .card p {
     color: #aaa;
     line-height: 1.6;
-    margin-bottom: 15px;
   }
 
-  .card ul {
-    list-style: none;
-    margin-top: 15px;
+  .card a {
+    color: #00ccff;
+    text-decoration: none;
   }
 
-  .card li {
-    padding: 8px 0;
-    color: #888;
-    padding-left: 25px;
-    position: relative;
+  .card a:hover {
+    text-decoration: underline;
   }
 
-  .card li:before {
-    content: "→";
-    color: #ff88ff;
-    position: absolute;
-    left: 0;
-    font-weight: bold;
-  }
-
-  /* Section */
   .section {
     background: #1a1a2e;
     border: 2px solid #333;
@@ -142,47 +131,36 @@
   }
 
   .section h2 {
-    color: #ff88ff;
+    color: #00ff88;
     font-size: 2em;
     margin-bottom: 25px;
-    text-align: center;
   }
 
-  .section h3 {
-    color: #00ccff;
-    font-size: 1.4em;
-    margin: 25px 0 15px 0;
-  }
-
-  .section p {
-    color: #aaa;
-    line-height: 1.7;
-    margin-bottom: 15px;
-  }
-
-  .section code {
-    background: #0a0a0a;
-    color: #00ff88;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-family: 'Courier New', monospace;
-  }
-
-  .section pre {
-    background: #0a0a0a;
-    border: 1px solid #333;
+  .btn {
+    display: inline-block;
+    padding: 12px 24px;
     border-radius: 8px;
-    padding: 20px;
-    overflow-x: auto;
-    margin: 15px 0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px;
   }
 
-  .section pre code {
-    background: none;
-    padding: 0;
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
   }
 
-  /* Footer */
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ccff;
+    border: 2px solid #00ccff;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
   footer {
     text-align: center;
     padding: 30px;
@@ -191,276 +169,155 @@
     margin-top: 60px;
   }
 
-  footer a {
-    color: #ff88ff;
-    text-decoration: none;
-  }
-
-  footer a:hover {
-    text-decoration: underline;
-  }
+  .color-green h1, .color-green .card { border-left-color: #00ff88; }
+  .color-blue h1, .color-blue .card { border-left-color: #00ccff; }
+  .color-purple h1, .color-purple .card { border-left-color: #ff88ff; }
+  .color-orange h1, .color-orange .card { border-left-color: #ffaa00; }
+  .color-red h1, .color-red .card { border-left-color: #ff6666; }
+  .color-cyan h1, .color-cyan .card { border-left-color: #00ffff; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <!-- Header -->
-  <header>
-    <div class="icon">👥</div>
-    <h1>Collaboration Workspace</h1>
-    <p class="tagline">Multi-Agent Development & Team Collaboration</p>
-  </header>
-
-  <!-- Navigation -->
-  <nav class="nav-bar">
-    <a href="../index.html" class="nav-link">← Home</a>
-    <a href="../os/index.html" class="nav-link">Operating System</a>
-    <a href="../docs/" class="nav-link">Documentation</a>
-    <a href="../cli/README.md" class="nav-link">CLI Tools</a>
-  </nav>
-
-  <!-- Collaboration Methods -->
-  <div class="grid">
-    <div class="card">
-      <div class="card-icon">🤖</div>
-      <h2>Multi-Agent Systems</h2>
-      <p>Collaborate with AI agents that work together to solve complex problems.</p>
-      <ul>
-        <li>Autonomous task execution</li>
-        <li>Distributed problem solving</li>
-        <li>Agent communication protocols</li>
-        <li>Coordinated workflows</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🔄</div>
-      <h2>Version Control</h2>
-      <p>Track changes, manage branches, and collaborate on code with Git.</p>
-      <ul>
-        <li>Branch-based workflows</li>
-        <li>Pull request reviews</li>
-        <li>Merge conflict resolution</li>
-        <li>Commit history tracking</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">💬</div>
-      <h2>Communication</h2>
-      <p>Stay connected with your team through integrated communication tools.</p>
-      <ul>
-        <li>Real-time chat</li>
-        <li>Code comments</li>
-        <li>Issue discussions</li>
-        <li>Documentation updates</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🧪</div>
-      <h2>Testing & Quality</h2>
-      <p>Ensure code quality through collaborative testing and review processes.</p>
-      <ul>
-        <li>Automated test suites</li>
-        <li>Code review workflows</li>
-        <li>Continuous integration</li>
-        <li>Quality gates</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Best Practices -->
-  <section class="section">
-    <h2>Collaboration Best Practices</h2>
-
-    <h3>1. Clear Communication</h3>
-    <p>
-      Effective collaboration starts with clear communication. Document your intentions,
-      explain your changes, and ask questions when you need clarification.
-    </p>
-
-    <h3>2. Atomic Commits</h3>
-    <p>
-      Make small, focused commits that address a single concern. This makes it easier to
-      review changes, identify issues, and roll back if needed.
-    </p>
-    <pre><code># Good commit messages:
-git commit -m "feat: Add user authentication"
-git commit -m "fix: Resolve memory leak in cache"
-git commit -m "docs: Update API documentation"</code></pre>
-
-    <h3>3. Code Review</h3>
-    <p>
-      Review code collaboratively to catch bugs, share knowledge, and maintain code quality.
-      Provide constructive feedback and be open to suggestions.
-    </p>
-
-    <h3>4. Documentation</h3>
-    <p>
-      Keep documentation up-to-date. Good documentation helps new contributors understand
-      the system and reduces onboarding time.
-    </p>
-
-    <h3>5. Testing</h3>
-    <p>
-      Write tests for your code and ensure existing tests pass. Collaborative testing helps
-      catch issues early and maintain system reliability.
-    </p>
-    <pre><code># Run tests before committing
-npm test
-pytest
-cargo test</code></pre>
-
-    <h3>6. Consistent Style</h3>
-    <p>
-      Follow agreed-upon coding standards and use automated formatters to maintain consistency
-      across the codebase.
-    </p>
-  </section>
-
-  <!-- Workflow -->
-  <section class="section">
-    <h2>Collaborative Workflow</h2>
-
-    <h3>Step 1: Plan</h3>
-    <p>
-      Discuss the feature or fix with your team. Create issues or tickets to track work.
-    </p>
-
-    <h3>Step 2: Branch</h3>
-    <p>
-      Create a feature branch from the main branch:
-    </p>
-    <pre><code>git checkout -b feature/new-capability
-git checkout -b fix/bug-description</code></pre>
-
-    <h3>Step 3: Develop</h3>
-    <p>
-      Write code, commit frequently, and push to your branch:
-    </p>
-    <pre><code>git add .
-git commit -m "feat: Add new capability"
-git push origin feature/new-capability</code></pre>
-
-    <h3>Step 4: Review</h3>
-    <p>
-      Create a pull request and request reviews from team members. Address feedback
-      and make necessary changes.
-    </p>
-
-    <h3>Step 5: Test</h3>
-    <p>
-      Ensure all tests pass and the code works as expected in the staging environment.
-    </p>
-
-    <h3>Step 6: Merge</h3>
-    <p>
-      Once approved and tested, merge the pull request into the main branch:
-    </p>
-    <pre><code>git checkout main
-git merge feature/new-capability
-git push origin main</code></pre>
-
-    <h3>Step 7: Deploy</h3>
-    <p>
-      Deploy the changes to production and monitor for any issues.
-    </p>
-  </section>
-
-  <!-- Tools -->
-  <section class="section">
-    <h2>Collaboration Tools</h2>
-
-    <div class="grid">
-      <div class="card">
-        <div class="card-icon">📝</div>
-        <h2>Documentation</h2>
-        <ul>
-          <li>Markdown files</li>
-          <li>README documentation</li>
-          <li>API references</li>
-          <li>Architecture diagrams</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🔍</div>
-        <h2>Code Review</h2>
-        <ul>
-          <li>Pull request reviews</li>
-          <li>Inline comments</li>
-          <li>Approval workflows</li>
-          <li>Automated checks</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">🚀</div>
-        <h2>CI/CD</h2>
-        <ul>
-          <li>Automated testing</li>
-          <li>Build pipelines</li>
-          <li>Deployment automation</li>
-          <li>Quality gates</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">📊</div>
-        <h2>Project Management</h2>
-        <ul>
-          <li>Issue tracking</li>
-          <li>Kanban boards</li>
-          <li>Sprint planning</li>
-          <li>Progress reporting</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Getting Started -->
-  <section class="section">
-    <h2>Getting Started</h2>
-
-    <h3>For New Contributors</h3>
-    <p>
-      Welcome! Here's how to get started collaborating on this project:
-    </p>
-    <ol style="color: #aaa; line-height: 2; margin-left: 20px;">
-      <li>Clone the repository to your local machine</li>
-      <li>Read the documentation to understand the system</li>
-      <li>Set up your development environment</li>
-      <li>Find an issue or feature to work on</li>
-      <li>Create a branch and start coding</li>
-      <li>Submit a pull request when ready</li>
-      <li>Respond to feedback and iterate</li>
-    </ol>
-
-    <h3>For Team Leads</h3>
-    <p>
-      Manage collaboration by:
-    </p>
-    <ul style="color: #aaa; line-height: 2; margin-left: 20px;">
-      <li>Setting clear coding standards and guidelines</li>
-      <li>Establishing review processes and workflows</li>
-      <li>Providing timely feedback on pull requests</li>
-      <li>Mentoring new contributors</li>
-      <li>Maintaining documentation and architecture diagrams</li>
-    </ul>
-  </section>
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Loading index data...</p>
 </div>
 
-<!-- Footer -->
-<footer>
-  <p>
-    <strong style="color: #ff88ff;">Collaboration Workspace</strong><br>
-    Multi-Agent Development • Team Coordination • Quality Assurance
-  </p>
-  <p style="margin-top: 15px;">
-    <a href="../index.html">← Back to Home</a>
-  </p>
-</footer>
+<div class="container" id="content" style="display: none;"></div>
+
+<script>
+// Generic Index Loader
+// Loads structured index data and renders the page
+
+async function loadIndex() {
+  try {
+    // Load index tag data
+    const response = await fetch('index/tag.json');
+    if (!response.ok) {
+      throw new Error('Index data not found');
+    }
+
+    const tag = await response.json();
+
+    // Apply color scheme
+    document.body.className = `color-${tag.Color_Scheme}`;
+    document.title = tag.Title;
+
+    // Build page content
+    const content = document.getElementById('content');
+    content.innerHTML = `
+      <header>
+        <div class="icon">${tag.Icon}</div>
+        <h1>${tag.Title}</h1>
+        <p class="description">${tag.Description}</p>
+        <div>
+          <span class="badge">${tag.ISA_Level.replace('_', '-')}</span>
+          <span class="badge">UUID: ${tag.UUID.substring(0, 8)}</span>
+        </div>
+      </header>
+
+      ${tag.Parent_Path ? `
+      <div style="text-align: center; margin-bottom: 40px;">
+        <a href="${tag.Parent_Path}" class="btn btn-secondary">← Parent Directory</a>
+      </div>
+      ` : ''}
+
+      ${tag.Features && tag.Features.length > 0 ? `
+      <div class="section">
+        <h2>Features</h2>
+        <div class="grid">
+          ${tag.Features.map(f => `
+            <div class="card">
+              <div class="card-icon">${f.icon}</div>
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Child_Directories && tag.Child_Directories.length > 0 ? `
+      <div class="section">
+        <h2>Subdirectories</h2>
+        <div class="grid">
+          ${tag.Child_Directories.map(d => `
+            <div class="card">
+              <div class="card-icon">${d.icon}</div>
+              <h2><a href="${d.path}">${d.title}</a></h2>
+              <p>${d.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${(tag.Has_PLC || tag.Has_HMI || tag.Has_SCADA) ? `
+      <div class="section">
+        <h2>Control Interfaces</h2>
+        <div style="text-align: center;">
+          ${tag.Has_SCADA ? `<a href="${tag.SCADA_Path}" class="btn btn-primary">📊 SCADA</a>` : ''}
+          ${tag.Has_HMI ? `<a href="${tag.HMI_Path}" class="btn btn-primary">🎛️ HMI</a>` : ''}
+          ${tag.Has_PLC ? `<a href="${tag.PLC_Path}" class="btn btn-primary">⚙️ PLC</a>` : ''}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Related_Files && tag.Related_Files.length > 0 ? `
+      <div class="section">
+        <h2>Documentation</h2>
+        <div class="grid">
+          ${tag.Related_Files.map(f => `
+            <div class="card">
+              <h2><a href="${f.path}">${f.name}</a></h2>
+              <p>Type: ${f.type}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Quick_Actions && tag.Quick_Actions.length > 0 ? `
+      <div class="section">
+        <h2>Quick Actions</h2>
+        <div style="text-align: center;">
+          ${tag.Quick_Actions.map(a => `
+            <a href="${a.path}" class="btn btn-${a.type}">${a.label}</a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      <footer>
+        <p>
+          <strong>ISA-95 ${tag.ISA_Level.replace('_', '-')}</strong><br>
+          ${tag.Directory_Path}
+        </p>
+      </footer>
+    `;
+
+    // Hide loader, show content
+    document.getElementById('loader').style.display = 'none';
+    content.style.display = 'block';
+
+  } catch (error) {
+    console.error('Error loading index:', error);
+    document.getElementById('loader').innerHTML = `
+      <div class="card" style="max-width: 500px;">
+        <h2 style="color: #ff6666;">⚠️ Error Loading Index</h2>
+        <p>${error.message}</p>
+        <p style="margin-top: 20px;">
+          <a href="../" class="btn btn-secondary">← Go Back</a>
+        </p>
+      </div>
+    `;
+  }
+}
+
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadIndex);
+</script>
 
 </body>
 </html>

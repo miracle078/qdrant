@@ -1,0 +1,160 @@
+{
+  "UUID": "7ac26543-ba56-49ac-8429-ab5d7b365945",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/logs/",
+  "Directory_Name": "Logs",
+  "Title": "Logs",
+  "Description": "ISA-95 L3_MES - logs subsystem",
+  "Icon": "\ud83d\udcdd",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/logs/api/",
+      "title": "Api",
+      "description": "api subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/audit/",
+      "title": "Audit",
+      "description": "audit subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/boot/",
+      "title": "Boot",
+      "description": "boot subsystem",
+      "icon": "\ud83d\ude80"
+    },
+    {
+      "path": "/os/logs/database/",
+      "title": "Database",
+      "description": "database subsystem",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/logs/debug/",
+      "title": "Debug",
+      "description": "debug subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/errors/",
+      "title": "Errors",
+      "description": "errors subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/modules/",
+      "title": "Modules",
+      "description": "modules subsystem",
+      "icon": "\ud83d\udce6"
+    },
+    {
+      "path": "/os/logs/plc/",
+      "title": "Plc",
+      "description": "plc subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/scada/",
+      "title": "Scada",
+      "description": "scada subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/security/",
+      "title": "Security",
+      "description": "security subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/system/",
+      "title": "System",
+      "description": "system subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/logs/plc.html",
+  "hmi_path": "/os/logs/hmi.html",
+  "scada_path": "/os/logs/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

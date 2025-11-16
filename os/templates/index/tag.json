@@ -1,0 +1,124 @@
+{
+  "UUID": "2d604331-9b7f-4d4c-816a-7a815c9c64dc",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/templates/",
+  "Directory_Name": "Templates",
+  "Title": "Templates",
+  "Description": "ISA-95 L3_MES - templates subsystem",
+  "Icon": "\ud83d\udcc4",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/templates/components/",
+      "title": "Components",
+      "description": "components subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/templates/layouts/",
+      "title": "Layouts",
+      "description": "layouts subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/templates/medical/",
+      "title": "Medical",
+      "description": "medical subsystem",
+      "icon": "\ud83c\udfe5"
+    },
+    {
+      "path": "/os/templates/p-and-id/",
+      "title": "P And Id",
+      "description": "p-and-id subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/templates/views/",
+      "title": "Views",
+      "description": "views subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/templates/plc.html",
+  "hmi_path": "/os/templates/hmi.html",
+  "scada_path": "/os/templates/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

@@ -3,392 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Debug - Chazon</title>
+<title>Loading...</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: 'Courier New', monospace;
-    background: #0a0a0a;
-    color: #00ff88;
-    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
   }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top-color: #00ff88;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
   .container {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 60px 40px;
   }
+
   header {
-    background: #1a1a2e;
-    border: 2px solid #00ff88;
-    border-radius: 8px;
-    padding: 20px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .icon {
+    font-size: 4em;
     margin-bottom: 20px;
   }
+
   h1 {
-    color: #00ff88;
-    margin-bottom: 10px;
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
   }
-  .breadcrumb {
+
+  .description {
     color: #888;
-    font-size: 14px;
+    font-size: 1.3em;
   }
-  .breadcrumb a {
+
+  .badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2a2a3e;
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 10px 5px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #333;
+    border-left: 5px solid #00ff88;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s;
+  }
+
+  .card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .card h2 {
+    color: #00ff88;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  .card a {
     color: #00ccff;
     text-decoration: none;
   }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 20px;
+
+  .card a:hover {
+    text-decoration: underline;
   }
+
   .section {
     background: #1a1a2e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 20px;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
   }
+
   .section h2 {
-    color: #00ccff;
-    border-bottom: 2px solid #00ff88;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-size: 18px;
-  }
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
-  }
-  .info-label {
-    color: #888;
-  }
-  .info-value {
     color: #00ff88;
-    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 25px;
   }
-  .log-viewer {
-    background: #000;
-    border: 1px solid #333;
-    border-radius: 4px;
-    padding: 10px;
-    height: 300px;
-    overflow-y: auto;
-    font-size: 12px;
-  }
-  .log-entry {
-    margin: 2px 0;
-    padding: 2px 0;
-  }
-  .log-entry.error { color: #ff0044; }
-  .log-entry.warning { color: #ffaa00; }
-  .log-entry.success { color: #00ff88; }
-  .log-entry.info { color: #00ccff; }
+
   .btn {
-    padding: 8px 16px;
-    background: #00ff88;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 5px 0 0;
-    font-family: inherit;
-    font-size: 12px;
-  }
-  .btn:hover {
-    background: #00cc66;
-  }
-  .btn.secondary {
-    background: #333;
-    color: #00ff88;
-  }
-  .status-indicator {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 5px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px;
   }
-  .status-indicator.green { background: #00ff88; }
-  .status-indicator.red { background: #ff0044; }
-  .status-indicator.yellow { background: #ffaa00; }
-  .module-status {
-    padding: 8px;
-    margin: 5px 0;
-    background: #000;
-    border-left: 3px solid #333;
-    font-size: 12px;
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
   }
-  .module-status.loaded { border-left-color: #00ff88; }
-  .module-status.error { border-left-color: #ff0044; }
-  .module-status.loading { border-left-color: #ffaa00; }
-  pre {
-    background: #000;
-    padding: 10px;
-    border-radius: 4px;
-    overflow-x: auto;
-    font-size: 11px;
-    color: #00ff88;
+
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ccff;
+    border: 2px solid #00ccff;
   }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    border-top: 2px solid #333;
+    margin-top: 60px;
+  }
+
+  .color-green h1, .color-green .card { border-left-color: #00ff88; }
+  .color-blue h1, .color-blue .card { border-left-color: #00ccff; }
+  .color-purple h1, .color-purple .card { border-left-color: #ff88ff; }
+  .color-orange h1, .color-orange .card { border-left-color: #ffaa00; }
+  .color-red h1, .color-red .card { border-left-color: #ff6666; }
+  .color-cyan h1, .color-cyan .card { border-left-color: #00ffff; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>🐛 Debug Console</h1>
-    <div class="breadcrumb">
-      <a href="../">Home</a> / Debug
-    </div>
-  </header>
-
-  <div class="grid">
-    <!-- System Info -->
-    <div class="section">
-      <h2>System Info</h2>
-      <div class="info-row">
-        <span class="info-label">Browser:</span>
-        <span class="info-value" id="browser">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Platform:</span>
-        <span class="info-value" id="platform">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Screen:</span>
-        <span class="info-value" id="screen">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Memory:</span>
-        <span class="info-value" id="memory">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Connection:</span>
-        <span class="info-value" id="connection">-</span>
-      </div>
-      <button class="btn" onclick="refreshSystemInfo()">Refresh</button>
-    </div>
-
-    <!-- Feature Support -->
-    <div class="section">
-      <h2>Feature Support</h2>
-      <div class="info-row">
-        <span class="info-label">WebGPU:</span>
-        <span class="info-value" id="webgpu">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">WebGL:</span>
-        <span class="info-value" id="webgl">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">IndexedDB:</span>
-        <span class="info-value" id="indexeddb">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">LocalStorage:</span>
-        <span class="info-value" id="localstorage">-</span>
-      </div>
-      <div class="info-row">
-        <span class="info-label">Workers:</span>
-        <span class="info-value" id="workers">-</span>
-      </div>
-      <button class="btn" onclick="checkFeatures()">Check</button>
-    </div>
-  </div>
-
-  <!-- Module Status -->
-  <div class="section" style="margin-top: 20px;">
-    <h2>Module Status</h2>
-    <div id="module-status-list">
-      <p style="color: #888;">Click "Scan Modules" to detect loaded modules</p>
-    </div>
-    <button class="btn" onclick="scanModules()">Scan Modules</button>
-    <button class="btn secondary" onclick="clearModules()">Clear</button>
-  </div>
-
-  <!-- System Log -->
-  <div class="section" style="margin-top: 20px;">
-    <h2>System Log</h2>
-    <div class="log-viewer" id="log-viewer">
-      <div class="log-entry info">[${new Date().toLocaleTimeString()}] Debug console ready</div>
-    </div>
-    <button class="btn" onclick="clearLogs()">Clear Logs</button>
-    <button class="btn secondary" onclick="exportLogs()">Export</button>
-    <button class="btn secondary" onclick="testLog()">Test</button>
-  </div>
-
-  <!-- Performance Metrics -->
-  <div class="section" style="margin-top: 20px;">
-    <h2>Performance</h2>
-    <div id="performance-metrics">
-      <pre id="perf-data">Click "Measure" to run performance tests</pre>
-    </div>
-    <button class="btn" onclick="measurePerformance()">Measure</button>
-  </div>
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Loading index data...</p>
 </div>
 
+<div class="container" id="content" style="display: none;"></div>
+
 <script>
-const Logger = {
-  log(message, type = 'info') {
-    const entry = document.createElement('div');
-    entry.className = `log-entry ${type}`;
-    entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-    document.getElementById('log-viewer').appendChild(entry);
+// Generic Index Loader
+// Loads structured index data and renders the page
 
-    const viewer = document.getElementById('log-viewer');
-    viewer.scrollTop = viewer.scrollHeight;
-  },
-  error(msg) { this.log(msg, 'error'); },
-  warning(msg) { this.log(msg, 'warning'); },
-  success(msg) { this.log(msg, 'success'); },
-  info(msg) { this.log(msg, 'info'); }
-};
-
-function refreshSystemInfo() {
-  document.getElementById('browser').textContent = navigator.userAgent.split(' ').pop();
-  document.getElementById('platform').textContent = navigator.platform;
-  document.getElementById('screen').textContent = `${screen.width}x${screen.height}`;
-
-  if (performance.memory) {
-    const used = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1);
-    const total = (performance.memory.totalJSHeapSize / 1024 / 1024).toFixed(1);
-    document.getElementById('memory').textContent = `${used}/${total} MB`;
-  } else {
-    document.getElementById('memory').textContent = 'Not available';
-  }
-
-  document.getElementById('connection').textContent = navigator.onLine ? 'Online' : 'Offline';
-
-  Logger.success('System info refreshed');
-}
-
-async function checkFeatures() {
-  // WebGPU
-  const webgpu = navigator.gpu ? '✓ Supported' : '✗ Not supported';
-  document.getElementById('webgpu').textContent = webgpu;
-
-  // WebGL
-  const canvas = document.createElement('canvas');
-  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
-  const webgl = gl ? `✓ ${gl.getParameter(gl.VERSION)}` : '✗ Not supported';
-  document.getElementById('webgl').textContent = webgl;
-
-  // IndexedDB
-  const idb = 'indexedDB' in window ? '✓ Supported' : '✗ Not supported';
-  document.getElementById('indexeddb').textContent = idb;
-
-  // LocalStorage
-  const ls = 'localStorage' in window ? '✓ Supported' : '✗ Not supported';
-  document.getElementById('localstorage').textContent = ls;
-
-  // Workers
-  const workers = 'Worker' in window ? '✓ Supported' : '✗ Not supported';
-  document.getElementById('workers').textContent = workers;
-
-  Logger.success('Feature check complete');
-}
-
-function scanModules() {
-  const modules = [
-    'ChazonOS', 'MDCompiler', 'AttractorEngine', 'EquilibriumEngine',
-    'PackML', 'BootSequencer', 'ChazonCLI', 'ModelLoader', 'ONNXRuntime',
-    'WebGPUInference', 'MedicalInference', 'QdrantClient', 'TokenDB'
-  ];
-
-  const list = document.getElementById('module-status-list');
-  list.innerHTML = '';
-
-  modules.forEach(moduleName => {
-    const div = document.createElement('div');
-    div.className = 'module-status';
-
-    if (window[moduleName]) {
-      div.classList.add('loaded');
-      div.innerHTML = `<span class="status-indicator green"></span>${moduleName}: Loaded`;
-      Logger.success(`${moduleName} found`);
-    } else {
-      div.classList.add('error');
-      div.innerHTML = `<span class="status-indicator red"></span>${moduleName}: Not loaded`;
+async function loadIndex() {
+  try {
+    // Load index tag data
+    const response = await fetch('index/tag.json');
+    if (!response.ok) {
+      throw new Error('Index data not found');
     }
 
-    list.appendChild(div);
-  });
-}
+    const tag = await response.json();
 
-function clearModules() {
-  document.getElementById('module-status-list').innerHTML = '<p style="color: #888;">Cleared</p>';
-  Logger.info('Module list cleared');
-}
+    // Apply color scheme
+    document.body.className = `color-${tag.Color_Scheme}`;
+    document.title = tag.Title;
 
-function clearLogs() {
-  document.getElementById('log-viewer').innerHTML = '';
-  Logger.info('Logs cleared');
-}
+    // Build page content
+    const content = document.getElementById('content');
+    content.innerHTML = `
+      <header>
+        <div class="icon">${tag.Icon}</div>
+        <h1>${tag.Title}</h1>
+        <p class="description">${tag.Description}</p>
+        <div>
+          <span class="badge">${tag.ISA_Level.replace('_', '-')}</span>
+          <span class="badge">UUID: ${tag.UUID.substring(0, 8)}</span>
+        </div>
+      </header>
 
-function exportLogs() {
-  const logs = document.getElementById('log-viewer').textContent;
-  const blob = new Blob([logs], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `chazon-logs-${Date.now()}.txt`;
-  a.click();
-  Logger.success('Logs exported');
-}
+      ${tag.Parent_Path ? `
+      <div style="text-align: center; margin-bottom: 40px;">
+        <a href="${tag.Parent_Path}" class="btn btn-secondary">← Parent Directory</a>
+      </div>
+      ` : ''}
 
-function testLog() {
-  Logger.info('This is an info message');
-  Logger.success('This is a success message');
-  Logger.warning('This is a warning message');
-  Logger.error('This is an error message');
-}
+      ${tag.Features && tag.Features.length > 0 ? `
+      <div class="section">
+        <h2>Features</h2>
+        <div class="grid">
+          ${tag.Features.map(f => `
+            <div class="card">
+              <div class="card-icon">${f.icon}</div>
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-async function measurePerformance() {
-  Logger.info('Running performance tests...');
+      ${tag.Child_Directories && tag.Child_Directories.length > 0 ? `
+      <div class="section">
+        <h2>Subdirectories</h2>
+        <div class="grid">
+          ${tag.Child_Directories.map(d => `
+            <div class="card">
+              <div class="card-icon">${d.icon}</div>
+              <h2><a href="${d.path}">${d.title}</a></h2>
+              <p>${d.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  const results = [];
+      ${(tag.Has_PLC || tag.Has_HMI || tag.Has_SCADA) ? `
+      <div class="section">
+        <h2>Control Interfaces</h2>
+        <div style="text-align: center;">
+          ${tag.Has_SCADA ? `<a href="${tag.SCADA_Path}" class="btn btn-primary">📊 SCADA</a>` : ''}
+          ${tag.Has_HMI ? `<a href="${tag.HMI_Path}" class="btn btn-primary">🎛️ HMI</a>` : ''}
+          ${tag.Has_PLC ? `<a href="${tag.PLC_Path}" class="btn btn-primary">⚙️ PLC</a>` : ''}
+        </div>
+      </div>
+      ` : ''}
 
-  // Test 1: Array operations
-  const start1 = performance.now();
-  const arr = new Array(1000000).fill(0).map((_, i) => i * 2);
-  const end1 = performance.now();
-  results.push(`Array ops (1M): ${(end1 - start1).toFixed(2)}ms`);
+      ${tag.Related_Files && tag.Related_Files.length > 0 ? `
+      <div class="section">
+        <h2>Documentation</h2>
+        <div class="grid">
+          ${tag.Related_Files.map(f => `
+            <div class="card">
+              <h2><a href="${f.path}">${f.name}</a></h2>
+              <p>Type: ${f.type}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  // Test 2: Object creation
-  const start2 = performance.now();
-  for (let i = 0; i < 100000; i++) {
-    const obj = { x: i, y: i * 2, z: i * 3 };
+      ${tag.Quick_Actions && tag.Quick_Actions.length > 0 ? `
+      <div class="section">
+        <h2>Quick Actions</h2>
+        <div style="text-align: center;">
+          ${tag.Quick_Actions.map(a => `
+            <a href="${a.path}" class="btn btn-${a.type}">${a.label}</a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      <footer>
+        <p>
+          <strong>ISA-95 ${tag.ISA_Level.replace('_', '-')}</strong><br>
+          ${tag.Directory_Path}
+        </p>
+      </footer>
+    `;
+
+    // Hide loader, show content
+    document.getElementById('loader').style.display = 'none';
+    content.style.display = 'block';
+
+  } catch (error) {
+    console.error('Error loading index:', error);
+    document.getElementById('loader').innerHTML = `
+      <div class="card" style="max-width: 500px;">
+        <h2 style="color: #ff6666;">⚠️ Error Loading Index</h2>
+        <p>${error.message}</p>
+        <p style="margin-top: 20px;">
+          <a href="../" class="btn btn-secondary">← Go Back</a>
+        </p>
+      </div>
+    `;
   }
-  const end2 = performance.now();
-  results.push(`Object creation (100K): ${(end2 - start2).toFixed(2)}ms`);
-
-  // Test 3: String operations
-  const start3 = performance.now();
-  let str = '';
-  for (let i = 0; i < 10000; i++) {
-    str += 'test';
-  }
-  const end3 = performance.now();
-  results.push(`String concat (10K): ${(end3 - start3).toFixed(2)}ms`);
-
-  // Test 4: DOM operations
-  const start4 = performance.now();
-  for (let i = 0; i < 1000; i++) {
-    const div = document.createElement('div');
-    div.textContent = 'test';
-  }
-  const end4 = performance.now();
-  results.push(`DOM creation (1K): ${(end4 - start4).toFixed(2)}ms`);
-
-  document.getElementById('perf-data').textContent = results.join('\n');
-  Logger.success('Performance tests complete');
 }
 
-// Auto-run on load
-window.addEventListener('load', () => {
-  refreshSystemInfo();
-  checkFeatures();
-  Logger.success('Debug console loaded');
-});
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadIndex);
 </script>
 
 </body>

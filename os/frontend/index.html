@@ -3,620 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌌 Chazon - AI Medical Imaging</title>
+<title>Loading...</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: 'Courier New', monospace;
-    background: #0a0a0a;
-    color: #00ff88;
-    overflow: hidden;
-    height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
   }
 
-  /* Main Layout */
-  #app {
-    display: grid;
-    grid-template-rows: 50px 1fr 40px;
-    height: 100vh;
-  }
-
-  /* Header */
-  #header {
-    background: #1a1a2e;
-    border-bottom: 2px solid #00ff88;
+  .loader {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
-  }
-
-  #header h1 {
-    font-size: 1.2em;
-    color: #00ff88;
-  }
-
-  #nav-tabs {
-    display: flex;
-    gap: 10px;
-  }
-
-  .tab {
-    padding: 8px 16px;
-    background: #0a0a0a;
-    border: 1px solid #00ff88;
-    color: #00ff88;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s;
-  }
-
-  .tab:hover {
-    background: #00ff88;
-    color: #000;
-  }
-
-  .tab.active {
-    background: #00ff88;
-    color: #000;
-  }
-
-  /* Main Content Area */
-  #content {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    overflow: hidden;
-  }
-
-  /* Screens */
-  .screen {
-    display: none;
-    padding: 20px;
-    overflow-y: auto;
-  }
-
-  .screen.active {
-    display: block;
-  }
-
-  /* Log Panel (Always Visible) */
-  #log-panel {
-    background: #000;
-    border-left: 2px solid #00ff88;
-    padding: 20px;
-    overflow-y: auto;
-    font-size: 12px;
-  }
-
-  #log-panel h3 {
-    color: #00ccff;
-    margin-bottom: 10px;
-    position: sticky;
-    top: 0;
-    background: #000;
-    padding: 5px 0;
-  }
-
-  .log-entry {
-    margin: 2px 0;
-    padding: 2px 0;
-    animation: fadeIn 0.3s;
-  }
-
-  .log-entry.success { color: #00ff88; }
-  .log-entry.error { color: #ff0044; }
-  .log-entry.warning { color: #ffaa00; }
-  .log-entry.info { color: #00ccff; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* Terminal Screen */
-  #terminal-screen {
-    background: #000;
-    display: flex;
+    min-height: 100vh;
     flex-direction: column;
+    gap: 20px;
   }
 
-  #terminal-output {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-    white-space: pre-wrap;
-    font-size: 14px;
-  }
-
-  #terminal-input-line {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #00ff88;
-  }
-
-  #terminal-prompt {
-    color: #00ff88;
-    margin-right: 5px;
-  }
-
-  #terminal-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: #00ff88;
-    font-family: inherit;
-    font-size: 14px;
-    outline: none;
-  }
-
-  /* Debug Screen */
-  #debug-screen {
-    background: #0a0a0a;
-  }
-
-  .module-status {
-    background: #1a1a2e;
-    border: 1px solid #333;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
-  }
-
-  .module-status.loaded {
-    border-color: #00ff88;
-  }
-
-  .module-status.error {
-    border-color: #ff0044;
-  }
-
-  .module-name {
-    font-weight: bold;
-    color: #00ccff;
-  }
-
-  .module-path {
-    color: #888;
-    font-size: 11px;
-  }
-
-  .module-error {
-    color: #ff0044;
-    font-size: 12px;
-    margin-top: 5px;
-  }
-
-  /* Status Bar */
-  #status-bar {
-    background: #1a1a2e;
-    border-top: 2px solid #00ff88;
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
-    font-size: 12px;
-  }
-
-  .status-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .status-indicator {
-    width: 10px;
-    height: 10px;
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top-color: #00ff88;
     border-radius: 50%;
-    background: #888;
+    animation: spin 1s linear infinite;
   }
 
-  .status-indicator.loading {
-    background: #ffaa00;
-    animation: pulse 1s infinite;
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
-  .status-indicator.ready {
-    background: #00ff88;
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 40px;
   }
 
-  .status-indicator.error {
-    background: #ff0044;
+  header {
+    text-align: center;
+    margin-bottom: 60px;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+  .icon {
+    font-size: 4em;
+    margin-bottom: 20px;
   }
 
-  /* Buttons */
+  h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+  }
+
+  .description {
+    color: #888;
+    font-size: 1.3em;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2a2a3e;
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 10px 5px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #333;
+    border-left: 5px solid #00ff88;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s;
+  }
+
+  .card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .card h2 {
+    color: #00ff88;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  .card a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
+  .section {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .section h2 {
+    color: #00ff88;
+    font-size: 2em;
+    margin-bottom: 25px;
+  }
+
   .btn {
-    padding: 5px 15px;
-    background: #00ff88;
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
     color: #000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 12px;
+  }
+
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ccff;
+    border: 2px solid #00ccff;
   }
 
   .btn:hover {
-    background: #00cc66;
+    transform: translateY(-2px);
   }
 
-  .btn.secondary {
-    background: #333;
-    color: #00ff88;
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    border-top: 2px solid #333;
+    margin-top: 60px;
   }
 
-  /* Boot Progress */
-  #boot-progress {
-    margin: 20px 0;
-  }
-
-  .phase {
-    margin: 10px 0;
-    padding: 10px;
-    background: #1a1a2e;
-    border-left: 3px solid #333;
-  }
-
-  .phase.loading {
-    border-left-color: #ffaa00;
-  }
-
-  .phase.complete {
-    border-left-color: #00ff88;
-  }
-
-  .phase.error {
-    border-left-color: #ff0044;
-  }
-
-  .phase-name {
-    color: #00ccff;
-    font-weight: bold;
-  }
-
-  .phase-status {
-    color: #888;
-    font-size: 11px;
-  }
+  .color-green h1, .color-green .card { border-left-color: #00ff88; }
+  .color-blue h1, .color-blue .card { border-left-color: #00ccff; }
+  .color-purple h1, .color-purple .card { border-left-color: #ff88ff; }
+  .color-orange h1, .color-orange .card { border-left-color: #ffaa00; }
+  .color-red h1, .color-red .card { border-left-color: #ff6666; }
+  .color-cyan h1, .color-cyan .card { border-left-color: #00ffff; }
 </style>
 </head>
 <body>
 
-<div id="app">
-  <!-- Header -->
-  <div id="header">
-    <h1>🌌 Chazon - AI Medical Imaging</h1>
-    <div id="nav-tabs">
-      <button class="tab active" onclick="switchScreen('boot')">Boot</button>
-      <button class="tab" onclick="switchScreen('terminal')">Terminal</button>
-      <button class="tab" onclick="switchScreen('debug')">Debug</button>
-    </div>
-  </div>
-
-  <!-- Main Content -->
-  <div id="content">
-    <!-- Screens -->
-    <div id="screens">
-      <!-- Boot Screen -->
-      <div id="boot-screen" class="screen active">
-        <h2>System Boot</h2>
-        <div id="boot-progress"></div>
-        <div style="margin-top: 20px;">
-          <button class="btn" onclick="startBoot()">Start Boot</button>
-          <button class="btn secondary" onclick="testPhase(0)">Test Phase 0</button>
-          <button class="btn secondary" onclick="clearLogs()">Clear Logs</button>
-        </div>
-      </div>
-
-      <!-- Terminal Screen -->
-      <div id="terminal-screen" class="screen">
-        <div id="terminal-output"></div>
-        <div id="terminal-input-line">
-          <span id="terminal-prompt">chazon@os:~$</span>
-          <input type="text" id="terminal-input" autofocus>
-        </div>
-      </div>
-
-      <!-- Debug Screen -->
-      <div id="debug-screen" class="screen">
-        <h2>Module Debug Info</h2>
-        <div id="module-list"></div>
-      </div>
-    </div>
-
-    <!-- Log Panel (Always Visible) -->
-    <div id="log-panel">
-      <h3>System Log</h3>
-      <div id="log-content"></div>
-    </div>
-  </div>
-
-  <!-- Status Bar -->
-  <div id="status-bar">
-    <div class="status-item">
-      <div class="status-indicator" id="status-indicator"></div>
-      <span id="status-text">Idle</span>
-    </div>
-    <div class="status-item">
-      <span id="module-count">Modules: 0/0</span>
-      <span id="phase-count">Phase: 0/6</span>
-    </div>
-  </div>
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Loading index data...</p>
 </div>
 
+<div class="container" id="content" style="display: none;"></div>
+
 <script>
-// Global state
-const ChazonApp = {
-  currentScreen: 'boot',
-  bootState: 'idle',
-  modules: [],
-  phases: [],
-  errors: []
-};
+// Generic Index Loader
+// Loads structured index data and renders the page
 
-// Logging
-const Logger = {
-  log(message, type = 'info') {
-    const entry = document.createElement('div');
-    entry.className = `log-entry ${type}`;
-    entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-    document.getElementById('log-content').appendChild(entry);
-
-    // Auto-scroll
-    const logPanel = document.getElementById('log-panel');
-    logPanel.scrollTop = logPanel.scrollHeight;
-  },
-
-  success(msg) { this.log(msg, 'success'); },
-  error(msg) { this.log(msg, 'error'); ChazonApp.errors.push(msg); },
-  warning(msg) { this.log(msg, 'warning'); },
-  info(msg) { this.log(msg, 'info'); }
-};
-
-// Screen switching
-function switchScreen(screenName) {
-  // Update tabs
-  document.querySelectorAll('.tab').forEach(tab => {
-    tab.classList.remove('active');
-  });
-  event.target.classList.add('active');
-
-  // Update screens
-  document.querySelectorAll('.screen').forEach(screen => {
-    screen.classList.remove('active');
-  });
-  document.getElementById(`${screenName}-screen`).classList.add('active');
-
-  ChazonApp.currentScreen = screenName;
-  Logger.info(`Switched to ${screenName} screen`);
-}
-
-// Clear logs
-function clearLogs() {
-  document.getElementById('log-content').innerHTML = '';
-  Logger.info('Logs cleared');
-}
-
-// Update status
-function updateStatus(text, state = 'idle') {
-  document.getElementById('status-text').textContent = text;
-  const indicator = document.getElementById('status-indicator');
-  indicator.className = `status-indicator ${state}`;
-  ChazonApp.bootState = state;
-}
-
-// Minimal MDCompiler
-window.MDCompiler = {
-  compile(markdown) {
-    const regex = /```(?:javascript|js)?\n([\s\S]*?)```/g;
-    const blocks = [];
-    let match;
-    while ((match = regex.exec(markdown))) {
-      blocks.push(match[1].trim());
-    }
-    return blocks.map(code => {
-      try {
-        eval(code);
-        return { success: true };
-      } catch (err) {
-        return { success: false, error: err.message };
-      }
-    });
-  }
-};
-
-// Load single module
-async function loadModule(path) {
+async function loadIndex() {
   try {
-    Logger.info(`Loading: ${path}`);
-    const response = await fetch(path);
-
+    // Load index tag data
+    const response = await fetch('index/tag.json');
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+      throw new Error('Index data not found');
     }
 
-    const markdown = await response.text();
-    const compiled = MDCompiler.compile(markdown);
+    const tag = await response.json();
 
-    let hasError = false;
-    compiled.forEach(result => {
-      if (!result.success) {
-        Logger.error(`Error in ${path}: ${result.error}`);
-        hasError = true;
-      }
-    });
+    // Apply color scheme
+    document.body.className = `color-${tag.Color_Scheme}`;
+    document.title = tag.Title;
 
-    if (!hasError) {
-      Logger.success(`✓ ${path.split('/').pop()}`);
-      ChazonApp.modules.push({ path, status: 'loaded' });
-      return true;
-    } else {
-      ChazonApp.modules.push({ path, status: 'error' });
-      return false;
-    }
-  } catch (err) {
-    Logger.error(`✗ ${path}: ${err.message}`);
-    ChazonApp.modules.push({ path, status: 'error', error: err.message });
-    return false;
-  }
-}
+    // Build page content
+    const content = document.getElementById('content');
+    content.innerHTML = `
+      <header>
+        <div class="icon">${tag.Icon}</div>
+        <h1>${tag.Title}</h1>
+        <p class="description">${tag.Description}</p>
+        <div>
+          <span class="badge">${tag.ISA_Level.replace('_', '-')}</span>
+          <span class="badge">UUID: ${tag.UUID.substring(0, 8)}</span>
+        </div>
+      </header>
 
-// Test single phase
-async function testPhase(phaseNum) {
-  Logger.info(`Testing Phase ${phaseNum}...`);
-  updateStatus(`Testing Phase ${phaseNum}`, 'loading');
+      ${tag.Parent_Path ? `
+      <div style="text-align: center; margin-bottom: 40px;">
+        <a href="${tag.Parent_Path}" class="btn btn-secondary">← Parent Directory</a>
+      </div>
+      ` : ''}
 
-  const phases = [
-    {
-      name: 'Phase 0: Core',
-      modules: [
-        '../modules/chazon-mdcompiler.md',
-        '../modules/chazon-os.md',
-        '../modules/chazon-attractors.md'
-      ]
-    },
-    {
-      name: 'Phase 1: CLI',
-      modules: [
-        '../modules/cli-core.md',
-        '../modules/chazon-cli.md'
-      ]
-    }
-  ];
+      ${tag.Features && tag.Features.length > 0 ? `
+      <div class="section">
+        <h2>Features</h2>
+        <div class="grid">
+          ${tag.Features.map(f => `
+            <div class="card">
+              <div class="card-icon">${f.icon}</div>
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  const phase = phases[phaseNum];
-  if (!phase) {
-    Logger.error(`Phase ${phaseNum} not found`);
-    return;
-  }
+      ${tag.Child_Directories && tag.Child_Directories.length > 0 ? `
+      <div class="section">
+        <h2>Subdirectories</h2>
+        <div class="grid">
+          ${tag.Child_Directories.map(d => `
+            <div class="card">
+              <div class="card-icon">${d.icon}</div>
+              <h2><a href="${d.path}">${d.title}</a></h2>
+              <p>${d.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  updateBootPhase(phase.name, 'loading');
+      ${(tag.Has_PLC || tag.Has_HMI || tag.Has_SCADA) ? `
+      <div class="section">
+        <h2>Control Interfaces</h2>
+        <div style="text-align: center;">
+          ${tag.Has_SCADA ? `<a href="${tag.SCADA_Path}" class="btn btn-primary">📊 SCADA</a>` : ''}
+          ${tag.Has_HMI ? `<a href="${tag.HMI_Path}" class="btn btn-primary">🎛️ HMI</a>` : ''}
+          ${tag.Has_PLC ? `<a href="${tag.PLC_Path}" class="btn btn-primary">⚙️ PLC</a>` : ''}
+        </div>
+      </div>
+      ` : ''}
 
-  for (const modulePath of phase.modules) {
-    await loadModule(modulePath);
-  }
+      ${tag.Related_Files && tag.Related_Files.length > 0 ? `
+      <div class="section">
+        <h2>Documentation</h2>
+        <div class="grid">
+          ${tag.Related_Files.map(f => `
+            <div class="card">
+              <h2><a href="${f.path}">${f.name}</a></h2>
+              <p>Type: ${f.type}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-  updateBootPhase(phase.name, 'complete');
-  updateStatus('Test complete', 'ready');
-  Logger.success(`Phase ${phaseNum} test complete`);
-}
+      ${tag.Quick_Actions && tag.Quick_Actions.length > 0 ? `
+      <div class="section">
+        <h2>Quick Actions</h2>
+        <div style="text-align: center;">
+          ${tag.Quick_Actions.map(a => `
+            <a href="${a.path}" class="btn btn-${a.type}">${a.label}</a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
 
-// Update boot progress UI
-function updateBootPhase(phaseName, status) {
-  let phaseEl = document.querySelector(`[data-phase="${phaseName}"]`);
-
-  if (!phaseEl) {
-    phaseEl = document.createElement('div');
-    phaseEl.className = 'phase';
-    phaseEl.dataset.phase = phaseName;
-    phaseEl.innerHTML = `
-      <div class="phase-name">${phaseName}</div>
-      <div class="phase-status">Idle</div>
+      <footer>
+        <p>
+          <strong>ISA-95 ${tag.ISA_Level.replace('_', '-')}</strong><br>
+          ${tag.Directory_Path}
+        </p>
+      </footer>
     `;
-    document.getElementById('boot-progress').appendChild(phaseEl);
-  }
 
-  phaseEl.className = `phase ${status}`;
-  phaseEl.querySelector('.phase-status').textContent = status.toUpperCase();
-}
+    // Hide loader, show content
+    document.getElementById('loader').style.display = 'none';
+    content.style.display = 'block';
 
-// Full boot sequence
-async function startBoot() {
-  Logger.info('Starting boot sequence...');
-  updateStatus('Booting', 'loading');
-  ChazonApp.modules = [];
-
-  // Load boot sequencer first
-  Logger.info('Loading boot sequencer...');
-
-  try {
-    await loadModule('../boot/boot-sequencer.md');
-
-    if (window.BootSequencer) {
-      Logger.success('Boot sequencer loaded');
-      await window.BootSequencer.boot();
-    } else {
-      Logger.error('Boot sequencer not found in window');
-      updateStatus('Boot failed', 'error');
-    }
-  } catch (err) {
-    Logger.error(`Boot failed: ${err.message}`);
-    updateStatus('Boot failed', 'error');
+  } catch (error) {
+    console.error('Error loading index:', error);
+    document.getElementById('loader').innerHTML = `
+      <div class="card" style="max-width: 500px;">
+        <h2 style="color: #ff6666;">⚠️ Error Loading Index</h2>
+        <p>${error.message}</p>
+        <p style="margin-top: 20px;">
+          <a href="../" class="btn btn-secondary">← Go Back</a>
+        </p>
+      </div>
+    `;
   }
 }
 
-// Terminal
-const Terminal = {
-  print(text, color = '#00ff88') {
-    const line = document.createElement('div');
-    line.style.color = color;
-    line.textContent = text;
-    document.getElementById('terminal-output').appendChild(line);
-
-    const output = document.getElementById('terminal-output');
-    output.scrollTop = output.scrollHeight;
-  },
-
-  async exec(command) {
-    this.print(`chazon@os:~$ ${command}`, '#00ff88');
-
-    if (!command.trim()) return;
-
-    if (command === 'help') {
-      this.print('\nAvailable commands:', '#00ccff');
-      this.print('  help     - Show this help', '#888');
-      this.print('  clear    - Clear terminal', '#888');
-      this.print('  ls       - List files', '#888');
-      this.print('  boot     - Run boot sequence', '#888');
-      this.print('');
-      return;
-    }
-
-    if (command === 'clear') {
-      document.getElementById('terminal-output').innerHTML = '';
-      return;
-    }
-
-    if (command === 'boot') {
-      startBoot();
-      return;
-    }
-
-    if (window.ChazonCLI) {
-      try {
-        await ChazonCLI.exec(command);
-      } catch (err) {
-        this.print(`Error: ${err.message}`, '#ff0044');
-      }
-    } else {
-      this.print('CLI not loaded yet. Run boot first.', '#ff0044');
-    }
-  }
-};
-
-// Terminal input
-document.getElementById('terminal-input').addEventListener('keypress', async (e) => {
-  if (e.key === 'Enter') {
-    const input = e.target;
-    const command = input.value;
-    input.value = '';
-    await Terminal.exec(command);
-  }
-});
-
-// Initialize
-window.addEventListener('load', () => {
-  Logger.info('Chazon v1.0.0 - AI Medical Imaging Analyzer');
-  Logger.info('lablab.ai Qdrant Challenge');
-  Logger.info('');
-  Logger.info('Ready. Click "Start Boot" to begin.');
-  updateStatus('Ready', 'ready');
-});
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadIndex);
 </script>
 
 </body>

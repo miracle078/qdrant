@@ -1,0 +1,98 @@
+{
+  "UUID": "2a5a7fc3-d3c5-4753-8e28-7da4bac60d2c",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/backend/",
+  "Directory_Name": "Backend",
+  "Title": "Backend",
+  "Description": "ISA-95 L3_MES - backend subsystem",
+  "Icon": "\u2699\ufe0f",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/backend/plc.html",
+  "hmi_path": "/os/backend/hmi.html",
+  "scada_path": "/os/backend/scada.html",
+  "Features": [
+    {
+      "title": "API Services",
+      "description": "RESTful API endpoints",
+      "icon": "\ud83d\udd0c"
+    },
+    {
+      "title": "Data Processing",
+      "description": "Backend data operations",
+      "icon": "\u26a1"
+    },
+    {
+      "title": "Authentication",
+      "description": "User auth and security",
+      "icon": "\ud83d\udd10"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    },
+    {
+      "path": "requirements.txt",
+      "name": "Requirements",
+      "type": "text"
+    }
+  ]
+}
