@@ -1,5 +1,5 @@
 {
-  "UUID": "9bd86efb-f2ef-48cf-8182-357474173c9e",
+  "UUID": "d4cffc59-a266-42d2-82c6-bb9cf206ec65",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/",
   "Directory_Name": "Root",
@@ -13,37 +13,48 @@
       "path": "/cli/",
       "title": "Cli",
       "description": "cli subsystem",
-      "icon": "\u2328\ufe0f"
+      "icon": "\u2328\ufe0f",
+      "page_count": 13
     },
     {
       "path": "/collab/",
       "title": "Collab",
       "description": "collab subsystem",
-      "icon": "\ud83d\udc65"
+      "icon": "\ud83d\udc65",
+      "page_count": 5
     },
     {
       "path": "/docs/",
       "title": "Docs",
       "description": "docs subsystem",
-      "icon": "\ud83d\udcda"
+      "icon": "\ud83d\udcda",
+      "page_count": 9
     },
     {
       "path": "/os/",
       "title": "Os",
       "description": "os subsystem",
-      "icon": "\ud83d\udcbb"
+      "icon": "\ud83d\udcbb",
+      "page_count": 9
     }
   ],
   "Sibling_Directories": [],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
   "has_plc": true,
   "has_hmi": true,
   "has_scada": true,
-  "plc_path": "/./plc.html",
-  "hmi_path": "/./hmi.html",
-  "scada_path": "/./scada.html",
+  "plc_path": "plc.html",
+  "hmi_path": "hmi.html",
+  "scada_path": "scada.html",
   "Features": [
     {
       "title": "Core Functionality",
@@ -100,6 +111,11 @@
       "type": "html"
     },
     {
+      "path": "index-custom.html",
+      "name": "Custom Index",
+      "type": "html"
+    },
+    {
       "path": "plc.html",
       "name": "PLC",
       "type": "html"
@@ -113,6 +129,71 @@
       "path": "scada.html",
       "name": "SCADA",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "hmi.html",
+      "name": "Hmi",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 10491
+    },
+    {
+      "path": "plc.html",
+      "name": "Plc",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 8419
+    },
+    {
+      "path": "scada.html",
+      "name": "Scada",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 12596
+    },
+    {
+      "path": "ABOUT.md",
+      "name": "About",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 1541
+    },
+    {
+      "path": "CHANGELOG.md",
+      "name": "Changelog",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 7554
+    },
+    {
+      "path": "MANIFEST.md",
+      "name": "Manifest",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 7472
+    },
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 9332
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4441
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3595
     }
   ]
 }

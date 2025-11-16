@@ -1,15 +1,61 @@
 {
-  "UUID": "0e5708c6-3693-4c51-8125-44c10ea68312",
+  "UUID": "9ad71c0c-3171-44f3-bcfb-74151b6d46d3",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/controls/hmi/",
   "Directory_Name": "Hmi",
   "Title": "Hmi",
   "Description": "ISA-95 L3_MES - hmi subsystem",
-  "Icon": "\ud83d\udcc1",
+  "Icon": "\ud83c\udf9b\ufe0f",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/language/controls/",
   "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Sibling_Directories": [
+    {
+      "path": "/os/language/controls/plc/",
+      "title": "Plc",
+      "description": "plc area",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "path": "/os/language/controls/scada/",
+      "title": "Scada",
+      "description": "scada area",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/language/controls/tags/",
+      "title": "Tags",
+      "description": "tags area",
+      "icon": "\ud83c\udff7\ufe0f"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/language/",
+      "title": "Language",
+      "icon": "\ud83c\udf10"
+    },
+    {
+      "path": "/os/language/controls/",
+      "title": "Controls",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/language/controls/hmi/",
+      "title": "Hmi",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": null,
   "Status_Path": null,
@@ -63,6 +109,15 @@
       "path": "index.html",
       "name": "Index",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 731
     }
   ]
 }

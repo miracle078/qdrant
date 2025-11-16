@@ -1,5 +1,5 @@
 {
-  "UUID": "f4df39c3-b365-4709-b78b-c3c959232173",
+  "UUID": "09c6c210-7039-4551-84e0-0ba227b15813",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/trinary/compiler/",
   "Directory_Name": "Compiler",
@@ -13,19 +13,54 @@
       "path": "/os/language/trinary/compiler/controls/",
       "title": "Controls",
       "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f",
+      "page_count": 2
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/os/language/trinary/controls/",
+      "title": "Controls",
+      "description": "controls area",
       "icon": "\ud83c\udf9b\ufe0f"
     }
   ],
-  "Sibling_Directories": [],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/language/",
+      "title": "Language",
+      "icon": "\ud83c\udf10"
+    },
+    {
+      "path": "/os/language/trinary/",
+      "title": "Trinary",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/language/trinary/compiler/",
+      "title": "Compiler",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
   "has_plc": true,
   "has_hmi": true,
   "has_scada": true,
-  "plc_path": "/os/language/trinary/compiler/plc.html",
-  "hmi_path": "/os/language/trinary/compiler/hmi.html",
-  "scada_path": "/os/language/trinary/compiler/scada.html",
+  "plc_path": "plc.html",
+  "hmi_path": "hmi.html",
+  "scada_path": "scada.html",
   "Features": [
     {
       "title": "Core Functionality",
@@ -95,6 +130,64 @@
       "path": "scada.html",
       "name": "SCADA",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "hmi.html",
+      "name": "Hmi",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3922
+    },
+    {
+      "path": "plc.html",
+      "name": "Plc",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3693
+    },
+    {
+      "path": "scada.html",
+      "name": "Scada",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 6048
+    },
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 1481
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4680
+    },
+    {
+      "path": "lexer.md",
+      "name": "Lexer",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 2017
+    },
+    {
+      "path": "parser.md",
+      "name": "Parser",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 2599
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3633
     }
   ]
 }

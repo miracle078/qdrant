@@ -1,15 +1,71 @@
 {
-  "UUID": "63da35fc-8266-466d-958f-520ffae1c756",
+  "UUID": "51986a66-3f6e-47fd-8291-688d7e8fd435",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/debug/controls/controls/plc/",
   "Directory_Name": "Plc",
   "Title": "Plc",
   "Description": "ISA-95 L3_MES - plc subsystem",
-  "Icon": "\ud83d\udcc1",
+  "Icon": "\u2699\ufe0f",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/debug/controls/controls/",
   "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Sibling_Directories": [
+    {
+      "path": "/os/logs/debug/controls/controls/hmi/",
+      "title": "Hmi",
+      "description": "hmi area",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/logs/debug/controls/controls/scada/",
+      "title": "Scada",
+      "description": "scada area",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/logs/debug/controls/controls/tags/",
+      "title": "Tags",
+      "description": "tags area",
+      "icon": "\ud83c\udff7\ufe0f"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/logs/",
+      "title": "Logs",
+      "icon": "\ud83d\udcdd"
+    },
+    {
+      "path": "/os/logs/debug/",
+      "title": "Debug",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/debug/controls/",
+      "title": "Controls",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/logs/debug/controls/controls/",
+      "title": "Controls",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/logs/debug/controls/controls/plc/",
+      "title": "Plc",
+      "icon": "\u2699\ufe0f"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": null,
   "Status_Path": null,
@@ -63,6 +119,15 @@
       "path": "index.html",
       "name": "Index",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 760
     }
   ]
 }

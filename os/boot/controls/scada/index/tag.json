@@ -1,15 +1,61 @@
 {
-  "UUID": "40e57685-26dd-4abb-8af9-720b0ca43ae8",
+  "UUID": "58211940-9272-486b-bae5-3cf059b0b130",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/boot/controls/scada/",
   "Directory_Name": "Scada",
   "Title": "Scada",
   "Description": "ISA-95 L3_MES - scada subsystem",
-  "Icon": "\ud83d\udcc1",
+  "Icon": "\ud83d\udcca",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/boot/controls/",
   "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Sibling_Directories": [
+    {
+      "path": "/os/boot/controls/hmi/",
+      "title": "Hmi",
+      "description": "hmi area",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/boot/controls/plc/",
+      "title": "Plc",
+      "description": "plc area",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "path": "/os/boot/controls/tags/",
+      "title": "Tags",
+      "description": "tags area",
+      "icon": "\ud83c\udff7\ufe0f"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/boot/",
+      "title": "Boot",
+      "icon": "\ud83d\ude80"
+    },
+    {
+      "path": "/os/boot/controls/",
+      "title": "Controls",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/boot/controls/scada/",
+      "title": "Scada",
+      "icon": "\ud83d\udcca"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": null,
   "Status_Path": null,
@@ -63,6 +109,15 @@
       "path": "index.html",
       "name": "Index",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 782
     }
   ]
 }
