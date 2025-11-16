@@ -4,6 +4,28 @@
 
 All CLI tools are **markdown files (.md)** that follow the system's markdown-first architecture.
 
+## Three Access Methods
+
+Every CLI command is accessible via **three interfaces**:
+
+| Method | Example | Port |
+|--------|---------|------|
+| **CLI** (Direct) | `./cli/boot.md` | N/A |
+| **API** (REST) | `POST http://localhost:8001/cli/boot` | 8001 |
+| **MCP** (Tool) | `cli_boot` tool via MCP server | stdio |
+
+### Start Wrappers
+
+```bash
+# Start API wrapper (port 8001)
+python3 cli/api-wrapper.md
+
+# Start MCP wrapper (stdio)
+python3 cli/mcp-wrapper.md
+
+# Or configure MCP in Claude Desktop (see mcp-wrapper.md)
+```
+
 ---
 
 ## Quick Reference
@@ -30,6 +52,138 @@ All CLI tools are **markdown files (.md)** that follow the system's markdown-fir
 ./cli/models/download.md    # Download AI models
 ./cli/models/list.md        # List available models
 ```
+
+---
+
+## Complete Examples (All 3 Methods)
+
+### Boot OS
+```bash
+# CLI
+./cli/boot.md
+
+# API
+curl -X POST http://localhost:8001/cli/boot
+
+# MCP (natural language in Claude Desktop)
+"Boot the Chazon OS"
+```
+
+### Start Services
+```bash
+# CLI
+./cli/start.md
+
+# API
+curl -X POST http://localhost:8001/cli/start
+
+# MCP
+"Start all services"
+```
+
+### Health Check
+```bash
+# CLI
+./cli/health.md
+
+# API
+curl http://localhost:8001/cli/health
+
+# MCP
+"Check system health"
+```
+
+### View Logs
+```bash
+# CLI
+./cli/logs.md backend
+
+# API
+curl -X POST http://localhost:8001/cli/logs \
+  -H "Content-Type: application/json" \
+  -d '{"args": ["backend"]}'
+
+# MCP
+"Show me the backend logs"
+```
+
+### Run Tests
+```bash
+# CLI
+./cli/dev/test.md
+
+# API
+curl -X POST http://localhost:8001/cli/dev/test
+
+# MCP
+"Run all tests"
+```
+
+### List Models
+```bash
+# CLI
+./cli/models/list.md
+
+# API
+curl http://localhost:8001/cli/models/list
+
+# MCP
+"List all AI models"
+```
+
+---
+
+## API & MCP Wrappers
+
+### api-wrapper.md
+FastAPI server that exposes all CLI commands as REST endpoints.
+
+**Features:**
+- All CLI commands available via HTTP POST/GET
+- JSON responses with stdout/stderr/exit codes
+- CORS enabled
+- 5-minute timeout per command
+- `/cli/commands` endpoint lists all available commands
+
+**Endpoints:**
+- `GET /health` - API health check
+- `GET /cli/commands` - List all commands
+- `POST /cli/boot` - Boot OS
+- `POST /cli/start` - Start services
+- `POST /cli/stop` - Stop services
+- `POST /cli/restart` - Restart services
+- `GET /cli/health` - System health
+- `POST /cli/logs` - View logs
+- `POST /cli/deploy` - Deploy
+- `POST /cli/dev/setup` - Dev setup
+- `POST /cli/dev/test` - Run tests
+- `POST /cli/models/download` - Download models
+- `GET /cli/models/list` - List models
+- `POST /cli/exec` - Execute any command
+
+### mcp-wrapper.md
+Model Context Protocol server for Claude Desktop and other MCP clients.
+
+**Features:**
+- 12 MCP tools (one per CLI command)
+- Natural language interface
+- Async execution
+- 5-minute timeout per command
+- Works with Claude Desktop, IDEs, etc.
+
+**Tools:**
+- `cli_boot` - Boot OS
+- `cli_start` - Start services
+- `cli_stop` - Stop services
+- `cli_restart` - Restart services
+- `cli_health` - Health check
+- `cli_logs` - View logs (with area parameter)
+- `cli_deploy` - Deploy
+- `cli_dev_setup` - Dev setup
+- `cli_dev_test` - Run tests
+- `cli_models_download` - Download models
+- `cli_models_list` - List models
+- `cli_exec` - Execute any command
 
 ---
 
@@ -327,6 +481,8 @@ Total models: 4
 ```
 cli/
 ├── README.md               # This file
+├── api-wrapper.md          # REST API wrapper (port 8001)
+├── mcp-wrapper.md          # MCP server wrapper (stdio)
 ├── boot.md                 # Boot OS
 ├── start.md                # Start services
 ├── stop.md                 # Stop services
