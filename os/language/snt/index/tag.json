@@ -1,0 +1,90 @@
+{
+  "UUID": "a8a73ac4-6a9d-4eb9-b8ec-a9d74da00eef",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/language/snt/",
+  "Directory_Name": "Snt",
+  "Title": "Snt",
+  "Description": "ISA-95 L3_MES - snt subsystem",
+  "Icon": "\ud83d\udcc1",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/language/",
+  "Child_Directories": [
+    {
+      "path": "/os/language/snt/examples/",
+      "title": "Examples",
+      "description": "examples subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": null,
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/language/snt/plc.html",
+  "hmi_path": "/os/language/snt/hmi.html",
+  "scada_path": "/os/language/snt/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

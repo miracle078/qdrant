@@ -1,0 +1,111 @@
+{
+  "UUID": "ac96370c-cc95-4f4c-b36a-f6d5c5d9dfe6",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/frontend/",
+  "Directory_Name": "Frontend",
+  "Title": "Frontend",
+  "Description": "ISA-95 L3_MES - frontend subsystem",
+  "Icon": "\ud83d\udda5\ufe0f",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/frontend/public/",
+      "title": "Public",
+      "description": "public subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/frontend/src/",
+      "title": "Src",
+      "description": "src subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/frontend/plc.html",
+  "hmi_path": "/os/frontend/hmi.html",
+  "scada_path": "/os/frontend/scada.html",
+  "Features": [
+    {
+      "title": "User Interface",
+      "description": "React-based UI components",
+      "icon": "\ud83c\udfa8"
+    },
+    {
+      "title": "State Management",
+      "description": "Redux state handling",
+      "icon": "\ud83d\udd04"
+    },
+    {
+      "title": "Routing",
+      "description": "Client-side navigation",
+      "icon": "\ud83d\uddfa\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    },
+    {
+      "path": "package.json",
+      "name": "Package",
+      "type": "json"
+    }
+  ]
+}

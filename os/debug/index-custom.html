@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Debug - Chazon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  .breadcrumb {
+    color: #888;
+    font-size: 14px;
+  }
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .section h2 {
+    color: #00ccff;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #222;
+  }
+  .info-label {
+    color: #888;
+  }
+  .info-value {
+    color: #00ff88;
+    font-weight: bold;
+  }
+  .log-viewer {
+    background: #000;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+    font-size: 12px;
+  }
+  .log-entry {
+    margin: 2px 0;
+    padding: 2px 0;
+  }
+  .log-entry.error { color: #ff0044; }
+  .log-entry.warning { color: #ffaa00; }
+  .log-entry.success { color: #00ff88; }
+  .log-entry.info { color: #00ccff; }
+  .btn {
+    padding: 8px 16px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 5px 0 0;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  .btn:hover {
+    background: #00cc66;
+  }
+  .btn.secondary {
+    background: #333;
+    color: #00ff88;
+  }
+  .status-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+  .status-indicator.green { background: #00ff88; }
+  .status-indicator.red { background: #ff0044; }
+  .status-indicator.yellow { background: #ffaa00; }
+  .module-status {
+    padding: 8px;
+    margin: 5px 0;
+    background: #000;
+    border-left: 3px solid #333;
+    font-size: 12px;
+  }
+  .module-status.loaded { border-left-color: #00ff88; }
+  .module-status.error { border-left-color: #ff0044; }
+  .module-status.loading { border-left-color: #ffaa00; }
+  pre {
+    background: #000;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 11px;
+    color: #00ff88;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🐛 Debug Console</h1>
+    <div class="breadcrumb">
+      <a href="../">Home</a> / Debug
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- System Info -->
+    <div class="section">
+      <h2>System Info</h2>
+      <div class="info-row">
+        <span class="info-label">Browser:</span>
+        <span class="info-value" id="browser">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Platform:</span>
+        <span class="info-value" id="platform">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Screen:</span>
+        <span class="info-value" id="screen">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Memory:</span>
+        <span class="info-value" id="memory">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Connection:</span>
+        <span class="info-value" id="connection">-</span>
+      </div>
+      <button class="btn" onclick="refreshSystemInfo()">Refresh</button>
+    </div>
+
+    <!-- Feature Support -->
+    <div class="section">
+      <h2>Feature Support</h2>
+      <div class="info-row">
+        <span class="info-label">WebGPU:</span>
+        <span class="info-value" id="webgpu">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">WebGL:</span>
+        <span class="info-value" id="webgl">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">IndexedDB:</span>
+        <span class="info-value" id="indexeddb">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">LocalStorage:</span>
+        <span class="info-value" id="localstorage">-</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Workers:</span>
+        <span class="info-value" id="workers">-</span>
+      </div>
+      <button class="btn" onclick="checkFeatures()">Check</button>
+    </div>
+  </div>
+
+  <!-- Module Status -->
+  <div class="section" style="margin-top: 20px;">
+    <h2>Module Status</h2>
+    <div id="module-status-list">
+      <p style="color: #888;">Click "Scan Modules" to detect loaded modules</p>
+    </div>
+    <button class="btn" onclick="scanModules()">Scan Modules</button>
+    <button class="btn secondary" onclick="clearModules()">Clear</button>
+  </div>
+
+  <!-- System Log -->
+  <div class="section" style="margin-top: 20px;">
+    <h2>System Log</h2>
+    <div class="log-viewer" id="log-viewer">
+      <div class="log-entry info">[${new Date().toLocaleTimeString()}] Debug console ready</div>
+    </div>
+    <button class="btn" onclick="clearLogs()">Clear Logs</button>
+    <button class="btn secondary" onclick="exportLogs()">Export</button>
+    <button class="btn secondary" onclick="testLog()">Test</button>
+  </div>
+
+  <!-- Performance Metrics -->
+  <div class="section" style="margin-top: 20px;">
+    <h2>Performance</h2>
+    <div id="performance-metrics">
+      <pre id="perf-data">Click "Measure" to run performance tests</pre>
+    </div>
+    <button class="btn" onclick="measurePerformance()">Measure</button>
+  </div>
+</div>
+
+<script>
+const Logger = {
+  log(message, type = 'info') {
+    const entry = document.createElement('div');
+    entry.className = `log-entry ${type}`;
+    entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+    document.getElementById('log-viewer').appendChild(entry);
+
+    const viewer = document.getElementById('log-viewer');
+    viewer.scrollTop = viewer.scrollHeight;
+  },
+  error(msg) { this.log(msg, 'error'); },
+  warning(msg) { this.log(msg, 'warning'); },
+  success(msg) { this.log(msg, 'success'); },
+  info(msg) { this.log(msg, 'info'); }
+};
+
+function refreshSystemInfo() {
+  document.getElementById('browser').textContent = navigator.userAgent.split(' ').pop();
+  document.getElementById('platform').textContent = navigator.platform;
+  document.getElementById('screen').textContent = `${screen.width}x${screen.height}`;
+
+  if (performance.memory) {
+    const used = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1);
+    const total = (performance.memory.totalJSHeapSize / 1024 / 1024).toFixed(1);
+    document.getElementById('memory').textContent = `${used}/${total} MB`;
+  } else {
+    document.getElementById('memory').textContent = 'Not available';
+  }
+
+  document.getElementById('connection').textContent = navigator.onLine ? 'Online' : 'Offline';
+
+  Logger.success('System info refreshed');
+}
+
+async function checkFeatures() {
+  // WebGPU
+  const webgpu = navigator.gpu ? '✓ Supported' : '✗ Not supported';
+  document.getElementById('webgpu').textContent = webgpu;
+
+  // WebGL
+  const canvas = document.createElement('canvas');
+  const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+  const webgl = gl ? `✓ ${gl.getParameter(gl.VERSION)}` : '✗ Not supported';
+  document.getElementById('webgl').textContent = webgl;
+
+  // IndexedDB
+  const idb = 'indexedDB' in window ? '✓ Supported' : '✗ Not supported';
+  document.getElementById('indexeddb').textContent = idb;
+
+  // LocalStorage
+  const ls = 'localStorage' in window ? '✓ Supported' : '✗ Not supported';
+  document.getElementById('localstorage').textContent = ls;
+
+  // Workers
+  const workers = 'Worker' in window ? '✓ Supported' : '✗ Not supported';
+  document.getElementById('workers').textContent = workers;
+
+  Logger.success('Feature check complete');
+}
+
+function scanModules() {
+  const modules = [
+    'ChazonOS', 'MDCompiler', 'AttractorEngine', 'EquilibriumEngine',
+    'PackML', 'BootSequencer', 'ChazonCLI', 'ModelLoader', 'ONNXRuntime',
+    'WebGPUInference', 'MedicalInference', 'QdrantClient', 'TokenDB'
+  ];
+
+  const list = document.getElementById('module-status-list');
+  list.innerHTML = '';
+
+  modules.forEach(moduleName => {
+    const div = document.createElement('div');
+    div.className = 'module-status';
+
+    if (window[moduleName]) {
+      div.classList.add('loaded');
+      div.innerHTML = `<span class="status-indicator green"></span>${moduleName}: Loaded`;
+      Logger.success(`${moduleName} found`);
+    } else {
+      div.classList.add('error');
+      div.innerHTML = `<span class="status-indicator red"></span>${moduleName}: Not loaded`;
+    }
+
+    list.appendChild(div);
+  });
+}
+
+function clearModules() {
+  document.getElementById('module-status-list').innerHTML = '<p style="color: #888;">Cleared</p>';
+  Logger.info('Module list cleared');
+}
+
+function clearLogs() {
+  document.getElementById('log-viewer').innerHTML = '';
+  Logger.info('Logs cleared');
+}
+
+function exportLogs() {
+  const logs = document.getElementById('log-viewer').textContent;
+  const blob = new Blob([logs], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `chazon-logs-${Date.now()}.txt`;
+  a.click();
+  Logger.success('Logs exported');
+}
+
+function testLog() {
+  Logger.info('This is an info message');
+  Logger.success('This is a success message');
+  Logger.warning('This is a warning message');
+  Logger.error('This is an error message');
+}
+
+async function measurePerformance() {
+  Logger.info('Running performance tests...');
+
+  const results = [];
+
+  // Test 1: Array operations
+  const start1 = performance.now();
+  const arr = new Array(1000000).fill(0).map((_, i) => i * 2);
+  const end1 = performance.now();
+  results.push(`Array ops (1M): ${(end1 - start1).toFixed(2)}ms`);
+
+  // Test 2: Object creation
+  const start2 = performance.now();
+  for (let i = 0; i < 100000; i++) {
+    const obj = { x: i, y: i * 2, z: i * 3 };
+  }
+  const end2 = performance.now();
+  results.push(`Object creation (100K): ${(end2 - start2).toFixed(2)}ms`);
+
+  // Test 3: String operations
+  const start3 = performance.now();
+  let str = '';
+  for (let i = 0; i < 10000; i++) {
+    str += 'test';
+  }
+  const end3 = performance.now();
+  results.push(`String concat (10K): ${(end3 - start3).toFixed(2)}ms`);
+
+  // Test 4: DOM operations
+  const start4 = performance.now();
+  for (let i = 0; i < 1000; i++) {
+    const div = document.createElement('div');
+    div.textContent = 'test';
+  }
+  const end4 = performance.now();
+  results.push(`DOM creation (1K): ${(end4 - start4).toFixed(2)}ms`);
+
+  document.getElementById('perf-data').textContent = results.join('\n');
+  Logger.success('Performance tests complete');
+}
+
+// Auto-run on load
+window.addEventListener('load', () => {
+  refreshSystemInfo();
+  checkFeatures();
+  Logger.success('Debug console loaded');
+});
+</script>
+
+</body>
+</html>

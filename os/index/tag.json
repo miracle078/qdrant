@@ -1,0 +1,196 @@
+{
+  "UUID": "46bd5eab-2c72-4ea5-ac6a-db9bb231987a",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/",
+  "Directory_Name": "Os",
+  "Title": "Os",
+  "Description": "ISA-95 L3_MES - os subsystem",
+  "Icon": "\ud83d\udcbb",
+  "Color_Scheme": "blue",
+  "Parent_Path": null,
+  "Child_Directories": [
+    {
+      "path": "/os/backend/",
+      "title": "Backend",
+      "description": "backend subsystem",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "path": "/os/boot/",
+      "title": "Boot",
+      "description": "boot subsystem",
+      "icon": "\ud83d\ude80"
+    },
+    {
+      "path": "/os/config/",
+      "title": "Config",
+      "description": "config subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
+    {
+      "path": "/os/data/",
+      "title": "Data",
+      "description": "data subsystem",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/debug/",
+      "title": "Debug",
+      "description": "debug subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/equipment/",
+      "title": "Equipment",
+      "description": "equipment subsystem",
+      "icon": "\ud83c\udfed"
+    },
+    {
+      "path": "/os/frontend/",
+      "title": "Frontend",
+      "description": "frontend subsystem",
+      "icon": "\ud83d\udda5\ufe0f"
+    },
+    {
+      "path": "/os/language/",
+      "title": "Language",
+      "description": "language subsystem",
+      "icon": "\ud83c\udf10"
+    },
+    {
+      "path": "/os/logs/",
+      "title": "Logs",
+      "description": "logs subsystem",
+      "icon": "\ud83d\udcdd"
+    },
+    {
+      "path": "/os/medical/",
+      "title": "Medical",
+      "description": "medical subsystem",
+      "icon": "\ud83c\udfe5"
+    },
+    {
+      "path": "/os/models/",
+      "title": "Models",
+      "description": "models subsystem",
+      "icon": "\ud83e\udd16"
+    },
+    {
+      "path": "/os/modules/",
+      "title": "Modules",
+      "description": "modules subsystem",
+      "icon": "\ud83d\udce6"
+    },
+    {
+      "path": "/os/sandbox/",
+      "title": "Sandbox",
+      "description": "sandbox subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/scripts/",
+      "title": "Scripts",
+      "description": "scripts subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/templates/",
+      "title": "Templates",
+      "description": "templates subsystem",
+      "icon": "\ud83d\udcc4"
+    },
+    {
+      "path": "/os/test-modules/",
+      "title": "Test Modules",
+      "description": "test-modules subsystem",
+      "icon": "\ud83d\udce6"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/plc.html",
+  "hmi_path": "/os/hmi.html",
+  "scada_path": "/os/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

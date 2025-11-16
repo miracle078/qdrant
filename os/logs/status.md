@@ -1,0 +1,180 @@
+# System Status
+**UUID:** 7bc2a122-f0c2-4c9e-a85f-73edd2f5f96a
+**ISA-95 Level:** L3 MES
+**Directory:** `/os/logs/`
+**Last Updated:** 2025-11-16 01:51:02 UTC
+
+## Current State
+
+### Operational Status
+- **Status:** PRODUCTION
+- **Health:** HEALTHY
+- **Mode:** Automatic
+- **Uptime:** 95.6%
+
+### Resource Utilization
+- **CPU:** 47%
+- **Memory:** 58%
+- **Disk:** 67%
+- **Network:** Active
+
+## Control System
+
+### PLC Status
+- **Controller:** LOGS_PLC_001
+- **State:** PRODUCTION
+- **Scan Time:** 500ms
+- **Last Cycle:** 95ms
+- **Faults:** 0
+
+### HMI Status
+- **Interface:** LOGS_HMI
+- **Connected Users:** 0
+- **Screen:** Main Overview
+- **Refresh Rate:** 1 second
+- **Response Time:** 109ms
+
+### SCADA Status
+- **Server:** LOGS_SCADA
+- **Tag Count:** 45
+- **Update Rate:** 83%
+- **Data Quality:** Good
+- **Historian:** Connected
+
+## Alarms & Events
+
+### Active Alarms
+- **Critical:** 0
+- **Warning:** 3
+- **Info:** 1
+- **Total:** 3
+
+### Recent Events
+1. `[01:51:02]` System heartbeat - Normal
+2. `[01:51:02]` Tag refresh - Success
+3. `[01:51:02]` Communication - Active
+4. `[01:51:02]` Scan cycle - 80ms
+5. `[01:51:02]` Status update - Complete
+
+## Performance Metrics
+
+### Production (if applicable)
+- **Current Output:** 93 units/hr
+- **Target Output:** 100 units/hr
+- **Efficiency:** 79%
+- **Quality Rate:** 96.0%
+
+### System Health
+- **Response Time:** 71ms
+- **Packet Loss:** 0.47%
+- **Error Rate:** 0.411%
+- **Availability:** 95.6%
+
+## Network Status
+
+### Connections
+- **PLC Network:** Connected
+- **HMI Network:** Connected
+- **SCADA Network:** Connected
+- **Database:** Connected
+
+### Protocols
+- **OPC UA:** Port 4840 - Active
+- **Modbus TCP:** Port 502 - Active
+- **EtherNet/IP:** Port 44818 - Active
+- **HTTP/HTTPS:** Port 80/443 - Active
+
+## Tag Summary
+
+### Tag Statistics
+- **Total Tags:** 75
+- **Active Tags:** 81
+- **Stale Tags:** 2
+- **Bad Quality:** 0
+
+### Tag Categories
+- **Status Tags:** 12
+- **Process Tags:** 34
+- **Alarm Tags:** 3
+- **Command Tags:** 6
+- **Diagnostic Tags:** 9
+
+## PackML State Machine
+
+### Current State: PRODUCTION
+
+```
+IDLE → STARTING → EXECUTE → COMPLETING → COMPLETE
+                     ↑
+                  [CURRENT]
+
+Alternative States:
+- STOPPING → STOPPED
+- ABORTING → ABORTED
+- HOLDING → HELD
+```
+
+### State Details
+- **Entry Time:** 01:51:02
+- **Duration:** 128 seconds
+- **Transitions:** 12
+- **Faults:** 0
+
+## Maintenance
+
+### Last Maintenance
+- **Date:** 2025-11-16
+- **Type:** Preventive
+- **Duration:** 15 minutes
+- **Technician:** Operator_5
+
+### Next Scheduled
+- **Date:** 2025-11-16
+- **Type:** Inspection
+- **Estimated Duration:** 24 minutes
+- **Priority:** Normal
+
+## Diagnostics
+
+### System Checks
+- ✅ Configuration Valid
+- ✅ Communication Active
+- ✅ Tags Updating
+- ✅ No Active Alarms
+- ✅ Historian Recording
+- ✅ Backup Current
+
+### Health Indicators
+- **Overall:** HEALTHY
+- **Hardware:** GOOD
+- **Software:** GOOD
+- **Network:** GOOD
+- **Storage:** GOOD
+
+## Quick Actions
+
+### Available Commands
+- `START` - Start operation
+- `STOP` - Stop operation
+- `RESET` - Reset faults
+- `ACKNOWLEDGE` - Acknowledge alarms
+- `REFRESH` - Refresh display
+
+### Navigation
+- `plc.html` - PLC interface
+- `hmi.html` - HMI panel
+- `scada.html` - SCADA overview
+- `controls.md` - Control definitions
+- `README.md` - Documentation
+
+## Related Files
+
+- **Controls:** `controls.md` - PLC/HMI/SCADA pathways
+- **Documentation:** `README.md` - Area overview
+- **Interfaces:** `plc.html`, `hmi.html`, `scada.html`
+- **Configuration:** System configuration files
+
+---
+
+**Status Code:** HEALTHY
+**Message:** System operating normally

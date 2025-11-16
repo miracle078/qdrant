@@ -1,0 +1,93 @@
+{
+  "UUID": "a9a8655e-5175-4e58-be73-43aabb4d5e72",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/boot/",
+  "Directory_Name": "Boot",
+  "Title": "Boot",
+  "Description": "ISA-95 L3_MES - boot subsystem",
+  "Icon": "\ud83d\ude80",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/boot/plc.html",
+  "hmi_path": "/os/boot/hmi.html",
+  "scada_path": "/os/boot/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

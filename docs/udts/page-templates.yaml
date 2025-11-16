@@ -1,0 +1,146 @@
+# Page Template UDTs (User Defined Types)
+# ISA-95 Compliant Data Structures for All Page Types
+
+templates:
+  # Controls Page Template
+  ControlsTemplate:
+    name: ControlsTemplate
+    version: 1.0.0
+    description: PLC/HMI/SCADA control system definitions
+    tags:
+      - name: UUID
+        type: STRING
+      - name: ISA_Level
+        type: STRING
+      - name: PLC_Scan_Time
+        type: STRING
+      - name: Tag_Count
+        type: INTEGER
+      - name: Protocols
+        type: ARRAY[Protocol]
+      - name: PackML_State
+        type: STRING
+        enum: [IDLE, STARTING, EXECUTE, COMPLETING, COMPLETE, STOPPING, STOPPED, ABORTING, ABORTED, HOLDING, HELD]
+
+  # Status Page Template
+  StatusTemplate:
+    name: StatusTemplate
+    version: 1.0.0
+    description: Real-time operational status monitoring
+    tags:
+      - name: UUID
+        type: STRING
+      - name: Operational_Status
+        type: STRING
+        enum: [RUNNING, IDLE, STOPPED, WARNING, FAULT]
+      - name: Health
+        type: STRING
+        enum: [HEALTHY, DEGRADED, WARNING, CRITICAL]
+      - name: CPU_Usage
+        type: FLOAT
+        unit: percent
+      - name: Memory_Usage
+        type: FLOAT
+        unit: percent
+      - name: Disk_Usage
+        type: FLOAT
+        unit: percent
+      - name: Uptime
+        type: FLOAT
+        unit: percent
+      - name: Active_Alarms
+        type: INTEGER
+      - name: Last_Updated
+        type: TIMESTAMP
+
+  # README Template
+  ReadmeTemplate:
+    name: ReadmeTemplate
+    version: 1.0.0
+    description: Documentation and getting started guide
+    sections:
+      - Overview
+      - Features
+      - Installation
+      - Usage
+      - Configuration
+      - API_Reference
+      - Examples
+      - Contributing
+      - License
+
+  # SCADA Page Template
+  ScadaTemplate:
+    name: ScadaTemplate
+    version: 1.0.0
+    description: Supervisory Control and Data Acquisition interface
+    tags:
+      - name: Tag_Provider
+        type: STRING
+      - name: Update_Rate
+        type: INTEGER
+        unit: milliseconds
+      - name: Data_Points
+        type: INTEGER
+      - name: Historian_Status
+        type: STRING
+        enum: [Connected, Disconnected, Error]
+      - name: Alarm_Priority
+        type: STRING
+        enum: [Critical, High, Medium, Low, Info]
+
+  # HMI Page Template
+  HmiTemplate:
+    name: HmiTemplate
+    version: 1.0.0
+    description: Human-Machine Interface panel
+    tags:
+      - name: Screen_Count
+        type: INTEGER
+      - name: Access_Level
+        type: STRING
+        enum: [Operator, Engineer, Administrator, View_Only]
+      - name: Update_Rate
+        type: INTEGER
+        unit: seconds
+      - name: Connected_Users
+        type: INTEGER
+      - name: Response_Time
+        type: INTEGER
+        unit: milliseconds
+
+  # PLC Page Template
+  PlcTemplate:
+    name: PlcTemplate
+    version: 1.0.0
+    description: Programmable Logic Controller interface
+    tags:
+      - name: Controller_Name
+        type: STRING
+      - name: Scan_Time
+        type: INTEGER
+        unit: milliseconds
+      - name: Program_State
+        type: STRING
+        enum: [RUN, STOP, PROGRAM, TEST]
+      - name: Tag_Count
+        type: INTEGER
+      - name: Fault_Count
+        type: INTEGER
+      - name: Logic_Type
+        type: STRING
+        enum: [Ladder, Structured_Text, Function_Block, Sequential_Function_Chart]
+
+# Protocol UDT
+nested_types:
+  Protocol:
+    - name: name
+      type: STRING
+      enum: [OPC_UA, Modbus_TCP, EtherNet_IP, HTTP, HTTPS]
+    - name: port
+      type: INTEGER
+    - name: status
+      type: STRING
+      enum: [Active, Inactive, Error]
+    - name: security
+      type: STRING

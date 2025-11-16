@@ -1,0 +1,88 @@
+{
+  "UUID": "983abd8a-176f-4cee-9c89-1b9addca0e00",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/modules/medical/",
+  "Directory_Name": "Medical",
+  "Title": "Medical",
+  "Description": "ISA-95 L3_MES - medical subsystem",
+  "Icon": "\ud83c\udfe5",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/modules/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/modules/medical/plc.html",
+  "hmi_path": "/os/modules/medical/hmi.html",
+  "scada_path": "/os/modules/medical/scada.html",
+  "Features": [
+    {
+      "title": "DICOM Processing",
+      "description": "Medical image handling",
+      "icon": "\ud83c\udfe5"
+    },
+    {
+      "title": "AlF-DETECT",
+      "description": "AI-powered detection",
+      "icon": "\ud83e\udde0"
+    },
+    {
+      "title": "Analysis Tools",
+      "description": "Image analysis suite",
+      "icon": "\ud83d\udd2c"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

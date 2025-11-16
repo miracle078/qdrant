@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modules - Chazon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  header {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  .breadcrumb {
+    color: #888;
+    font-size: 14px;
+  }
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  .search-box {
+    margin: 20px 0;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 12px;
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    color: #00ff88;
+    font-family: inherit;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    background: #1a1a2e;
+    border: 1px solid #00ff88;
+    color: #00ff88;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .filter-btn.active {
+    background: #00ff88;
+    color: #000;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+  }
+  .stat-card {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+  }
+  .stat-value {
+    color: #00ff88;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  .stat-label {
+    color: #888;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 15px;
+  }
+  .module-card {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .module-card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+  }
+  .module-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 10px;
+  }
+  .module-name {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .module-category {
+    background: #000;
+    color: #00ccff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+  }
+  .module-desc {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .module-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 11px;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>📦 Module Browser</h1>
+    <div class="breadcrumb">
+      <a href="../">Home</a> / Modules
+    </div>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Search modules..." oninput="filterModules()">
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-category="all" onclick="setFilter('all', event)">All</button>
+    <button class="filter-btn" data-category="core" onclick="setFilter('core', event)">Core</button>
+    <button class="filter-btn" data-category="cli" onclick="setFilter('cli', event)">CLI</button>
+    <button class="filter-btn" data-category="medical" onclick="setFilter('medical', event)">Medical</button>
+    <button class="filter-btn" data-category="language" onclick="setFilter('language', event)">Language</button>
+    <button class="filter-btn" data-category="ui" onclick="setFilter('ui', event)">UI</button>
+    <button class="filter-btn" data-category="database" onclick="setFilter('database', event)">Database</button>
+    <button class="filter-btn" data-category="models" onclick="setFilter('models', event)">Models</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-value" id="total-modules">0</div>
+      <div class="stat-label">Total Modules</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="total-tokens">0</div>
+      <div class="stat-label">Total Tokens</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="avg-tokens">0</div>
+      <div class="stat-label">Avg Tokens/Module</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="categories">0</div>
+      <div class="stat-label">Categories</div>
+    </div>
+  </div>
+
+  <div class="module-grid" id="module-grid">
+    <!-- Modules will be loaded here -->
+  </div>
+</div>
+
+<script>
+const modules = [
+  // Core
+  { name: 'chazon-mdcompiler.md', category: 'core', desc: 'Markdown code block compiler', tokens: 180 },
+  { name: 'chazon-os.md', category: 'core', desc: 'OS kernel with virtual filesystem', tokens: 220 },
+  { name: 'chazon-attractors.md', category: 'core', desc: 'Strange attractor engine', tokens: 200 },
+  { name: 'chazon-equilibrium.md', category: 'core', desc: 'Nash equilibrium solver', tokens: 190 },
+  { name: 'chazon-packml.md', category: 'core', desc: 'PackML state machine', tokens: 210 },
+  { name: 'chazon-sqlite.md', category: 'core', desc: 'SQLite wrapper for browser', tokens: 170 },
+
+  // CLI
+  { name: 'cli-core.md', category: 'cli', desc: 'Core CLI system', tokens: 200 },
+  { name: 'cli-edit.md', category: 'cli', desc: 'File editing commands', tokens: 180 },
+  { name: 'cli-test.md', category: 'cli', desc: 'Testing commands', tokens: 150 },
+  { name: 'cli-logs.md', category: 'cli', desc: 'Log viewing commands', tokens: 140 },
+  { name: 'cli-git.md', category: 'cli', desc: 'Git wrapper commands', tokens: 160 },
+  { name: 'cli-models.md', category: 'cli', desc: 'Model management commands', tokens: 240 },
+  { name: 'cli-db.md', category: 'cli', desc: 'Database CLI commands', tokens: 180 },
+  { name: 'chazon-cli.md', category: 'cli', desc: 'Main CLI interface', tokens: 190 },
+
+  // Medical
+  { name: 'medical-imaging.md', category: 'medical', desc: 'Medical imaging core', tokens: 200 },
+  { name: 'medical-qdrant.md', category: 'medical', desc: 'Qdrant vector search', tokens: 180 },
+  { name: 'medical-xray-analyzer.md', category: 'medical', desc: 'X-ray analysis', tokens: 220 },
+  { name: 'medical-dicom-viewer.md', category: 'medical', desc: 'DICOM viewer', tokens: 240 },
+  { name: 'medical-dataset.md', category: 'medical', desc: 'Medical dataset loader', tokens: 170 },
+  { name: 'medical-inference.md', category: 'medical', desc: 'Client-side AI inference', tokens: 210 },
+  { name: 'qdrant-client.md', category: 'medical', desc: 'Qdrant client wrapper', tokens: 160 },
+  { name: 'embed-openai.md', category: 'medical', desc: 'OpenAI embeddings', tokens: 140 },
+
+  // Language
+  { name: 'trinary-core.md', category: 'language', desc: 'Balanced ternary arithmetic', tokens: 200 },
+  { name: 'spacetime-compiler.md', category: 'language', desc: 'Space-time compilation', tokens: 230 },
+  { name: 'snt-parser.md', category: 'language', desc: 'SNT syntax parser', tokens: 190 },
+  { name: 'snt-syntax.md', category: 'language', desc: 'SNT language syntax', tokens: 210 },
+  { name: 'photonic-layer.md', category: 'language', desc: 'Photonic quantum layer', tokens: 180 },
+  { name: 'emoji-compression.md', category: 'language', desc: 'Emoji-based compression', tokens: 160 },
+
+  // UI
+  { name: 'chazon-desktop.md', category: 'ui', desc: 'Desktop environment', tokens: 200 },
+  { name: 'chazon-windows.md', category: 'ui', desc: 'Window management', tokens: 180 },
+  { name: 'chazon-agents.md', category: 'ui', desc: 'Multi-agent system', tokens: 220 },
+  { name: 'chazon-icons.md', category: 'ui', desc: 'Icon system', tokens: 140 },
+  { name: 'chazon-taskbar.md', category: 'ui', desc: 'Taskbar UI', tokens: 150 },
+  { name: 'chazon-theme.md', category: 'ui', desc: 'Theme system', tokens: 130 },
+
+  // Database
+  { name: 'db-token.md', category: 'database', desc: 'Token database core', tokens: 190 },
+  { name: 'token-analyzer.md', category: 'database', desc: 'Module token analyzer', tokens: 200 },
+  { name: 'api-database.md', category: 'database', desc: 'Database API wrapper', tokens: 160 },
+  { name: 'mcp-database.md', category: 'database', desc: 'Database MCP wrapper', tokens: 150 },
+
+  // Models
+  { name: 'webgpu-inference.md', category: 'models', desc: 'WebGPU acceleration', tokens: 210 },
+  { name: 'onnx-runtime.md', category: 'models', desc: 'ONNX Runtime Web', tokens: 200 },
+  { name: 'model-loader.md', category: 'models', desc: 'Model download & cache', tokens: 240 }
+];
+
+let currentFilter = 'all';
+
+function renderModules() {
+  const grid = document.getElementById('module-grid');
+  const search = document.getElementById('search').value.toLowerCase();
+
+  const filtered = modules.filter(m => {
+    const matchesCategory = currentFilter === 'all' || m.category === currentFilter;
+    const matchesSearch = m.name.toLowerCase().includes(search) || m.desc.toLowerCase().includes(search);
+    return matchesCategory && matchesSearch;
+  });
+
+  grid.innerHTML = filtered.map(m => `
+    <div class="module-card" onclick="window.open('${m.name}')">
+      <div class="module-header">
+        <div class="module-name">${m.name}</div>
+        <div class="module-category">${m.category}</div>
+      </div>
+      <div class="module-desc">${m.desc}</div>
+      <div class="module-meta">
+        <span>📊 ${m.tokens} tokens</span>
+        <span>📄 Markdown</span>
+      </div>
+    </div>
+  `).join('');
+
+  updateStats(filtered);
+}
+
+function updateStats(filtered = modules) {
+  document.getElementById('total-modules').textContent = filtered.length;
+
+  const totalTokens = filtered.reduce((sum, m) => sum + m.tokens, 0);
+  document.getElementById('total-tokens').textContent = totalTokens.toLocaleString();
+
+  const avgTokens = filtered.length > 0 ? Math.round(totalTokens / filtered.length) : 0;
+  document.getElementById('avg-tokens').textContent = avgTokens;
+
+  const categories = new Set(modules.map(m => m.category)).size;
+  document.getElementById('categories').textContent = categories;
+}
+
+function setFilter(category, evt) {
+  currentFilter = category;
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  evt.target.classList.add('active');
+
+  renderModules();
+}
+
+function filterModules() {
+  renderModules();
+}
+
+// Initial render
+renderModules();
+</script>
+
+</body>
+</html>

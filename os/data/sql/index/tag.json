@@ -1,0 +1,83 @@
+{
+  "UUID": "b79f226e-d5cb-44c7-b037-1873aeab209c",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/data/sql/",
+  "Directory_Name": "Sql",
+  "Title": "Sql",
+  "Description": "ISA-95 L3_MES - sql subsystem",
+  "Icon": "\ud83d\udcc1",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/data/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": null,
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/data/sql/plc.html",
+  "hmi_path": "/os/data/sql/hmi.html",
+  "scada_path": "/os/data/sql/scada.html",
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

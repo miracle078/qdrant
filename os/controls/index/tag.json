@@ -1,0 +1,100 @@
+{
+  "UUID": "5574a9b2-5b91-4d55-9556-f828e0ad97e6",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/controls/",
+  "Directory_Name": "Controls",
+  "Title": "Controls",
+  "Description": "ISA-95 L3_MES - controls subsystem",
+  "Icon": "\ud83c\udf9b\ufe0f",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/",
+  "Child_Directories": [
+    {
+      "path": "/os/controls/tag-providers/",
+      "title": "Tag Providers",
+      "description": "tag-providers subsystem",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": true,
+  "has_hmi": true,
+  "has_scada": true,
+  "plc_path": "/os/controls/plc.html",
+  "hmi_path": "/os/controls/hmi.html",
+  "scada_path": "/os/controls/scada.html",
+  "Features": [
+    {
+      "title": "SCADA System",
+      "description": "Supervisory control",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Tag Providers",
+      "description": "Data point management",
+      "icon": "\ud83c\udff7\ufe0f"
+    },
+    {
+      "title": "Alarm Management",
+      "description": "Priority-based alarms",
+      "icon": "\ud83d\udea8"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC",
+      "type": "html"
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI",
+      "type": "html"
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA",
+      "type": "html"
+    }
+  ]
+}

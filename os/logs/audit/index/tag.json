@@ -1,0 +1,68 @@
+{
+  "UUID": "68a920c3-a465-4dd3-9594-b94c9c7f83fc",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/logs/audit/",
+  "Directory_Name": "Audit",
+  "Title": "Audit",
+  "Description": "ISA-95 L3_MES - audit subsystem",
+  "Icon": "\ud83d\udcc1",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/logs/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": null,
+  "Controls_Path": "controls.md",
+  "Status_Path": "status.md",
+  "has_plc": false,
+  "has_hmi": false,
+  "has_scada": false,
+  "plc_path": null,
+  "hmi_path": null,
+  "scada_path": null,
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown"
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown"
+    }
+  ]
+}

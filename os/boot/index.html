@@ -3,285 +3,320 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Boot System - Chazon</title>
+<title>Loading...</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
-    font-family: 'Courier New', monospace;
-    background: #0a0a0a;
-    color: #00ff88;
-    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
   }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #333;
+    border-top-color: #00ff88;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
   .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    padding: 60px 40px;
   }
+
   header {
-    background: #1a1a2e;
-    border: 2px solid #00ff88;
-    border-radius: 8px;
-    padding: 20px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .icon {
+    font-size: 4em;
     margin-bottom: 20px;
   }
+
   h1 {
-    color: #00ff88;
-    margin-bottom: 10px;
+    font-size: 3em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
   }
-  .breadcrumb {
+
+  .description {
     color: #888;
-    font-size: 14px;
+    font-size: 1.3em;
   }
-  .breadcrumb a {
+
+  .badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #2a2a3e;
+    border: 2px solid #00ff88;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff88;
+    margin: 10px 5px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 2px solid #333;
+    border-left: 5px solid #00ff88;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s;
+  }
+
+  .card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 10px 40px rgba(0, 255, 136, 0.2);
+    transform: translateY(-3px);
+  }
+
+  .card-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+  }
+
+  .card h2 {
+    color: #00ff88;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .card p {
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  .card a {
     color: #00ccff;
     text-decoration: none;
   }
+
+  .card a:hover {
+    text-decoration: underline;
+  }
+
   .section {
     background: #1a1a2e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
   }
+
   .section h2 {
-    color: #00ccff;
-    border-bottom: 2px solid #00ff88;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-  }
-  .phase {
-    background: #0a0a0a;
-    border-left: 3px solid #333;
-    padding: 15px;
-    margin: 10px 0;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .phase:hover {
-    border-left-color: #00ff88;
-    background: #1a1a2e;
-  }
-  .phase-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .phase-name {
     color: #00ff88;
-    font-weight: bold;
-    font-size: 16px;
+    font-size: 2em;
+    margin-bottom: 25px;
   }
-  .phase-status {
-    padding: 4px 12px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: bold;
-  }
-  .phase-status.idle { background: #333; color: #888; }
-  .phase-status.loading { background: #ffaa00; color: #000; }
-  .phase-status.complete { background: #00ff88; color: #000; }
-  .phase-status.error { background: #ff0044; color: #fff; }
-  .phase-modules {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #888;
-  }
-  .phase-modules ul {
-    list-style: none;
-    margin-top: 5px;
-  }
-  .phase-modules li {
-    padding: 5px 0;
-    border-bottom: 1px solid #222;
-  }
+
   .btn {
-    padding: 8px 16px;
-    background: #00ff88;
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    margin: 5px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
     color: #000;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 5px 5px 0 0;
-    font-family: inherit;
   }
+
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ccff;
+    border: 2px solid #00ccff;
+  }
+
   .btn:hover {
-    background: #00cc66;
+    transform: translateY(-2px);
   }
-  .btn.secondary {
-    background: #333;
-    color: #00ff88;
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    border-top: 2px solid #333;
+    margin-top: 60px;
   }
-  .diagram {
-    background: #000;
-    padding: 20px;
-    border-radius: 4px;
-    font-size: 12px;
-    overflow-x: auto;
-  }
+
+  .color-green h1, .color-green .card { border-left-color: #00ff88; }
+  .color-blue h1, .color-blue .card { border-left-color: #00ccff; }
+  .color-purple h1, .color-purple .card { border-left-color: #ff88ff; }
+  .color-orange h1, .color-orange .card { border-left-color: #ffaa00; }
+  .color-red h1, .color-red .card { border-left-color: #ff6666; }
+  .color-cyan h1, .color-cyan .card { border-left-color: #00ffff; }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>🚀 Boot System</h1>
-    <div class="breadcrumb">
-      <a href="../">Home</a> / Boot
-    </div>
-  </header>
-
-  <div class="section">
-    <h2>Boot Sequencer</h2>
-    <p style="color: #888; margin-bottom: 15px;">Modular state machine boot process with 6 phases</p>
-    <button class="btn" onclick="testBoot()">Test Boot</button>
-    <button class="btn secondary" onclick="window.open('boot-sequencer.md')">View Sequencer</button>
-    <button class="btn secondary" onclick="window.open('../frontend/')">Live Boot (Frontend)</button>
-  </div>
-
-  <div class="section">
-    <h2>Boot Phases</h2>
-
-    <div class="phase" onclick="window.open('boot-phase0-core.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 0: Core</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        Core infrastructure - Compiler, OS, Attractors, Equilibrium, PackML, SQLite
-        <ul>
-          <li>chazon-mdcompiler.md</li>
-          <li>chazon-os.md</li>
-          <li>chazon-attractors.md</li>
-          <li>chazon-equilibrium.md</li>
-          <li>chazon-packml.md</li>
-          <li>chazon-changelog.md</li>
-          <li>chazon-sqlite.md</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase" onclick="window.open('boot-phase1-cli.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 1: CLI</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        Command line interface system
-        <ul>
-          <li>cli-core.md, cli-edit.md, cli-test.md</li>
-          <li>cli-logs.md, cli-git.md</li>
-          <li>chazon-cli.md, chazon-state.md</li>
-          <li>chazon-mcp.md, chazon-api.md</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase" onclick="window.open('boot-phase2-ui.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 2: UI</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        User interface and desktop environment
-        <ul>
-          <li>chazon-agents.md, chazon-desktop.md</li>
-          <li>chazon-windows.md, chazon-icons.md</li>
-          <li>chazon-taskbar.md, chazon-theme.md</li>
-          <li>chazon-isa-*.md (ISA-88/95 standards)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase" onclick="window.open('boot-phase3-medical.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 3: Medical</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        Medical imaging and AI analysis
-        <ul>
-          <li>medical-imaging.md, medical-qdrant.md</li>
-          <li>qdrant-client.md, embed-openai.md</li>
-          <li>medical-xray-analyzer.md</li>
-          <li>medical-dataset.md, medical-dicom-viewer.md</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase" onclick="window.open('boot-phase4-language.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 4: Language</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        SNT language and trinary computing
-        <ul>
-          <li>trinary-core.md, spacetime-compiler.md</li>
-          <li>snt-parser.md, snt-syntax.md</li>
-          <li>photonic-layer.md, emoji-compression.md</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="phase" onclick="window.open('boot-phase5-programs.md')">
-      <div class="phase-header">
-        <div class="phase-name">Phase 5: Programs</div>
-        <div class="phase-status idle">IDLE</div>
-      </div>
-      <div class="phase-modules">
-        User programs and SNT examples
-        <ul>
-          <li>All programs in programs/</li>
-          <li>SNT language examples</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Boot Flow</h2>
-    <div class="diagram">
-<pre>
-┌─────────────────────────────────────────┐
-│       Boot Sequencer (Main)             │
-└─────────────────┬───────────────────────┘
-                  │
-         ┌────────┴────────┐
-         │  Load Phase     │
-         │  Modules First  │
-         └────────┬────────┘
-                  │
-    ┌─────────────┴─────────────┐
-    │                           │
-    ▼                           ▼
-┌───────────────┐       ┌───────────────┐
-│ Phase 0: Core │──────▶│ Phase 1: CLI  │
-│   (LOADING)   │       │    (IDLE)     │
-└───────────────┘       └───────┬───────┘
-                                │
-                    ┌───────────┴───────────┐
-                    │                       │
-                    ▼                       ▼
-            ┌───────────────┐       ┌───────────────┐
-            │ Phase 2: UI   │──────▶│ Phase 3:      │
-            │   (IDLE)      │       │   Medical     │
-            └───────────────┘       └───────┬───────┘
-                                            │
-                                ┌───────────┴────────┐
-                                │                    │
-                                ▼                    ▼
-                        ┌───────────────┐   ┌───────────────┐
-                        │ Phase 4:      │──▶│ Phase 5:      │
-                        │   Language    │   │   Programs    │
-                        └───────────────┘   └───────────────┘
-</pre>
-    </div>
-  </div>
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <p>Loading index data...</p>
 </div>
 
+<div class="container" id="content" style="display: none;"></div>
+
 <script>
-function testBoot() {
-  alert('Boot test:\n\n1. Open Frontend: ../frontend/\n2. Click "Start Boot"\n3. Watch phases load in real-time\n4. Check logs for any errors');
+// Generic Index Loader
+// Loads structured index data and renders the page
+
+async function loadIndex() {
+  try {
+    // Load index tag data
+    const response = await fetch('index/tag.json');
+    if (!response.ok) {
+      throw new Error('Index data not found');
+    }
+
+    const tag = await response.json();
+
+    // Apply color scheme
+    document.body.className = `color-${tag.Color_Scheme}`;
+    document.title = tag.Title;
+
+    // Build page content
+    const content = document.getElementById('content');
+    content.innerHTML = `
+      <header>
+        <div class="icon">${tag.Icon}</div>
+        <h1>${tag.Title}</h1>
+        <p class="description">${tag.Description}</p>
+        <div>
+          <span class="badge">${tag.ISA_Level.replace('_', '-')}</span>
+          <span class="badge">UUID: ${tag.UUID.substring(0, 8)}</span>
+        </div>
+      </header>
+
+      ${tag.Parent_Path ? `
+      <div style="text-align: center; margin-bottom: 40px;">
+        <a href="${tag.Parent_Path}" class="btn btn-secondary">← Parent Directory</a>
+      </div>
+      ` : ''}
+
+      ${tag.Features && tag.Features.length > 0 ? `
+      <div class="section">
+        <h2>Features</h2>
+        <div class="grid">
+          ${tag.Features.map(f => `
+            <div class="card">
+              <div class="card-icon">${f.icon}</div>
+              <h2>${f.title}</h2>
+              <p>${f.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Child_Directories && tag.Child_Directories.length > 0 ? `
+      <div class="section">
+        <h2>Subdirectories</h2>
+        <div class="grid">
+          ${tag.Child_Directories.map(d => `
+            <div class="card">
+              <div class="card-icon">${d.icon}</div>
+              <h2><a href="${d.path}">${d.title}</a></h2>
+              <p>${d.description}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${(tag.Has_PLC || tag.Has_HMI || tag.Has_SCADA) ? `
+      <div class="section">
+        <h2>Control Interfaces</h2>
+        <div style="text-align: center;">
+          ${tag.Has_SCADA ? `<a href="${tag.SCADA_Path}" class="btn btn-primary">📊 SCADA</a>` : ''}
+          ${tag.Has_HMI ? `<a href="${tag.HMI_Path}" class="btn btn-primary">🎛️ HMI</a>` : ''}
+          ${tag.Has_PLC ? `<a href="${tag.PLC_Path}" class="btn btn-primary">⚙️ PLC</a>` : ''}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Related_Files && tag.Related_Files.length > 0 ? `
+      <div class="section">
+        <h2>Documentation</h2>
+        <div class="grid">
+          ${tag.Related_Files.map(f => `
+            <div class="card">
+              <h2><a href="${f.path}">${f.name}</a></h2>
+              <p>Type: ${f.type}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      ${tag.Quick_Actions && tag.Quick_Actions.length > 0 ? `
+      <div class="section">
+        <h2>Quick Actions</h2>
+        <div style="text-align: center;">
+          ${tag.Quick_Actions.map(a => `
+            <a href="${a.path}" class="btn btn-${a.type}">${a.label}</a>
+          `).join('')}
+        </div>
+      </div>
+      ` : ''}
+
+      <footer>
+        <p>
+          <strong>ISA-95 ${tag.ISA_Level.replace('_', '-')}</strong><br>
+          ${tag.Directory_Path}
+        </p>
+      </footer>
+    `;
+
+    // Hide loader, show content
+    document.getElementById('loader').style.display = 'none';
+    content.style.display = 'block';
+
+  } catch (error) {
+    console.error('Error loading index:', error);
+    document.getElementById('loader').innerHTML = `
+      <div class="card" style="max-width: 500px;">
+        <h2 style="color: #ff6666;">⚠️ Error Loading Index</h2>
+        <p>${error.message}</p>
+        <p style="margin-top: 20px;">
+          <a href="../" class="btn btn-secondary">← Go Back</a>
+        </p>
+      </div>
+    `;
+  }
 }
+
+// Load on page ready
+document.addEventListener('DOMContentLoaded', loadIndex);
 </script>
 
 </body>

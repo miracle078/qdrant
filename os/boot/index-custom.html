@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boot System - Chazon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #00ff88;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  header {
+    background: #1a1a2e;
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #00ff88;
+    margin-bottom: 10px;
+  }
+  .breadcrumb {
+    color: #888;
+    font-size: 14px;
+  }
+  .breadcrumb a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+  .section {
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .section h2 {
+    color: #00ccff;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  .phase {
+    background: #0a0a0a;
+    border-left: 3px solid #333;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .phase:hover {
+    border-left-color: #00ff88;
+    background: #1a1a2e;
+  }
+  .phase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phase-name {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .phase-status {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+  }
+  .phase-status.idle { background: #333; color: #888; }
+  .phase-status.loading { background: #ffaa00; color: #000; }
+  .phase-status.complete { background: #00ff88; color: #000; }
+  .phase-status.error { background: #ff0044; color: #fff; }
+  .phase-modules {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #888;
+  }
+  .phase-modules ul {
+    list-style: none;
+    margin-top: 5px;
+  }
+  .phase-modules li {
+    padding: 5px 0;
+    border-bottom: 1px solid #222;
+  }
+  .btn {
+    padding: 8px 16px;
+    background: #00ff88;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 5px 0 0;
+    font-family: inherit;
+  }
+  .btn:hover {
+    background: #00cc66;
+  }
+  .btn.secondary {
+    background: #333;
+    color: #00ff88;
+  }
+  .diagram {
+    background: #000;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 12px;
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🚀 Boot System</h1>
+    <div class="breadcrumb">
+      <a href="../">Home</a> / Boot
+    </div>
+  </header>
+
+  <div class="section">
+    <h2>Boot Sequencer</h2>
+    <p style="color: #888; margin-bottom: 15px;">Modular state machine boot process with 6 phases</p>
+    <button class="btn" onclick="testBoot()">Test Boot</button>
+    <button class="btn secondary" onclick="window.open('boot-sequencer.md')">View Sequencer</button>
+    <button class="btn secondary" onclick="window.open('../frontend/')">Live Boot (Frontend)</button>
+  </div>
+
+  <div class="section">
+    <h2>Boot Phases</h2>
+
+    <div class="phase" onclick="window.open('boot-phase0-core.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 0: Core</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        Core infrastructure - Compiler, OS, Attractors, Equilibrium, PackML, SQLite
+        <ul>
+          <li>chazon-mdcompiler.md</li>
+          <li>chazon-os.md</li>
+          <li>chazon-attractors.md</li>
+          <li>chazon-equilibrium.md</li>
+          <li>chazon-packml.md</li>
+          <li>chazon-changelog.md</li>
+          <li>chazon-sqlite.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase" onclick="window.open('boot-phase1-cli.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 1: CLI</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        Command line interface system
+        <ul>
+          <li>cli-core.md, cli-edit.md, cli-test.md</li>
+          <li>cli-logs.md, cli-git.md</li>
+          <li>chazon-cli.md, chazon-state.md</li>
+          <li>chazon-mcp.md, chazon-api.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase" onclick="window.open('boot-phase2-ui.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 2: UI</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        User interface and desktop environment
+        <ul>
+          <li>chazon-agents.md, chazon-desktop.md</li>
+          <li>chazon-windows.md, chazon-icons.md</li>
+          <li>chazon-taskbar.md, chazon-theme.md</li>
+          <li>chazon-isa-*.md (ISA-88/95 standards)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase" onclick="window.open('boot-phase3-medical.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 3: Medical</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        Medical imaging and AI analysis
+        <ul>
+          <li>medical-imaging.md, medical-qdrant.md</li>
+          <li>qdrant-client.md, embed-openai.md</li>
+          <li>medical-xray-analyzer.md</li>
+          <li>medical-dataset.md, medical-dicom-viewer.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase" onclick="window.open('boot-phase4-language.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 4: Language</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        SNT language and trinary computing
+        <ul>
+          <li>trinary-core.md, spacetime-compiler.md</li>
+          <li>snt-parser.md, snt-syntax.md</li>
+          <li>photonic-layer.md, emoji-compression.md</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase" onclick="window.open('boot-phase5-programs.md')">
+      <div class="phase-header">
+        <div class="phase-name">Phase 5: Programs</div>
+        <div class="phase-status idle">IDLE</div>
+      </div>
+      <div class="phase-modules">
+        User programs and SNT examples
+        <ul>
+          <li>All programs in programs/</li>
+          <li>SNT language examples</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Boot Flow</h2>
+    <div class="diagram">
+<pre>
+┌─────────────────────────────────────────┐
+│       Boot Sequencer (Main)             │
+└─────────────────┬───────────────────────┘
+                  │
+         ┌────────┴────────┐
+         │  Load Phase     │
+         │  Modules First  │
+         └────────┬────────┘
+                  │
+    ┌─────────────┴─────────────┐
+    │                           │
+    ▼                           ▼
+┌───────────────┐       ┌───────────────┐
+│ Phase 0: Core │──────▶│ Phase 1: CLI  │
+│   (LOADING)   │       │    (IDLE)     │
+└───────────────┘       └───────┬───────┘
+                                │
+                    ┌───────────┴───────────┐
+                    │                       │
+                    ▼                       ▼
+            ┌───────────────┐       ┌───────────────┐
+            │ Phase 2: UI   │──────▶│ Phase 3:      │
+            │   (IDLE)      │       │   Medical     │
+            └───────────────┘       └───────┬───────┘
+                                            │
+                                ┌───────────┴────────┐
+                                │                    │
+                                ▼                    ▼
+                        ┌───────────────┐   ┌───────────────┐
+                        │ Phase 4:      │──▶│ Phase 5:      │
+                        │   Language    │   │   Programs    │
+                        └───────────────┘   └───────────────┘
+</pre>
+    </div>
+  </div>
+</div>
+
+<script>
+function testBoot() {
+  alert('Boot test:\n\n1. Open Frontend: ../frontend/\n2. Click "Start Boot"\n3. Watch phases load in real-time\n4. Check logs for any errors');
+}
+</script>
+
+</body>
+</html>
