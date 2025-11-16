@@ -1,5 +1,5 @@
 {
-  "UUID": "936fefff-9b2a-4120-8a9a-0c042f054cc9",
+  "UUID": "4a829383-8fd4-479f-8a2e-63a26feac284",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/equipment/process-cells/",
   "Directory_Name": "Process Cells",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/equipment/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/equipment/process-cells/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

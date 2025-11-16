@@ -1,5 +1,5 @@
 {
-  "UUID": "1b2b11a0-8ce7-4986-8778-25869975b364",
+  "UUID": "6cf619e4-c6b4-4d37-8f59-33e5c90ff15b",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/modules/cli/",
   "Directory_Name": "Cli",
@@ -8,7 +8,14 @@
   "Icon": "\u2328\ufe0f",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/modules/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/modules/cli/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

@@ -1,5 +1,5 @@
 {
-  "UUID": "77f6d114-9eb3-4eb8-9e55-75339d256cf9",
+  "UUID": "d2141b91-8265-482d-bc80-bcb018ccbe24",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/cli/backup/",
   "Directory_Name": "Backup",
@@ -63,6 +63,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

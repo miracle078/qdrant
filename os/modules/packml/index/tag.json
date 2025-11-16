@@ -1,5 +1,5 @@
 {
-  "UUID": "2b3fa882-2f18-4e95-a3d4-b41e1bb09447",
+  "UUID": "7ae37e18-cb65-4c98-9c62-36bc83023124",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/modules/packml/",
   "Directory_Name": "Packml",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/modules/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/modules/packml/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

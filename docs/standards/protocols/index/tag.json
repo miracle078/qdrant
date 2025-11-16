@@ -1,5 +1,5 @@
 {
-  "UUID": "cd312d59-169e-41b7-aa58-4b49f2ede291",
+  "UUID": "8c0f5c53-1355-49c5-baa7-59c1e0ab6ef1",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/protocols/",
   "Directory_Name": "Protocols",
@@ -87,6 +87,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

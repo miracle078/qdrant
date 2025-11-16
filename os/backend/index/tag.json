@@ -1,5 +1,5 @@
 {
-  "UUID": "2a5a7fc3-d3c5-4753-8e28-7da4bac60d2c",
+  "UUID": "74c4805c-8687-4b55-a2d6-e513d4dd4e62",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/backend/",
   "Directory_Name": "Backend",
@@ -8,7 +8,14 @@
   "Icon": "\u2699\ufe0f",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/backend/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",

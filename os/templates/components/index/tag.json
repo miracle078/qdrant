@@ -1,5 +1,5 @@
 {
-  "UUID": "9d4836fa-a635-451a-a663-690b85824260",
+  "UUID": "c0735085-59b1-4197-9e83-c5862a65b3ad",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/templates/components/",
   "Directory_Name": "Components",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/templates/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/templates/components/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

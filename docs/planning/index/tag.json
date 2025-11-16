@@ -1,5 +1,5 @@
 {
-  "UUID": "262df8c0-6a54-4640-a932-d07381cf60d4",
+  "UUID": "95ed7a0f-1c32-47b4-a1f7-57e2c006813a",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/planning/",
   "Directory_Name": "Planning",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "UUID": "3c30f709-243d-47fc-85c1-d4c84779df7a",
+  "UUID": "f7f3695f-4ced-4a5b-822e-91c9a318aec6",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/cli/models/",
   "Directory_Name": "Models",
@@ -63,6 +63,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

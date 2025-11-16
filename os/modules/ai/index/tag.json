@@ -1,5 +1,5 @@
 {
-  "UUID": "9e5dedba-4c92-4310-a1af-a438e6a14d7a",
+  "UUID": "a6af5b58-66a0-4747-bdc5-958fceb964fd",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/modules/ai/",
   "Directory_Name": "Ai",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/modules/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/modules/ai/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

@@ -1,5 +1,5 @@
 {
-  "UUID": "6e8c2088-0403-4cfe-92e4-2297bd899b86",
+  "UUID": "32096aee-1a38-49eb-9736-e52b669e6a4a",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/models/squeezenet/",
   "Directory_Name": "Squeezenet",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/models/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/models/squeezenet/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

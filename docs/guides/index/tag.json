@@ -1,5 +1,5 @@
 {
-  "UUID": "17e79729-6663-4f2c-b55c-18b8e1fb79d9",
+  "UUID": "f63025a1-235a-4eb2-820b-93b33727adc6",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/guides/",
   "Directory_Name": "Guides",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

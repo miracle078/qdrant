@@ -1,5 +1,5 @@
 {
-  "UUID": "273e1076-0be4-43a4-a961-7777b558f7c1",
+  "UUID": "3e69d7fd-7ef3-4076-9b4f-e57b0a7c95c8",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/config/",
   "Directory_Name": "Config",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/config/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

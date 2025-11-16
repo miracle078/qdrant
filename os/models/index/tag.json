@@ -1,5 +1,5 @@
 {
-  "UUID": "1940873c-1d45-46f2-a715-965c4de6922a",
+  "UUID": "d686ee62-e98e-428b-97aa-625eef234936",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/models/",
   "Directory_Name": "Models",
@@ -14,6 +14,12 @@
       "title": "Bert Tiny",
       "description": "bert-tiny subsystem",
       "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/models/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
     },
     {
       "path": "/os/models/mobilenet-v2/",

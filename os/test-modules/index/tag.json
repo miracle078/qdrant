@@ -1,5 +1,5 @@
 {
-  "UUID": "a72ece9e-eaa0-4c73-8a46-2ba8a374c8fa",
+  "UUID": "7f25770a-4fec-429e-9e36-b8e17326843b",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/test-modules/",
   "Directory_Name": "Test Modules",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udce6",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/test-modules/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",

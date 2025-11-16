@@ -1,5 +1,5 @@
 {
-  "UUID": "16a2f122-0306-41f7-9279-1416662b3a92",
+  "UUID": "c7b9bb39-9c78-4271-aa7b-f5d5aba739d9",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/tom/",
   "Directory_Name": "Tom",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

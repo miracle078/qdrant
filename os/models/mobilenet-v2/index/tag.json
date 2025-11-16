@@ -1,5 +1,5 @@
 {
-  "UUID": "cac7f9b0-c2eb-4bff-a8b9-0681bb2cfbcb",
+  "UUID": "056f1742-b6f6-4733-90d5-9753421323c7",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/models/mobilenet-v2/",
   "Directory_Name": "Mobilenet V2",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/models/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/models/mobilenet-v2/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

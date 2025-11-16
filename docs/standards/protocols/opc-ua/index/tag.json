@@ -1,5 +1,5 @@
 {
-  "UUID": "90f3b96b-2850-4d06-af15-18a9cc6283f7",
+  "UUID": "1f5324e4-0abe-4cf6-aef5-72d90565971c",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/protocols/opc-ua/",
   "Directory_Name": "Opc Ua",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

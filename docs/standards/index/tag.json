@@ -1,5 +1,5 @@
 {
-  "UUID": "be2f2c4f-fc3e-4d52-b95b-efb8140d3899",
+  "UUID": "0413d54b-333d-4b54-9c68-2252e4ddc913",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/",
   "Directory_Name": "Standards",
@@ -81,6 +81,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

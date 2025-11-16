@@ -1,5 +1,5 @@
 {
-  "UUID": "ac96370c-cc95-4f4c-b36a-f6d5c5d9dfe6",
+  "UUID": "44592a41-b142-47b4-9b5b-581c7ea8ff95",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/frontend/",
   "Directory_Name": "Frontend",
@@ -9,6 +9,12 @@
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
   "Child_Directories": [
+    {
+      "path": "/os/frontend/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
     {
       "path": "/os/frontend/public/",
       "title": "Public",

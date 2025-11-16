@@ -1,5 +1,5 @@
 {
-  "UUID": "fed3a9d8-d881-46bb-86f5-9b062234e388",
+  "UUID": "c9b871f6-d01f-48dc-9d8d-5304843a5127",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/security/",
   "Directory_Name": "Security",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/security/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

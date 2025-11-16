@@ -1,5 +1,5 @@
 {
-  "UUID": "b79f226e-d5cb-44c7-b037-1873aeab209c",
+  "UUID": "12f4ae3b-8603-42f3-8a52-de3d0b09b799",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/data/sql/",
   "Directory_Name": "Sql",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/data/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/data/sql/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

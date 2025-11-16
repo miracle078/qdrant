@@ -1,5 +1,5 @@
 {
-  "UUID": "d7df8cc6-e56d-47c9-870f-3012d10f42c4",
+  "UUID": "69f1d13f-7435-4d68-bde0-f0d6ad5878f3",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/equipment/",
   "Directory_Name": "Equipment",
@@ -20,6 +20,12 @@
       "title": "Control Modules",
       "description": "control-modules subsystem",
       "icon": "\ud83d\udce6"
+    },
+    {
+      "path": "/os/equipment/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
     },
     {
       "path": "/os/equipment/enterprise/",
@@ -111,6 +117,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

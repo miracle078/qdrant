@@ -1,5 +1,5 @@
 {
-  "UUID": "04b14bf1-06b1-4137-93f5-0922c3ab85d2",
+  "UUID": "f4a0b972-59a9-4ebf-9a36-a3c14fdd0063",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/data/",
   "Directory_Name": "Data",
@@ -14,6 +14,12 @@
       "title": "Architecture",
       "description": "architecture subsystem",
       "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/data/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
     },
     {
       "path": "/os/data/sql/",

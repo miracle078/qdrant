@@ -1,5 +1,5 @@
 {
-  "UUID": "0e3800ea-233a-4e4d-af3d-d89e62d1a596",
+  "UUID": "3964731b-1ca6-442a-8938-02694f5455fb",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/protocols/modbus/",
   "Directory_Name": "Modbus",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

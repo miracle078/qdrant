@@ -1,5 +1,5 @@
 {
-  "UUID": "8ef8a27a-f8ac-4c4a-8345-e3df24073981",
+  "UUID": "3f7a4a5a-b48d-469e-b5e5-9b87a676b048",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/protocols/mqtt/",
   "Directory_Name": "Mqtt",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

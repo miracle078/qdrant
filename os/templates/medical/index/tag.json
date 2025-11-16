@@ -1,5 +1,5 @@
 {
-  "UUID": "46f61851-abfa-4b40-8e6a-a629c4a16134",
+  "UUID": "0144b04c-dda2-45bd-a091-2ec216138cae",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/templates/medical/",
   "Directory_Name": "Medical",
@@ -8,7 +8,14 @@
   "Icon": "\ud83c\udfe5",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/templates/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/templates/medical/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

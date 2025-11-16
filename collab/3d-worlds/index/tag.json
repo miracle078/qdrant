@@ -1,5 +1,5 @@
 {
-  "UUID": "1507ecfc-22b0-4328-85ad-ea0c88b565b1",
+  "UUID": "9e920352-5b9b-4314-83b8-d09099ab63d5",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/3d-worlds/",
   "Directory_Name": "3D Worlds",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

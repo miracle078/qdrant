@@ -1,0 +1,68 @@
+{
+  "UUID": "22ddc380-8b59-4084-9839-15043950c31a",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/os/templates/p-and-id/controls/controls/plc/",
+  "Directory_Name": "Plc",
+  "Title": "Plc",
+  "Description": "ISA-95 L3_MES - plc subsystem",
+  "Icon": "\ud83d\udcc1",
+  "Color_Scheme": "blue",
+  "Parent_Path": "/os/templates/p-and-id/controls/controls/",
+  "Child_Directories": [],
+  "Sibling_Directories": [],
+  "README_Path": "README.md",
+  "Controls_Path": null,
+  "Status_Path": null,
+  "has_plc": false,
+  "has_hmi": false,
+  "has_scada": false,
+  "plc_path": null,
+  "hmi_path": null,
+  "scada_path": null,
+  "Features": [
+    {
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Status",
+      "path": "status.md",
+      "type": "primary"
+    },
+    {
+      "label": "Controls",
+      "path": "controls.md",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    }
+  ]
+}

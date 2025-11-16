@@ -1,5 +1,5 @@
 {
-  "UUID": "a0179123-6109-43c4-9806-ecedc051b269",
+  "UUID": "25ee39bf-3548-4241-888c-c87a3d0db0e2",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/controls/tag-providers/",
   "Directory_Name": "Tag Providers",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/controls/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/controls/tag-providers/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

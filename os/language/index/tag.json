@@ -1,5 +1,5 @@
 {
-  "UUID": "fa5e7686-eebb-48d2-9cb3-b3a966435f3b",
+  "UUID": "779883e4-eaae-438f-868a-c44e944b0f66",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/",
   "Directory_Name": "Language",
@@ -9,6 +9,12 @@
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
   "Child_Directories": [
+    {
+      "path": "/os/language/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
     {
       "path": "/os/language/snt/",
       "title": "Snt",

@@ -1,5 +1,5 @@
 {
-  "UUID": "772a0d0b-d9f6-48b3-b40e-f80fdb95ae5a",
+  "UUID": "763fdfe3-fb85-4f85-8ecc-48020719a6e7",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/api/",
   "Directory_Name": "Api",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/api/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

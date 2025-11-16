@@ -1,5 +1,5 @@
 {
-  "UUID": "f603d37d-5755-42ab-a1ff-352d3361d693",
+  "UUID": "5d88264d-5304-4247-8e9c-3ba5bf5ef46f",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/standards/isa/isa-101/",
   "Directory_Name": "Isa 101",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

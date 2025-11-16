@@ -1,5 +1,5 @@
 {
-  "UUID": "04e9b801-32db-4ff0-9322-40356c5f28f1",
+  "UUID": "21355b61-a371-43d5-bb73-a19b91759843",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/templates/views/",
   "Directory_Name": "Views",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/templates/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/templates/views/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

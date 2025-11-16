@@ -1,5 +1,5 @@
 {
-  "UUID": "78be3603-32ba-4719-b9ed-35ce0dc7f415",
+  "UUID": "f22a433f-dc50-4b0a-b28b-588b24217c0e",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/equipment/units/",
   "Directory_Name": "Units",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/equipment/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/equipment/units/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "UUID": "a85645d2-8301-4be0-8ec4-b54f0bff33b1",
+  "UUID": "716d5edb-8578-40ea-991b-08fbae0f3a82",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/cli/logs/",
   "Directory_Name": "Logs",
@@ -63,6 +63,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

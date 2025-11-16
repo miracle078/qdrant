@@ -1,5 +1,5 @@
 {
-  "UUID": "aae87347-2b8e-41e2-b2da-13fe0c19fa6b",
+  "UUID": "d4a93814-c996-4cd2-847b-c514d7477e75",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/scada/",
   "Directory_Name": "Scada",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/scada/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

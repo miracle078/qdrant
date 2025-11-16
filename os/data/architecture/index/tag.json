@@ -1,5 +1,5 @@
 {
-  "UUID": "8b57c6a0-26b2-4d06-a82d-1410b23cec78",
+  "UUID": "2cc761e8-8fc3-4091-964b-b2107a1fcb13",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/data/architecture/",
   "Directory_Name": "Architecture",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/data/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/data/architecture/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

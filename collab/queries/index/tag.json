@@ -1,5 +1,5 @@
 {
-  "UUID": "7120d146-1f6d-4c64-a234-c3b2880268e0",
+  "UUID": "44452c63-0b83-487b-bb51-ab2d8865b4a8",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/queries/",
   "Directory_Name": "Queries",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

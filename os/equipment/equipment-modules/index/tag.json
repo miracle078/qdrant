@@ -1,5 +1,5 @@
 {
-  "UUID": "356441ae-6230-49e8-b757-9ac74ce8ba83",
+  "UUID": "9a09b098-7882-4f0b-a570-fef762a1f3aa",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/equipment/equipment-modules/",
   "Directory_Name": "Equipment Modules",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udce6",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/equipment/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/equipment/equipment-modules/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

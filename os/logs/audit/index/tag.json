@@ -1,5 +1,5 @@
 {
-  "UUID": "68a920c3-a465-4dd3-9594-b94c9c7f83fc",
+  "UUID": "c093fe10-ddae-454b-8971-ab77979457ad",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/audit/",
   "Directory_Name": "Audit",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/audit/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

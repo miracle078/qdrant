@@ -1,5 +1,5 @@
 {
-  "UUID": "a8a73ac4-6a9d-4eb9-b8ec-a9d74da00eef",
+  "UUID": "866b9e43-f781-4be8-b36b-28568784aa16",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/snt/",
   "Directory_Name": "Snt",
@@ -9,6 +9,12 @@
   "Color_Scheme": "blue",
   "Parent_Path": "/os/language/",
   "Child_Directories": [
+    {
+      "path": "/os/language/snt/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    },
     {
       "path": "/os/language/snt/examples/",
       "title": "Examples",
@@ -70,6 +76,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

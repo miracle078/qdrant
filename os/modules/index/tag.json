@@ -1,5 +1,5 @@
 {
-  "UUID": "0d2f21cb-2f99-437d-a40d-e0c4285eebe1",
+  "UUID": "c99e3b94-fbc6-46ef-b3df-7fe7679441c9",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/modules/",
   "Directory_Name": "Modules",
@@ -20,6 +20,12 @@
       "title": "Cli",
       "description": "cli subsystem",
       "icon": "\u2328\ufe0f"
+    },
+    {
+      "path": "/os/modules/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
     },
     {
       "path": "/os/modules/medical/",

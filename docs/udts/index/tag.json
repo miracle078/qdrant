@@ -1,5 +1,5 @@
 {
-  "UUID": "4c2a112d-313e-4557-8f35-2eed8774545f",
+  "UUID": "5b440b29-3eaf-4099-9bdf-3634d7d1ff73",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/udts/",
   "Directory_Name": "Udts",
@@ -10,7 +10,7 @@
   "Parent_Path": "/docs/",
   "Child_Directories": [],
   "Sibling_Directories": [],
-  "README_Path": null,
+  "README_Path": "README.md",
   "Controls_Path": null,
   "Status_Path": null,
   "has_plc": false,
@@ -53,5 +53,16 @@
       "type": "secondary"
     }
   ],
-  "Related_Files": []
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    }
+  ]
 }

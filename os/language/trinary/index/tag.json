@@ -1,5 +1,5 @@
 {
-  "UUID": "348b3890-90fc-4910-9aba-f3ad3f4e5a80",
+  "UUID": "b2dd6631-3498-446a-a855-d4449d6e10b3",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/trinary/",
   "Directory_Name": "Trinary",
@@ -14,6 +14,12 @@
       "title": "Compiler",
       "description": "compiler subsystem",
       "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/language/trinary/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
     }
   ],
   "Sibling_Directories": [],
@@ -70,6 +76,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

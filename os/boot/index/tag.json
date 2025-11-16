@@ -1,5 +1,5 @@
 {
-  "UUID": "a9a8655e-5175-4e58-be73-43aabb4d5e72",
+  "UUID": "634f5764-38c4-4666-ab08-0c1930d4501a",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/boot/",
   "Directory_Name": "Boot",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\ude80",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/boot/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",

@@ -1,5 +1,5 @@
 {
-  "UUID": "bd75ac8e-eec0-4b79-a8db-2282fa830a3a",
+  "UUID": "99a16a4d-37be-4ca6-95f2-a6a73e25004e",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/agents/",
   "Directory_Name": "Agents",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

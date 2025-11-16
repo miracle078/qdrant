@@ -1,5 +1,5 @@
 {
-  "UUID": "0c221462-590b-4c18-8382-500f4ebd996b",
+  "UUID": "618bebac-f42b-4866-ac8b-cec0296a3ca0",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/plc/",
   "Directory_Name": "Plc",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/plc/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

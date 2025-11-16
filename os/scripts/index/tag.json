@@ -1,5 +1,5 @@
 {
-  "UUID": "8ec98375-ff12-4570-a807-c93c66c7ad85",
+  "UUID": "e2a8afee-6036-46e3-a0d3-ad0cfaafaa3d",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/scripts/",
   "Directory_Name": "Scripts",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/scripts/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

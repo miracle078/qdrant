@@ -1,5 +1,5 @@
 {
-  "UUID": "84433d18-f10b-4329-8ce5-7e3e214b1d1d",
+  "UUID": "6e904290-39bc-4d05-9189-d80c29b5be09",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/models/resnet18/",
   "Directory_Name": "Resnet18",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/models/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/models/resnet18/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
@@ -68,6 +75,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

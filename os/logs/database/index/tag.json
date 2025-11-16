@@ -1,5 +1,5 @@
 {
-  "UUID": "9998c787-d6f1-4241-b86e-f64800431758",
+  "UUID": "8143f19a-86d6-4bd3-9719-40c048dcaa51",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/database/",
   "Directory_Name": "Database",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcca",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/database/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

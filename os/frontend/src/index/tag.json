@@ -1,5 +1,5 @@
 {
-  "UUID": "3692025b-cd8f-4a7f-8e13-9cbc42e41275",
+  "UUID": "e8769e7f-29cb-435f-a6f6-f489a8d79d4f",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/frontend/src/",
   "Directory_Name": "Src",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/frontend/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/frontend/src/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     },
     {
       "path": "plc.html",

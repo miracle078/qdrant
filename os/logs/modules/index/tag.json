@@ -1,5 +1,5 @@
 {
-  "UUID": "7e8e3939-62bd-458f-8b33-903b6084420b",
+  "UUID": "acd16931-cfbf-47a5-aa14-3cab6fde5922",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/modules/",
   "Directory_Name": "Modules",
@@ -8,7 +8,14 @@
   "Icon": "\ud83d\udce6",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/modules/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
   "Sibling_Directories": [],
   "README_Path": null,
   "Controls_Path": "controls.md",
@@ -63,6 +70,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }

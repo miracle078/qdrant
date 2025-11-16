@@ -1,5 +1,5 @@
 {
-  "UUID": "1baea402-508c-42cc-ad45-5bde13ca06c3",
+  "UUID": "564d2613-aac0-45e6-b5b4-a53776178251",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/miracle/",
   "Directory_Name": "Miracle",
@@ -68,6 +68,11 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
     }
   ]
 }
