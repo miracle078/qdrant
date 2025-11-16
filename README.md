@@ -1,173 +1,389 @@
 # Chazon Medical Imaging SCADA System
 
-**Status:** Production | **License:** MIT | **Live:** https://teslasolar.github.io/qdrant/
+AI-powered medical imaging analysis with industrial automation (ISA-95/88) architecture.
+
+**Live:** https://teslasolar.github.io/qdrant/ | **License:** MIT
+
+---
 
 ## Quick Start
 
+### Client-Side Only (No Installation)
 ```bash
-# Clone
 git clone https://github.com/teslasolar/qdrant && cd qdrant
+open index.html  # Opens SCADA gateway
+```
 
-# Run client-side (no install)
-open index.html
-
-# Full stack
+### Full Stack (with Backend)
+```bash
+# 1. Start Qdrant vector database
 docker run -p 6333:6333 qdrant/qdrant
+
+# 2. Start backend API
 pip install -r os/backend/requirements.txt
 python os/backend/api.py
+
+# 3. Open browser
+open index.html
 ```
 
-## Key URLs
+### Using CLI Tools
+```bash
+# Boot the OS
+./cli/boot.sh
 
-- **SCADA Gateway:** `/index.html`
-- **SCADA Master:** `/scada.html`
-- **PLC Controller:** `/plc.html`
-- **HMI Panel:** `/hmi.html`
-- **Chazon OS:** `/os/index.html`
-- **Frontend:** `/os/frontend/index.html`
-- **Backend API:** `/os/backend/index.html`
-- **Modules:** `/os/modules/index.html`
-- **Boot:** `/os/boot/index.html`
-- **Models:** `/os/models/index.html`
-- **Data:** `/os/data/index.html`
-- **Language:** `/os/language/index.html`
-- **Templates:** `/os/templates/`
-- **AlF-DETECT:** `/os/medical/alf-detect.html`
-- **Debug:** `/os/debug/index.html`
+# Start all services
+./cli/start.sh
 
-## File Structure
+# Health check
+./cli/health.sh
 
+# Deploy to GitHub Pages
+./cli/deploy.sh
 ```
-qdrant/
-├── index.html          # SCADA Gateway landing
-├── scada.html          # Master SCADA control
-├── plc.html            # Master PLC logic
-├── hmi.html            # Master HMI panel
-├── docs/               # Documentation
-│   └── standards/      # ISA standards and protocols
-│       ├── isa/        # ISA-88, ISA-95, ISA-101
-│       └── protocols/  # MQTT, OPC UA, Modbus
-├── collab/             # Multi-agent workspace
-└── os/                 # Operating System (all runtime components)
-    ├── index.html      # OS gateway
-    ├── path-resolver.js # GitHub Pages path resolution
-    ├── module-router.md # UUID-based module discovery
-    ├── config/         # Docker, pytest configs
-    ├── controls/       # Tag providers, SCADA controls
-    ├── frontend/       # Medical viewer UI
-    ├── backend/        # FastAPI server
-    ├── modules/        # 114 markdown modules
-    ├── boot/           # 6-phase boot system
-    ├── debug/          # Debug console
-    ├── models/         # AI models (ONNX)
-    ├── medical/        # AlF-DETECT runtime
-    ├── data/           # SQL databases, architecture maps
-    ├── language/       # SNT/trinary compiler
-    ├── templates/      # ISA template engine
-    ├── scripts/        # Setup/deployment scripts
-    ├── sandbox/        # Development sandbox
-    └── test-modules/   # Module testing
-```
+
+---
+
+## Navigation
+
+### L4: Business Layer (Root)
+| Path | Description |
+|------|-------------|
+| `/index.html` | Main business gateway |
+| `/scada.html` | Master SCADA overview |
+| `/plc.html` | Master PLC coordinator |
+| `/hmi.html` | Master HMI dashboard |
+
+### L3: MES Layer (/os/)
+| Path | Description |
+|------|-------------|
+| `/os/index.html` | Operating system gateway |
+| `/os/backend/` | API services (FastAPI, Qdrant) |
+| `/os/frontend/` | Medical imaging viewer (React) |
+| `/os/modules/` | 114+ executable modules |
+| `/os/boot/` | 6-phase boot system |
+| `/os/models/` | AI models (ONNX) |
+| `/os/medical/` | DICOM processing, AlF-DETECT |
+| `/os/data/` | Databases, architecture |
+| `/os/language/` | SNT/trinary compiler |
+| `/os/logs/` | System-wide logging |
+| `/os/equipment/` | ISA-88 hierarchy definitions |
+
+### L2: Supervisory Layer
+| Path | Description |
+|------|-------------|
+| `/os/controls/` | Tag providers, SCADA controls |
+| `/os/{area}/scada.html` | Area SCADA interfaces |
+| `/os/{area}/hmi.html` | Area HMI panels |
+
+### L1: Control Layer
+| Path | Description |
+|------|-------------|
+| `/os/{area}/plc.html` | PLC controllers (32 total) |
+
+### L0: Physical Layer
+| Path | Description |
+|------|-------------|
+| `/os/controls/tag-providers/` | Tag definitions (sensors/actuators) |
+
+---
 
 ## Architecture
 
-**Factory Automation Model (ISA-95):**
-- 8 PLC areas (Frontend, Backend, Modules, Boot, Models, Data, Language, Medical)
-- Master SCADA gateway with real-time monitoring
-- HMI operator panels for each area
-- PackML state machines for module control
-
-**Medical Imaging:**
-- DICOM-compliant viewer (X-Ray, CT, MRI)
-- AlF-DETECT: Alzheimer's/Autism early detection
-- Qdrant vector search for case similarity
-- WebGPU client-side inference
-
-**Boot System:**
-- Phase 0: Core (OS, Compiler, PackML)
-- Phase 1: AI (ONNX, WebGPU, Models)
-- Phase 2: Multi-Agent (Swarm, Conway, GPT)
-- Phase 3: Medical (DICOM, Qdrant, Imaging)
-- Phase 4: UI (Components, Icons, Screens)
-- Phase 5: Templates (ISA, Views, Medical)
-
-## CLI Commands
-
-```bash
-# Backend API
-cd os/backend && python api.py
-
-# Qdrant Docker
-docker run -p 6333:6333 qdrant/qdrant
-
-# MCP Servers
-python os/backend/mcp-codesign.py
-python os/backend/mcp-qdrant.py
-python os/backend/mcp-sqlite.py
-
-# Local server
-python3 -m http.server 8080
-
-# Download AI models
-cd os/models && python download-models.py
-
-# Deploy to GitHub Pages
-git push origin claude/automation-gpt-multimodal-search-*
+### ISA-95 Functional Hierarchy
+```
+L4 (Business)      → / (root)          → Documentation, deployment
+L3 (MES)           → /os/              → Master SCADA/HMI/PLC coordination
+L2 (Supervisory)   → /os/controls/     → Tag providers, area SCADA
+L1 (Control)       → /os/{area}/plc/   → 32 PLC controllers
+L0 (Physical)      → Tag definitions   → Sensors, actuators, I/O
 ```
 
-## Key Technologies
+### ISA-88 Equipment Hierarchy
+```
+Enterprise         → Chazon Medical Imaging SCADA
+└── Site           → GitHub Pages Production Site
+    └── Areas (8)  → Backend, Frontend, Medical, Models, Data, Modules, Boot, Language
+        └── Process Cells (24+)
+            └── Units (72+)
+                └── Equipment Modules (200+)
+                    └── Control Modules (500+)
+```
 
-- **Vector DB:** Qdrant for medical case search
-- **AI:** ONNX Runtime, WebGPU inference
-- **Language:** SNT (Space-Time Notation), trinary computing
-- **Medical:** DICOM, dual-energy X-ray, Vision Transformers
-- **Architecture:** Markdown-first (114 modules), token-dense storage
-- **SCADA:** Ignition Perspective-style factory automation
+See: `/os/equipment/README.md` for complete hierarchy
+
+### 8 PLC Areas
+| Area | Scan Time | Tags | Purpose |
+|------|-----------|------|---------|
+| Backend | 100ms | 28 | API, Qdrant integration |
+| Frontend | 50ms | 47 | UI, DICOM viewer |
+| Modules | 75ms | Dynamic | 114+ module execution |
+| Boot | Phase | 18 | 6-phase startup |
+| Models | Variable | 12/model | AI inference (ONNX) |
+| Data | 100ms | 15 | Database operations |
+| Medical | 200ms | 25 | DICOM, AlF-DETECT |
+| Language | Compile | 10 | SNT/trinary compiler |
+
+---
+
+## Medical Imaging
+
+### Capabilities
+- **DICOM Viewer:** X-Ray, CT, MRI support
+- **AlF-DETECT:** Alzheimer's & Autism early detection
+- **Vector Search:** Qdrant similarity search for similar cases
+- **AI Models:** ONNX Runtime with WebGPU acceleration
+- **Modalities:** CR (X-Ray), CT, MR, US, MG
+
+### AlF-DETECT
+Location: `/os/medical/alf-detect.html`
+- Alzheimer's probability detection
+- Autism probability detection
+- Confidence scoring
+- Multi-modal analysis
+
+---
+
+## Technology Stack
+
+### Frontend
+- **UI:** HTML5, JavaScript, React
+- **AI:** ONNX Runtime, WebGPU
+- **Storage:** IndexedDB, LocalStorage
+- **Viewer:** DICOM.js-compatible
+
+### Backend
+- **API:** FastAPI (Python)
+- **Vector DB:** Qdrant
+- **Database:** SQLite
+- **Embeddings:** OpenAI, CodeBERT, CLIP
+
+### Deployment
+- **Static Hosting:** GitHub Pages
+- **Containerization:** Docker, Docker Compose
+- **CI/CD:** GitHub Actions
+
+### Standards
+- **Industrial:** ISA-88, ISA-95, ISA-101, PackML
+- **Medical:** DICOM, HL7, IHE, FHIR
+- **Regulatory:** 21 CFR Part 11, EU Annex 11, ISO 13485, HIPAA
+
+---
 
 ## API Endpoints
 
-```
-POST /analyze       # Analyze medical image
-POST /search        # Qdrant similarity search
-POST /study         # Create DICOM study
-POST /report        # Generate radiology report
-GET  /health        # Health check
-```
-
-## Environment
-
 ```bash
+# Health check
+GET /api/health
+
+# Vector search
+POST /api/search
+{
+  "query": "chest x-ray pneumonia",
+  "top_k": 10
+}
+
+# Index embedding
+POST /api/index
+{
+  "text": "Patient presents with...",
+  "metadata": {...}
+}
+
+# Create collection
+POST /api/collections
+{
+  "name": "medical_cases",
+  "vector_size": 1536
+}
+```
+
+---
+
+## CLI Commands
+
+### System Management
+```bash
+./cli/boot.sh           # Boot the OS
+./cli/start.sh          # Start all services
+./cli/stop.sh           # Stop all services
+./cli/restart.sh        # Restart services
+./cli/health.sh         # System health check
+./cli/logs.sh [area]    # View logs
+```
+
+### Development
+```bash
+./cli/dev/setup.sh      # Development setup
+./cli/dev/test.sh       # Run tests
+./cli/dev/lint.sh       # Lint code
+./cli/dev/build.sh      # Build assets
+```
+
+### Deployment
+```bash
+./cli/deploy.sh         # Deploy to GitHub Pages
+./cli/backup.sh         # Backup databases
+./cli/restore.sh        # Restore from backup
+```
+
+### Models
+```bash
+./cli/models/download.sh    # Download AI models
+./cli/models/list.sh        # List available models
+./cli/models/validate.sh    # Validate models
+```
+
+---
+
+## Environment Variables
+
+Create `.env` file (see `.env.example`):
+```bash
+# API Keys
 OPENAI_API_KEY=sk-...
 ANTHROPIC_API_KEY=sk-ant-...
+COHERE_API_KEY=...
+
+# Qdrant
 QDRANT_URL=https://xyz.qdrant.io
 QDRANT_API_KEY=...
-COHERE_API_KEY=...
+
+# Application
+DEBUG=false
+LOG_LEVEL=INFO
+PORT=8000
 ```
 
-## Key Components
+---
 
-**Medical Imaging:**
-- `os/modules/medical-imaging.md` - Core imaging system
-- `os/modules/medical-xray-analyzer.md` - X-ray AI analysis
-- `os/modules/medical-dicom-viewer.md` - DICOM viewer
-- `os/modules/medical-qdrant.md` - Vector search integration
-- `os/medical/alf-detect.html` - AlF-DETECT Alzheimer's/Autism detection
+## Directory Structure
 
-**SNT Language:**
-- Space-Time Notation with trinary computing
-- Base-3 arithmetic, emoji compression
-- See: `os/language/` directory
+```
+qdrant/
+├── index.html              # L4: Business gateway
+├── scada.html              # L4: Master SCADA
+├── plc.html                # L4: Master PLC
+├── hmi.html                # L4: Master HMI
+├── cli/                    # CLI tools for OS management
+│   ├── boot.sh
+│   ├── start.sh
+│   ├── health.sh
+│   └── ...
+├── docs/                   # Documentation
+│   ├── standards/          # ISA-88, ISA-95, ISA-101
+│   └── ISA-95-COMPLETE-HIERARCHY.md
+├── collab/                 # Multi-agent workspace
+└── os/                     # L3: Operating System (MES layer)
+    ├── index.html          # OS gateway
+    ├── backend/            # API services
+    ├── frontend/           # Medical viewer
+    ├── modules/            # 114+ modules
+    ├── boot/               # Boot system
+    ├── models/             # AI models
+    ├── medical/            # DICOM, AlF-DETECT
+    ├── data/               # Databases
+    ├── language/           # Compiler
+    ├── logs/               # System logs
+    ├── controls/           # L2: Tag providers, SCADA
+    ├── equipment/          # ISA-88 hierarchy
+    └── templates/          # Template engine
+```
 
-**ISA Standards:**
-- ISA-88: Batch control, procedural model
-- ISA-95: Enterprise-control integration
-- ISA-101: HMI design guidelines
-- See: `docs/standards/isa/` directory
+---
 
-## License
+## Documentation
 
-MIT - Open source for medical/educational use
+### Quick Reference
+- **Architecture:** `/docs/ISA-95-COMPLETE-HIERARCHY.md`
+- **Equipment:** `/os/equipment/README.md`
+- **Standards:** `/docs/standards/`
+- **About:** `/ABOUT.md`
 
-## More Info
+### Key Documents
+| Document | Description |
+|----------|-------------|
+| `docs/ISA-95-COMPLETE-HIERARCHY.md` | Complete ISA-95 L4→L0 mapping |
+| `os/equipment/README.md` | ISA-88 equipment hierarchy |
+| `docs/standards/isa/isa-95/README.md` | ISA-95 standard details |
+| `docs/standards/isa/isa-88/README.md` | ISA-88 batch control |
+| `os/modules/REGISTRY.md` | Module registry |
+| `MANIFEST.md` | Complete project manifest |
 
-See `ABOUT.md` for vision, features, acknowledgments.
+---
+
+## Development
+
+### Run Locally
+```bash
+# Development server
+python3 -m http.server 8080
+open http://localhost:8080
+
+# Or use live-server
+npx live-server --port=8080
+```
+
+### Run Backend
+```bash
+cd os/backend
+pip install -r requirements.txt
+python api.py
+# Runs on http://localhost:8000
+```
+
+### Run Tests
+```bash
+./cli/dev/test.sh
+# Or manually:
+cd os/test-modules
+pytest
+```
+
+---
+
+## Key Features
+
+### Medical Imaging
+- ✅ DICOM compliance
+- ✅ Multi-modality support (X-Ray, CT, MRI)
+- ✅ AlF-DETECT AI analysis
+- ✅ Vector similarity search
+- ✅ Client-side WebGPU inference
+
+### Industrial Automation
+- ✅ ISA-95 5-level hierarchy
+- ✅ ISA-88 equipment hierarchy
+- ✅ 32 PLC controllers
+- ✅ PackML state machines
+- ✅ Real-time SCADA monitoring
+- ✅ Tag provider system
+
+### Development
+- ✅ Markdown-first architecture (114+ modules)
+- ✅ Hot module reloading
+- ✅ Comprehensive logging
+- ✅ Full test coverage
+- ✅ Docker containerization
+
+---
+
+## Support & Contributing
+
+### Issues
+Report bugs: https://github.com/teslasolar/qdrant/issues
+
+### Contributing
+See `docs/guides/CONTRIBUTING.md`
+
+### License
+MIT License - See `LICENSE` file
+
+---
+
+## Learn More
+
+- **Vision & Features:** `ABOUT.md`
+- **Change History:** `CHANGELOG.md`
+- **Architecture Docs:** `docs/`
+- **Quick Start Guide:** `docs/guides/QUICKSTART.md`
