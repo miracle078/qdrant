@@ -1,0 +1,78 @@
+{
+  "version": "1.0.0",
+  "description": "HMI Template System - Ignition-style reusable component templates",
+  "metadata": {
+    "created": "2025-11-16",
+    "author": "HMI System",
+    "templateVersion": "1.0.0"
+  },
+  "templateTypes": {
+    "component": {
+      "description": "Reusable UI components (buttons, panels, indicators, etc.)",
+      "path": "templates/components/",
+      "inheritance": false,
+      "parameters": true
+    },
+    "view": {
+      "description": "Complete screen views that can be composed from components",
+      "path": "templates/views/",
+      "inheritance": true,
+      "parameters": true
+    },
+    "base": {
+      "description": "Base view templates that other views can inherit from",
+      "path": "templates/base/",
+      "inheritance": false,
+      "parameters": true
+    }
+  },
+  "parameterTypes": {
+    "string": {
+      "description": "Text parameter",
+      "example": "Equipment Name"
+    },
+    "number": {
+      "description": "Numeric parameter",
+      "example": 42
+    },
+    "boolean": {
+      "description": "True/false parameter",
+      "example": true
+    },
+    "color": {
+      "description": "Color value (CSS color)",
+      "example": "#6B46C1"
+    },
+    "uuid": {
+      "description": "Screen UUID for navigation",
+      "example": "hmi-overview-main"
+    },
+    "array": {
+      "description": "Array of values",
+      "example": [1, 2, 3]
+    },
+    "object": {
+      "description": "Nested object parameter",
+      "example": {"key": "value"}
+    }
+  },
+  "builtInComponents": [
+    "NavigationButton",
+    "StatusIndicator",
+    "ValueDisplay",
+    "AlarmPanel",
+    "EquipmentCard",
+    "TrendChart",
+    "DataTable",
+    "ControlPanel",
+    "Header",
+    "Footer"
+  ],
+  "builtInViews": [
+    "BaseView",
+    "DashboardView",
+    "DetailView",
+    "FormView",
+    "ReportView"
+  ]
+}

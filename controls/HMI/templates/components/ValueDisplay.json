@@ -1,0 +1,118 @@
+{
+  "templateType": "component",
+  "name": "ValueDisplay",
+  "version": "1.0.0",
+  "description": "Large format value display for KPIs and metrics",
+  "parameters": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Metric label"
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "description": "Current value"
+    },
+    "unit": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Unit of measurement"
+    },
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Icon to display with label"
+    },
+    "target": {
+      "type": "string",
+      "required": false,
+      "description": "Target value text"
+    },
+    "borderColor": {
+      "type": "color",
+      "required": false,
+      "default": "var(--primary-purple)",
+      "description": "Border color"
+    },
+    "valueColor": {
+      "type": "color",
+      "required": false,
+      "default": "var(--text-primary)",
+      "description": "Value text color"
+    },
+    "fontSize": {
+      "type": "string",
+      "required": false,
+      "default": "48px",
+      "description": "Value font size"
+    }
+  },
+  "template": {
+    "type": "ia.container.flex",
+    "version": "1.0.0",
+    "props": {
+      "direction": "column",
+      "style": {
+        "flex": "1",
+        "background": "var(--bg-surface)",
+        "borderRadius": "var(--radius-lg)",
+        "padding": "var(--spacing-xl)",
+        "border": "2px solid {borderColor}",
+        "textAlign": "center"
+      }
+    },
+    "meta": {
+      "name": "ValueDisplay_{label}"
+    },
+    "children": [
+      {
+        "type": "ia.display.label",
+        "props": {
+          "text": "{icon} {label}",
+          "style": {
+            "fontSize": "var(--font-size-lg)",
+            "color": "var(--text-secondary)",
+            "marginBottom": "var(--spacing-md)"
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "props": {
+          "text": "{value}{unit ? ' ' + unit : ''}",
+          "style": {
+            "fontSize": "{fontSize}",
+            "fontWeight": "bold",
+            "color": "{valueColor}",
+            "lineHeight": "1"
+          }
+        }
+      },
+      {
+        "type": "ia.display.label",
+        "props": {
+          "text": "{target}",
+          "visible": "{!!target}",
+          "style": {
+            "fontSize": "var(--font-size-sm)",
+            "color": "var(--text-tertiary)",
+            "marginTop": "var(--spacing-sm)"
+          }
+        }
+      }
+    ]
+  },
+  "example": {
+    "label": "Overall OEE",
+    "value": "85.3",
+    "unit": "%",
+    "icon": "📊",
+    "target": "Target: 80%",
+    "borderColor": "var(--state-running)",
+    "valueColor": "var(--state-running)",
+    "fontSize": "48px"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "templateType": "base",
+  "name": "BaseView",
+  "version": "1.0.0",
+  "description": "Base view template with header, main content area, and footer",
+  "parameters": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Screen title"
+    },
+    "subtitle": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Screen subtitle"
+    },
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "🏭",
+      "description": "Title icon"
+    },
+    "showSystemStatus": {
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Show system status indicator in header"
+    },
+    "showDateTime": {
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Show date/time in header"
+    },
+    "showBackButton": {
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Show back to home button"
+    },
+    "homeUuid": {
+      "type": "uuid",
+      "required": false,
+      "default": "hmi-overview-main",
+      "description": "UUID of home screen"
+    },
+    "headerGradient": {
+      "type": "string",
+      "required": false,
+      "default": "linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light))",
+      "description": "Header background gradient"
+    },
+    "contentPadding": {
+      "type": "string",
+      "required": false,
+      "default": "var(--spacing-lg)",
+      "description": "Main content area padding"
+    }
+  },
+  "template": {
+    "type": "ia.container.flex",
+    "version": "1.0.0",
+    "props": {
+      "direction": "column",
+      "style": {
+        "minHeight": "100vh",
+        "background": "var(--bg-primary)"
+      }
+    },
+    "meta": {
+      "name": "BaseView"
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "props": {
+          "justify": "space-between",
+          "alignItems": "center",
+          "style": {
+            "padding": "var(--spacing-xl)",
+            "background": "{headerGradient}",
+            "borderRadius": "var(--radius-xl)",
+            "margin": "var(--spacing-md)",
+            "boxShadow": "var(--shadow-xl)"
+          }
+        },
+        "meta": {"name": "Header"},
+        "children": [
+          {
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column"
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "props": {
+                  "text": "{icon} {title}",
+                  "style": {
+                    "fontSize": "var(--font-size-4xl)",
+                    "fontWeight": "bold",
+                    "color": "var(--text-primary)",
+                    "marginBottom": "var(--spacing-xs)"
+                  }
+                }
+              },
+              {
+                "type": "ia.display.label",
+                "props": {
+                  "text": "{subtitle}",
+                  "visible": "{!!subtitle}",
+                  "style": {
+                    "fontSize": "var(--font-size-lg)",
+                    "color": "var(--text-secondary)"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "type": "ia.container.flex",
+            "props": {
+              "direction": "column",
+              "alignItems": "flex-end",
+              "style": {
+                "gap": "var(--spacing-sm)"
+              }
+            },
+            "children": [
+              {
+                "type": "ia.display.label",
+                "props": {
+                  "text": "{new Date().toLocaleString()}",
+                  "visible": "{showDateTime}",
+                  "style": {
+                    "fontSize": "var(--font-size-lg)",
+                    "color": "var(--text-secondary)"
+                  }
+                },
+                "meta": {"name": "DateTime"}
+              },
+              {
+                "type": "ia.display.state-indicator",
+                "props": {
+                  "state": "running",
+                  "text": "SYSTEM ONLINE",
+                  "visible": "{showSystemStatus}"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "style": {
+            "flex": "1",
+            "padding": "{contentPadding}",
+            "gap": "var(--spacing-lg)"
+          }
+        },
+        "meta": {"name": "MainContent"},
+        "custom": {
+          "slot": "content",
+          "description": "Main content area - override this in child views"
+        },
+        "children": []
+      },
+      {
+        "type": "ia.container.flex",
+        "props": {
+          "justify": "space-between",
+          "alignItems": "center",
+          "style": {
+            "padding": "var(--spacing-md)",
+            "background": "var(--bg-secondary)",
+            "borderTop": "1px solid var(--border-secondary)"
+          }
+        },
+        "meta": {"name": "Footer"},
+        "children": [
+          {
+            "type": "ia.display.label",
+            "props": {
+              "text": "© 2025 Industrial Control System",
+              "style": {
+                "fontSize": "var(--font-size-sm)",
+                "color": "var(--text-secondary)"
+              }
+            }
+          },
+          {
+            "type": "ia.input.button",
+            "props": {
+              "text": "🏠 Home",
+              "visible": "{showBackButton}",
+              "style": {
+                "padding": "var(--spacing-sm) var(--spacing-md)"
+              }
+            },
+            "custom": {
+              "onClick": "hmiNav.navigateTo('{homeUuid}')"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "example": {
+    "title": "Equipment Dashboard",
+    "subtitle": "Real-time Equipment Monitoring",
+    "icon": "⚙️",
+    "showSystemStatus": true,
+    "showDateTime": true,
+    "showBackButton": true
+  }
+}

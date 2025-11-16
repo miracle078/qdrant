@@ -1,0 +1,458 @@
+{
+  "type": "ia.container.flex",
+  "version": "1.0.0",
+  "props": {
+    "direction": "column",
+    "style": {
+      "padding": "20px",
+      "gap": "20px",
+      "minHeight": "100vh"
+    }
+  },
+  "meta": {
+    "name": "MainOverview",
+    "description": "Main HMI overview screen with quick access to all systems"
+  },
+  "children": [
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "space-between",
+        "alignItems": "center",
+        "style": {
+          "padding": "30px",
+          "background": "linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light))",
+          "borderRadius": "16px",
+          "boxShadow": "0 10px 30px rgba(0,0,0,0.3)"
+        }
+      },
+      "meta": { "name": "MainHeader" },
+      "children": [
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column"
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "🏭 Industrial Control System",
+                "style": {
+                  "fontSize": "36px",
+                  "fontWeight": "bold",
+                  "color": "var(--text-primary)",
+                  "marginBottom": "8px"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "Plant Overview Dashboard",
+                "style": {
+                  "fontSize": "18px",
+                  "color": "var(--text-secondary)"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "alignItems": "flex-end",
+            "style": {
+              "gap": "8px"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "November 16, 2025 14:35:22",
+                "style": {
+                  "fontSize": "16px",
+                  "color": "var(--text-secondary)"
+                }
+              }
+            },
+            {
+              "type": "ia.display.state-indicator",
+              "props": {
+                "state": "running",
+                "text": "ALL SYSTEMS OPERATIONAL"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "space-between",
+        "style": {
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "KPIRow" },
+      "children": [
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "24px",
+              "border": "2px solid var(--state-running)",
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "⚡ Production",
+                "style": {
+                  "fontSize": "16px",
+                  "color": "var(--text-secondary)",
+                  "marginBottom": "12px"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "4,823",
+                "style": {
+                  "fontSize": "48px",
+                  "fontWeight": "bold",
+                  "color": "var(--state-running)",
+                  "lineHeight": "1"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "units/hour",
+                "style": {
+                  "fontSize": "14px",
+                  "color": "var(--text-tertiary)",
+                  "marginTop": "8px"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "24px",
+              "border": "2px solid var(--data-neutral)",
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "📊 Overall OEE",
+                "style": {
+                  "fontSize": "16px",
+                  "color": "var(--text-secondary)",
+                  "marginBottom": "12px"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "85.3%",
+                "style": {
+                  "fontSize": "48px",
+                  "fontWeight": "bold",
+                  "color": "var(--data-neutral)",
+                  "lineHeight": "1"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "Target: 80%",
+                "style": {
+                  "fontSize": "14px",
+                  "color": "var(--text-tertiary)",
+                  "marginTop": "8px"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "24px",
+              "border": "2px solid var(--alarm-medium)",
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "⚠️ Active Alarms",
+                "style": {
+                  "fontSize": "16px",
+                  "color": "var(--text-secondary)",
+                  "marginBottom": "12px"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "6",
+                "style": {
+                  "fontSize": "48px",
+                  "fontWeight": "bold",
+                  "color": "var(--alarm-medium)",
+                  "lineHeight": "1"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "1 Critical",
+                "style": {
+                  "fontSize": "14px",
+                  "color": "var(--alarm-critical)",
+                  "marginTop": "8px"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "24px",
+              "border": "2px solid var(--primary-purple)",
+              "textAlign": "center"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "👥 Operators",
+                "style": {
+                  "fontSize": "16px",
+                  "color": "var(--text-secondary)",
+                  "marginBottom": "12px"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "12",
+                "style": {
+                  "fontSize": "48px",
+                  "fontWeight": "bold",
+                  "color": "var(--primary-purple-light)",
+                  "lineHeight": "1"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "Day Shift",
+                "style": {
+                  "fontSize": "14px",
+                  "color": "var(--text-tertiary)",
+                  "marginTop": "8px"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ia.display.label",
+      "props": {
+        "text": "System Navigation",
+        "style": {
+          "fontSize": "24px",
+          "fontWeight": "bold",
+          "marginTop": "20px",
+          "marginBottom": "10px"
+        }
+      }
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "style": {
+          "display": "grid",
+          "gridTemplateColumns": "repeat(auto-fit, minmax(250px, 1fr))",
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "NavigationGrid" },
+      "children": [
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📊 OEE Dashboard",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #3b82f6, #2563eb)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "OEEButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "⚙️ Equipment Status",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #10b981, #059669)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "EquipmentButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "🔔 Active Alarms",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #f59e0b, #d97706)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "AlarmsButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📈 Trends & Analytics",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #8b5cf6, #7c3aed)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "TrendsButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "🎛️ Process Control",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #06b6d4, #0891b2)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "ProcessButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📦 Batch Management",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #ec4899, #db2777)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "BatchButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📝 Data Entry",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #14b8a6, #0d9488)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "DataEntryButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📋 Reports",
+            "style": {
+              "padding": "30px",
+              "fontSize": "18px",
+              "background": "linear-gradient(135deg, #6366f1, #4f46e5)",
+              "minHeight": "120px",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center"
+            }
+          },
+          "meta": { "name": "ReportsButton" }
+        }
+      ]
+    }
+  ]
+}

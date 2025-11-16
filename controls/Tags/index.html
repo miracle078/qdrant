@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag Browser - Industrial Control System</title>
+    <link rel="stylesheet" href="../HMI/css/isa101-theme.css">
+</head>
+<body>
+    <div class="hmi-container">
+        <header class="hmi-header">
+            <h1>🏷️ Tag Browser</h1>
+            <button class="hmi-button hmi-button-secondary" onclick="window.location.href='../index.html'">
+                🏠 Back to Controls Portal
+            </button>
+        </header>
+
+        <main class="hmi-main">
+            <div class="hmi-card">
+                <h2>Tag Providers</h2>
+                <p class="text-secondary mb-lg">Browse ISA-88 compliant tag structures and UDT definitions</p>
+
+                <div class="hmi-grid hmi-grid-3" style="margin-top: var(--spacing-xl);">
+                    <a href="../../os/controls/tag-providers/index.html" style="text-decoration: none;">
+                        <div class="hmi-card" style="cursor: pointer; transition: all var(--transition-base);">
+                            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md);">📁 Tag Providers</h3>
+                            <p class="text-secondary">View all tag provider directories and structures</p>
+                        </div>
+                    </a>
+
+                    <a href="../../os/controls/tag-providers/hmi-integration.js" style="text-decoration: none;">
+                        <div class="hmi-card" style="cursor: pointer; transition: all var(--transition-base);">
+                            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md);">🔌 HMI Integration</h3>
+                            <p class="text-secondary">Tag integration for HMI screens</p>
+                        </div>
+                    </a>
+
+                    <div class="hmi-card" style="opacity: 0.6;">
+                        <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md);">📊 Real-Time Values</h3>
+                        <p class="text-secondary">Live tag monitoring (Coming Soon)</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="hmi-footer">
+            <div>© 2025 Industrial Control System</div>
+            <div><span class="hmi-badge hmi-badge-success">ISA-88 Compliant</span></div>
+        </footer>
+    </div>
+</body>
+</html>

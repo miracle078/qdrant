@@ -1,0 +1,124 @@
+{
+  "templateType": "component",
+  "name": "EquipmentCard",
+  "version": "1.0.0",
+  "description": "Equipment status card with live data",
+  "parameters": {
+    "equipmentName": {
+      "type": "string",
+      "required": true,
+      "description": "Name of equipment"
+    },
+    "equipmentId": {
+      "type": "string",
+      "required": true,
+      "description": "Unique equipment identifier"
+    },
+    "state": {
+      "type": "string",
+      "required": true,
+      "enum": ["running", "stopped", "maintenance", "fault"],
+      "description": "Current state"
+    },
+    "metrics": {
+      "type": "array",
+      "required": true,
+      "description": "Array of metric objects {label, value, unit}"
+    },
+    "detailViewUuid": {
+      "type": "uuid",
+      "required": false,
+      "description": "UUID of detail view to navigate to"
+    },
+    "showDetailButton": {
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Show button to navigate to detail view"
+    }
+  },
+  "template": {
+    "type": "ia.container.flex",
+    "version": "1.0.0",
+    "props": {
+      "direction": "column",
+      "style": {
+        "background": "var(--bg-surface)",
+        "borderRadius": "var(--radius-lg)",
+        "padding": "var(--spacing-lg)",
+        "border": "2px solid {state === 'running' ? 'var(--state-running)' : state === 'fault' ? 'var(--state-fault)' : state === 'maintenance' ? 'var(--state-maintenance)' : 'var(--state-stopped)'}",
+        "transition": "all var(--transition-base)"
+      }
+    },
+    "meta": {
+      "name": "EquipmentCard_{equipmentId}"
+    },
+    "children": [
+      {
+        "type": "ia.container.flex",
+        "props": {
+          "justify": "space-between",
+          "alignItems": "center",
+          "style": {
+            "marginBottom": "var(--spacing-md)"
+          }
+        },
+        "children": [
+          {
+            "type": "ia.display.label",
+            "props": {
+              "text": "{equipmentName}",
+              "style": {
+                "fontSize": "var(--font-size-xl)",
+                "fontWeight": "bold",
+                "color": "var(--text-primary)"
+              }
+            }
+          },
+          {
+            "type": "ia.display.state-indicator",
+            "props": {
+              "state": "{state}",
+              "text": "{state.toUpperCase()}"
+            }
+          }
+        ]
+      },
+      {
+        "type": "ia.container.flex",
+        "props": {
+          "direction": "column",
+          "style": {
+            "gap": "var(--spacing-sm)"
+          }
+        },
+        "children": "{metrics.map(m => ({type: 'ia.display.label', props: {text: m.label + ': ' + m.value + (m.unit ? ' ' + m.unit : ''), style: {color: 'var(--text-secondary)'}}}))}"
+      },
+      {
+        "type": "ia.input.button",
+        "props": {
+          "text": "View Details",
+          "visible": "{showDetailButton && detailViewUuid}",
+          "style": {
+            "marginTop": "var(--spacing-md)"
+          }
+        },
+        "custom": {
+          "onClick": "hmiNav.navigateTo('{detailViewUuid}')"
+        }
+      }
+    ]
+  },
+  "example": {
+    "equipmentName": "Production Line 1",
+    "equipmentId": "line-1",
+    "state": "running",
+    "metrics": [
+      {"label": "Speed", "value": "1250", "unit": "units/hr"},
+      {"label": "Temperature", "value": "75.3", "unit": "°C"},
+      {"label": "Runtime", "value": "6h 45m", "unit": ""}
+    ],
+    "detailViewUuid": "hmi-equipment-detail-line1",
+    "showDetailButton": true
+  }
+}
