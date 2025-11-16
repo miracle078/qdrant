@@ -1,0 +1,154 @@
+{
+  "UUID": "c0417015-0000-4000-8000-000000000001",
+  "ISA_Level": "L2_Supervisory",
+  "Directory_Path": "/index/controls/",
+  "Directory_Name": "Controls",
+  "Title": "Controls Portal",
+  "Description": "ISA-95 L2 Supervisory Layer - Industrial Automation & Control Systems",
+  "Icon": "🎛️",
+  "Color_Scheme": "purple",
+  "Parent_Path": "/index/",
+  "Child_Directories": [
+    {
+      "path": "/index/controls/HMI/",
+      "title": "HMI System",
+      "description": "Human-Machine Interface - Operator control and monitoring",
+      "icon": "🖥️",
+      "page_count": 15
+    },
+    {
+      "path": "/index/controls/SCADA/",
+      "title": "SCADA System",
+      "description": "Supervisory Control and Data Acquisition",
+      "icon": "📊",
+      "page_count": 0
+    },
+    {
+      "path": "/index/controls/PLC/",
+      "title": "PLC Programming",
+      "description": "Programmable Logic Controller configuration",
+      "icon": "⚙️",
+      "page_count": 0
+    },
+    {
+      "path": "/index/controls/Tags/",
+      "title": "Tag Browser",
+      "description": "ISA-88 tag structures and UDT definitions",
+      "icon": "🏷️",
+      "page_count": 1
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/cli/",
+      "title": "CLI",
+      "description": "Command line interface tools",
+      "icon": "⌨️"
+    },
+    {
+      "path": "/collab/",
+      "title": "Collaboration",
+      "description": "Team collaboration tools",
+      "icon": "👥"
+    },
+    {
+      "path": "/docs/",
+      "title": "Documentation",
+      "description": "System documentation",
+      "icon": "📚"
+    },
+    {
+      "path": "/os/",
+      "title": "Operating System",
+      "description": "Core OS components",
+      "icon": "💻"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "🏠"
+    },
+    {
+      "path": "/index/controls/",
+      "title": "Controls",
+      "icon": "🎛️"
+    }
+  ],
+  "Features": [
+    {
+      "title": "HMI System",
+      "description": "Real-time operator interfaces with JSON-based Perspective screens, UUID navigation, and ISA-101 compliant theming",
+      "icon": "🖥️"
+    },
+    {
+      "title": "SCADA Monitoring",
+      "description": "Plant-wide supervisory control and data acquisition with historical trending and reporting",
+      "icon": "📊"
+    },
+    {
+      "title": "PLC Programming",
+      "description": "Logic controller configuration and programming (Administrator access required)",
+      "icon": "⚙️"
+    },
+    {
+      "title": "Tag Management",
+      "description": "ISA-88 compliant tag structures with UDT definitions and real-time monitoring",
+      "icon": "🏷️"
+    },
+    {
+      "title": "UUID Navigation",
+      "description": "Path-independent navigation system for portable and maintainable screen definitions",
+      "icon": "🔗"
+    },
+    {
+      "title": "Template System",
+      "description": "Ignition Perspective-style reusable component templates for rapid development",
+      "icon": "📋"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "🖥️ Launch HMI",
+      "path": "HMI/index.html",
+      "type": "primary"
+    },
+    {
+      "label": "📊 SCADA Overview",
+      "path": "../os/index.html",
+      "type": "secondary"
+    },
+    {
+      "label": "🏷️ Browse Tags",
+      "path": "Tags/index.html",
+      "type": "secondary"
+    },
+    {
+      "label": "📖 HMI Guide",
+      "path": "HMI/README.md",
+      "type": "secondary"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "index.html",
+      "name": "Controls Portal",
+      "type": "html",
+      "icon": "🌐",
+      "size": 10240
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "HMI/README.md",
+      "name": "HMI System Documentation",
+      "type": "markdown"
+    },
+    {
+      "path": "HMI/TEMPLATE_GUIDE.md",
+      "name": "Template System Guide",
+      "type": "markdown"
+    }
+  ]
+}

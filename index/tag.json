@@ -5,7 +5,7 @@
   "Directory_Name": "Root",
   "Title": "Root",
   "Description": "ISA-95 L4_Business - root subsystem",
-  "Icon": "\ud83d\udcc1",
+  "Icon": "📁",
   "Color_Scheme": "green",
   "Parent_Path": null,
   "Child_Directories": [
@@ -13,28 +13,35 @@
       "path": "/cli/",
       "title": "Cli",
       "description": "cli subsystem",
-      "icon": "\u2328\ufe0f",
+      "icon": "⌨️",
       "page_count": 13
     },
     {
       "path": "/collab/",
       "title": "Collab",
       "description": "collab subsystem",
-      "icon": "\ud83d\udc65",
+      "icon": "👥",
       "page_count": 5
+    },
+    {
+      "path": "/index/controls/",
+      "title": "Controls",
+      "description": "ISA-95 L2 Controls Portal - HMI, SCADA, PLC, Tags",
+      "icon": "🎛️",
+      "page_count": 23
     },
     {
       "path": "/docs/",
       "title": "Docs",
       "description": "docs subsystem",
-      "icon": "\ud83d\udcda",
+      "icon": "📚",
       "page_count": 9
     },
     {
       "path": "/os/",
       "title": "Os",
       "description": "os subsystem",
-      "icon": "\ud83d\udcbb",
+      "icon": "💻",
       "page_count": 9
     }
   ],
@@ -43,7 +50,7 @@
     {
       "path": "/",
       "title": "Home",
-      "icon": "\ud83c\udfe0"
+      "icon": "🏠"
     }
   ],
   "README_Path": "README.md",
@@ -59,17 +66,17 @@
     {
       "title": "Core Functionality",
       "description": "Primary system features",
-      "icon": "\u2699\ufe0f"
+      "icon": "⚙️"
     },
     {
       "title": "Data Management",
       "description": "Structured data handling",
-      "icon": "\ud83d\udcca"
+      "icon": "📊"
     },
     {
       "title": "Monitoring",
       "description": "Real-time monitoring",
-      "icon": "\ud83d\udc41\ufe0f"
+      "icon": "👁️"
     }
   ],
   "Quick_Actions": [
@@ -136,63 +143,63 @@
       "path": "hmi.html",
       "name": "Hmi",
       "type": "html",
-      "icon": "\ud83c\udf10",
+      "icon": "🌐",
       "size": 10491
     },
     {
       "path": "plc.html",
       "name": "Plc",
       "type": "html",
-      "icon": "\ud83c\udf10",
+      "icon": "🌐",
       "size": 8419
     },
     {
       "path": "scada.html",
       "name": "Scada",
       "type": "html",
-      "icon": "\ud83c\udf10",
+      "icon": "🌐",
       "size": 12596
     },
     {
       "path": "ABOUT.md",
       "name": "About",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 1541
     },
     {
       "path": "CHANGELOG.md",
       "name": "Changelog",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 7554
     },
     {
       "path": "MANIFEST.md",
       "name": "Manifest",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 7472
     },
     {
       "path": "README.md",
       "name": "Readme",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 9332
     },
     {
       "path": "controls.md",
       "name": "Controls",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 4441
     },
     {
       "path": "status.md",
       "name": "Status",
       "type": "markdown",
-      "icon": "\ud83d\udcdd",
+      "icon": "📝",
       "size": 3595
     }
   ]
