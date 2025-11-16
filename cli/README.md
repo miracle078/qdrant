@@ -1,6 +1,30 @@
 # Chazon CLI Tools
 
-Command-line interface tools for managing the Chazon Medical Imaging SCADA System.
+**Markdown-executable** command-line interface tools for managing the Chazon Medical Imaging SCADA System.
+
+All CLI tools are **markdown files (.md)** that follow the system's markdown-first architecture.
+
+## Three Access Methods
+
+Every CLI command is accessible via **three interfaces**:
+
+| Method | Example | Port |
+|--------|---------|------|
+| **CLI** (Direct) | `./cli/boot.md` | N/A |
+| **API** (REST) | `POST http://localhost:8001/cli/boot` | 8001 |
+| **MCP** (Tool) | `cli_boot` tool via MCP server | stdio |
+
+### Start Wrappers
+
+```bash
+# Start API wrapper (port 8001)
+python3 cli/api-wrapper.md
+
+# Start MCP wrapper (stdio)
+python3 cli/mcp-wrapper.md
+
+# Or configure MCP in Claude Desktop (see mcp-wrapper.md)
+```
 
 ---
 
@@ -8,32 +32,164 @@ Command-line interface tools for managing the Chazon Medical Imaging SCADA Syste
 
 ### System Management
 ```bash
-./cli/boot.sh           # Boot the OS (6-phase sequence)
-./cli/start.sh          # Start all services
-./cli/stop.sh           # Stop all services
-./cli/restart.sh        # Restart all services
-./cli/health.sh         # System health check
-./cli/logs.sh [area]    # View logs (backend|http|system|all)
-./cli/deploy.sh         # Deploy to GitHub Pages
+./cli/boot.md           # Boot the OS (6-phase sequence)
+./cli/start.md          # Start all services
+./cli/stop.md           # Stop all services
+./cli/restart.md        # Restart all services
+./cli/health.md         # System health check
+./cli/logs.md [area]    # View logs (backend|http|system|all)
+./cli/deploy.md         # Deploy to GitHub Pages
 ```
 
 ### Development
 ```bash
-./cli/dev/setup.sh      # Setup development environment
-./cli/dev/test.sh       # Run all tests
+./cli/dev/setup.md      # Setup development environment
+./cli/dev/test.md       # Run all tests
 ```
 
 ### Models
 ```bash
-./cli/models/download.sh    # Download AI models
-./cli/models/list.sh        # List available models
+./cli/models/download.md    # Download AI models
+./cli/models/list.md        # List available models
 ```
+
+---
+
+## Complete Examples (All 3 Methods)
+
+### Boot OS
+```bash
+# CLI
+./cli/boot.md
+
+# API
+curl -X POST http://localhost:8001/cli/boot
+
+# MCP (natural language in Claude Desktop)
+"Boot the Chazon OS"
+```
+
+### Start Services
+```bash
+# CLI
+./cli/start.md
+
+# API
+curl -X POST http://localhost:8001/cli/start
+
+# MCP
+"Start all services"
+```
+
+### Health Check
+```bash
+# CLI
+./cli/health.md
+
+# API
+curl http://localhost:8001/cli/health
+
+# MCP
+"Check system health"
+```
+
+### View Logs
+```bash
+# CLI
+./cli/logs.md backend
+
+# API
+curl -X POST http://localhost:8001/cli/logs \
+  -H "Content-Type: application/json" \
+  -d '{"args": ["backend"]}'
+
+# MCP
+"Show me the backend logs"
+```
+
+### Run Tests
+```bash
+# CLI
+./cli/dev/test.md
+
+# API
+curl -X POST http://localhost:8001/cli/dev/test
+
+# MCP
+"Run all tests"
+```
+
+### List Models
+```bash
+# CLI
+./cli/models/list.md
+
+# API
+curl http://localhost:8001/cli/models/list
+
+# MCP
+"List all AI models"
+```
+
+---
+
+## API & MCP Wrappers
+
+### api-wrapper.md
+FastAPI server that exposes all CLI commands as REST endpoints.
+
+**Features:**
+- All CLI commands available via HTTP POST/GET
+- JSON responses with stdout/stderr/exit codes
+- CORS enabled
+- 5-minute timeout per command
+- `/cli/commands` endpoint lists all available commands
+
+**Endpoints:**
+- `GET /health` - API health check
+- `GET /cli/commands` - List all commands
+- `POST /cli/boot` - Boot OS
+- `POST /cli/start` - Start services
+- `POST /cli/stop` - Stop services
+- `POST /cli/restart` - Restart services
+- `GET /cli/health` - System health
+- `POST /cli/logs` - View logs
+- `POST /cli/deploy` - Deploy
+- `POST /cli/dev/setup` - Dev setup
+- `POST /cli/dev/test` - Run tests
+- `POST /cli/models/download` - Download models
+- `GET /cli/models/list` - List models
+- `POST /cli/exec` - Execute any command
+
+### mcp-wrapper.md
+Model Context Protocol server for Claude Desktop and other MCP clients.
+
+**Features:**
+- 12 MCP tools (one per CLI command)
+- Natural language interface
+- Async execution
+- 5-minute timeout per command
+- Works with Claude Desktop, IDEs, etc.
+
+**Tools:**
+- `cli_boot` - Boot OS
+- `cli_start` - Start services
+- `cli_stop` - Stop services
+- `cli_restart` - Restart services
+- `cli_health` - Health check
+- `cli_logs` - View logs (with area parameter)
+- `cli_deploy` - Deploy
+- `cli_dev_setup` - Dev setup
+- `cli_dev_test` - Run tests
+- `cli_models_download` - Download models
+- `cli_models_list` - List models
+- `cli_exec` - Execute any command
 
 ---
 
 ## System Management Scripts
 
-### boot.sh
+### boot.md
 Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 **Phases:**
@@ -46,7 +202,7 @@ Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 **Usage:**
 ```bash
-./cli/boot.sh
+./cli/boot.md
 ```
 
 **Output:**
@@ -56,7 +212,7 @@ Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 ---
 
-### start.sh
+### start.md
 Starts all backend services required for full system operation.
 
 **Services Started:**
@@ -70,7 +226,7 @@ Starts all backend services required for full system operation.
 
 **Usage:**
 ```bash
-./cli/start.sh
+./cli/start.md
 ```
 
 **Logs:**
@@ -83,7 +239,7 @@ Starts all backend services required for full system operation.
 
 ---
 
-### stop.sh
+### stop.md
 Stops all running services gracefully.
 
 **Stops:**
@@ -93,27 +249,27 @@ Stops all running services gracefully.
 
 **Usage:**
 ```bash
-./cli/stop.sh
+./cli/stop.md
 ```
 
 ---
 
-### restart.sh
+### restart.md
 Convenience script that stops and starts all services.
 
 **Usage:**
 ```bash
-./cli/restart.sh
+./cli/restart.md
 ```
 
 Equivalent to:
 ```bash
-./cli/stop.sh && sleep 2 && ./cli/start.sh
+./cli/stop.md && sleep 2 && ./cli/start.md
 ```
 
 ---
 
-### health.sh
+### health.md
 Comprehensive system health check for all services and resources.
 
 **Checks:**
@@ -130,7 +286,7 @@ Comprehensive system health check for all services and resources.
 
 **Usage:**
 ```bash
-./cli/health.sh
+./cli/health.md
 ```
 
 **Example Output:**
@@ -146,12 +302,12 @@ Comprehensive system health check for all services and resources.
 
 ---
 
-### logs.sh
+### logs.md
 View system logs for different areas.
 
 **Usage:**
 ```bash
-./cli/logs.sh [area]
+./cli/logs.md [area]
 ```
 
 **Areas:**
@@ -163,16 +319,16 @@ View system logs for different areas.
 **Examples:**
 ```bash
 # View all logs (summary)
-./cli/logs.sh
+./cli/logs.md
 
 # Tail backend logs
-./cli/logs.sh backend
+./cli/logs.md backend
 
 # Tail HTTP server logs
-./cli/logs.sh http
+./cli/logs.md http
 
 # View system logs
-./cli/logs.sh system
+./cli/logs.md system
 ```
 
 **Live Monitoring:**
@@ -180,7 +336,7 @@ For live log monitoring, the script will run `tail -f` for single areas.
 
 ---
 
-### deploy.sh
+### deploy.md
 Deploy the application to GitHub Pages.
 
 **Process:**
@@ -191,7 +347,7 @@ Deploy the application to GitHub Pages.
 
 **Usage:**
 ```bash
-./cli/deploy.sh
+./cli/deploy.md
 ```
 
 **Deployment URL:**
@@ -203,7 +359,7 @@ https://teslasolar.github.io/qdrant/
 
 ## Development Scripts
 
-### dev/setup.sh
+### dev/setup.md
 Sets up the complete development environment.
 
 **Actions:**
@@ -217,7 +373,7 @@ Sets up the complete development environment.
 
 **Usage:**
 ```bash
-./cli/dev/setup.sh
+./cli/dev/setup.md
 ```
 
 **Requirements:**
@@ -227,12 +383,12 @@ Sets up the complete development environment.
 
 **Post-Setup:**
 1. Update `.env` with your API keys
-2. Run `./cli/start.sh`
+2. Run `./cli/start.md`
 3. Open http://localhost:8080
 
 ---
 
-### dev/test.sh
+### dev/test.md
 Runs all available test suites.
 
 **Test Suites:**
@@ -241,7 +397,7 @@ Runs all available test suites.
 
 **Usage:**
 ```bash
-./cli/dev/test.sh
+./cli/dev/test.md
 ```
 
 **Requirements:**
@@ -266,7 +422,7 @@ Running backend tests...
 
 ## Model Management Scripts
 
-### models/download.sh
+### models/download.md
 Downloads AI models for inference.
 
 **Models:**
@@ -277,7 +433,7 @@ Downloads AI models for inference.
 
 **Usage:**
 ```bash
-./cli/models/download.sh
+./cli/models/download.md
 ```
 
 **Download Locations:**
@@ -289,12 +445,12 @@ Models are downloaded to their respective directories:
 
 ---
 
-### models/list.sh
+### models/list.md
 Lists all available AI models and their sizes.
 
 **Usage:**
 ```bash
-./cli/models/list.sh
+./cli/models/list.md
 ```
 
 **Example Output:**
@@ -325,19 +481,21 @@ Total models: 4
 ```
 cli/
 ├── README.md               # This file
-├── boot.sh                 # Boot OS
-├── start.sh                # Start services
-├── stop.sh                 # Stop services
-├── restart.sh              # Restart services
-├── health.sh               # Health check
-├── logs.sh                 # View logs
-├── deploy.sh               # Deploy to GitHub Pages
+├── api-wrapper.md          # REST API wrapper (port 8001)
+├── mcp-wrapper.md          # MCP server wrapper (stdio)
+├── boot.md                 # Boot OS
+├── start.md                # Start services
+├── stop.md                 # Stop services
+├── restart.md              # Restart services
+├── health.md               # Health check
+├── logs.md                 # View logs
+├── deploy.md               # Deploy to GitHub Pages
 ├── dev/                    # Development tools
-│   ├── setup.sh            # Dev environment setup
-│   └── test.sh             # Run tests
+│   ├── setup.md            # Dev environment setup
+│   └── test.md             # Run tests
 ├── models/                 # Model management
-│   ├── download.sh         # Download models
-│   └── list.sh             # List models
+│   ├── download.md         # Download models
+│   └── list.md             # List models
 ├── backup/                 # Backup tools (future)
 └── logs/                   # Service logs
     ├── backend.log         # Backend API logs
@@ -375,22 +533,22 @@ PORT=8000
 ### First-Time Setup
 ```bash
 # 1. Setup development environment
-./cli/dev/setup.sh
+./cli/dev/setup.md
 
 # 2. Update .env with API keys
 nano .env
 
 # 3. Download AI models (optional)
-./cli/models/download.sh
+./cli/models/download.md
 
 # 4. Boot the OS
-./cli/boot.sh
+./cli/boot.md
 
 # 5. Start all services
-./cli/start.sh
+./cli/start.md
 
 # 6. Check health
-./cli/health.sh
+./cli/health.md
 
 # 7. Open browser
 open http://localhost:8080
@@ -399,33 +557,33 @@ open http://localhost:8080
 ### Daily Development
 ```bash
 # Start services
-./cli/start.sh
+./cli/start.md
 
 # Make changes...
 
 # Run tests
-./cli/dev/test.sh
+./cli/dev/test.md
 
 # Check logs
-./cli/logs.sh backend
+./cli/logs.md backend
 
 # Restart if needed
-./cli/restart.sh
+./cli/restart.md
 
 # Stop when done
-./cli/stop.sh
+./cli/stop.md
 ```
 
 ### Deployment
 ```bash
 # Run tests
-./cli/dev/test.sh
+./cli/dev/test.md
 
 # Health check
-./cli/health.sh
+./cli/health.md
 
 # Deploy
-./cli/deploy.sh
+./cli/deploy.md
 ```
 
 ---
@@ -443,7 +601,7 @@ lsof -i :8080  # HTTP Server
 kill -9 <PID>
 
 # Restart services
-./cli/restart.sh
+./cli/restart.md
 ```
 
 ### Docker Issues
@@ -455,7 +613,7 @@ docker info
 docker stop qdrant && docker rm qdrant
 
 # Restart services
-./cli/start.sh
+./cli/start.md
 ```
 
 ### Python Virtual Environment Issues
@@ -471,9 +629,9 @@ pip install -r requirements.txt
 ### Permission Issues
 ```bash
 # Make scripts executable
-chmod +x cli/*.sh
-chmod +x cli/dev/*.sh
-chmod +x cli/models/*.sh
+chmod +x cli/*.md
+chmod +x cli/dev/*.md
+chmod +x cli/models/*.md
 ```
 
 ---
@@ -481,7 +639,7 @@ chmod +x cli/models/*.sh
 ## Advanced Usage
 
 ### Custom Health Checks
-Add your own health checks to `health.sh`:
+Add your own health checks to `health.md`:
 
 ```bash
 # Check custom service
@@ -494,7 +652,7 @@ fi
 ```
 
 ### Custom Log Monitoring
-Add custom log areas to `logs.sh`:
+Add custom log areas to `logs.md`:
 
 ```bash
 myservice)
@@ -517,7 +675,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./cli/deploy.sh
+      - run: ./cli/deploy.md
 ```
 
 ---

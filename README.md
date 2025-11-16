@@ -30,16 +30,16 @@ open index.html
 ### Using CLI Tools
 ```bash
 # Boot the OS
-./cli/boot.sh
+./cli/boot.md
 
 # Start all services
-./cli/start.sh
+./cli/start.md
 
 # Health check
-./cli/health.sh
+./cli/health.md
 
 # Deploy to GitHub Pages
-./cli/deploy.sh
+./cli/deploy.md
 ```
 
 ---
@@ -204,34 +204,34 @@ POST /api/collections
 
 ### System Management
 ```bash
-./cli/boot.sh           # Boot the OS
-./cli/start.sh          # Start all services
-./cli/stop.sh           # Stop all services
-./cli/restart.sh        # Restart services
-./cli/health.sh         # System health check
-./cli/logs.sh [area]    # View logs
+./cli/boot.md           # Boot the OS
+./cli/start.md          # Start all services
+./cli/stop.md           # Stop all services
+./cli/restart.md        # Restart services
+./cli/health.md         # System health check
+./cli/logs.md [area]    # View logs
 ```
 
 ### Development
 ```bash
-./cli/dev/setup.sh      # Development setup
-./cli/dev/test.sh       # Run tests
-./cli/dev/lint.sh       # Lint code
-./cli/dev/build.sh      # Build assets
+./cli/dev/setup.md      # Development setup
+./cli/dev/test.md       # Run tests
+./cli/dev/lint.md       # Lint code
+./cli/dev/build.md      # Build assets
 ```
 
 ### Deployment
 ```bash
-./cli/deploy.sh         # Deploy to GitHub Pages
-./cli/backup.sh         # Backup databases
-./cli/restore.sh        # Restore from backup
+./cli/deploy.md         # Deploy to GitHub Pages
+./cli/backup.md         # Backup databases
+./cli/restore.md        # Restore from backup
 ```
 
 ### Models
 ```bash
-./cli/models/download.sh    # Download AI models
-./cli/models/list.sh        # List available models
-./cli/models/validate.sh    # Validate models
+./cli/models/download.md    # Download AI models
+./cli/models/list.md        # List available models
+./cli/models/validate.md    # Validate models
 ```
 
 ---
@@ -266,9 +266,9 @@ qdrant/
 ├── plc.html                # L4: Master PLC
 ├── hmi.html                # L4: Master HMI
 ├── cli/                    # CLI tools for OS management
-│   ├── boot.sh
-│   ├── start.sh
-│   ├── health.sh
+│   ├── boot.md
+│   ├── start.md
+│   ├── health.md
 │   └── ...
 ├── docs/                   # Documentation
 │   ├── standards/          # ISA-88, ISA-95, ISA-101
@@ -334,7 +334,7 @@ python api.py
 
 ### Run Tests
 ```bash
-./cli/dev/test.sh
+./cli/dev/test.md
 # Or manually:
 cd os/test-modules
 pytest
