@@ -1,6 +1,8 @@
 # Chazon CLI Tools
 
-Command-line interface tools for managing the Chazon Medical Imaging SCADA System.
+**Markdown-executable** command-line interface tools for managing the Chazon Medical Imaging SCADA System.
+
+All CLI tools are **markdown files (.md)** that follow the system's markdown-first architecture.
 
 ---
 
@@ -8,32 +10,32 @@ Command-line interface tools for managing the Chazon Medical Imaging SCADA Syste
 
 ### System Management
 ```bash
-./cli/boot.sh           # Boot the OS (6-phase sequence)
-./cli/start.sh          # Start all services
-./cli/stop.sh           # Stop all services
-./cli/restart.sh        # Restart all services
-./cli/health.sh         # System health check
-./cli/logs.sh [area]    # View logs (backend|http|system|all)
-./cli/deploy.sh         # Deploy to GitHub Pages
+./cli/boot.md           # Boot the OS (6-phase sequence)
+./cli/start.md          # Start all services
+./cli/stop.md           # Stop all services
+./cli/restart.md        # Restart all services
+./cli/health.md         # System health check
+./cli/logs.md [area]    # View logs (backend|http|system|all)
+./cli/deploy.md         # Deploy to GitHub Pages
 ```
 
 ### Development
 ```bash
-./cli/dev/setup.sh      # Setup development environment
-./cli/dev/test.sh       # Run all tests
+./cli/dev/setup.md      # Setup development environment
+./cli/dev/test.md       # Run all tests
 ```
 
 ### Models
 ```bash
-./cli/models/download.sh    # Download AI models
-./cli/models/list.sh        # List available models
+./cli/models/download.md    # Download AI models
+./cli/models/list.md        # List available models
 ```
 
 ---
 
 ## System Management Scripts
 
-### boot.sh
+### boot.md
 Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 **Phases:**
@@ -46,7 +48,7 @@ Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 **Usage:**
 ```bash
-./cli/boot.sh
+./cli/boot.md
 ```
 
 **Output:**
@@ -56,7 +58,7 @@ Runs the 6-phase boot sequence to initialize the Chazon OS.
 
 ---
 
-### start.sh
+### start.md
 Starts all backend services required for full system operation.
 
 **Services Started:**
@@ -70,7 +72,7 @@ Starts all backend services required for full system operation.
 
 **Usage:**
 ```bash
-./cli/start.sh
+./cli/start.md
 ```
 
 **Logs:**
@@ -83,7 +85,7 @@ Starts all backend services required for full system operation.
 
 ---
 
-### stop.sh
+### stop.md
 Stops all running services gracefully.
 
 **Stops:**
@@ -93,27 +95,27 @@ Stops all running services gracefully.
 
 **Usage:**
 ```bash
-./cli/stop.sh
+./cli/stop.md
 ```
 
 ---
 
-### restart.sh
+### restart.md
 Convenience script that stops and starts all services.
 
 **Usage:**
 ```bash
-./cli/restart.sh
+./cli/restart.md
 ```
 
 Equivalent to:
 ```bash
-./cli/stop.sh && sleep 2 && ./cli/start.sh
+./cli/stop.md && sleep 2 && ./cli/start.md
 ```
 
 ---
 
-### health.sh
+### health.md
 Comprehensive system health check for all services and resources.
 
 **Checks:**
@@ -130,7 +132,7 @@ Comprehensive system health check for all services and resources.
 
 **Usage:**
 ```bash
-./cli/health.sh
+./cli/health.md
 ```
 
 **Example Output:**
@@ -146,12 +148,12 @@ Comprehensive system health check for all services and resources.
 
 ---
 
-### logs.sh
+### logs.md
 View system logs for different areas.
 
 **Usage:**
 ```bash
-./cli/logs.sh [area]
+./cli/logs.md [area]
 ```
 
 **Areas:**
@@ -163,16 +165,16 @@ View system logs for different areas.
 **Examples:**
 ```bash
 # View all logs (summary)
-./cli/logs.sh
+./cli/logs.md
 
 # Tail backend logs
-./cli/logs.sh backend
+./cli/logs.md backend
 
 # Tail HTTP server logs
-./cli/logs.sh http
+./cli/logs.md http
 
 # View system logs
-./cli/logs.sh system
+./cli/logs.md system
 ```
 
 **Live Monitoring:**
@@ -180,7 +182,7 @@ For live log monitoring, the script will run `tail -f` for single areas.
 
 ---
 
-### deploy.sh
+### deploy.md
 Deploy the application to GitHub Pages.
 
 **Process:**
@@ -191,7 +193,7 @@ Deploy the application to GitHub Pages.
 
 **Usage:**
 ```bash
-./cli/deploy.sh
+./cli/deploy.md
 ```
 
 **Deployment URL:**
@@ -203,7 +205,7 @@ https://teslasolar.github.io/qdrant/
 
 ## Development Scripts
 
-### dev/setup.sh
+### dev/setup.md
 Sets up the complete development environment.
 
 **Actions:**
@@ -217,7 +219,7 @@ Sets up the complete development environment.
 
 **Usage:**
 ```bash
-./cli/dev/setup.sh
+./cli/dev/setup.md
 ```
 
 **Requirements:**
@@ -227,12 +229,12 @@ Sets up the complete development environment.
 
 **Post-Setup:**
 1. Update `.env` with your API keys
-2. Run `./cli/start.sh`
+2. Run `./cli/start.md`
 3. Open http://localhost:8080
 
 ---
 
-### dev/test.sh
+### dev/test.md
 Runs all available test suites.
 
 **Test Suites:**
@@ -241,7 +243,7 @@ Runs all available test suites.
 
 **Usage:**
 ```bash
-./cli/dev/test.sh
+./cli/dev/test.md
 ```
 
 **Requirements:**
@@ -266,7 +268,7 @@ Running backend tests...
 
 ## Model Management Scripts
 
-### models/download.sh
+### models/download.md
 Downloads AI models for inference.
 
 **Models:**
@@ -277,7 +279,7 @@ Downloads AI models for inference.
 
 **Usage:**
 ```bash
-./cli/models/download.sh
+./cli/models/download.md
 ```
 
 **Download Locations:**
@@ -289,12 +291,12 @@ Models are downloaded to their respective directories:
 
 ---
 
-### models/list.sh
+### models/list.md
 Lists all available AI models and their sizes.
 
 **Usage:**
 ```bash
-./cli/models/list.sh
+./cli/models/list.md
 ```
 
 **Example Output:**
@@ -325,19 +327,19 @@ Total models: 4
 ```
 cli/
 ├── README.md               # This file
-├── boot.sh                 # Boot OS
-├── start.sh                # Start services
-├── stop.sh                 # Stop services
-├── restart.sh              # Restart services
-├── health.sh               # Health check
-├── logs.sh                 # View logs
-├── deploy.sh               # Deploy to GitHub Pages
+├── boot.md                 # Boot OS
+├── start.md                # Start services
+├── stop.md                 # Stop services
+├── restart.md              # Restart services
+├── health.md               # Health check
+├── logs.md                 # View logs
+├── deploy.md               # Deploy to GitHub Pages
 ├── dev/                    # Development tools
-│   ├── setup.sh            # Dev environment setup
-│   └── test.sh             # Run tests
+│   ├── setup.md            # Dev environment setup
+│   └── test.md             # Run tests
 ├── models/                 # Model management
-│   ├── download.sh         # Download models
-│   └── list.sh             # List models
+│   ├── download.md         # Download models
+│   └── list.md             # List models
 ├── backup/                 # Backup tools (future)
 └── logs/                   # Service logs
     ├── backend.log         # Backend API logs
@@ -375,22 +377,22 @@ PORT=8000
 ### First-Time Setup
 ```bash
 # 1. Setup development environment
-./cli/dev/setup.sh
+./cli/dev/setup.md
 
 # 2. Update .env with API keys
 nano .env
 
 # 3. Download AI models (optional)
-./cli/models/download.sh
+./cli/models/download.md
 
 # 4. Boot the OS
-./cli/boot.sh
+./cli/boot.md
 
 # 5. Start all services
-./cli/start.sh
+./cli/start.md
 
 # 6. Check health
-./cli/health.sh
+./cli/health.md
 
 # 7. Open browser
 open http://localhost:8080
@@ -399,33 +401,33 @@ open http://localhost:8080
 ### Daily Development
 ```bash
 # Start services
-./cli/start.sh
+./cli/start.md
 
 # Make changes...
 
 # Run tests
-./cli/dev/test.sh
+./cli/dev/test.md
 
 # Check logs
-./cli/logs.sh backend
+./cli/logs.md backend
 
 # Restart if needed
-./cli/restart.sh
+./cli/restart.md
 
 # Stop when done
-./cli/stop.sh
+./cli/stop.md
 ```
 
 ### Deployment
 ```bash
 # Run tests
-./cli/dev/test.sh
+./cli/dev/test.md
 
 # Health check
-./cli/health.sh
+./cli/health.md
 
 # Deploy
-./cli/deploy.sh
+./cli/deploy.md
 ```
 
 ---
@@ -443,7 +445,7 @@ lsof -i :8080  # HTTP Server
 kill -9 <PID>
 
 # Restart services
-./cli/restart.sh
+./cli/restart.md
 ```
 
 ### Docker Issues
@@ -455,7 +457,7 @@ docker info
 docker stop qdrant && docker rm qdrant
 
 # Restart services
-./cli/start.sh
+./cli/start.md
 ```
 
 ### Python Virtual Environment Issues
@@ -471,9 +473,9 @@ pip install -r requirements.txt
 ### Permission Issues
 ```bash
 # Make scripts executable
-chmod +x cli/*.sh
-chmod +x cli/dev/*.sh
-chmod +x cli/models/*.sh
+chmod +x cli/*.md
+chmod +x cli/dev/*.md
+chmod +x cli/models/*.md
 ```
 
 ---
@@ -481,7 +483,7 @@ chmod +x cli/models/*.sh
 ## Advanced Usage
 
 ### Custom Health Checks
-Add your own health checks to `health.sh`:
+Add your own health checks to `health.md`:
 
 ```bash
 # Check custom service
@@ -494,7 +496,7 @@ fi
 ```
 
 ### Custom Log Monitoring
-Add custom log areas to `logs.sh`:
+Add custom log areas to `logs.md`:
 
 ```bash
 myservice)
@@ -517,7 +519,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: ./cli/deploy.sh
+      - run: ./cli/deploy.md
 ```
 
 ---
