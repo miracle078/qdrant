@@ -1,5 +1,5 @@
 {
-  "UUID": "b79f226e-d5cb-44c7-b037-1873aeab209c",
+  "UUID": "b20fe49c-491a-42dd-8e0d-f6be0c1fbfd3",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/data/sql/",
   "Directory_Name": "Sql",
@@ -8,17 +8,60 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/data/",
-  "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/data/sql/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f",
+      "page_count": 2
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/os/data/architecture/",
+      "title": "Architecture",
+      "description": "architecture area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/data/controls/",
+      "title": "Controls",
+      "description": "controls area",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/data/",
+      "title": "Data",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/data/sql/",
+      "title": "Sql",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
   "README_Path": null,
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
   "has_plc": true,
   "has_hmi": true,
   "has_scada": true,
-  "plc_path": "/os/data/sql/plc.html",
-  "hmi_path": "/os/data/sql/hmi.html",
-  "scada_path": "/os/data/sql/scada.html",
+  "plc_path": "plc.html",
+  "hmi_path": "hmi.html",
+  "scada_path": "scada.html",
   "Features": [
     {
       "title": "Core Functionality",
@@ -65,6 +108,11 @@
       "type": "markdown"
     },
     {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
       "path": "plc.html",
       "name": "PLC",
       "type": "html"
@@ -78,6 +126,43 @@
       "path": "scada.html",
       "name": "SCADA",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "hmi.html",
+      "name": "Hmi",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3653
+    },
+    {
+      "path": "plc.html",
+      "name": "Plc",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3583
+    },
+    {
+      "path": "scada.html",
+      "name": "Scada",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 5901
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4524
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3600
     }
   ]
 }

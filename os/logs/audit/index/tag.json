@@ -1,5 +1,5 @@
 {
-  "UUID": "68a920c3-a465-4dd3-9594-b94c9c7f83fc",
+  "UUID": "1656534f-d028-435e-b23e-6c91ba1faa44",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/logs/audit/",
   "Directory_Name": "Audit",
@@ -8,8 +8,99 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/logs/",
-  "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/logs/audit/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f",
+      "page_count": 2
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/os/logs/api/",
+      "title": "Api",
+      "description": "api area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/boot/",
+      "title": "Boot",
+      "description": "boot area",
+      "icon": "\ud83d\ude80"
+    },
+    {
+      "path": "/os/logs/database/",
+      "title": "Database",
+      "description": "database area",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/logs/debug/",
+      "title": "Debug",
+      "description": "debug area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/errors/",
+      "title": "Errors",
+      "description": "errors area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/modules/",
+      "title": "Modules",
+      "description": "modules area",
+      "icon": "\ud83d\udce6"
+    },
+    {
+      "path": "/os/logs/plc/",
+      "title": "Plc",
+      "description": "plc area",
+      "icon": "\u2699\ufe0f"
+    },
+    {
+      "path": "/os/logs/scada/",
+      "title": "Scada",
+      "description": "scada area",
+      "icon": "\ud83d\udcca"
+    },
+    {
+      "path": "/os/logs/security/",
+      "title": "Security",
+      "description": "security area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/logs/system/",
+      "title": "System",
+      "description": "system area",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/logs/",
+      "title": "Logs",
+      "icon": "\ud83d\udcdd"
+    },
+    {
+      "path": "/os/logs/audit/",
+      "title": "Audit",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
   "README_Path": null,
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
@@ -63,6 +154,27 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4548
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3610
     }
   ]
 }

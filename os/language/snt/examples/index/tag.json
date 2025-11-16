@@ -1,5 +1,5 @@
 {
-  "UUID": "7b9b0423-e5bd-48bf-b1a1-ec8b6ca426f9",
+  "UUID": "f61b44c6-9c7a-493d-a132-d93fab77efe0",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/os/language/snt/examples/",
   "Directory_Name": "Examples",
@@ -8,17 +8,59 @@
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "blue",
   "Parent_Path": "/os/language/snt/",
-  "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Child_Directories": [
+    {
+      "path": "/os/language/snt/examples/controls/",
+      "title": "Controls",
+      "description": "controls subsystem",
+      "icon": "\ud83c\udf9b\ufe0f",
+      "page_count": 2
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/os/language/snt/controls/",
+      "title": "Controls",
+      "description": "controls area",
+      "icon": "\ud83c\udf9b\ufe0f"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "icon": "\ud83d\udcbb"
+    },
+    {
+      "path": "/os/language/",
+      "title": "Language",
+      "icon": "\ud83c\udf10"
+    },
+    {
+      "path": "/os/language/snt/",
+      "title": "Snt",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/os/language/snt/examples/",
+      "title": "Examples",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
   "README_Path": null,
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
   "has_plc": true,
   "has_hmi": true,
   "has_scada": true,
-  "plc_path": "/os/language/snt/examples/plc.html",
-  "hmi_path": "/os/language/snt/examples/hmi.html",
-  "scada_path": "/os/language/snt/examples/scada.html",
+  "plc_path": "plc.html",
+  "hmi_path": "hmi.html",
+  "scada_path": "scada.html",
   "Features": [
     {
       "title": "Core Functionality",
@@ -65,6 +107,11 @@
       "type": "markdown"
     },
     {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    },
+    {
       "path": "plc.html",
       "name": "PLC",
       "type": "html"
@@ -78,6 +125,64 @@
       "path": "scada.html",
       "name": "SCADA",
       "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "hmi.html",
+      "name": "Hmi",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3666
+    },
+    {
+      "path": "plc.html",
+      "name": "Plc",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 3611
+    },
+    {
+      "path": "scada.html",
+      "name": "Scada",
+      "type": "html",
+      "icon": "\ud83c\udf10",
+      "size": 5924
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4648
+    },
+    {
+      "path": "hello-snt.md",
+      "name": "Hello Snt",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 875
+    },
+    {
+      "path": "paradox-resolution.md",
+      "name": "Paradox Resolution",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 1305
+    },
+    {
+      "path": "quantum-superposition.md",
+      "name": "Quantum Superposition",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 1435
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3629
     }
   ]
 }

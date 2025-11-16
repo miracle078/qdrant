@@ -1,5 +1,5 @@
 {
-  "UUID": "4c2a112d-313e-4557-8f35-2eed8774545f",
+  "UUID": "60d3ef66-187d-46fd-8297-8b6d80a6ea06",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/udts/",
   "Directory_Name": "Udts",
@@ -9,8 +9,50 @@
   "Color_Scheme": "green",
   "Parent_Path": "/docs/",
   "Child_Directories": [],
-  "Sibling_Directories": [],
-  "README_Path": null,
+  "Sibling_Directories": [
+    {
+      "path": "/docs/guides/",
+      "title": "Guides",
+      "description": "guides area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/docs/planning/",
+      "title": "Planning",
+      "description": "planning area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/docs/presentation/",
+      "title": "Presentation",
+      "description": "presentation area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/docs/standards/",
+      "title": "Standards",
+      "description": "standards area",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/docs/",
+      "title": "Docs",
+      "icon": "\ud83d\udcda"
+    },
+    {
+      "path": "/docs/udts/",
+      "title": "Udts",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
+  "README_Path": "README.md",
   "Controls_Path": null,
   "Status_Path": null,
   "has_plc": false,
@@ -53,5 +95,25 @@
       "type": "secondary"
     }
   ],
-  "Related_Files": []
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 10140
+    }
+  ]
 }

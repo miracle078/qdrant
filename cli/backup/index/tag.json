@@ -1,5 +1,5 @@
 {
-  "UUID": "77f6d114-9eb3-4eb8-9e55-75339d256cf9",
+  "UUID": "1364ef22-c4a4-457d-a249-563af5abdb38",
   "ISA_Level": "L3_MES",
   "Directory_Path": "/cli/backup/",
   "Directory_Name": "Backup",
@@ -9,7 +9,43 @@
   "Color_Scheme": "blue",
   "Parent_Path": "/cli/",
   "Child_Directories": [],
-  "Sibling_Directories": [],
+  "Sibling_Directories": [
+    {
+      "path": "/cli/dev/",
+      "title": "Dev",
+      "description": "dev area",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/cli/logs/",
+      "title": "Logs",
+      "description": "logs area",
+      "icon": "\ud83d\udcdd"
+    },
+    {
+      "path": "/cli/models/",
+      "title": "Models",
+      "description": "models area",
+      "icon": "\ud83e\udd16"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/cli/",
+      "title": "Cli",
+      "icon": "\u2328\ufe0f"
+    },
+    {
+      "path": "/cli/backup/",
+      "title": "Backup",
+      "icon": "\ud83d\udcc1"
+    }
+  ],
   "README_Path": null,
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
@@ -63,6 +99,27 @@
       "path": "status.md",
       "name": "Status",
       "type": "markdown"
+    },
+    {
+      "path": "index.html",
+      "name": "Index",
+      "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4518
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3619
     }
   ]
 }

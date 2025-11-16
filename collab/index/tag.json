@@ -1,5 +1,5 @@
 {
-  "UUID": "5ac0021b-277e-4d61-9002-f3766880b4ce",
+  "UUID": "cb9bf449-5113-4a9c-967e-35442039daaa",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/",
   "Directory_Name": "Collab",
@@ -13,52 +13,91 @@
       "path": "/collab/3d-worlds/",
       "title": "3D Worlds",
       "description": "3d-worlds subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 8
     },
     {
       "path": "/collab/agent-1/",
       "title": "Agent 1",
       "description": "agent-1 subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 4
     },
     {
       "path": "/collab/agent-2/",
       "title": "Agent 2",
       "description": "agent-2 subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 4
     },
     {
       "path": "/collab/agents/",
       "title": "Agents",
       "description": "agents subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 6
     },
     {
       "path": "/collab/databases/",
       "title": "Databases",
       "description": "databases subsystem",
-      "icon": "\ud83d\udcca"
+      "icon": "\ud83d\udcca",
+      "page_count": 4
     },
     {
       "path": "/collab/miracle/",
       "title": "Miracle",
       "description": "miracle subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 4
     },
     {
       "path": "/collab/queries/",
       "title": "Queries",
       "description": "queries subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 6
     },
     {
       "path": "/collab/tom/",
       "title": "Tom",
       "description": "tom subsystem",
-      "icon": "\ud83d\udcc1"
+      "icon": "\ud83d\udcc1",
+      "page_count": 4
     }
   ],
-  "Sibling_Directories": [],
+  "Sibling_Directories": [
+    {
+      "path": "/cli/",
+      "title": "Cli",
+      "description": "cli area",
+      "icon": "\u2328\ufe0f"
+    },
+    {
+      "path": "/docs/",
+      "title": "Docs",
+      "description": "docs area",
+      "icon": "\ud83d\udcda"
+    },
+    {
+      "path": "/os/",
+      "title": "Os",
+      "description": "os area",
+      "icon": "\ud83d\udcbb"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "\ud83c\udfe0"
+    },
+    {
+      "path": "/collab/",
+      "title": "Collab",
+      "icon": "\ud83d\udc65"
+    }
+  ],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
@@ -122,6 +161,34 @@
       "path": "index.html",
       "name": "Index",
       "type": "html"
+    },
+    {
+      "path": "index-custom.html",
+      "name": "Custom Index",
+      "type": "html"
+    }
+  ],
+  "Page_Links": [
+    {
+      "path": "README.md",
+      "name": "Readme",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 392
+    },
+    {
+      "path": "controls.md",
+      "name": "Controls",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 4481
+    },
+    {
+      "path": "status.md",
+      "name": "Status",
+      "type": "markdown",
+      "icon": "\ud83d\udcdd",
+      "size": 3596
     }
   ]
 }
