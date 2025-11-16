@@ -1,0 +1,246 @@
+{
+  "type": "ia.container.flex",
+  "version": "1.0.0",
+  "props": {
+    "direction": "column",
+    "style": {
+      "padding": "20px",
+      "gap": "20px"
+    }
+  },
+  "meta": {
+    "name": "OEEDashboard",
+    "description": "Real-time OEE monitoring dashboard"
+  },
+  "children": [
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "space-between",
+        "alignItems": "center",
+        "style": {
+          "padding": "20px",
+          "background": "linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light))",
+          "borderRadius": "12px",
+          "marginBottom": "20px"
+        }
+      },
+      "meta": { "name": "Header" },
+      "children": [
+        {
+          "type": "ia.display.label",
+          "props": {
+            "text": "OEE Dashboard",
+            "style": {
+              "fontSize": "32px",
+              "fontWeight": "bold",
+              "color": "var(--text-primary)"
+            }
+          },
+          "meta": { "name": "Title" }
+        },
+        {
+          "type": "ia.display.state-indicator",
+          "props": {
+            "state": "running",
+            "text": "SYSTEM ONLINE"
+          },
+          "meta": { "name": "SystemStatus" }
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "space-between",
+        "style": {
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "MetricsRow" },
+      "children": [
+        {
+          "type": "ia.display.value",
+          "props": {
+            "label": "Overall OEE",
+            "value": "85.3",
+            "unit": "%",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "border": "2px solid var(--state-running)",
+              "borderRadius": "12px",
+              "padding": "24px"
+            }
+          },
+          "meta": { "name": "OEEValue" }
+        },
+        {
+          "type": "ia.display.value",
+          "props": {
+            "label": "Availability",
+            "value": "92.5",
+            "unit": "%",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "border": "2px solid var(--data-neutral)",
+              "borderRadius": "12px",
+              "padding": "24px"
+            }
+          },
+          "meta": { "name": "AvailabilityValue" }
+        },
+        {
+          "type": "ia.display.value",
+          "props": {
+            "label": "Performance",
+            "value": "88.7",
+            "unit": "%",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "border": "2px solid var(--data-info)",
+              "borderRadius": "12px",
+              "padding": "24px"
+            }
+          },
+          "meta": { "name": "PerformanceValue" }
+        },
+        {
+          "type": "ia.display.value",
+          "props": {
+            "label": "Quality",
+            "value": "96.2",
+            "unit": "%",
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "border": "2px solid var(--state-running)",
+              "borderRadius": "12px",
+              "padding": "24px"
+            }
+          },
+          "meta": { "name": "QualityValue" }
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "style": {
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "ChartsRow" },
+      "children": [
+        {
+          "type": "ia.chart.bar",
+          "props": {
+            "title": "Hourly OEE Trend",
+            "style": {
+              "flex": "2",
+              "minHeight": "300px",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px"
+            }
+          },
+          "meta": { "name": "OEETrendChart" }
+        },
+        {
+          "type": "ia.chart.pie",
+          "props": {
+            "title": "Downtime Breakdown",
+            "style": {
+              "flex": "1",
+              "minHeight": "300px",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px"
+            }
+          },
+          "meta": { "name": "DowntimeChart" }
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "style": {
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "TablesRow" },
+      "children": [
+        {
+          "type": "ia.display.table",
+          "props": {
+            "columns": [
+              { "field": "equipment", "label": "Equipment" },
+              { "field": "oee", "label": "OEE %" },
+              { "field": "status", "label": "Status" },
+              { "field": "shift", "label": "Shift" }
+            ],
+            "data": [
+              { "equipment": "Line 1", "oee": "87.5", "status": "Running", "shift": "Day" },
+              { "equipment": "Line 2", "oee": "92.3", "status": "Running", "shift": "Day" },
+              { "equipment": "Line 3", "oee": "76.8", "status": "Maintenance", "shift": "Day" },
+              { "equipment": "Line 4", "oee": "89.1", "status": "Running", "shift": "Day" }
+            ],
+            "style": {
+              "flex": "1",
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px"
+            }
+          },
+          "meta": { "name": "EquipmentTable" }
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "center",
+        "style": {
+          "gap": "10px",
+          "marginTop": "20px"
+        }
+      },
+      "meta": { "name": "ActionButtons" },
+      "children": [
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📊 View Reports",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "ReportsButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📝 Data Entry",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "DataEntryButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "⚙️ Settings",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "SettingsButton" }
+        }
+      ]
+    }
+  ]
+}

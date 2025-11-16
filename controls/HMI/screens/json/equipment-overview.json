@@ -1,0 +1,371 @@
+{
+  "type": "ia.container.flex",
+  "version": "1.0.0",
+  "props": {
+    "direction": "column",
+    "style": {
+      "padding": "20px",
+      "gap": "20px"
+    }
+  },
+  "meta": {
+    "name": "EquipmentOverview",
+    "description": "Equipment status overview screen"
+  },
+  "children": [
+    {
+      "type": "ia.display.label",
+      "props": {
+        "text": "Equipment Overview",
+        "style": {
+          "fontSize": "32px",
+          "fontWeight": "bold",
+          "marginBottom": "20px",
+          "color": "var(--text-primary)"
+        }
+      },
+      "meta": { "name": "Title" }
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "style": {
+          "display": "grid",
+          "gridTemplateColumns": "repeat(auto-fit, minmax(300px, 1fr))",
+          "gap": "20px"
+        }
+      },
+      "meta": { "name": "EquipmentGrid" },
+      "children": [
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px",
+              "border": "2px solid var(--state-running)"
+            }
+          },
+          "meta": { "name": "Equipment1" },
+          "children": [
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "justify": "space-between",
+                "alignItems": "center",
+                "style": {
+                  "marginBottom": "15px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Production Line 1",
+                    "style": {
+                      "fontSize": "20px",
+                      "fontWeight": "bold"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.state-indicator",
+                  "props": {
+                    "state": "running",
+                    "text": "RUNNING"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "direction": "column",
+                "style": {
+                  "gap": "10px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Speed: 1250 units/hr",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Temperature: 75.3°C",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Runtime: 6h 45m",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px",
+              "border": "2px solid var(--state-running)"
+            }
+          },
+          "meta": { "name": "Equipment2" },
+          "children": [
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "justify": "space-between",
+                "alignItems": "center",
+                "style": {
+                  "marginBottom": "15px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Production Line 2",
+                    "style": {
+                      "fontSize": "20px",
+                      "fontWeight": "bold"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.state-indicator",
+                  "props": {
+                    "state": "running",
+                    "text": "RUNNING"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "direction": "column",
+                "style": {
+                  "gap": "10px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Speed: 1180 units/hr",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Temperature: 72.8°C",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Runtime: 7h 12m",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px",
+              "border": "2px solid var(--state-maintenance)"
+            }
+          },
+          "meta": { "name": "Equipment3" },
+          "children": [
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "justify": "space-between",
+                "alignItems": "center",
+                "style": {
+                  "marginBottom": "15px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Production Line 3",
+                    "style": {
+                      "fontSize": "20px",
+                      "fontWeight": "bold"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.state-indicator",
+                  "props": {
+                    "state": "maintenance",
+                    "text": "MAINTENANCE"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "direction": "column",
+                "style": {
+                  "gap": "10px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Speed: 0 units/hr",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Scheduled PM: Belt Replacement",
+                    "style": {
+                      "color": "var(--state-maintenance)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Est. Completion: 2h 30m",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "direction": "column",
+            "style": {
+              "background": "var(--bg-surface)",
+              "borderRadius": "12px",
+              "padding": "20px",
+              "border": "2px solid var(--state-stopped)"
+            }
+          },
+          "meta": { "name": "Equipment4" },
+          "children": [
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "justify": "space-between",
+                "alignItems": "center",
+                "style": {
+                  "marginBottom": "15px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Production Line 4",
+                    "style": {
+                      "fontSize": "20px",
+                      "fontWeight": "bold"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.state-indicator",
+                  "props": {
+                    "state": "stopped",
+                    "text": "STOPPED"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "ia.container.flex",
+              "props": {
+                "direction": "column",
+                "style": {
+                  "gap": "10px"
+                }
+              },
+              "children": [
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Speed: 0 units/hr",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Reason: End of Shift",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                },
+                {
+                  "type": "ia.display.label",
+                  "props": {
+                    "text": "Last Run: 45m ago",
+                    "style": {
+                      "color": "var(--text-secondary)"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

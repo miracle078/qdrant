@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Alarms - Industrial Control System</title>
+
+    <!-- ISA-101 Theme -->
+    <link rel="stylesheet" href="../css/isa101-theme.css">
+</head>
+<body>
+    <div class="hmi-container">
+        <!-- Screen content will be rendered here from JSON -->
+        <div id="screen-root"></div>
+    </div>
+
+    <!-- Navigation System -->
+    <script src="../js/navigation.js"></script>
+
+    <!-- Template System -->
+    <script src="../js/template-loader.js"></script>
+
+    <!-- Screen Renderer -->
+    <script src="../js/screen-renderer.js"></script>
+
+    <!-- Page Script -->
+    <script>
+        // Initialize renderer
+        const renderer = new HMIScreenRenderer('#screen-root');
+
+        // Load and render the screen from JSON
+        async function loadScreen() {
+            try {
+                // Load the JSON definition
+                await renderer.loadScreen('json/alarms.json');
+
+                console.log('Alarms screen loaded from JSON');
+            } catch (error) {
+                console.error('Failed to load screen:', error);
+            }
+        }
+
+        // Load screen on page ready
+        document.addEventListener('DOMContentLoaded', loadScreen);
+    </script>
+</body>
+</html>

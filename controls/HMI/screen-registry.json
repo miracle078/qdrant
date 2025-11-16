@@ -1,0 +1,70 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-16",
+  "description": "UUID-based registry for HMI screens - enables path-independent navigation",
+  "screens": {
+    "hmi-overview-main": {
+      "uuid": "hmi-overview-main",
+      "name": "HMI Overview",
+      "path": "index.html",
+      "type": "overview",
+      "description": "Main HMI overview screen with navigation to all subsystems"
+    },
+    "hmi-oee-entry": {
+      "uuid": "hmi-oee-entry",
+      "name": "OEE Data Entry",
+      "path": "screens/oee-entry.html",
+      "type": "data-entry",
+      "description": "Manual OEE data entry form"
+    },
+    "hmi-oee-dashboard": {
+      "uuid": "hmi-oee-dashboard",
+      "name": "OEE Dashboard",
+      "path": "screens/oee-dashboard.html",
+      "type": "dashboard",
+      "description": "Real-time OEE monitoring dashboard"
+    },
+    "hmi-equipment-overview": {
+      "uuid": "hmi-equipment-overview",
+      "name": "Equipment Overview",
+      "path": "screens/equipment-overview.html",
+      "type": "overview",
+      "description": "Overview of all equipment status"
+    },
+    "hmi-alarms-active": {
+      "uuid": "hmi-alarms-active",
+      "name": "Active Alarms",
+      "path": "screens/alarms.html",
+      "type": "alarms",
+      "description": "Active alarm monitoring and acknowledgment"
+    },
+    "hmi-trends-production": {
+      "uuid": "hmi-trends-production",
+      "name": "Production Trends",
+      "path": "screens/trends.html",
+      "type": "trends",
+      "description": "Historical production data trends"
+    },
+    "hmi-process-control": {
+      "uuid": "hmi-process-control",
+      "name": "Process Control",
+      "path": "screens/process-control.html",
+      "type": "control",
+      "description": "Real-time process control interface"
+    },
+    "hmi-batch-management": {
+      "uuid": "hmi-batch-management",
+      "name": "Batch Management",
+      "path": "screens/batch-management.html",
+      "type": "batch",
+      "description": "Batch recipe management and execution"
+    },
+    "hmi-reports-viewer": {
+      "uuid": "hmi-reports-viewer",
+      "name": "Reports",
+      "path": "screens/reports.html",
+      "type": "reports",
+      "description": "Production reports and analytics"
+    }
+  }
+}

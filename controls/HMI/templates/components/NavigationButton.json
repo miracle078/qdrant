@@ -1,0 +1,93 @@
+{
+  "templateType": "component",
+  "name": "NavigationButton",
+  "version": "1.0.0",
+  "description": "Reusable navigation button with UUID-based navigation",
+  "parameters": {
+    "targetUuid": {
+      "type": "uuid",
+      "required": true,
+      "description": "UUID of the screen to navigate to"
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "description": "Button label text"
+    },
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "📄",
+      "description": "Icon/emoji to display"
+    },
+    "statusText": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "description": "Status text below label"
+    },
+    "indicatorState": {
+      "type": "string",
+      "required": false,
+      "default": "running",
+      "enum": ["running", "stopped", "warning", "fault"],
+      "description": "Status indicator color"
+    },
+    "showIndicator": {
+      "type": "boolean",
+      "required": false,
+      "default": true,
+      "description": "Whether to show status indicator"
+    },
+    "gradient": {
+      "type": "string",
+      "required": false,
+      "default": "linear-gradient(135deg, #3b82f6, #2563eb)",
+      "description": "Button background gradient"
+    },
+    "minHeight": {
+      "type": "string",
+      "required": false,
+      "default": "120px",
+      "description": "Minimum height of button"
+    }
+  },
+  "template": {
+    "type": "ia.input.button",
+    "version": "1.0.0",
+    "props": {
+      "text": "{icon} {label}",
+      "style": {
+        "padding": "30px",
+        "fontSize": "18px",
+        "background": "{gradient}",
+        "minHeight": "{minHeight}",
+        "display": "flex",
+        "flexDirection": "column",
+        "alignItems": "center",
+        "justifyContent": "center",
+        "position": "relative",
+        "borderRadius": "var(--radius-lg)",
+        "border": "none",
+        "color": "var(--text-primary)",
+        "cursor": "pointer",
+        "transition": "all var(--transition-base)"
+      }
+    },
+    "meta": {
+      "name": "NavButton_{targetUuid}"
+    },
+    "custom": {
+      "navigationUuid": "{targetUuid}",
+      "onClick": "hmiNav.navigateTo('{targetUuid}')"
+    }
+  },
+  "example": {
+    "targetUuid": "hmi-oee-dashboard",
+    "label": "OEE Dashboard",
+    "icon": "📊",
+    "statusText": "Real-time monitoring",
+    "indicatorState": "running",
+    "gradient": "linear-gradient(135deg, #10b981, #059669)"
+  }
+}

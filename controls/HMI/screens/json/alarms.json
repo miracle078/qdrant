@@ -1,0 +1,279 @@
+{
+  "type": "ia.container.flex",
+  "version": "1.0.0",
+  "props": {
+    "direction": "column",
+    "style": {
+      "padding": "20px",
+      "gap": "20px"
+    }
+  },
+  "meta": {
+    "name": "AlarmScreen",
+    "description": "Active alarms and alarm history"
+  },
+  "children": [
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "space-between",
+        "alignItems": "center",
+        "style": {
+          "marginBottom": "20px"
+        }
+      },
+      "meta": { "name": "Header" },
+      "children": [
+        {
+          "type": "ia.display.label",
+          "props": {
+            "text": "Active Alarms",
+            "style": {
+              "fontSize": "32px",
+              "fontWeight": "bold",
+              "color": "var(--text-primary)"
+            }
+          },
+          "meta": { "name": "Title" }
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "style": {
+              "gap": "15px"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "🔴 Critical: 1",
+                "style": {
+                  "padding": "8px 16px",
+                  "background": "rgba(220, 38, 38, 0.2)",
+                  "borderRadius": "20px",
+                  "fontSize": "14px",
+                  "fontWeight": "bold",
+                  "color": "var(--alarm-critical)"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "🟡 Medium: 3",
+                "style": {
+                  "padding": "8px 16px",
+                  "background": "rgba(234, 179, 8, 0.2)",
+                  "borderRadius": "20px",
+                  "fontSize": "14px",
+                  "fontWeight": "bold",
+                  "color": "var(--alarm-medium)"
+                }
+              }
+            },
+            {
+              "type": "ia.display.label",
+              "props": {
+                "text": "🔵 Low: 2",
+                "style": {
+                  "padding": "8px 16px",
+                  "background": "rgba(59, 130, 246, 0.2)",
+                  "borderRadius": "20px",
+                  "fontSize": "14px",
+                  "fontWeight": "bold",
+                  "color": "var(--alarm-low)"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ia.display.alarm-table",
+      "props": {
+        "alarms": [
+          {
+            "priority": "critical",
+            "active": true,
+            "timestamp": "2025-11-16 14:32:15",
+            "message": "Line 1 - Emergency Stop Activated"
+          },
+          {
+            "priority": "medium",
+            "active": true,
+            "timestamp": "2025-11-16 14:28:42",
+            "message": "Line 2 - High Temperature Warning (78.5°C)"
+          },
+          {
+            "priority": "medium",
+            "active": true,
+            "timestamp": "2025-11-16 14:15:33",
+            "message": "Line 3 - Low Pressure Detected (3.2 PSI)"
+          },
+          {
+            "priority": "medium",
+            "active": true,
+            "timestamp": "2025-11-16 14:08:21",
+            "message": "Line 4 - Quality Check Failed (Batch #4521)"
+          },
+          {
+            "priority": "low",
+            "active": true,
+            "timestamp": "2025-11-16 13:55:10",
+            "message": "Line 1 - Maintenance Due in 24 Hours"
+          },
+          {
+            "priority": "low",
+            "active": true,
+            "timestamp": "2025-11-16 13:42:05",
+            "message": "Line 2 - Filter Replacement Reminder"
+          }
+        ],
+        "style": {
+          "background": "var(--bg-surface)",
+          "borderRadius": "12px",
+          "padding": "20px"
+        }
+      },
+      "meta": { "name": "ActiveAlarmsTable" }
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "justify": "center",
+        "style": {
+          "gap": "10px",
+          "marginTop": "20px"
+        }
+      },
+      "meta": { "name": "ActionButtons" },
+      "children": [
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "✓ Acknowledge All",
+            "style": {
+              "padding": "12px 24px",
+              "background": "var(--state-running)"
+            }
+          },
+          "meta": { "name": "AcknowledgeButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "🔄 Refresh",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "RefreshButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "📜 View History",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "HistoryButton" }
+        },
+        {
+          "type": "ia.input.button",
+          "props": {
+            "text": "⚙️ Settings",
+            "style": {
+              "padding": "12px 24px"
+            }
+          },
+          "meta": { "name": "SettingsButton" }
+        }
+      ]
+    },
+    {
+      "type": "ia.container.flex",
+      "props": {
+        "direction": "column",
+        "style": {
+          "background": "var(--bg-surface)",
+          "borderRadius": "12px",
+          "padding": "20px",
+          "marginTop": "20px"
+        }
+      },
+      "meta": { "name": "AlarmStats" },
+      "children": [
+        {
+          "type": "ia.display.label",
+          "props": {
+            "text": "Alarm Statistics (Last 24 Hours)",
+            "style": {
+              "fontSize": "20px",
+              "fontWeight": "bold",
+              "marginBottom": "15px"
+            }
+          }
+        },
+        {
+          "type": "ia.container.flex",
+          "props": {
+            "justify": "space-around",
+            "style": {
+              "gap": "20px"
+            }
+          },
+          "children": [
+            {
+              "type": "ia.display.value",
+              "props": {
+                "label": "Total Alarms",
+                "value": "47",
+                "style": {
+                  "flex": "1",
+                  "textAlign": "center"
+                }
+              }
+            },
+            {
+              "type": "ia.display.value",
+              "props": {
+                "label": "Avg Response Time",
+                "value": "4.2",
+                "unit": "min",
+                "style": {
+                  "flex": "1",
+                  "textAlign": "center"
+                }
+              }
+            },
+            {
+              "type": "ia.display.value",
+              "props": {
+                "label": "Acknowledged",
+                "value": "45",
+                "style": {
+                  "flex": "1",
+                  "textAlign": "center"
+                }
+              }
+            },
+            {
+              "type": "ia.display.value",
+              "props": {
+                "label": "Most Frequent",
+                "value": "High Temp",
+                "style": {
+                  "flex": "1",
+                  "textAlign": "center"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

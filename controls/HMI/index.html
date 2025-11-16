@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMI Overview - Industrial Control System</title>
+
+    <!-- ISA-101 Theme -->
+    <link rel="stylesheet" href="css/isa101-theme.css">
+
+    <style>
+        /* Additional page-specific styles */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .nav-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            border: 2px solid var(--border-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-align: center;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent, rgba(107, 70, 193, 0.1));
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--primary-purple-light);
+        }
+
+        .nav-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-card-icon {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--spacing-md);
+            z-index: 1;
+        }
+
+        .nav-card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+            z-index: 1;
+        }
+
+        .nav-card-desc {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            z-index: 1;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--state-running);
+            box-shadow: 0 0 10px var(--state-running);
+            z-index: 1;
+        }
+
+        .kpi-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .kpi-card {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            border: 2px solid var(--border-primary);
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .kpi-value {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: var(--primary-purple-light);
+            line-height: 1;
+        }
+
+        .kpi-unit {
+            font-size: var(--font-size-lg);
+            color: var(--text-tertiary);
+            margin-left: var(--spacing-xs);
+        }
+
+        .system-status-bar {
+            background: var(--bg-surface);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: var(--spacing-xl);
+            border: 1px solid var(--border-secondary);
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--state-running);
+            box-shadow: 0 0 8px var(--state-running);
+        }
+    </style>
+</head>
+<body>
+    <div class="hmi-container">
+        <!-- Header -->
+        <header class="hmi-header">
+            <div style="display: flex; align-items: center; gap: var(--spacing-lg);">
+                <button class="hmi-button hmi-button-secondary" onclick="window.location.href='../index.html'" style="margin-right: var(--spacing-md);">
+                    ← Controls Portal
+                </button>
+                <h1>🏭 HMI Control System</h1>
+                <span class="state-indicator state-running">ONLINE</span>
+            </div>
+            <div style="text-align: right;">
+                <div id="currentTime" style="font-size: var(--font-size-lg); color: var(--text-secondary);"></div>
+                <div style="font-size: var(--font-size-sm); color: var(--text-tertiary);">Shift: Day | Operator: Admin</div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="hmi-main">
+            <!-- System Status Bar -->
+            <div class="system-status-bar">
+                <div class="status-item">
+                    <div class="status-dot"></div>
+                    <span class="text-secondary">4 Lines Running</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot" style="background: var(--alarm-medium); box-shadow: 0 0 8px var(--alarm-medium);"></div>
+                    <span class="text-secondary">6 Active Alarms</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot" style="background: var(--data-neutral); box-shadow: 0 0 8px var(--data-neutral);"></div>
+                    <span class="text-secondary">Network: 98%</span>
+                </div>
+                <div class="status-item">
+                    <div class="status-dot" style="background: var(--primary-purple); box-shadow: 0 0 8px var(--primary-purple);"></div>
+                    <span class="text-secondary">12 Operators</span>
+                </div>
+            </div>
+
+            <!-- KPI Section -->
+            <div class="kpi-section">
+                <div class="kpi-card" style="border-color: var(--state-running);">
+                    <div class="kpi-label">⚡ Production Rate</div>
+                    <div class="kpi-value">
+                        4,823
+                        <span class="kpi-unit">units/hr</span>
+                    </div>
+                </div>
+                <div class="kpi-card" style="border-color: var(--data-neutral);">
+                    <div class="kpi-label">📊 Overall OEE</div>
+                    <div class="kpi-value">
+                        85.3
+                        <span class="kpi-unit">%</span>
+                    </div>
+                </div>
+                <div class="kpi-card" style="border-color: var(--alarm-medium);">
+                    <div class="kpi-label">⚠️ Active Alarms</div>
+                    <div class="kpi-value">
+                        6
+                        <span class="kpi-unit"></span>
+                    </div>
+                </div>
+                <div class="kpi-card" style="border-color: var(--primary-purple);">
+                    <div class="kpi-label">👥 Active Users</div>
+                    <div class="kpi-value">
+                        12
+                        <span class="kpi-unit"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Section -->
+            <h2 style="color: var(--text-primary); margin-bottom: var(--spacing-lg);">System Navigation</h2>
+
+            <div class="nav-grid">
+                <!-- OEE Dashboard -->
+                <div class="nav-card" data-nav-uuid="hmi-oee-dashboard">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">📊</div>
+                    <div class="nav-card-title">OEE Dashboard</div>
+                    <div class="nav-card-desc">Real-time OEE monitoring and analytics</div>
+                </div>
+
+                <!-- Equipment Overview -->
+                <div class="nav-card" data-nav-uuid="hmi-equipment-overview">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">⚙️</div>
+                    <div class="nav-card-title">Equipment Status</div>
+                    <div class="nav-card-desc">Live equipment monitoring and control</div>
+                </div>
+
+                <!-- Active Alarms -->
+                <div class="nav-card" data-nav-uuid="hmi-alarms-active">
+                    <div class="status-badge" style="background: var(--alarm-medium); box-shadow: 0 0 10px var(--alarm-medium);"></div>
+                    <div class="nav-card-icon">🔔</div>
+                    <div class="nav-card-title">Active Alarms</div>
+                    <div class="nav-card-desc">Alarm management and acknowledgment</div>
+                </div>
+
+                <!-- Production Trends -->
+                <div class="nav-card" data-nav-uuid="hmi-trends-production">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">📈</div>
+                    <div class="nav-card-title">Production Trends</div>
+                    <div class="nav-card-desc">Historical data and trend analysis</div>
+                </div>
+
+                <!-- Process Control -->
+                <div class="nav-card" data-nav-uuid="hmi-process-control">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">🎛️</div>
+                    <div class="nav-card-title">Process Control</div>
+                    <div class="nav-card-desc">Real-time process control interface</div>
+                </div>
+
+                <!-- Batch Management -->
+                <div class="nav-card" data-nav-uuid="hmi-batch-management">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">📦</div>
+                    <div class="nav-card-title">Batch Management</div>
+                    <div class="nav-card-desc">Recipe management and batch execution</div>
+                </div>
+
+                <!-- Data Entry -->
+                <div class="nav-card" data-nav-uuid="hmi-oee-entry">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">📝</div>
+                    <div class="nav-card-title">Manual Data Entry</div>
+                    <div class="nav-card-desc">OEE and production data entry</div>
+                </div>
+
+                <!-- Reports -->
+                <div class="nav-card" data-nav-uuid="hmi-reports-viewer">
+                    <div class="status-badge"></div>
+                    <div class="nav-card-icon">📋</div>
+                    <div class="nav-card-title">Reports & Analytics</div>
+                    <div class="nav-card-desc">Production reports and analytics</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="hmi-footer">
+            <div>© 2025 Industrial Control System | ISA-101 Compliant</div>
+            <div>
+                <span style="color: var(--text-secondary);">Version 1.0.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Navigation System -->
+    <script src="js/navigation.js"></script>
+
+    <!-- Template System -->
+    <script src="js/template-loader.js"></script>
+
+    <!-- Screen Renderer -->
+    <script src="js/screen-renderer.js"></script>
+
+    <!-- Page Script -->
+    <script>
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('currentTime').textContent = timeStr;
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Log template system ready
+        console.log('HMI Navigation System Ready');
+        console.log('UUID-based navigation enabled');
+        console.log('ISA-101 theme loaded');
+        console.log('Template system available');
+    </script>
+</body>
+</html>

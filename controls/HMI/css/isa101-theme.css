@@ -1,0 +1,649 @@
+/**
+ * ISA-101 Compliant HMI Theme
+ * Purple & Cream Color Scheme
+ *
+ * ISA-101 Standards Applied:
+ * - High contrast for readability
+ * - Consistent color usage for states
+ * - Standard alarm colors (Red, Yellow, Blue)
+ * - Clear visual hierarchy
+ * - Reduced eye strain with muted backgrounds
+ */
+
+:root {
+    /* Primary Brand Colors - Purple & Cream */
+    --primary-purple: #6B46C1;          /* Deep purple */
+    --primary-purple-light: #8B5CF6;    /* Light purple */
+    --primary-purple-dark: #553C9A;     /* Dark purple */
+    --primary-cream: #F5F3E8;           /* Cream */
+    --primary-cream-dark: #E8E4D0;      /* Darker cream */
+
+    /* ISA-101 Standard Alarm Colors */
+    --alarm-critical: #DC2626;          /* Red - Critical/Emergency */
+    --alarm-high: #F59E0B;              /* Amber/Orange - High */
+    --alarm-medium: #EAB308;            /* Yellow - Medium */
+    --alarm-low: #3B82F6;               /* Blue - Low/Advisory */
+    --alarm-acknowledged: #9CA3AF;      /* Gray - Acknowledged */
+
+    /* ISA-101 Equipment State Colors */
+    --state-running: #10B981;           /* Green - Running/Normal */
+    --state-stopped: #6B7280;           /* Gray - Stopped */
+    --state-manual: #8B5CF6;            /* Purple - Manual mode */
+    --state-auto: #3B82F6;              /* Blue - Auto mode */
+    --state-maintenance: #F59E0B;       /* Orange - Maintenance */
+    --state-fault: #DC2626;             /* Red - Fault */
+
+    /* Background Colors */
+    --bg-primary: #1A1625;              /* Deep purple-black */
+    --bg-secondary: #2D2438;            /* Dark purple-gray */
+    --bg-tertiary: #3F3351;             /* Medium purple-gray */
+    --bg-panel: #2A2435;                /* Panel background */
+    --bg-surface: #342B42;              /* Surface/Card background */
+    --bg-cream: #F5F3E8;                /* Cream background for light sections */
+
+    /* Text Colors */
+    --text-primary: #F5F3E8;            /* Cream text on dark */
+    --text-secondary: #D1CEC6;          /* Muted cream */
+    --text-tertiary: #A8A49A;           /* More muted cream */
+    --text-inverse: #1A1625;            /* Dark text on cream */
+    --text-disabled: #6B7280;           /* Disabled text */
+
+    /* Border Colors */
+    --border-primary: #6B46C1;          /* Purple border */
+    --border-secondary: #4A4258;        /* Gray-purple border */
+    --border-light: #554A66;            /* Light border */
+    --border-cream: #D1CEC6;            /* Cream border */
+
+    /* Interactive Elements */
+    --interactive-primary: #6B46C1;     /* Primary interactive */
+    --interactive-hover: #8B5CF6;       /* Hover state */
+    --interactive-active: #553C9A;      /* Active/pressed state */
+    --interactive-disabled: #4A4258;    /* Disabled state */
+
+    /* Data Visualization */
+    --data-good: #10B981;               /* Green - Good/Target */
+    --data-warning: #F59E0B;            /* Orange - Warning */
+    --data-critical: #DC2626;           /* Red - Critical */
+    --data-neutral: #3B82F6;            /* Blue - Neutral */
+    --data-info: #8B5CF6;               /* Purple - Info */
+
+    /* Shadows and Effects */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 15px rgba(107, 70, 193, 0.4);
+
+    /* Typography */
+    --font-family-primary: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-family-mono: 'Courier New', Consolas, Monaco, monospace;
+    --font-size-xs: 0.75rem;            /* 12px */
+    --font-size-sm: 0.875rem;           /* 14px */
+    --font-size-base: 1rem;             /* 16px */
+    --font-size-lg: 1.125rem;           /* 18px */
+    --font-size-xl: 1.25rem;            /* 20px */
+    --font-size-2xl: 1.5rem;            /* 24px */
+    --font-size-3xl: 1.875rem;          /* 30px */
+    --font-size-4xl: 2.25rem;           /* 36px */
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;              /* 4px */
+    --spacing-sm: 0.5rem;               /* 8px */
+    --spacing-md: 1rem;                 /* 16px */
+    --spacing-lg: 1.5rem;               /* 24px */
+    --spacing-xl: 2rem;                 /* 32px */
+    --spacing-2xl: 3rem;                /* 48px */
+    --spacing-3xl: 4rem;                /* 64px */
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;               /* 4px */
+    --radius-md: 0.5rem;                /* 8px */
+    --radius-lg: 0.75rem;               /* 12px */
+    --radius-xl: 1rem;                  /* 16px */
+    --radius-full: 9999px;              /* Fully rounded */
+
+    /* Transitions */
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 250ms ease-in-out;
+    --transition-slow: 350ms ease-in-out;
+
+    /* Z-index layers */
+    --z-base: 0;
+    --z-raised: 10;
+    --z-dropdown: 100;
+    --z-modal: 1000;
+    --z-popover: 1500;
+    --z-tooltip: 2000;
+    --z-notification: 3000;
+}
+
+/* ==================== Global Resets ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* ==================== Typography ==================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+p {
+    margin-bottom: var(--spacing-md);
+}
+
+a {
+    color: var(--interactive-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--interactive-hover);
+}
+
+/* ==================== Layout Components ==================== */
+
+.hmi-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+.hmi-header {
+    background: var(--bg-secondary);
+    border-bottom: 2px solid var(--border-primary);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.hmi-main {
+    padding: var(--spacing-lg);
+}
+
+.hmi-footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-secondary);
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* ==================== Card/Panel Components ==================== */
+
+.hmi-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.hmi-panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+}
+
+.hmi-panel-header {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+    color: var(--text-primary);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    font-weight: 600;
+    font-size: var(--font-size-lg);
+}
+
+.hmi-panel-body {
+    padding: var(--spacing-lg);
+}
+
+/* ==================== ISA-101 Alarm Styles ==================== */
+
+.alarm {
+    border-left: 4px solid;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    background: var(--bg-surface);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.alarm-critical {
+    border-left-color: var(--alarm-critical);
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.alarm-high {
+    border-left-color: var(--alarm-high);
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.alarm-medium {
+    border-left-color: var(--alarm-medium);
+    background: rgba(234, 179, 8, 0.1);
+}
+
+.alarm-low {
+    border-left-color: var(--alarm-low);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.alarm-acknowledged {
+    border-left-color: var(--alarm-acknowledged);
+    background: rgba(156, 163, 175, 0.1);
+    opacity: 0.7;
+}
+
+/* Flashing animation for active critical alarms */
+@keyframes alarm-flash {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.alarm-critical.alarm-active {
+    animation: alarm-flash 1s ease-in-out infinite;
+}
+
+/* ==================== Equipment State Indicators ==================== */
+
+.state-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.state-indicator::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: currentColor;
+}
+
+.state-running {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--state-running);
+    border: 1px solid var(--state-running);
+}
+
+.state-stopped {
+    background: rgba(107, 114, 128, 0.2);
+    color: var(--state-stopped);
+    border: 1px solid var(--state-stopped);
+}
+
+.state-manual {
+    background: rgba(139, 92, 246, 0.2);
+    color: var(--state-manual);
+    border: 1px solid var(--state-manual);
+}
+
+.state-auto {
+    background: rgba(59, 130, 246, 0.2);
+    color: var(--state-auto);
+    border: 1px solid var(--state-auto);
+}
+
+.state-maintenance {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--state-maintenance);
+    border: 1px solid var(--state-maintenance);
+}
+
+.state-fault {
+    background: rgba(220, 38, 38, 0.2);
+    color: var(--state-fault);
+    border: 1px solid var(--state-fault);
+}
+
+/* ==================== Buttons ==================== */
+
+.hmi-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-sm);
+}
+
+.hmi-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.hmi-button:active {
+    transform: translateY(0);
+}
+
+.hmi-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.hmi-button-primary {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+    color: var(--text-primary);
+}
+
+.hmi-button-primary:hover {
+    background: linear-gradient(135deg, var(--primary-purple-light), var(--primary-purple));
+}
+
+.hmi-button-secondary {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+}
+
+.hmi-button-success {
+    background: var(--state-running);
+    color: white;
+}
+
+.hmi-button-warning {
+    background: var(--alarm-high);
+    color: white;
+}
+
+.hmi-button-danger {
+    background: var(--alarm-critical);
+    color: white;
+}
+
+/* ==================== Form Elements ==================== */
+
+.hmi-form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.hmi-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hmi-input,
+.hmi-select,
+.hmi-textarea {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-base);
+    transition: all var(--transition-base);
+}
+
+.hmi-input:focus,
+.hmi-select:focus,
+.hmi-textarea:focus {
+    outline: none;
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px rgba(107, 70, 193, 0.2);
+}
+
+.hmi-input:disabled,
+.hmi-select:disabled,
+.hmi-textarea:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==================== Tables ==================== */
+
+.hmi-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.hmi-table thead {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+    color: var(--text-primary);
+}
+
+.hmi-table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.5px;
+}
+
+.hmi-table td {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-secondary);
+}
+
+.hmi-table tbody tr {
+    transition: background-color var(--transition-fast);
+}
+
+.hmi-table tbody tr:hover {
+    background: rgba(107, 70, 193, 0.1);
+}
+
+/* ==================== Navigation ==================== */
+
+.hmi-nav {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+}
+
+.hmi-nav-item {
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+    transition: all var(--transition-base);
+    border: 1px solid transparent;
+}
+
+.hmi-nav-item:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-primary);
+}
+
+.hmi-nav-item.active {
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-purple-light));
+    color: var(--text-primary);
+    box-shadow: var(--shadow-glow);
+}
+
+/* ==================== Badges & Tags ==================== */
+
+.hmi-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hmi-badge-primary {
+    background: var(--primary-purple);
+    color: var(--text-primary);
+}
+
+.hmi-badge-success {
+    background: var(--state-running);
+    color: white;
+}
+
+.hmi-badge-warning {
+    background: var(--alarm-medium);
+    color: var(--text-inverse);
+}
+
+.hmi-badge-danger {
+    background: var(--alarm-critical);
+    color: white;
+}
+
+.hmi-badge-info {
+    background: var(--data-neutral);
+    color: white;
+}
+
+/* ==================== Value Display ==================== */
+
+.hmi-value-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.hmi-value-label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.hmi-value-number {
+    font-size: var(--font-size-4xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: var(--font-family-mono);
+    line-height: 1;
+}
+
+.hmi-value-unit {
+    font-size: var(--font-size-lg);
+    color: var(--text-tertiary);
+    margin-left: var(--spacing-sm);
+}
+
+/* ==================== Grid Layouts ==================== */
+
+.hmi-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.hmi-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.hmi-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.hmi-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1200px) {
+    .hmi-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hmi-grid-2,
+    .hmi-grid-3,
+    .hmi-grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== Utilities ==================== */
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-success { color: var(--state-running); }
+.text-warning { color: var(--alarm-medium); }
+.text-danger { color: var(--alarm-critical); }
+.text-info { color: var(--data-neutral); }
+
+.bg-primary { background-color: var(--bg-primary); }
+.bg-secondary { background-color: var(--bg-secondary); }
+.bg-surface { background-color: var(--bg-surface); }
+
+.mt-xs { margin-top: var(--spacing-xs); }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-xs { margin-bottom: var(--spacing-xs); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
