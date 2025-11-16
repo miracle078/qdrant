@@ -3,194 +3,589 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Controls Center - Chazon OS</title>
+<title>⚙️ CHAZON SCADA Gateway - Industrial Control System</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Courier New', monospace;
     background: #0a0a0a;
     color: #00ff88;
+    overflow-x: hidden;
     min-height: 100vh;
+  }
+
+  /* Header */
+  .gateway-header {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border-bottom: 4px solid #00ff88;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .gateway-title {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 15px;
   }
 
-  .container {
-    max-width: 900px;
-    padding: 40px;
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  h1 {
-    font-size: 3em;
+  .gateway-title h1 {
     color: #00ff88;
+    font-size: 2.2em;
     text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
-    margin-bottom: 10px;
   }
 
-  .subtitle {
-    color: #888;
-    font-size: 1.2em;
+  .gateway-status {
+    display: flex;
+    gap: 20px;
+    align-items: center;
   }
 
-  .controls-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+  .status-badge {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .control-card {
-    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
-    border: 2px solid #00ff88;
-    border-radius: 12px;
+  .status-badge.online {
+    background: #00ff88;
+    color: #000;
+  }
+
+  .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #000;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .system-time {
+    color: #00ccff;
+    font-size: 1.3em;
+  }
+
+  /* Main Container */
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
     padding: 30px;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e, #2a2a3e);
+    border: 3px solid #00ff88;
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 30px;
     text-align: center;
+  }
+
+  .hero h2 {
+    color: #00ff88;
+    font-size: 2em;
+    margin-bottom: 15px;
+  }
+
+  .hero p {
+    color: #888;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #00ff88, #00cc66);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: #2a2a3e;
+    color: #00ff88;
+    border: 2px solid #00ff88;
+  }
+
+  .btn-secondary:hover {
+    background: #3a3a4e;
+  }
+
+  /* SCADA Grid */
+  .scada-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .scada-card {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-left: 4px solid #00ff88;
+    border-radius: 12px;
+    padding: 25px;
     cursor: pointer;
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
   }
 
-  .control-card:hover {
-    border-color: #00ccff;
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
-    transform: translateY(-5px);
-  }
-
-  .control-card::before {
+  .scada-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, transparent, rgba(0, 255, 136, 0.1));
+    background: linear-gradient(135deg, transparent, rgba(0, 255, 136, 0.05));
     opacity: 0;
     transition: opacity 0.3s;
   }
 
-  .control-card:hover::before {
+  .scada-card:hover {
+    border-color: #00ff88;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .scada-card:hover::before {
     opacity: 1;
   }
 
-  .icon {
-    font-size: 4em;
+  .scada-card.scada { border-left-color: #ff88ff; }
+  .scada-card.plc { border-left-color: #00ccff; }
+  .scada-card.hmi { border-left-color: #ffaa00; }
+
+  .card-icon {
+    font-size: 3em;
     margin-bottom: 15px;
   }
 
-  .control-title {
-    font-size: 1.5em;
+  .card-title {
     color: #00ff88;
+    font-size: 1.4em;
     font-weight: bold;
     margin-bottom: 10px;
   }
 
-  .control-desc {
+  .card-desc {
     color: #888;
-    font-size: 0.9em;
-    line-height: 1.5;
+    font-size: 0.95em;
+    margin-bottom: 15px;
   }
 
-  .breadcrumb {
-    text-align: center;
-    color: #888;
+  .card-stats {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #333;
+    font-size: 0.9em;
+  }
+
+  .stat-label {
+    color: #666;
+  }
+
+  .stat-value {
+    color: #00ff88;
+    font-weight: bold;
+  }
+
+  /* PLC Areas */
+  .section {
+    background: #1a1a2e;
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 30px;
     margin-bottom: 30px;
   }
 
-  .breadcrumb a {
+  .section h2 {
     color: #00ccff;
-    text-decoration: none;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00ff88;
+    padding-bottom: 12px;
   }
 
-  .breadcrumb a:hover {
-    text-decoration: underline;
+  .plc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .plc-area {
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-left: 3px solid #00ff88;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .plc-area:hover {
+    border-color: #00ff88;
+    background: #1a1a2e;
+  }
+
+  .plc-area.running { border-left-color: #00ff88; }
+  .plc-area.error { border-left-color: #ff0044; }
+  .plc-area.idle { border-left-color: #ffaa00; }
+
+  .plc-name {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+  }
+
+  .plc-status {
+    color: #666;
+    font-size: 0.85em;
+  }
+
+  /* Info Boxes */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
   }
 
   .info-box {
-    background: #1a1a2e;
+    background: #0a0a0a;
     border: 1px solid #333;
-    border-left: 3px solid #00ccff;
     border-radius: 8px;
     padding: 20px;
-    margin-top: 40px;
   }
 
   .info-box h3 {
     color: #00ccff;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-size: 1.2em;
   }
 
-  .info-box p {
+  .info-box ul {
+    list-style: none;
+  }
+
+  .info-box li {
+    padding: 6px 0;
     color: #888;
-    line-height: 1.6;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .info-box li:before {
+    content: "▸";
+    color: #00ff88;
+    position: absolute;
+    left: 0;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 2px solid #333;
+    color: #666;
+    margin-top: 40px;
+  }
+
+  .footer a {
+    color: #00ccff;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
   }
 </style>
+<script src="os/path-resolver.js"></script>
 </head>
 <body>
 
-<div class="container">
-  <div class="breadcrumb">
-    <a href="../index.html">OS Home</a> / Controls Center
-  </div>
-
-  <header>
-    <h1>⚙️ Controls Center</h1>
-    <div class="subtitle">Centralized SCADA, HMI, and PLC Control Interfaces</div>
-  </header>
-
-  <div class="controls-grid">
-    <!-- SCADA -->
-    <div class="control-card" onclick="window.location.href='scada.html'">
-      <div class="icon">📈</div>
-      <div class="control-title">SCADA</div>
-      <div class="control-desc">
-        Supervisory Control & Data Acquisition<br>
-        Master gateway for all 8 PLC areas
-      </div>
-    </div>
-
-    <!-- HMI -->
-    <div class="control-card" onclick="window.location.href='hmi.html'">
-      <div class="icon">🎛️</div>
-      <div class="control-title">HMI</div>
-      <div class="control-desc">
-        Human-Machine Interface<br>
-        Control panels for each system area
-      </div>
-    </div>
-
-    <!-- PLC -->
-    <div class="control-card" onclick="window.location.href='plc.html'">
-      <div class="icon">⚙️</div>
-      <div class="control-title">PLC</div>
-      <div class="control-desc">
-        Programmable Logic Controllers<br>
-        View logic for all control systems
-      </div>
+<!-- Header -->
+<div class="gateway-header">
+  <div class="gateway-title">
+    <div style="font-size: 2.5em;">⚙️</div>
+    <div>
+      <h1>CHAZON SCADA Gateway</h1>
+      <div style="color: #888; font-size: 0.5em;">Industrial Control System - Medical Imaging Factory</div>
     </div>
   </div>
-
-  <div class="info-box">
-    <h3>About Controls Center</h3>
-    <p>
-      This centralized controls directory contains the master SCADA gateway, HMI panels,
-      and PLC logic interfaces for the entire Chazon OS system. From here, you can monitor
-      and control all 8 PLC areas: Frontend, Backend, Modules, Boot, Models, Data, Language,
-      and Medical.
-    </p>
-    <p style="margin-top: 10px;">
-      <strong>ISA-95 Compliance:</strong> This implementation follows ISA-95 enterprise-control
-      integration standards with a 5-level hierarchy (L0-L4) and ISA-88 PackML state machines
-      for batch control operations.
-    </p>
+  <div class="gateway-status">
+    <div class="status-badge online">
+      <div class="status-indicator"></div>
+      ONLINE
+    </div>
+    <div class="system-time" id="system-time">00:00:00</div>
   </div>
 </div>
+
+<!-- Main Container -->
+<div class="container">
+  <!-- Hero -->
+  <div class="hero">
+    <h2>🏭 Factory Automation Control System</h2>
+    <p>AI Medical Imaging Production Line with Ignition Perspective-Style Architecture</p>
+    <div class="hero-buttons">
+      <a href="os/index.html" class="btn btn-primary">🖥️ Chazon OS Gateway</a>
+      <a href="#" onclick="navigateTo(\'scada.html\'); return false;" class="btn btn-secondary">📊 SCADA Master</a>
+      <a href="#" onclick="navigateTo(\'hmi.html\'); return false;" class="btn btn-secondary">🎛️ HMI Panel</a>
+      <a href="#" onclick="navigateTo(\'plc.html\'); return false;" class="btn btn-secondary">⚙️ PLC Logic</a>
+      <a href="os/medical/alf-detect.html" class="btn btn-secondary" style="border-color: #ff88ff; color: #ff88ff;">🧠 AlF-DETECT</a>
+    </div>
+  </div>
+
+  <!-- Main SCADA Cards -->
+  <div class="scada-grid">
+    <a href="#" onclick="navigateTo(\'scada.html\'); return false;" style="text-decoration: none;">
+      <div class="scada-card scada">
+        <div class="card-icon">📈</div>
+        <div class="card-title">SCADA Master</div>
+        <div class="card-desc">Real-time process monitoring, data acquisition, and factory overview</div>
+        <div class="card-stats">
+          <div><span class="stat-label">PLCs:</span> <span class="stat-value">8</span></div>
+          <div><span class="stat-label">Tags:</span> <span class="stat-value">247</span></div>
+          <div><span class="stat-label">Scan:</span> <span class="stat-value">100ms</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" onclick="navigateTo(\'plc.html\'); return false;" style="text-decoration: none;">
+      <div class="scada-card plc">
+        <div class="card-icon">⚙️</div>
+        <div class="card-title">PLC Controller</div>
+        <div class="card-desc">Master PLC logic, subroutines, and control program management</div>
+        <div class="card-stats">
+          <div><span class="stat-label">Areas:</span> <span class="stat-value">8</span></div>
+          <div><span class="stat-label">Rungs:</span> <span class="stat-value">156</span></div>
+          <div><span class="stat-label">Mode:</span> <span class="stat-value">RUN</span></div>
+        </div>
+      </div>
+    </a>
+
+    <a href="#" onclick="navigateTo(\'hmi.html\'); return false;" style="text-decoration: none;">
+      <div class="scada-card hmi">
+        <div class="card-icon">🎛️</div>
+        <div class="card-title">HMI Panel</div>
+        <div class="card-desc">Operator interface, controls, and visual process management</div>
+        <div class="card-stats">
+          <div><span class="stat-label">Screens:</span> <span class="stat-value">12</span></div>
+          <div><span class="stat-label">Alarms:</span> <span class="stat-value">0</span></div>
+          <div><span class="stat-label">Users:</span> <span class="stat-value">1</span></div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- PLC Areas -->
+  <div class="section">
+    <h2>🏭 Factory PLC Areas</h2>
+    <div class="plc-grid">
+      <div class="plc-area running" onclick="navigateTo(\'os/frontend/\')">
+        <div class="plc-name">🖥️ Frontend HMI</div>
+        <div class="plc-status">Running | 50ms scan</div>
+      </div>
+
+      <div class="plc-area running" onclick="navigateTo(\'os/backend/\')">
+        <div class="plc-name">🔧 Backend API</div>
+        <div class="plc-status">Running | 100ms scan</div>
+      </div>
+
+      <div class="plc-area running" onclick="navigateTo(\'os/modules/\')">
+        <div class="plc-name">📦 Module Library</div>
+        <div class="plc-status">114 modules loaded</div>
+      </div>
+
+      <div class="plc-area running" onclick="navigateTo(\'os/boot/\')">
+        <div class="plc-name">🚀 Boot Sequencer</div>
+        <div class="plc-status">Complete | 6/6 phases</div>
+      </div>
+
+      <div class="plc-area idle" onclick="navigateTo(\'os/models/\')">
+        <div class="plc-name">🤖 AI Models</div>
+        <div class="plc-status">Standby | 3 models</div>
+      </div>
+
+      <div class="plc-area running" onclick="navigateTo(\'os/data/\')">
+        <div class="plc-name">💾 Token Database</div>
+        <div class="plc-status">Ready | SQL active</div>
+      </div>
+
+      <div class="plc-area idle" onclick="navigateTo(\'os/language/\')">
+        <div class="plc-name">🔮 SNT Language</div>
+        <div class="plc-status">Idle | Compiler off</div>
+      </div>
+
+      <div class="plc-area running" onclick="navigateTo(\'os/debug/\')">
+        <div class="plc-name">🐛 Debug Console</div>
+        <div class="plc-status">Active | Logging</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Production Processes -->
+  <div class="section">
+    <h2>🏥 Medical Imaging Production Line</h2>
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Diagnostic Systems</h3>
+        <ul>
+          <li>X-Ray Analysis & Classification</li>
+          <li>MRI Multi-Sequence Processing</li>
+          <li>CT Scan 3D Reconstruction</li>
+          <li>DICOM Standard Compliance</li>
+          <li>🧠 AlF-DETECT (Alzheimer's/Autism)</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>AI Processing</h3>
+        <ul>
+          <li>Vision Transformers (ViT)</li>
+          <li>Qdrant Vector Search</li>
+          <li>WebGPU Acceleration</li>
+          <li>ONNX Runtime Inference</li>
+          <li>Similarity-Based Diagnosis</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Control Architecture</h3>
+        <ul>
+          <li>ISA-95 Factory Model</li>
+          <li>PackML State Machines</li>
+          <li>Modular PLC Subroutines</li>
+          <li>Real-Time SCADA Monitoring</li>
+          <li>Ignition Perspective Style</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>System Features</h3>
+        <ul>
+          <li>100+ Markdown Modules</li>
+          <li>Token-Dense Storage</li>
+          <li>SNT Trinary Language</li>
+          <li>Client-Side Inference</li>
+          <li>Offline-First Design</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="section">
+    <h2>🔗 Quick Access</h2>
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Development</h3>
+        <ul>
+          <li><a href="https://github.com/teslasolar/qdrant">GitHub Repository</a></li>
+          <li><a href="https://github.com/teslasolar/qdrant/issues">Issue Tracker</a></li>
+          <li><a href="docs/">Documentation</a></li>
+          <li><a href="os/templates/">Template Library</a></li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Production</h3>
+        <ul>
+          <li><a href="os/frontend/">Live Demo</a></li>
+          <li><a href="os/medical/alf-detect.html">AlF-DETECT System</a></li>
+          <li><a href="os/data/architecture-map.md">Architecture Map</a></li>
+          <li><a href="os/data/dependency-graph.md">Dependencies</a></li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Challenge Info</h3>
+        <ul>
+          <li><a href="https://lablab.ai">lablab.ai Platform</a></li>
+          <li>Qdrant Vector DB Challenge</li>
+          <li>AI Medical Imaging Focus</li>
+          <li>Open Source Contribution</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Technology</h3>
+        <ul>
+          <li>Qdrant (Vector Database)</li>
+          <li>ONNX Runtime (Inference)</li>
+          <li>WebGPU (Acceleration)</li>
+          <li>SQLite (Token Storage)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p style="color: #00ff88; font-size: 1.2em; margin-bottom: 15px;">
+    ⚙️ CHAZON SCADA • Factory Automation • Medical Imaging AI • lablab.ai Qdrant Challenge
+  </p>
+  <p>
+    <a href="https://github.com/teslasolar/qdrant">GitHub</a> •
+    <a href="https://github.com/teslasolar/qdrant/issues">Issues</a> •
+    <a href="https://lablab.ai">lablab.ai</a> •
+    <a href="#" onclick="navigateTo(\'scada.html\'); return false;">SCADA</a> •
+    <a href="#" onclick="navigateTo(\'plc.html\'); return false;">PLC</a> •
+    <a href="#" onclick="navigateTo(\'hmi.html\'); return false;">HMI</a>
+  </p>
+  <p style="margin-top: 15px; color: #444;">
+    Built with 💚 for the industrial automation and medical communities
+  </p>
+</div>
+
+<script>
+// Update system time
+function updateTime() {
+  const now = new Date();
+  document.getElementById('system-time').textContent = now.toLocaleTimeString();
+}
+setInterval(updateTime, 1000);
+updateTime();
+</script>
 
 </body>
 </html>
