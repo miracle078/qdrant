@@ -58,9 +58,9 @@
   "has_plc": true,
   "has_hmi": true,
   "has_scada": true,
-  "plc_path": "/screens/plc.html",
-  "hmi_path": "/screens/hmi.html",
-  "scada_path": "/screens/scada.html",
+  "plc_path": "/screens/Enterprise/L3/L2/L1/plc.html",
+  "hmi_path": "/screens/Enterprise/L3/L2/hmi.html",
+  "scada_path": "/screens/Enterprise/L3/L2/scada.html",
   "Features": [
     {
       "title": "ISA-101 Docking System",
@@ -111,7 +111,7 @@
     },
     {
       "label": "\ud83c\udfed Enterprise Portal",
-      "path": "screens/enterprise-portal.html",
+      "path": "screens/Enterprise/enterprise-portal.html",
       "type": "primary"
     },
     {
@@ -137,67 +137,67 @@
   ],
   "Page_Links": [
     {
-      "path": "screens/docking-hmi.html",
+      "path": "screens/Enterprise/docking-hmi.html",
       "name": "Docking HMI (Cream & Purple)",
       "icon": "🎛️",
       "size": 17000
     },
     {
-      "path": "screens/enterprise-portal.html",
+      "path": "screens/Enterprise/enterprise-portal.html",
       "name": "Enterprise Portal",
       "icon": "🏢",
       "size": 25000
     },
     {
-      "path": "screens/production-planning.html",
+      "path": "screens/Enterprise/production-planning.html",
       "name": "Production Planning",
       "icon": "📋",
       "size": 23000
     },
     {
-      "path": "screens/quality-management.html",
+      "path": "screens/Enterprise/quality-management.html",
       "name": "Quality Management",
       "icon": "✓",
       "size": 24000
     },
     {
-      "path": "screens/analytics-reporting.html",
+      "path": "screens/Enterprise/analytics-reporting.html",
       "name": "Analytics & Reporting",
       "icon": "📊",
       "size": 22000
     },
     {
-      "path": "screens/asset-management.html",
+      "path": "screens/Enterprise/asset-management.html",
       "name": "Asset Management",
       "icon": "🏭",
       "size": 21000
     },
     {
-      "path": "screens/maintenance-planning.html",
+      "path": "screens/Enterprise/maintenance-planning.html",
       "name": "Maintenance Planning",
       "icon": "🔧",
       "size": 23000
     },
     {
-      "path": "screens/configuration.html",
+      "path": "screens/Enterprise/configuration.html",
       "name": "Configuration",
       "icon": "⚙️",
       "size": 20000
     },
     {
-      "path": "screens/hmi.html",
+      "path": "screens/Enterprise/L3/L2/hmi.html",
       "name": "HMI Control Panel",
       "icon": "🎛️",
       "size": 14126
     },
     {
-      "path": "screens/scada.html",
+      "path": "screens/Enterprise/L3/L2/scada.html",
       "name": "SCADA Gateway",
       "icon": "📈",
       "size": 12596
     },
     {
-      "path": "screens/plc.html",
+      "path": "screens/Enterprise/L3/L2/L1/plc.html",
       "name": "PLC Logic",
       "icon": "⚙️",
       "size": 8419
@@ -225,52 +225,52 @@
       "type": "html"
     },
     {
-      "path": "screens/enterprise-portal.html",
+      "path": "screens/Enterprise/enterprise-portal.html",
       "name": "Enterprise Portal",
       "type": "html"
     },
     {
-      "path": "screens/production-planning.html",
+      "path": "screens/Enterprise/production-planning.html",
       "name": "Production Planning",
       "type": "html"
     },
     {
-      "path": "screens/quality-management.html",
+      "path": "screens/Enterprise/quality-management.html",
       "name": "Quality Management",
       "type": "html"
     },
     {
-      "path": "screens/analytics-reporting.html",
+      "path": "screens/Enterprise/analytics-reporting.html",
       "name": "Analytics & Reporting",
       "type": "html"
     },
     {
-      "path": "screens/asset-management.html",
+      "path": "screens/Enterprise/asset-management.html",
       "name": "Asset Management",
       "type": "html"
     },
     {
-      "path": "screens/maintenance-planning.html",
+      "path": "screens/Enterprise/maintenance-planning.html",
       "name": "Maintenance Planning",
       "type": "html"
     },
     {
-      "path": "screens/configuration.html",
+      "path": "screens/Enterprise/configuration.html",
       "name": "Configuration",
       "type": "html"
     },
     {
-      "path": "screens/plc.html",
+      "path": "screens/Enterprise/L3/L2/L1/plc.html",
       "name": "PLC",
       "type": "html"
     },
     {
-      "path": "screens/hmi.html",
+      "path": "screens/Enterprise/L3/L2/hmi.html",
       "name": "HMI",
       "type": "html"
     },
     {
-      "path": "screens/scada.html",
+      "path": "screens/Enterprise/L3/L2/scada.html",
       "name": "SCADA",
       "type": "html"
     }
