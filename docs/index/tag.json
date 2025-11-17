@@ -3,17 +3,29 @@
   "ISA_Level": "L4_Business",
   "Directory_Path": "/docs/",
   "Directory_Name": "Docs",
-  "Title": "Docs",
-  "Description": "ISA-95 L4_Business - docs subsystem",
+  "Title": "Documentation Hub",
+  "Description": "Complete documentation - API, security, user guides, developer guides, compliance (HIPAA, FDA 21 CFR Part 11)",
   "Icon": "\ud83d\udcda",
   "Color_Scheme": "green",
   "Parent_Path": null,
   "Child_Directories": [
     {
+      "path": "/docs/api/",
+      "title": "API Documentation",
+      "description": "Complete API endpoint reference with examples",
+      "icon": "\ud83d\udd0c"
+    },
+    {
+      "path": "/docs/security/",
+      "title": "Security & Compliance",
+      "description": "HIPAA, FDA 21 CFR Part 11, EU Annex 11, ISO 13485",
+      "icon": "\ud83d\udd12"
+    },
+    {
       "path": "/docs/guides/",
       "title": "Guides",
-      "description": "guides subsystem",
-      "icon": "\ud83d\udcc1"
+      "description": "User and developer guides",
+      "icon": "\ud83d\udcda"
     },
     {
       "path": "/docs/planning/",
@@ -52,35 +64,35 @@
   "scada_path": null,
   "Features": [
     {
-      "title": "Core Functionality",
-      "description": "Primary system features",
-      "icon": "\u2699\ufe0f"
+      "title": "API Documentation",
+      "description": "Complete endpoint reference with authentication and examples",
+      "icon": "\ud83d\udd0c"
     },
     {
-      "title": "Data Management",
-      "description": "Structured data handling",
-      "icon": "\ud83d\udcca"
+      "title": "Security & Compliance",
+      "description": "HIPAA, FDA 21 CFR Part 11, EU Annex 11, ISO 13485 compliance guides",
+      "icon": "\ud83d\udd12"
     },
     {
-      "title": "Monitoring",
-      "description": "Real-time monitoring",
-      "icon": "\ud83d\udc41\ufe0f"
+      "title": "Navigation Hub",
+      "description": "Centralized INDEX.md with links to all documentation sections",
+      "icon": "\ud83e\udded"
     }
   ],
   "Quick_Actions": [
     {
-      "label": "View Status",
-      "path": "status.md",
+      "label": "Documentation Index",
+      "path": "INDEX.md",
       "type": "primary"
     },
     {
-      "label": "Controls",
-      "path": "controls.md",
-      "type": "secondary"
+      "label": "API Reference",
+      "path": "api/README.md",
+      "type": "primary"
     },
     {
-      "label": "Documentation",
-      "path": "README.md",
+      "label": "Security & Compliance",
+      "path": "security/README.md",
       "type": "secondary"
     }
   ],

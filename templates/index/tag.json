@@ -3,17 +3,23 @@
   "ISA_Level": "L4_Business",
   "Directory_Path": "/templates/",
   "Directory_Name": "Templates",
-  "Title": "Templates",
-  "Description": "ISA-95 L4_Business - templates subsystem",
+  "Title": "Template System",
+  "Description": "JSON-based templating for screens, components, tags - UUID/tag-based loading for HMIs with ISA-101 docking system",
   "Icon": "\ud83d\udcc4",
   "Color_Scheme": "green",
   "Parent_Path": null,
   "Child_Directories": [
     {
+      "path": "/templates/docking/",
+      "title": "Docking System",
+      "description": "ISA-101 N/S/E/W/Center docking HMI with cream & purple theme",
+      "icon": "\ud83c\udfdb\ufe0f"
+    },
+    {
       "path": "/templates/components/",
       "title": "Components",
-      "description": "components subsystem",
-      "icon": "\ud83d\udcc1"
+      "description": "Reusable UI components and widgets",
+      "icon": "\ud83e\udde9"
     },
     {
       "path": "/templates/screens/",
@@ -40,35 +46,40 @@
   "scada_path": null,
   "Features": [
     {
-      "title": "Core Functionality",
-      "description": "Primary system features",
-      "icon": "\u2699\ufe0f"
+      "title": "ISA-101 Docking System",
+      "description": "N/S/E/W/Center panel layout with cream & purple theme",
+      "icon": "\ud83c\udfdb\ufe0f"
     },
     {
-      "title": "Data Management",
-      "description": "Structured data handling",
-      "icon": "\ud83d\udcca"
+      "title": "UUID-Based Loading",
+      "description": "Load screens and components by UUID or tag name",
+      "icon": "\ud83c\udfaf"
     },
     {
-      "title": "Monitoring",
-      "description": "Real-time monitoring",
-      "icon": "\ud83d\udc41\ufe0f"
+      "title": "JSON Templates",
+      "description": "Declarative screen and component definitions",
+      "icon": "\ud83d\udcc4"
+    },
+    {
+      "title": "Template Loader",
+      "description": "JavaScript loader with async rendering",
+      "icon": "\ud83d\ude80"
     }
   ],
   "Quick_Actions": [
     {
-      "label": "View Status",
-      "path": "status.md",
+      "label": "Docking Layout",
+      "path": "docking/docking-layout.html",
       "type": "primary"
     },
     {
-      "label": "Controls",
-      "path": "controls.md",
-      "type": "secondary"
+      "label": "Docking Docs",
+      "path": "docking/README.md",
+      "type": "primary"
     },
     {
-      "label": "Documentation",
-      "path": "README.md",
+      "label": "Template Loader",
+      "path": "template-loader.js",
       "type": "secondary"
     }
   ],
