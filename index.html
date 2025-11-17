@@ -345,6 +345,15 @@ function formatSize(bytes) {
 
 async function loadIndex() {
   try {
+    // Auto-redirect root index to frontend user portal
+    const currentPath = window.location.pathname;
+    const isRootIndex = currentPath === '/' || currentPath.endsWith('/index.html') || currentPath.endsWith('/qdrant/');
+
+    if (isRootIndex) {
+      window.location.href = 'screens/frontend/index.html';
+      return;
+    }
+
     // Load index tag data
     const response = await fetch('index/tag.json');
     if (!response.ok) {
