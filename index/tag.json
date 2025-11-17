@@ -3,8 +3,8 @@
   "ISA_Level": "L4_Business",
   "Directory_Path": "/",
   "Directory_Name": "Root",
-  "Title": "Root",
-  "Description": "ISA-95 L4_Business - root subsystem",
+  "Title": "ISA-95 Level 4 - Business Planning & Logistics",
+  "Description": "Medical Imaging Virtual Factory - Enterprise business planning, production scheduling, quality management, and asset tracking",
   "Icon": "\ud83d\udcc1",
   "Color_Scheme": "green",
   "Parent_Path": null,
@@ -84,6 +84,68 @@
       "type": "secondary"
     }
   ],
+  "Page_Links": [
+    {
+      "path": "enterprise-portal.html",
+      "name": "Enterprise Portal",
+      "icon": "🏢",
+      "size": 25000
+    },
+    {
+      "path": "production-planning.html",
+      "name": "Production Planning",
+      "icon": "📋",
+      "size": 23000
+    },
+    {
+      "path": "quality-management.html",
+      "name": "Quality Management",
+      "icon": "✓",
+      "size": 24000
+    },
+    {
+      "path": "analytics-reporting.html",
+      "name": "Analytics & Reporting",
+      "icon": "📊",
+      "size": 22000
+    },
+    {
+      "path": "asset-management.html",
+      "name": "Asset Management",
+      "icon": "🏭",
+      "size": 21000
+    },
+    {
+      "path": "maintenance-planning.html",
+      "name": "Maintenance Planning",
+      "icon": "🔧",
+      "size": 23000
+    },
+    {
+      "path": "configuration.html",
+      "name": "Configuration",
+      "icon": "⚙️",
+      "size": 20000
+    },
+    {
+      "path": "hmi.html",
+      "name": "HMI Control Panel",
+      "icon": "🎛️",
+      "size": 14126
+    },
+    {
+      "path": "scada.html",
+      "name": "SCADA Gateway",
+      "icon": "📈",
+      "size": 12596
+    },
+    {
+      "path": "plc.html",
+      "name": "PLC Logic",
+      "icon": "⚙️",
+      "size": 8419
+    }
+  ],
   "Related_Files": [
     {
       "path": "README.md",
@@ -103,6 +165,41 @@
     {
       "path": "index.html",
       "name": "Index",
+      "type": "html"
+    },
+    {
+      "path": "enterprise-portal.html",
+      "name": "Enterprise Portal",
+      "type": "html"
+    },
+    {
+      "path": "production-planning.html",
+      "name": "Production Planning",
+      "type": "html"
+    },
+    {
+      "path": "quality-management.html",
+      "name": "Quality Management",
+      "type": "html"
+    },
+    {
+      "path": "analytics-reporting.html",
+      "name": "Analytics & Reporting",
+      "type": "html"
+    },
+    {
+      "path": "asset-management.html",
+      "name": "Asset Management",
+      "type": "html"
+    },
+    {
+      "path": "maintenance-planning.html",
+      "name": "Maintenance Planning",
+      "type": "html"
+    },
+    {
+      "path": "configuration.html",
+      "name": "Configuration",
       "type": "html"
     },
     {
