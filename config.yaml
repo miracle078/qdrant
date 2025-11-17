@@ -375,6 +375,30 @@ dev_tools:
   enable_debug_panel: false
   mock_latency_ms: 200              # Simulate network latency
 
+# Database Configuration (SQLite)
+database:
+  enabled: true                       # Use SQLite databases instead of JSON files
+  path: "database/chazon.db"
+  use_in_browser: true                # Load database in browser (sql.js)
+
+  # Performance
+  cache_size_mb: 64
+  mmap_size_mb: 256
+  journal_mode: "WAL"
+
+  # Tables to use from database (set false to use JSON fallback)
+  tables:
+    tags: true                        # Use tags table instead of tag.json files
+    samples: true                     # Use samples table
+    standards: true                   # Use standards table
+    models: true                      # Use models table
+    mock_data: true                   # Use mock_responses table for demo
+
+  # File size reduction estimate
+  # Before: ~100+ JSON files
+  # After: 1 SQLite database (~500KB-1MB)
+  # Reduction: ~90% fewer files, ~50% smaller size
+
 # Deployment
 deployment:
   port: 8000
