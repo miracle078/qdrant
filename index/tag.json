@@ -17,12 +17,6 @@
       "page_count": 8
     },
     {
-      "path": "/collab/",
-      "title": "Collaboration",
-      "description": "Team collaboration and project management tools",
-      "icon": "\ud83d\udc65"
-    },
-    {
       "path": "/docs/",
       "title": "Documentation Hub",
       "description": "Complete documentation - API, security, user guides, developer guides, compliance (HIPAA, FDA 21 CFR Part 11)",
