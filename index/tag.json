@@ -49,6 +49,12 @@
       "title": "Test Infrastructure",
       "description": "Pytest framework - unit, integration, e2e tests with fixtures for standards and medical workflows",
       "icon": "\ud83e\uddea"
+    },
+    {
+      "path": "/examples/",
+      "title": "Medical Imaging Examples",
+      "description": "Open-source datasets - X-ray, CT, MRI, DICOM samples for testing (MIMIC-CXR, NIH, TCIA, OASIS)",
+      "icon": "\ud83d\uddc2\ufe0f"
     }
   ],
   "Sibling_Directories": [],
