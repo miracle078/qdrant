@@ -240,7 +240,7 @@ L0: /screens/Enterprise/L3/L2/L1/L0/ (Physical devices)
 
 ### ISA-101 Theme in CHAZON
 - Theme file: `/theme.yaml`
-- Loader: `/theme-loader.js`
+- Loader: `/scripts/theme-loader.js`
 - Base CSS: `/os/medical/styles/isa101-theme.css`
 - Colors: Cream & purple per ISA-101 guidelines
 
