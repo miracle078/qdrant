@@ -1,109 +1,69 @@
 {
-  "UUID": "template-system-001",
-  "ISA_Level": "L3_MES",
+  "UUID": "cc942780-8105-4eff-b58e-329000a2fd13",
+  "ISA_Level": "L4_Business",
   "Directory_Path": "/templates/",
   "Directory_Name": "Templates",
-  "Title": "HMI Templates System",
-  "Description": "JSON-based templating system for HMI screens, components, tags, and controls",
-  "Icon": "📋",
-  "Color_Scheme": "purple",
-  "Parent_Path": "/",
+  "Title": "Templates",
+  "Description": "ISA-95 L4_Business - templates subsystem",
+  "Icon": "\ud83d\udcc4",
+  "Color_Scheme": "green",
+  "Parent_Path": null,
   "Child_Directories": [
-    {
-      "path": "/templates/screens/",
-      "title": "Screens",
-      "description": "Complete HMI screen templates",
-      "icon": "🖥️"
-    },
     {
       "path": "/templates/components/",
       "title": "Components",
-      "description": "Reusable UI components",
-      "icon": "🧩"
+      "description": "components subsystem",
+      "icon": "\ud83d\udcc1"
+    },
+    {
+      "path": "/templates/screens/",
+      "title": "Screens",
+      "description": "screens subsystem",
+      "icon": "\ud83d\udcc1"
     },
     {
       "path": "/templates/tags/",
       "title": "Tags",
-      "description": "Tag definition templates",
-      "icon": "🏷️"
-    },
-    {
-      "path": "/templates/controls/",
-      "title": "Controls",
-      "description": "Control logic templates",
-      "icon": "⚙️"
-    },
-    {
-      "path": "/templates/layouts/",
-      "title": "Layouts",
-      "description": "Layout templates",
-      "icon": "📐"
+      "description": "tags subsystem",
+      "icon": "\ud83d\udcc1"
     }
   ],
-  "Sibling_Directories": [
-    {
-      "path": "/os/",
-      "title": "OS",
-      "description": "Operating system",
-      "icon": "💻"
-    },
-    {
-      "path": "/cli/",
-      "title": "CLI",
-      "description": "Command line interface",
-      "icon": "⌨️"
-    },
-    {
-      "path": "/docs/",
-      "title": "Docs",
-      "description": "Documentation",
-      "icon": "📚"
-    }
-  ],
-  "Breadcrumb_Trail": [
-    {
-      "path": "/",
-      "title": "Home",
-      "icon": "🏠"
-    },
-    {
-      "path": "/templates/",
-      "title": "Templates",
-      "icon": "📋"
-    }
-  ],
+  "Sibling_Directories": [],
   "README_Path": "README.md",
+  "Controls_Path": null,
+  "Status_Path": null,
+  "has_plc": false,
+  "has_hmi": false,
+  "has_scada": false,
+  "plc_path": null,
+  "hmi_path": null,
+  "scada_path": null,
   "Features": [
     {
-      "title": "Screen Templates",
-      "description": "Pre-built HMI screen templates for overview, detail, alarm, and trend views",
-      "icon": "🖥️"
+      "title": "Core Functionality",
+      "description": "Primary system features",
+      "icon": "\u2699\ufe0f"
     },
     {
-      "title": "Component Library",
-      "description": "Reusable UI components including buttons, gauges, charts, and indicators",
-      "icon": "🧩"
+      "title": "Data Management",
+      "description": "Structured data handling",
+      "icon": "\ud83d\udcca"
     },
     {
-      "title": "Tag Templates",
-      "description": "Standard tag definitions for analog and digital I/O",
-      "icon": "🏷️"
-    },
-    {
-      "title": "UUID-Based Loading",
-      "description": "Load templates by UUID, name, or tag for flexible screen composition",
-      "icon": "🔍"
+      "title": "Monitoring",
+      "description": "Real-time monitoring",
+      "icon": "\ud83d\udc41\ufe0f"
     }
   ],
   "Quick_Actions": [
     {
-      "label": "View Example HMI",
-      "path": "example-hmi.html",
+      "label": "View Status",
+      "path": "status.md",
       "type": "primary"
     },
     {
-      "label": "Template Loader",
-      "path": "template-loader.js",
+      "label": "Controls",
+      "path": "controls.md",
       "type": "secondary"
     },
     {
@@ -117,26 +77,6 @@
       "path": "README.md",
       "name": "README",
       "type": "markdown"
-    },
-    {
-      "path": "template-loader.js",
-      "name": "Template Loader",
-      "type": "javascript"
-    },
-    {
-      "path": "example-hmi.html",
-      "name": "Example HMI",
-      "type": "html"
     }
-  ],
-  "Template_Stats": {
-    "total_screens": 4,
-    "total_components": 4,
-    "total_tags": 3,
-    "categories": {
-      "screens": ["overview", "detail", "alarm", "trend"],
-      "components": ["button", "gauge", "indicator"],
-      "tags": ["analog", "digital"]
-    }
-  }
+  ]
 }

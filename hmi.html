@@ -174,6 +174,8 @@
   .modal-content h2 { color: #00ff88; margin-bottom: 20px; }
 </style>
 <script src="os/path-resolver.js"></script>
+<!-- Template System Integration -->
+<script src="templates/template-loader.js"></script>
 </head>
 <body>
 
@@ -299,6 +301,7 @@
     <div>
       <button class="btn" onclick="window.open('scada.html')">📈 SCADA View</button>
       <button class="btn secondary" onclick="window.open('plc.html')">⚙️ PLC Logic</button>
+      <button class="btn secondary" onclick="showTemplateScreens()">📋 Template Screens</button>
     </div>
     <div>
       <button class="btn" onclick="refreshAll()">🔄 Refresh All</button>
@@ -318,6 +321,27 @@
       <div>Vectors: 0</div>
     </div>
     <button class="btn" style="margin-top: 20px;" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- Template Screens Modal -->
+<div class="modal" id="template-modal">
+  <div class="modal-content" style="max-width: 700px;">
+    <h2>Template-Based Screens</h2>
+    <p style="color: #888; margin-bottom: 15px;">Load HMI screens from JSON templates</p>
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #00ff88; margin-bottom: 10px;">Available Screens</h3>
+      <div id="template-screen-list" style="max-height: 300px; overflow-y: auto;">
+        <p style="color: #888;">Loading screens...</p>
+      </div>
+    </div>
+    <div style="margin-bottom: 20px;">
+      <h3 style="color: #00ff88; margin-bottom: 10px;">Load by Tag</h3>
+      <input type="text" id="tag-search" placeholder="Enter tag (e.g., overview, alarm, detail)"
+             style="width: 100%; padding: 8px; background: #0a0a0a; color: #00ff88; border: 2px solid #00ff88; border-radius: 4px; font-family: inherit;">
+      <button class="btn" style="margin-top: 10px;" onclick="loadByTag()">Search & Load</button>
+    </div>
+    <button class="btn secondary" onclick="closeModal()">Close</button>
   </div>
 </div>
 
@@ -344,6 +368,76 @@ function showQdrantModal() {
 
 function closeModal() {
   document.getElementById('qdrant-modal').classList.remove('active');
+  document.getElementById('template-modal').classList.remove('active');
+}
+
+// Template Screen Functions
+async function showTemplateScreens() {
+  const modal = document.getElementById('template-modal');
+  modal.classList.add('active');
+  await loadTemplateScreenList();
+}
+
+async function loadTemplateScreenList() {
+  const listContainer = document.getElementById('template-screen-list');
+  try {
+    await window.templateLoader.loadIndexes();
+    const screens = window.templateLoader.indexes.screens.screens;
+
+    let html = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+    screens.forEach(screen => {
+      html += `
+        <div style="background: #1a1a2e; border: 2px solid #00ff88; border-radius: 8px; padding: 15px; cursor: pointer;"
+             onclick="loadTemplateScreen('${screen.uuid}')">
+          <div style="font-weight: bold; color: #00ff88; margin-bottom: 5px;">${screen.name}</div>
+          <div style="color: #888; font-size: 0.9em; margin-bottom: 5px;">${screen.description}</div>
+          <div style="color: #00ccff; font-size: 0.85em;">
+            Tags: ${screen.tags.join(', ')} | UUID: ${screen.uuid}
+          </div>
+        </div>
+      `;
+    });
+    html += '</div>';
+    listContainer.innerHTML = html;
+  } catch (error) {
+    listContainer.innerHTML = `<p style="color: #ff0044;">Error loading screens: ${error.message}</p>`;
+  }
+}
+
+async function loadTemplateScreen(uuid) {
+  try {
+    // Open template screen in new window
+    window.open(`templates/example-hmi.html?uuid=${uuid}`, '_blank');
+    closeModal();
+  } catch (error) {
+    alert(`Failed to load screen: ${error.message}`);
+  }
+}
+
+async function loadByTag() {
+  const tag = document.getElementById('tag-search').value.trim();
+  if (!tag) {
+    alert('Please enter a tag to search');
+    return;
+  }
+
+  try {
+    await window.templateLoader.loadIndexes();
+    const screens = window.templateLoader.indexes.screens.screens.filter(s =>
+      s.tags && s.tags.some(t => t.toLowerCase().includes(tag.toLowerCase()))
+    );
+
+    if (screens.length === 0) {
+      alert(`No screens found with tag: ${tag}`);
+      return;
+    }
+
+    // Open first matching screen
+    window.open(`templates/example-hmi.html?uuid=${screens[0].uuid}`, '_blank');
+    closeModal();
+  } catch (error) {
+    alert(`Failed to search screens: ${error.message}`);
+  }
 }
 
 // Refresh all
