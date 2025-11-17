@@ -1,0 +1,142 @@
+{
+  "UUID": "template-system-001",
+  "ISA_Level": "L3_MES",
+  "Directory_Path": "/templates/",
+  "Directory_Name": "Templates",
+  "Title": "HMI Templates System",
+  "Description": "JSON-based templating system for HMI screens, components, tags, and controls",
+  "Icon": "📋",
+  "Color_Scheme": "purple",
+  "Parent_Path": "/",
+  "Child_Directories": [
+    {
+      "path": "/templates/screens/",
+      "title": "Screens",
+      "description": "Complete HMI screen templates",
+      "icon": "🖥️"
+    },
+    {
+      "path": "/templates/components/",
+      "title": "Components",
+      "description": "Reusable UI components",
+      "icon": "🧩"
+    },
+    {
+      "path": "/templates/tags/",
+      "title": "Tags",
+      "description": "Tag definition templates",
+      "icon": "🏷️"
+    },
+    {
+      "path": "/templates/controls/",
+      "title": "Controls",
+      "description": "Control logic templates",
+      "icon": "⚙️"
+    },
+    {
+      "path": "/templates/layouts/",
+      "title": "Layouts",
+      "description": "Layout templates",
+      "icon": "📐"
+    }
+  ],
+  "Sibling_Directories": [
+    {
+      "path": "/os/",
+      "title": "OS",
+      "description": "Operating system",
+      "icon": "💻"
+    },
+    {
+      "path": "/cli/",
+      "title": "CLI",
+      "description": "Command line interface",
+      "icon": "⌨️"
+    },
+    {
+      "path": "/docs/",
+      "title": "Docs",
+      "description": "Documentation",
+      "icon": "📚"
+    }
+  ],
+  "Breadcrumb_Trail": [
+    {
+      "path": "/",
+      "title": "Home",
+      "icon": "🏠"
+    },
+    {
+      "path": "/templates/",
+      "title": "Templates",
+      "icon": "📋"
+    }
+  ],
+  "README_Path": "README.md",
+  "Features": [
+    {
+      "title": "Screen Templates",
+      "description": "Pre-built HMI screen templates for overview, detail, alarm, and trend views",
+      "icon": "🖥️"
+    },
+    {
+      "title": "Component Library",
+      "description": "Reusable UI components including buttons, gauges, charts, and indicators",
+      "icon": "🧩"
+    },
+    {
+      "title": "Tag Templates",
+      "description": "Standard tag definitions for analog and digital I/O",
+      "icon": "🏷️"
+    },
+    {
+      "title": "UUID-Based Loading",
+      "description": "Load templates by UUID, name, or tag for flexible screen composition",
+      "icon": "🔍"
+    }
+  ],
+  "Quick_Actions": [
+    {
+      "label": "View Example HMI",
+      "path": "example-hmi.html",
+      "type": "primary"
+    },
+    {
+      "label": "Template Loader",
+      "path": "template-loader.js",
+      "type": "secondary"
+    },
+    {
+      "label": "Documentation",
+      "path": "README.md",
+      "type": "secondary"
+    }
+  ],
+  "Related_Files": [
+    {
+      "path": "README.md",
+      "name": "README",
+      "type": "markdown"
+    },
+    {
+      "path": "template-loader.js",
+      "name": "Template Loader",
+      "type": "javascript"
+    },
+    {
+      "path": "example-hmi.html",
+      "name": "Example HMI",
+      "type": "html"
+    }
+  ],
+  "Template_Stats": {
+    "total_screens": 4,
+    "total_components": 4,
+    "total_tags": 3,
+    "categories": {
+      "screens": ["overview", "detail", "alarm", "trend"],
+      "components": ["button", "gauge", "indicator"],
+      "tags": ["analog", "digital"]
+    }
+  }
+}
