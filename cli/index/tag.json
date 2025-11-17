@@ -3,8 +3,8 @@
   "ISA_Level": "L3_MES",
   "Directory_Path": "/cli/",
   "Directory_Name": "Cli",
-  "Title": "Cli",
-  "Description": "ISA-95 L3_MES - cli subsystem",
+  "Title": "CLI Maintenance Tools",
+  "Description": "8 command-line utilities - health checks, tag validation, project stats, streamlining, UUID generation",
   "Icon": "\u2328\ufe0f",
   "Color_Scheme": "blue",
   "Parent_Path": null,
@@ -46,19 +46,24 @@
   "scada_path": null,
   "Features": [
     {
-      "title": "Core Functionality",
-      "description": "Primary system features",
-      "icon": "\u2699\ufe0f"
+      "title": "Health Checks",
+      "description": "Validate project structure, tags, and dependencies",
+      "icon": "\ud83c\udfaf"
     },
     {
-      "title": "Data Management",
-      "description": "Structured data handling",
+      "title": "Tag Validation",
+      "description": "Ensure all tag.json files are correctly formatted",
+      "icon": "\u2713"
+    },
+    {
+      "title": "Project Statistics",
+      "description": "Generate metrics, reports, and analysis",
       "icon": "\ud83d\udcca"
     },
     {
-      "title": "Monitoring",
-      "description": "Real-time monitoring",
-      "icon": "\ud83d\udc41\ufe0f"
+      "title": "Streamlining",
+      "description": "Remove duplicates and optimize structure",
+      "icon": "\ud83e\uddf9"
     }
   ],
   "Quick_Actions": [
