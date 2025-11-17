@@ -1,5 +1,5 @@
 {
-  "UUID": "92c787da-9ec4-4877-8f67-f6646458f97e",
+  "UUID": "8dadca0d-995b-485e-a6b4-7733735e8b40",
   "ISA_Level": "L4_Business",
   "Directory_Path": "/collab/tom/",
   "Directory_Name": "Tom",
@@ -9,67 +9,7 @@
   "Color_Scheme": "green",
   "Parent_Path": "/collab/",
   "Child_Directories": [],
-  "Sibling_Directories": [
-    {
-      "path": "/collab/3d-worlds/",
-      "title": "3D Worlds",
-      "description": "3d-worlds area",
-      "icon": "\ud83d\udcc1"
-    },
-    {
-      "path": "/collab/agent-1/",
-      "title": "Agent 1",
-      "description": "agent-1 area",
-      "icon": "\ud83d\udcc1"
-    },
-    {
-      "path": "/collab/agent-2/",
-      "title": "Agent 2",
-      "description": "agent-2 area",
-      "icon": "\ud83d\udcc1"
-    },
-    {
-      "path": "/collab/agents/",
-      "title": "Agents",
-      "description": "agents area",
-      "icon": "\ud83d\udcc1"
-    },
-    {
-      "path": "/collab/databases/",
-      "title": "Databases",
-      "description": "databases area",
-      "icon": "\ud83d\udcca"
-    },
-    {
-      "path": "/collab/miracle/",
-      "title": "Miracle",
-      "description": "miracle area",
-      "icon": "\ud83d\udcc1"
-    },
-    {
-      "path": "/collab/queries/",
-      "title": "Queries",
-      "description": "queries area",
-      "icon": "\ud83d\udcc1"
-    }
-  ],
-  "Breadcrumb_Trail": [
-    {
-      "path": "/",
-      "title": "Home",
-      "icon": "\ud83c\udfe0"
-    },
-    {
-      "path": "/collab/",
-      "title": "Collab",
-      "icon": "\ud83d\udc65"
-    },
-    {
-      "path": "/collab/tom/",
-      "title": "Tom",
-      "icon": "\ud83d\udcc1"
-    }
-  ],
+  "Sibling_Directories": [],
   "README_Path": "README.md",
   "Controls_Path": "controls.md",
   "Status_Path": "status.md",
@@ -133,29 +73,6 @@
       "path": "index.html",
       "name": "Index",
       "type": "html"
-    }
-  ],
-  "Page_Links": [
-    {
-      "path": "README.md",
-      "name": "Readme",
-      "type": "markdown",
-      "icon": "\ud83d\udcdd",
-      "size": 135
-    },
-    {
-      "path": "controls.md",
-      "name": "Controls",
-      "type": "markdown",
-      "icon": "\ud83d\udcdd",
-      "size": 4501
-    },
-    {
-      "path": "status.md",
-      "name": "Status",
-      "type": "markdown",
-      "icon": "\ud83d\udcdd",
-      "size": 3594
     }
   ]
 }

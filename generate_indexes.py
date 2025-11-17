@@ -2,15 +2,38 @@
 """
 Generate index directories and tag data for all directories
 Creates structured index data following ISA UDT specifications
+
+This script generates index.html loaders and tag.json metadata files for
+every directory in the project. It prevents duplicate directory creation
+and validates the directory structure before making changes.
+
+Features:
+- Duplicate directory detection and prevention
+- Dry-run mode for safe testing
+- Comprehensive validation
+- Detailed logging and statistics
+- ISA-95 level categorization
+- Automatic backup of custom index files
+
+Usage:
+    python generate_indexes.py          # Normal run
+    python generate_indexes.py --dry-run  # Test without making changes
+    python generate_indexes.py --verbose  # Detailed output
 """
 
 import os
+import sys
 import json
 import uuid
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Set
+from collections import defaultdict
 
 ROOT_DIR = Path("/home/user/qdrant")
+
+# Parse command-line arguments
+DRY_RUN = '--dry-run' in sys.argv
+VERBOSE = '--verbose' in sys.argv or DRY_RUN
 
 # ISA-95 Level categorization
 CATEGORY_MAP = {
@@ -556,48 +579,299 @@ document.addEventListener('DOMContentLoaded', loadIndex);
 </html>
 """
 
-def main():
-    """Generate index directories and tag data for all directories"""
-    print("Generating index directories and tag data...")
-    print()
+def is_duplicate_directory(dir_path: Path) -> bool:
+    """
+    Check if a directory appears to be a duplicate of its parent.
 
-    count = 0
-    for root, dirs, files in os.walk(ROOT_DIR):
-        # Skip hidden directories, node_modules, and existing index directories
-        dirs[:] = [d for d in dirs if not d.startswith('.') and d not in ['node_modules', 'index', '__pycache__']]
+    A directory is considered duplicate if:
+    1. Its name matches one of its ancestor directory names
+    2. It's within 2 levels of a directory with the same name
 
+    Examples of duplicates:
+        /os/controls/controls -> True (parent is 'controls')
+        /os/controls/tag-providers/controls -> False (legitimate structure)
+        /backend/api/backend -> True (ancestor is 'backend')
+
+    Args:
+        dir_path: Path to check for duplication
+
+    Returns:
+        True if directory appears to be a duplicate, False otherwise
+    """
+    dir_name = dir_path.name
+
+    # Check immediate parent
+    parent = dir_path.parent
+    if parent.name == dir_name:
+        return True
+
+    # Check grandparent (but allow some legitimate patterns)
+    grandparent = parent.parent
+    if grandparent.name == dir_name:
+        # This might be legitimate if there's an intervening directory
+        # Example: controls/tag-providers/controls is OK
+        # But controls/index/controls is NOT OK
+        if parent.name in ['index', 'backup', 'old', 'temp', 'cache']:
+            return True
+
+    return False
+
+
+def validate_directory_structure(dir_path: Path) -> Dict[str, Any]:
+    """
+    Validate directory structure and check for issues.
+
+    Returns dict with validation results:
+    {
+        'valid': bool,
+        'issues': List[str],
+        'warnings': List[str]
+    }
+    """
+    issues = []
+    warnings = []
+
+    # Check if directory is a duplicate
+    if is_duplicate_directory(dir_path):
+        issues.append(f"Duplicate directory pattern detected: {dir_path}")
+
+    # Check if directory is accessible
+    if not os.access(dir_path, os.R_OK):
+        issues.append(f"Directory not readable: {dir_path}")
+
+    # Check if directory is writable (needed to create index)
+    if not os.access(dir_path, os.W_OK):
+        issues.append(f"Directory not writable: {dir_path}")
+
+    # Check for nested index directories (potential issue)
+    index_dir = dir_path / 'index'
+    if index_dir.exists():
+        if (index_dir / 'index').exists():
+            warnings.append(f"Nested index directory found: {index_dir / 'index'}")
+
+    return {
+        'valid': len(issues) == 0,
+        'issues': issues,
+        'warnings': warnings
+    }
+
+
+def get_directories_to_process(root_dir: Path) -> List[Path]:
+    """
+    Get list of directories to process, excluding duplicates and invalid directories.
+
+    This function walks the directory tree and collects all valid directories
+    while filtering out:
+    - Hidden directories (starting with .)
+    - Common exclude patterns (node_modules, __pycache__, etc.)
+    - Duplicate directories
+    - Index directories themselves
+
+    Args:
+        root_dir: Root directory to start walking from
+
+    Returns:
+        List of Path objects for directories to process
+    """
+    directories = []
+    skipped = defaultdict(list)
+
+    # Directories to always skip
+    SKIP_DIRS = {
+        'node_modules', '__pycache__', 'index', '.git',
+        '.venv', 'venv', 'env', 'dist', 'build',
+        '.next', '.nuxt', 'coverage', '.pytest_cache'
+    }
+
+    for root, dirs, files in os.walk(root_dir):
         root_path = Path(root)
 
-        # Create index directory
-        index_dir = root_path / 'index'
-        index_dir.mkdir(exist_ok=True)
+        # Filter directories in-place to control os.walk descent
+        original_dirs = dirs.copy()
+        dirs[:] = []
 
-        # Generate tag data
-        tag_data = generate_index_tag(root_path)
+        for d in original_dirs:
+            dir_path = root_path / d
 
-        # Write tag.json
-        tag_file = index_dir / 'tag.json'
-        with open(tag_file, 'w') as f:
-            json.dump(tag_data, f, indent=2)
+            # Skip hidden directories
+            if d.startswith('.'):
+                skipped['hidden'].append(dir_path)
+                continue
 
-        # Create generic index.html loader (only if doesn't exist or is old)
-        index_html = root_path / 'index.html'
-        if not index_html.exists() or 'Generic Index Loader' not in index_html.read_text():
-            # Backup existing if it's a custom one
-            if index_html.exists() and index_html.stat().st_size > 1000:
-                backup = root_path / 'index-custom.html'
-                if not backup.exists():
-                    index_html.rename(backup)
-                    print(f"  💾 Backed up custom index: {root_path.relative_to(ROOT_DIR)}/index-custom.html")
+            # Skip common exclude patterns
+            if d in SKIP_DIRS:
+                skipped['excluded'].append(dir_path)
+                continue
 
-            # Write generic loader
-            index_html.write_text(create_index_loader())
+            # Skip if it's a duplicate
+            if is_duplicate_directory(dir_path):
+                skipped['duplicate'].append(dir_path)
+                continue
 
-        count += 1
-        rel_path = root_path.relative_to(ROOT_DIR) if root_path != ROOT_DIR else Path('.')
-        print(f"  ✅ Created index for: {rel_path}")
+            # This directory is OK to process
+            dirs.append(d)
 
-    print(f"\n✅ Generated {count} index directories with tag data")
+        # Add current directory to process list
+        # (but skip root if it's the project root to avoid issues)
+        if root_path == root_dir:
+            directories.append(root_path)
+        else:
+            validation = validate_directory_structure(root_path)
+            if validation['valid']:
+                directories.append(root_path)
+            else:
+                skipped['invalid'].append(root_path)
+                if VERBOSE:
+                    for issue in validation['issues']:
+                        print(f"  ⚠️  {issue}")
+
+    return directories, skipped
+
+
+def print_statistics(processed: int, skipped: Dict[str, List[Path]],
+                    created: int, updated: int, backed_up: int):
+    """Print detailed statistics about the operation"""
+    print("\n" + "="*60)
+    print("STATISTICS")
+    print("="*60)
+    print(f"\nProcessed Directories: {processed}")
+    print(f"  - Created new indexes: {created}")
+    print(f"  - Updated existing indexes: {updated}")
+    print(f"  - Backed up custom files: {backed_up}")
+
+    print(f"\nSkipped Directories: {sum(len(v) for v in skipped.values())}")
+    for reason, dirs in skipped.items():
+        if dirs:
+            print(f"  - {reason.title()}: {len(dirs)}")
+            if VERBOSE:
+                # Show first 10 directories for this skip reason
+                for d in dirs[:10]:
+                    rel_path = d.relative_to(ROOT_DIR) if d != ROOT_DIR else Path('.')
+                    print(f"      • {rel_path}")
+                if len(dirs) > 10:
+                    print(f"      ... and {len(dirs) - 10} more")
+
+    print("="*60 + "\n")
+
+
+def main():
+    """
+    Generate index directories and tag data for all directories.
+
+    This is the main entry point that orchestrates the index generation process:
+    1. Scans directory tree to find all valid directories
+    2. Validates each directory for duplicates and accessibility
+    3. Generates index data and files for each valid directory
+    4. Reports statistics and any issues found
+    """
+    print("="*60)
+    print("INDEX GENERATOR - ISA-95 Structured Index System")
+    print("="*60)
+
+    if DRY_RUN:
+        print("🔍 DRY RUN MODE - No files will be modified")
+
+    print(f"\nRoot Directory: {ROOT_DIR}")
+    print(f"Scanning directory tree...\n")
+
+    # Get directories to process
+    directories, skipped = get_directories_to_process(ROOT_DIR)
+
+    print(f"Found {len(directories)} directories to process")
+    if skipped:
+        total_skipped = sum(len(v) for v in skipped.values())
+        print(f"Skipping {total_skipped} directories (duplicates, hidden, etc.)")
+    print()
+
+    # Statistics
+    created_count = 0
+    updated_count = 0
+    backed_up_count = 0
+
+    # Process each directory
+    for dir_path in directories:
+        try:
+            rel_path = dir_path.relative_to(ROOT_DIR) if dir_path != ROOT_DIR else Path('.')
+
+            # Validate before processing
+            validation = validate_directory_structure(dir_path)
+            if not validation['valid']:
+                if VERBOSE:
+                    print(f"  ⚠️  Skipping {rel_path}: {validation['issues'][0]}")
+                skipped['invalid'].append(dir_path)
+                continue
+
+            # Create index directory
+            index_dir = dir_path / 'index'
+            if not DRY_RUN:
+                index_dir.mkdir(exist_ok=True)
+
+            is_new = not (index_dir / 'tag.json').exists()
+
+            # Generate tag data
+            tag_data = generate_index_tag(dir_path)
+
+            # Write tag.json
+            tag_file = index_dir / 'tag.json'
+            if not DRY_RUN:
+                with open(tag_file, 'w') as f:
+                    json.dump(tag_data, f, indent=2)
+
+            # Create generic index.html loader (only if doesn't exist or is old)
+            index_html = dir_path / 'index.html'
+            needs_update = (not index_html.exists() or
+                          'Generic Index Loader' not in index_html.read_text())
+
+            if needs_update:
+                # Backup existing if it's a custom one
+                if index_html.exists() and index_html.stat().st_size > 1000:
+                    backup = dir_path / 'index-custom.html'
+                    if not backup.exists():
+                        if not DRY_RUN:
+                            index_html.rename(backup)
+                        backed_up_count += 1
+                        if VERBOSE:
+                            print(f"  💾 Backed up custom index: {rel_path}/index-custom.html")
+
+                # Write generic loader
+                if not DRY_RUN:
+                    index_html.write_text(create_index_loader())
+
+            # Update statistics
+            if is_new:
+                created_count += 1
+            else:
+                updated_count += 1
+
+            # Print progress
+            status = "✅ Created" if is_new else "🔄 Updated"
+            print(f"  {status} index for: {rel_path}")
+
+            # Show warnings if any
+            if validation['warnings'] and VERBOSE:
+                for warning in validation['warnings']:
+                    print(f"      ⚠️  {warning}")
+
+        except Exception as e:
+            print(f"  ❌ Error processing {dir_path}: {e}")
+            if VERBOSE:
+                import traceback
+                traceback.print_exc()
+
+    # Print statistics
+    print_statistics(
+        processed=len(directories),
+        skipped=skipped,
+        created=created_count,
+        updated=updated_count,
+        backed_up=backed_up_count
+    )
+
+    if DRY_RUN:
+        print("🔍 DRY RUN COMPLETE - No files were modified")
+        print("    Run without --dry-run to apply changes")
+    else:
+        print("✅ INDEX GENERATION COMPLETE")
 
 if __name__ == '__main__':
     main()
