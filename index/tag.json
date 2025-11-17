@@ -69,6 +69,11 @@
   "scada_path": "/./scada.html",
   "Features": [
     {
+      "title": "ISA-101 Docking System",
+      "description": "N/S/E/W/Center docking HMI with cream & purple theme - modular, responsive, ISA-101 compliant design",
+      "icon": "\ud83c\udfdb\ufe0f"
+    },
+    {
       "title": "Standards-as-Tags Framework",
       "description": "Revolutionary executable standards - PackML, ISA-88, ISA-95 as instantiable processes with Meta-Standard Language (MSL)",
       "icon": "\ud83d\udcd0"
@@ -137,6 +142,12 @@
     }
   ],
   "Page_Links": [
+    {
+      "path": "docking-hmi.html",
+      "name": "Docking HMI (Cream & Purple)",
+      "icon": "🎛️",
+      "size": 17000
+    },
     {
       "path": "enterprise-portal.html",
       "name": "Enterprise Portal",
